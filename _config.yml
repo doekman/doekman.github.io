@@ -18,3 +18,7 @@ github_username:  doekman
 
 # Build settings
 markdown: kramdown
+
+# Uitbreidingen
+gems:
+  - jekyll-gist
