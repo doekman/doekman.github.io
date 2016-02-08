@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "To refactor, or not to refactor"
-categories: refactor
+categories: refactor, one-liner
 ---
 
 The code iteration below is a contemporary comment on the use of refactoring.
