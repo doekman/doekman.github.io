@@ -2,7 +2,7 @@
 layout: post
 title:  "A console.log() adventure; pimped"
 date:   2016-03-06 13:45+01:00
-categories: refactor,game
+tags: refactor,game
 ---
 
 Over a year ago, my interwebfriend [secretGeek][] created a thing. I created a fork, and pimped it [into this][play-it] (*and copied some of his blog lines too*). I urge you to go and try it out before you read on. Unfortunately you'll need to be on a desktop computer, not a mobile phone.
