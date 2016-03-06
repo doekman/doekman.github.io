@@ -21,3 +21,5 @@ Here are the predecessors (and thank my [public backup service](https://archive.
     [http://www.xs4all.nl/~zanstra/logs/](http://zanstra.home.xs4all.nl/logs/jsLog-2004.htm)
     [more entries](http://zanstra.home.xs4all.nl/logs/jsLog.htm) and 
     [some idea's](http://zanstra.home.xs4all.nl/logs/ideaLog.htm) ([batch-file](http://zanstra.home.xs4all.nl/logs/gen.bat))
+
+I also have a Tumblr micro-blogging thing called [dd3v](https://www.tumblr.com/blog/dd3v "Doekman Dev").

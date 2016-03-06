@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "A console.log() adventure; pimped"
-date:   2016-01-16 20:00
+date:   2016-03-06 13:43
 categories: refactor,game
 ---
 
@@ -63,14 +63,15 @@ So I just started. After running around in the forest (in the game, that is), I 
 An other thing: in a JavaScript game, I don't consider inspecting and modifying variables cheating.
 So I prevented that with an [iife][] and some help of [strict mode][] (to eliminate global variables).
 
-Multiple lines are now returned after entering a command, so they are formatted the same. And deaths are
-a bit more dramatic now. You should really try it, if you haven't already...
+Multiple lines are now returned after entering a command, so they are displayed in the same font and color. And deaths 
+are a bit more dramatic now. You should really try it, if you haven't already...
 
 After dying too often, implementing load/save was next. First I just saved the game state, but then I realized
 this was another way to cheat, so now only the entered commands are stored. Then I realized, a demo-mode
 is very easy to implement. Couldn't resist it, but it's hidden somewhere in the game.
 
 I didn't want to change the map or story. Just wanted to share the fun I had, both playing and pimping the game.
+
 
 [secretGeek]: https://twitter.com/secretGeek
 [console-log]: http://www.secretgeek.net/console_log
