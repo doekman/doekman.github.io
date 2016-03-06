@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "A console.log() adventure; pimped"
-date:   2016-03-06 13:45
+date:   2016-03-06 13:45+01:00
 categories: refactor,game
 ---
 

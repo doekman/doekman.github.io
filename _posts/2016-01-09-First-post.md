@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "First post!"
-date:   2016-01-09 20:30
+date:   2016-01-09 20:30+01:00
 categories: meta
 ---
 
