@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Only my warnings"
-categories: javascript
+categories: tools
 ---
 
 Don't you hate to be put in a situation like the following?
@@ -14,7 +14,7 @@ Don't you hate to be put in a situation like the following?
 > paid big dollars for high quality, virtually bug-free software), cannot get rid of those pesky lines of inability…
 >
 > For starters, why judge those warnings in the first place. You're just the new guy, you don't want to get into any trouble. Also, 
-> by solving warnings, you may introduce new bugs (even though your super competent, after all creating bugs is just a matter of probability). 
+> by solving warnings, you may introduce new bugs (even though you're super competent, after all creating bugs is just a matter of probability). 
 > Nobody wants that! And finally, you're a professional. The client is only paying for the new functionality, not for you to clean
 > up the place. And about your collegues, you don't want to hurt anyones feelings. 
 > So in short: the man says no. No way fixing those warnings, José!
@@ -39,4 +39,4 @@ For now, the extension is still in its early alpha phase. If you want to partici
 when the extention will be released to the Visual Studio Gallery, please 
 [fill out this form](https://docs.google.com/forms/d/e/1FAIpQLScMYh6JqrQn-dEA8hzIGJdJsV5-9ufCuTkfczPeXlBjNoB7KA/viewform).
 
-(this is a blog post in the series: I'm perfect: communicate better with tools)
+(this is a blog post in the series: I'm perfect, communicate better with tools)
