@@ -10,7 +10,7 @@ Don't you hate to be put in a situation like the following?
 > some client. The client has standards and practices in place stating you can't checkin code that produces warnings, only to find
 > out that a clean checkout produces loads of warnings when building!
 > 
-> But you can't fix 😢 those warnings. You, the super star programmer™ (whose boss is getting
+> But you can't fix <span style="font-style:normal">😢</span> those warnings. You, the super star programmer™ (whose boss is getting
 > paid big dollars for high quality, virtually bug-free software), cannot get rid of those pesky lines of inability…
 >
 > For starters, why judge those warnings in the first place. You're just the new guy, you don't want to get into any trouble. Also, 
