@@ -2,6 +2,7 @@
 layout: post
 title:  "JSON, the game #2: The parsings"
 date:   2017-05-14
+tags: [game]
 ---
 
 For some reason, I imagined the next step in the development of the game was to make the 'block' move. Like up and down, and sliding to the left. For [agile][agile] reasons, I want to make progress that is reflected and visible in the software. So no spending time at writing libraries first. You probably end up writing stuff you don't even need. But when starting, I realized the partial-JSON part needed to be worked on first.

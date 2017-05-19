@@ -1,7 +1,8 @@
 ---
 layout: post
 title:  "Only my warnings"
-categories: tools
+date:   2016-09-08
+tags: [tools]
 ---
 
 Don't you hate to be put in a situation like the following?

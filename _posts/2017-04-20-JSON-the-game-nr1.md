@@ -2,6 +2,7 @@
 layout: post
 title:  "JSON, the game #1: Bootstrapping it"
 date:   2017-04-30
+tags:   [game]
 ---
 
 Around a year ago, I had the daft idea to create some nerdy JSON-game. I had good fun thinking about some concepts, made some notes, and that was about it. Until now that is. The game: It's coming... It has already started. To keep me focussed, I will keep a journal of the creation, and you're reading the first part.
