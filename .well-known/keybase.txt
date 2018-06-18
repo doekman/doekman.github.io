@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/doekman
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://blog.zanstra.com
+  * I am doekman (https://keybase.io/doekman) on keybase.
+  * I have a public key ASDhb5zNrn5eL3RhB4nBo_1cfnuGQTArjuOMtBi-mUt_tQo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0120e16f9ccdae7e5e2f74610789c1a3fd5c7e7b8641302b8ee38cb418be994b7fb50a",
+      "host": "keybase.io",
+      "kid": "0120e16f9ccdae7e5e2f74610789c1a3fd5c7e7b8641302b8ee38cb418be994b7fb50a",
+      "uid": "0c09dc8b1b819e00666f9fe204821b00",
+      "username": "doekman"
+    },
+    "merkle_root": {
+      "ctime": 1529331877,
+      "hash": "745083d118e7cfa9952b91ab2061199c821ea82c07b069e88b8f8237bdf2bb21556d29bf773044dde5608969f1a3cb0cf0b744709ca31b88e4a74dd227d6eaf6",
+      "hash_meta": "ec5a64b9011d99eb2d4c709b19df220d51deb2cac3893d0cd38b30f176a04e08",
+      "seqno": 3093041
+    },
+    "service": {
+      "entropy": "StuutuOXOAoEXV2tLmNI3OKd",
+      "hostname": "blog.zanstra.com",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "2.0.0"
+  },
+  "ctime": 1529331939,
+  "expire_in": 504576000,
+  "prev": "3ee8d344125744d96718d87785aef42c5e07eddb0dc401d585db40bb62c54adc",
+  "seqno": 24,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEg4W+cza5+Xi90YQeJwaP9XH57hkEwK47jjLQYvplLf7UKp3BheWxvYWTESpcCGMQgPujTRBJXRNlnGNh3ha70LF4H7dsNxAHVhdtAu2LFStzEIAhWcfYttVnmFhBs0P/oL4tRN8vla7fMIFzSJKp8mPt4AgHCo3NpZ8RAlh797OE8I9s9qko5+czCKQJfbWeZ+v3qKzhnu30tKZD1NTXHZ/3THXKyRZnaxVR2ambdKbDo5p3orz6W+B9pCqhzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEID0R7QQvP8iLZ536d5Lt/BA3f1xJsyB1mgohLmt7SeLDo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/doekman
+
+==================================================================
