@@ -17,6 +17,11 @@
             {% include icon-github.html username=site.github_username %}
           </li>
           {% endif %}
+          {% if site.keybase_username %}
+          <li>
+            {% include icon-keybase.html username=site.keybase_username %}
+          </li>
+          {% endif %}
           <li>
               <span style="color:#828282;size:150%;text-decoration:none" title="Micro.blog">☆</span> <a href="https://micro.blog/doekman" rel="me" />doekman</a>
           </li>
