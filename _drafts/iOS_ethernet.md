@@ -14,7 +14,9 @@ I first bought the [Apple Lightning to USB 3 camera adapter][camera-adapter] (yo
 Next was a [powered USB hub][aukey-hub] from the Aukey, which already has an ethernet LAN adapter build in!
 So there's no need to buy an external USB Ethernet Adapter.
 
-This setup works (almost) perfectly with both iPhone 5 (iOS 10.3.3), iPhone SE and iPad Air 2 (both iOS 11.new). 
+This setup works (almost) perfectly with both iPhone 5 (iOS 10.3.3), iPhone SE and iPad Air 2 (both iOS 11.4.1).
+I didn't test my original iPad, since I don't have a camera adapter with a [dock connector][doc-con].
+
 When connecting the setup, you'll get an entry between Wifi and Bluetooth in the settings menu, where you can check your TCP/IP settings.
 When I plugged in my Apple USB Ethernet Adapter, the Ethernet menu shows two adapters (also one for the build-in Aukey ethernet).
 Like in macOS, it will prioritize the adapters automatically and choose the "best" one.
@@ -38,4 +40,5 @@ Devices, like in Lisa's tablet and Bart's iPhone... D'oh!
 [eth2]: https://9to5mac.com/2017/03/01/ios-10-2-ethernet-adapter-ui-settings-app/
 [camera-adapter]: https://www.apple.com/nl/shop/product/MK0W2ZM/A/lightning-naar-usb-3-camera-adapter?fnode=5a77c06a31d0e5022a688a2defec8127910a5c967ad27547e77a7424219ab7f0a55463cd85fcdd333d6606c4fa120dfcc8c4531e057b6b3771cf23ba049aaa7807f3e771f4c29345bec09a21c843c02ccb64fe33ce5ec4bf8ae31ebbf3f1d902
 [aukey-hub]: https://www.amazon.de/gp/product/B00QWYJSUG/ref=oh_aui_detailpage_o00_s01?ie=UTF8&psc=1
+[doc-con]: https://en.wikipedia.org/wiki/Dock_connector
 
