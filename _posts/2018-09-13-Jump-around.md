@@ -11,7 +11,7 @@ There are more ways [to navigate the file system][nav] in _bash_ than I imagined
 
 * `cd` navigates to the home folder. Like `cd /users/$(whoami)` or `cd "$HOME"` but shorter.
 * `cd -` navigates to the previous directory. It's like the _zap-button_ on your television remote control!
-* <code>cd ~/Doc<span title="Horitonzal Tab">␉</span></code> _tab-completion_ works like Visual Studio's intelli-sense, but without the dropdown and it's case sensitive. If there is one choice, it will complete it. If there is more, you need to press <abbr title="␉ or Horizonal Tab">tab</abbr> twice, and it will show a list.
+* <code>cd ~/Doc<span title="HORIZONTAL TABULATION">␉</span></code> _tab-completion_ works like Visual Studio's intelli-sense, but without the dropdown and it's case sensitive. If there is one choice, it will complete it. If there is more, you need to press <abbr title="␉ or Horizontal Tab">tab</abbr> twice, and it will show a list.
 * `pushd`/`popd`/`dirs` save/load/show a directory to/from the stack. Especially handy in complex scripts.
 
 
