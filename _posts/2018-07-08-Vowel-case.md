@@ -2,6 +2,7 @@
 layout: post
 title:  "To vowel case"
 date:   2018-07-08
+changed: 2018-11-28
 tags:   [one-liner]
 ---
 
@@ -13,3 +14,4 @@ __And nOw YOU cAn dO vOwEr cAsE tOO__!
 	  return text.toLowerCase().replace(/[aeiouy]+/g, match => match.toUpperCase());
 	}
 
+**Updated**: _a correct implementation of `toVowelCase` is locale-dependend. In English, the letter `y` is sometimes a vowel, and at other times a consonant.  The above works for the Dutch language and some other languages. Your mileage may vary._
