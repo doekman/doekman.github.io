@@ -1,7 +1,8 @@
 ---
 layout: post
 title:  Networking with iOS via Ethernet
-date:   2018-09-04
+initial: 2018-09-04
+date:   2018-12-31
 tags:   [does-it-work]
 ---
 
