@@ -13,7 +13,7 @@ Introducing osagitfilter
 ========================
 Now you can combine those two ways by using the [osagitfilter utility][osagitfilter]. Technically, it's a [git filter][] that translates AppleScript's binary format into the text-representation which then will be used by git's internal workings.
 
-See the [repository's readme][ogf-readme] for installation instructions. After that, you can put compiled script files, AppleScript applications and script bundles in git as if they where regular text-files. When you clone said repository, the files are re-assembled bit-perfect when you put them into git.
+See the [repository's readme][ogf-readme] for installation instructions. After that, you can put compiled script files, AppleScript applications and script bundles in git as if they where regular text-files. When you then clone this repository, the files are re-assembled bit-perfect.
 
 Let me demonstrate this by an example. First create a git-repository:
 
@@ -32,9 +32,9 @@ Since we don't want to add a binary file to git, we first need to associate the 
 Now the files can be added to git:
 
 	git add .gitattributes my_script.scpt
-	git commit -m "Initial"
+	git commit -m Initial
 
-Now let's change the script by appending `& ", I like your name"` to the say command. Don't forget to save.
+Now let's change the script by appending `& ", I like your name"` to the say command in the `my-script.scpt` file. Don't forget to save.
 
 Now when you run `git diff`, you can see the changes you made as you would with text-files. You don't need to stick with the command-line: I can confirm it works with GitHub Desktop. It should also work with other GUI's, but I haven't tested this. 
 
