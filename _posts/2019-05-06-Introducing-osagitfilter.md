@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  A third way of putting AppleScript into git
-date:   2019-04-28
+date:   2019-05-06
 ---
 
 There are currently two ways of putting AppleScript into git. First is just by adding the binary `.scpt`-files. You don't get much benefit from using git, but it works.
