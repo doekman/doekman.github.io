@@ -4,29 +4,28 @@ title:  A third way of putting AppleScript into git
 date:   2019-04-28
 ---
 
-There are currently two ways of putting AppleScript into git. First is just by adding the binary `.scpt`-files. You don't get much advantages by using git, but it works.
+There are currently two ways of putting AppleScript into git. First is just by adding the binary `.scpt`-files. You don't get much benefit from using git, but it works.
 
-The _second way_ is to save your AppleScript source as text-files, and put these into git. You get advantages from git, but you do get some extra work.
+The _second way_ is to save your AppleScript source as text-files, and put these into git. You get advantages from git, but it is not as seamless as the first way.
 
 
 Introducing osagitfilter
 ========================
 Now you can combine those two ways by using the [osagitfilter utility][osagitfilter]. Technically, it's a [git filter][] that translates AppleScript's binary format into the text-representation which then will be used by git's internal workings.
 
-To use it, you'll need to [install it][ogf-readme]. After that, you can put compiled script files, AppleScript applications and script bundles in git as if they where regular text-files. When you clone said repository, the files are put back together as they where when you put them into git.
+See the [repository's readme][ogf-readme] for installation instructions. After that, you can put compiled script files, AppleScript applications and script bundles in git as if they where regular text-files. When you clone said repository, the files are re-assembled bit-perfect when you put them into git.
 
 Let me demonstrate this by an example. First create a git-repository:
 
-	mkdir ~/Downloads/osagitfilter-demo
-	cd ~/Downloads/osagitfilter-demo
-	git init
+	git init osagitfilter-demo
+	cd osagitfilter-demo
 
-Now create the AppleScript-file `my_script.scpt` with the following contents:
+Now create the AppleScript-file `my_script.scpt` in this folder with the following contents:
 
 	display dialog "What's your name" default answer ""
 	say "Hi there, " & text returned of result
 
-Since we don't want to add a binary file to git, we first need to associate the `.scpt`-extension with the osagitfilter. We do that, by adding a line to the `.gitattributes`-file, connecting the `.scpt`-extension to the `osa` filter:
+Since we don't want to add a binary file to git, we first need to associate the `.scpt`-extension with the osagitfilter (you need to explicitly _opt-in_ every repository). This can be done by adding a line to the `.gitattributes`-file, connecting the `.scpt`-extension to the `osa` filter:
 
 	echo "*.scpt filter=osa" >> .gitattributes
 
@@ -46,7 +45,7 @@ The program is called [osa][]gitfilter, so you can also add JavaScript `.scpt`-f
 
 I hope osagitfilter will be useful tool. It will not completely replace the first two methods, but it's nice to have an alternative to them.
 
-Let me know what you think: _find me on this topic_ (yet to be created) at Late Night Software's forum.
+Let me know what you think [at this thread][as-forum-thread] on Late Night Software's AppleScript forum.
 
 
 [git filter]: https://git-scm.com/book/en/v2/Customizing-Git-Git-Attributes#filters_a
@@ -54,3 +53,4 @@ Let me know what you think: _find me on this topic_ (yet to be created) at Late 
 [ogf-readme]: https://github.com/doekman/osagitfilter/blob/master/README.md
 [osa]: https://developer.apple.com/library/archive/documentation/AppleScript/Conceptual/AppleScriptX/Concepts/osa.html "The Open Scripting Architecture (OSA) provides a standard and extensible mechanism for interapplication communication in OS X."
 [scriptdebugger]: https://latenightsw.com
+[as-forum-thread]: https://forum.latenightsw.com
