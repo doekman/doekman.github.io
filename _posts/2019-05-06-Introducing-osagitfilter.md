@@ -45,7 +45,9 @@ The program is called [osa][]gitfilter, so you can also add JavaScript `.scpt`-f
 
 I hope osagitfilter will be useful tool. It will not completely replace the first two methods, but it's nice to have an alternative to them.
 
-Let me know what you think [at this thread][as-forum-thread] on Late Night Software's AppleScript forum.
+Let me know what you think on [twitter][twitter].
+
+<html><!-- [at this thread][as-forum-thread] on Late Night Software's AppleScript forum. --></html>
 
 
 [git filter]: https://git-scm.com/book/en/v2/Customizing-Git-Git-Attributes#filters_a
@@ -53,4 +55,5 @@ Let me know what you think [at this thread][as-forum-thread] on Late Night Softw
 [ogf-readme]: https://github.com/doekman/osagitfilter/blob/master/README.md
 [osa]: https://developer.apple.com/library/archive/documentation/AppleScript/Conceptual/AppleScriptX/Concepts/osa.html "The Open Scripting Architecture (OSA) provides a standard and extensible mechanism for interapplication communication in OS X."
 [scriptdebugger]: https://latenightsw.com
+[twitter]: https://twitter.com/doekezanstra
 [as-forum-thread]: https://forum.latenightsw.com
