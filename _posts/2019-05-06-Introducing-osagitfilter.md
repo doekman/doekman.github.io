@@ -55,5 +55,5 @@ Let me know what you think on [twitter][twitter].
 [ogf-readme]: https://github.com/doekman/osagitfilter/blob/master/README.md
 [osa]: https://developer.apple.com/library/archive/documentation/AppleScript/Conceptual/AppleScriptX/Concepts/osa.html "The Open Scripting Architecture (OSA) provides a standard and extensible mechanism for interapplication communication in OS X."
 [scriptdebugger]: https://latenightsw.com
-[twitter]: https://twitter.com/doekezanstra
+[twitter]: https://twitter.com/doekezanstra/status/1125696216573140993
 [as-forum-thread]: https://forum.latenightsw.com
