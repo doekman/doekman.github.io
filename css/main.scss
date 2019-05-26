@@ -74,9 +74,19 @@ pre, code {
 ;   border:2px solid #1756a9
 ;   border-radius: 5px
 ;   cursor: pointer
+;   line-height: $base-line-height
 }
 .no_cookies_bar button:hover
 {   border:2px solid red
 ;   color:red
 ;   background-color:yellow
+}
+.no_cookies_bar span
+{   float:right
+;   display:inline-block;
+;   margin-right:1em;
+;   cursor: pointer
+}
+.no_cookies_bar span:hover
+{   color:red
 }
