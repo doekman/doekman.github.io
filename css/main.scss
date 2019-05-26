@@ -54,3 +54,29 @@ $on-laptop:        800px;
 pre, code {
     background-color:#f8f8f8;
 }
+
+//--| no_cookies.js BAR |----------------------------------
+.no_cookies_bar
+{   font-size:115%
+;   background-color: $grey-color
+;   color:white
+;   padding: 8px 0 6px 0
+;   border-bottom: 5px solid $grey-color-dark
+;   margin-top:-5px
+}
+
+.no_cookies_bar button
+{   float:right
+;   font-size:80%
+;   font-weight:bold
+;   color:#1756a9
+;   background-color:white
+;   border:2px solid #1756a9
+;   border-radius: 5px
+;   cursor: pointer
+}
+.no_cookies_bar button:hover
+{   border:2px solid red
+;   color:red
+;   background-color:yellow
+}
