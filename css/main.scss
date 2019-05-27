@@ -57,36 +57,45 @@ pre, code {
 
 //--| no_cookies.js BAR |----------------------------------
 .no_cookies_bar
-{   font-size:115%
-;   background-color: $grey-color
-;   color:white
-;   padding: 8px 0 6px 0
-;   border-bottom: 5px solid $grey-color-dark
-;   margin-top:-5px
+{	--actionable_color_fg: #1756a9
+;	--signal_color_fg: red
+;	--signal_color_bg: yellow
+;	--text-color: white
+;	font-size:115%
+;	background-color:$grey-color
+;	color:var(--text-color)
+;	padding: 8px 0 6px 0
+;	border-bottom:5px solid $grey-color-dark
+;	margin-top:-5px
 }
-
 .no_cookies_bar button
-{   float:right
-;   font-size:80%
-;   font-weight:bold
-;   color:#1756a9
-;   background-color:white
-;   border:2px solid #1756a9
-;   border-radius: 5px
-;   cursor: pointer
-;   line-height: $base-line-height
+{	margin:2px                //Safari adds margin+padding, but Firefox doesn't
+;	padding:2px 6px 3px 6px   //and Chrome only adds padding
+;	cursor:pointer
+;	font-size:80%
+;	font-weight:bold
+;	border-radius:5px
 }
-.no_cookies_bar button:hover
-{   border:2px solid red
-;   color:red
-;   background-color:yellow
+.no_cookies_bar .btn-text
+{	float:right
+;	color:var(--actionable_color_fg)
+;	background-color:white
+;	border:2px solid var(--actionable_color_fg)
 }
-.no_cookies_bar span
-{   float:right
-;   display:inline-block;
-;   margin-right:1em;
-;   cursor: pointer
+.no_cookies_bar .btn-text:hover
+{	border:2px solid var(--signal_color_fg)
+;	color:var(--signal_color_fg)
+;	background-color:var(--signal_color_bg)
 }
-.no_cookies_bar span:hover
-{   color:red
+.no_cookies_bar .btn-x
+{	float:right
+;	display:inline-block;
+;	color:$grey-color-dark
+;	background-color:transparent
+;	border:2px solid transparent
+}
+.no_cookies_bar .btn-x:hover
+{	color:var(--signal_color_fg)
+;	background-color:var(--signal_color_bg)
+;	border-color:var(--signal_color_fg)
 }

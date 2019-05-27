@@ -10,19 +10,17 @@
 	}
 ;	let current_locale = navigator.language.substr(0,2)
 ;	const LS = localized_strings[current_locale] || localized_strings['en']
-;	if (get_pref(NC, false) !== true)
+;	if(get_pref(NC, false) !== true)
 	{	let no_cookies_bar = document.createElement('div')
 	;   no_cookies_bar.setAttribute('class', 'no_cookies_bar')
-	;	no_cookies_bar.innerHTML = '<span title="'+LS.close+'">×</span><div class="wrapper">'+LS.message+' <button title="'+LS.explanation+'">'+LS.button+'</button></div>'
+	;	no_cookies_bar.innerHTML = '<button title="'+LS.close+'" data-persist="false" class="btn-x">×</button><div class="wrapper">'+LS.message+' <button title="'+LS.explanation+'" data-persist="true" class="btn-text">'+LS.button+'</button></div>'
 	;	let h = document.querySelector('header') || document.querySelector('body')
 	;	h.insertBefore(no_cookies_bar, h.childNodes[0])
-	;	h.querySelector('button').addEventListener('click', function(e)
-		{	set_pref(NC, true)
-		;	h.removeChild(no_cookies_bar)
-		})
-	;	h.querySelector('span').addEventListener('click', function(e)
-		{	set_pref(NC, true, true)
-		;	h.removeChild(no_cookies_bar)
-		})
+	;	for(let button of h.querySelectorAll('button[data-persist]'))
+		{	button.addEventListener('click', function(e)
+			{	set_pref(NC, true, button.dataset.persist==='true')
+			;	h.removeChild(no_cookies_bar)
+			})
+		}
 	}
 })();
