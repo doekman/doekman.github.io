@@ -10,7 +10,7 @@ layout: default
 
   <div class="post-content" itemprop="articleBody">
     {{ content }}
-    {% if page.gist %}<a href="{{ page.gist }}" title="{% if page.gist_title %}{{ page.gist_title }}{% else %}Code on GitHub Gist{% endif %}" class="right icon">※</a>{% endif %}
+    {% if page.src_href %}<a href="{{ page.src_href }}" title="{% if page.src_title %}{{ page.src_title }}{% else %}Link to code{% endif %}" class="right icon">※</a>{% endif %}
   </div>
 
 </article>

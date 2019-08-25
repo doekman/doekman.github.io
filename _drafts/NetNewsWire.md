@@ -2,8 +2,8 @@
 layout: post
 title:  NetNewsWire 5.0 released
 date:   2019-08-20
-gist:	https://gist.github.com/doekman/002c8503d14310ac0b608d4d909b208c
-gist_title: Code to generate above text from git-log
+src_href:	https://gist.github.com/doekman/002c8503d14310ac0b608d4d909b208c
+src_title: Code to generate above text from git-log
 ---
 
 From the [Coding Guidelines][vc] of NetNewsWire:
@@ -13,7 +13,7 @@ From the [Coding Guidelines][vc] of NetNewsWire:
 
 
 ## 2017
-Initial Add Add Add Add Remove Add Add Add Add Add Add Add Add Fix Make Add Unbreak Add Add Add Add Add Add Add Add Add Add Add Delete Add Remove Drop Add Add Add Add Add Add Comment Allow Put Make Update Make Show Wire Avoid Replace Add Add Ignore Add Write Update Remove Merge Generate Merge I Merge.
+ Initial Add Add Add Add Remove Add Add Add Add Add Add Add Add Fix Make Add Unbreak Add Add Add Add Add Add Add Add Add Add Add Delete Add Remove Drop Add Add Add Add Add Add Comment Allow Put Make Update Make Show Wire Avoid Replace Add Add Ignore Add Write Update Remove Merge Generate Merge I Merge.
 
 Provide If Add Merge Fix Merge Fix Merge Merge Update Merge Use Use Start Create Start Extract Start Make Make Get Start Add Turn Add Add Move Fix Add Add.
 
@@ -30,7 +30,7 @@ Flesh Craete Fix Create Start Do Start Fix Move Move Read Show Use Use Make Make
 Avoid Update Update Bump Fix Save Use Make Start Add Fix Get Add Add Use Bind When Create Delete Fix Do Increase Fetch Set Show Create Refresh Make Use Update Merge Update Add Start Add Fix Continue Make Define Make Create Make Create Create Parse Fix Base Cache Update Clean Fix Remove Remove Get Increase Add Create Create Remove Remove Remove Add Add Add Make Use Add Draw Skip Add Delete Reuse Parse Remove Bump Update Merge Add Save Refresh Parse Make Add Prefer Test Add Support Add Parse Add Add Make Add Add Fix Add Add Add Add Make Implement Add Style Display Normalized Continue Progress Make Edit Implement Position Bump Update Add Add Update Fix Add Add Link Add Add Add Fix Add Add Fix Add Continue Add Fix Update Use Merge Set Add Merge Update Update Move Implement Merge Clean Move Validate Add Use Use Remove Merge Simplify Return Validate Popup Add Remove Create Improve Set Start Don’t Set Use Use Bump Remove Update Implement Go Add Use Make Bump Update Remove Remove Create Merge Make Continue Continue Show Update Add Update Fix Show Use Put Add Fix Use Update Add Add Show Make Fix Comment Bump Update Freeze Fix Make Show.
 
 ## 2018
-Move Move Add Show Fix Check Use Update Make Make Turn Create Remove Draw Add move Merge Merge, Bump Increase Make Start Check Remove Merge Make Decrease Make Update Continue basic Merge revert Merge Make Add Use Add Switch Make User Use Fix Increase Add Bump Change Update Update Add Add Create Add Make Use Use Bump Update Make Unbreak Create Scripting Merge Add revert Merge Add Remove Layout Create Create Make Continue Keep Adjust Remove Reopen Open Restore Hide Display Continue Increase Continue Set Share Create Send Extend Make Add Revise Refer Move Add Handle Use Update Merge Scripting revert Add Merge Remove Download Switch Remove Remove Back Use Remove Add Add Set Make Add Add Add Add Validate Set Merge Consider Register Merge Re-sort Create Build Add Add Create Change It Accept Remove Sender Merge Merge Merge.
+ Move Move Add Show Fix Check Use Update Make Make Turn Create Remove Draw Add move Merge Merge, Bump Increase Make Start Check Remove Merge Make Decrease Make Update Continue basic Merge revert Merge Make Add Use Add Switch Make User Use Fix Increase Add Bump Change Update Update Add Add Create Add Make Use Use Bump Update Make Unbreak Create Scripting Merge Add revert Merge Add Remove Layout Create Create Make Continue Keep Adjust Remove Reopen Open Restore Hide Display Continue Increase Continue Set Share Create Send Extend Make Add Revise Refer Move Add Handle Use Update Merge Scripting revert Add Merge Remove Download Switch Remove Remove Back Use Remove Add Add Set Make Add Add Add Add Validate Set Merge Consider Register Merge Re-sort Create Build Add Add Create Change It Accept Remove Sender Merge Merge Merge.
 
 Merge convert Merge Merge Start Merge Create Layout Change Add Wire Try Disable Make Delete Remake Make Remove Continue Get Add Add Move Make Remove Bump Update Reorder Remove Create Merge Merge Remove Show Make Show Change Update Restore implement Merge Merge Start Add Merge Add Pass Rearrange Add Use Add Create Add Make Add Add Remove Fetch support Merge Merge Fetch Rename Bump Update Remove Skip Make Remember Fix Make Skip Disallow Punt Make Create Implement Support Add Start Make Support Make Remove Update Bump Update When Skip Make Add Do Merge Hide When Make Update Make Create Delete Remove Add Add Use Use Use Remove Remove Use Create Use Create Use Don’t Use Add Remove Create Move Remove Move Move Fix Remove Move Darken Do Start Show Skip Add Mark Release Make Remove Rewrite Define Tweak Bump Update Give Tweak Draw Show Make Update Merge Switch Remove Create Add Turn Reenable Make Add Use Make Don’t Don’t Remove Replace Make support Remove Start Continue Use Fix Turn Reduce Lower Lighten Tweak Add Skip Make Turn Fix Match Adjust Use Make Turn Revert Hide Fix Make Make Deal Rebuild Bump Update Force Draw Reduce Save Bump Update Start Clean.
 
@@ -55,7 +55,7 @@ Remove Update Re-enable Make Allow Update Make Update Increment Install Clean Up
 Clean Update Merge Add Add Make Override Use Enable Add Add Update Update Get Do Disable Update Move Add Remove Add Remove Start Continue Make Remove Add Remove Add Use Rename Remove Make Move Fix Remove Remove Remove Make Add Add Add Add Make Make Add Remove.
 
 ## 2019
-changed Merge added Merge Start Merge Send Add Fix Update Run Don’t Start Add Add Add Update Update Add Fix Update Bind Add Switch Keep Update Update Fix Set Bump Close Add Bind Refresh Check Add Fix Switch Update Remove Enable Update Make Bump Tighten Reduce Further Update Bump.
+ changed Merge added Merge Start Merge Send Add Fix Update Run Don’t Start Add Add Add Update Update Add Fix Update Bind Add Switch Keep Update Update Fix Set Bump Close Add Bind Refresh Check Add Fix Switch Update Remove Enable Update Make Bump Tighten Reduce Further Update Bump.
 
 Moving Remove Updates Update Re-sort Restore Make Set Start Update Refresh Bump Drop Update Use Make Add Implement Add Implement Bump added Merge Don’t Don’t Update Make Allow Queue Do Remove Remove Remove Skip Fix Fix Discard Bump Update Skip Stop Update Remove Remove Remove Remove Remove Fix Merge Move Merge Remove Get Delete Delete Simplify Simplify Simplify Rationalize Import Start Make Update Quiet Merge Create Update Remove Move Make Remove Make Place Move Create Add Start Start Differentiate Merge Change Fix Merge Work Merge Make Continue Start Continue Remove Make Make Continue Rewire Fix Merge. Update Make Remove Remove Make Update Make Update Update Implement Make Add Index Update Revise Create Show Add Update Remove Revert Bump.
 
@@ -69,10 +69,10 @@ Cleanup Cleanup Add Make Pop Add Prevent Fix Fix Fix Ensure Fix Remove Fix Move 
 
 Move Run Merge Update Add Encapsulate Move Move Move Remove Change Merge Write Update Update Make Update Add Note Remove Update Merge Update Make Merge Use Update Update Update Mark Make Merge Remove Make Delete Make Make Make Make Make Make Merge Update Use Update Merge Create Merge Merge Add Merge Add fiddle Merge Merge Use Merge Create Merge Updated Use Remove Merge Merge Create Merge Create Create Make Merge Create merge Merge Add Prevent Added Add Fix Hook Change Show Fix Initial Fix Merge Make Merge Help Remove Merge Remove Automatically Rename Change Merge Show Merge In Restore Merge Remove Merge Merge Make Merge Remove Trying Get Merge make Merge rename CLean Skip Merge Integrate Check Merge Merge Merge revert Revert Try Exempt Merge Helpbook: Merge Add Merge Prevent Merge fix Fix fix Merge Merge.
 
-Merge Refactor Make Add Remove Implemented Correctly Adjust Correct The Merge Merge Replace Merge Fix Fix Fix Remove Merge Made Keep Fix Wire Merge Fix Merge Enable Add Merge Fix Deleted Made Remove Fix Fix Merge Reformat Merge Refactor Fix Change Reenable Correct Removed Fix Fix Fix Helpbook: Merge Remove Merge Help Merge Change Merge Merge fix undo Bump Merge Add, Merge Merge Update Fix Merge Bump Merge Use Merge Break Merge Update Add Add Get Update Merge Bump Merge Update Bump Merge Now Merge Update Fix Rearrange Add Add Add Add Center Add Add Add Add Change Do Implement Add Merge Add Remove Move Add Merge Add Add Add Add Move Merge Commenting Fix Work.
+Merge Refactor Make Add Remove Implemented Correctly Adjust Correct The Merge Merge Replace Merge Fix Fix Fix Remove Merge Made Keep Fix Wire Merge Fix Merge Enable Add Merge Fix Deleted Made Remove Fix Fix Merge Reformat Merge Refactor Fix Change Reenable Correct Removed Fix Fix Fix Helpbook: Merge Remove Merge Help Merge Change Merge Merge fix undo Bump Merge Add, Merge Merge Update Fix Merge Bump Merge Use Merge Break Merge Update Add Add Get Update Merge Bump Merge Update Bump Merge Now Merge Update Fix Rearrange Add Add Add Add Center Add Add Add Add Change Do Implement Add Merge Add Remove Move Add Merge Add Add Add Add Move Merge Commenting Fix Work Change fix Replace, Merge Start Port Change Optimize Remove Make Give Refetch Bump Merge Update Add Merge Hack Remove Add Fix Reload Center Center Center Bump Update Merge Bump Merge Add Leverage Merge add Change Add Update.
 
 
-[Enjoy][nnw]...
+Congratulations to Brent and team. [Enjoy][nnw]...
 
 
   [nnw]: http://netnewswireapp.com
