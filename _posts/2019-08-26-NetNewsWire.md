@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  NetNewsWire 5.0 released
-date:   2019-08-20
+date:   2019-08-26
 src_href:	https://gist.github.com/doekman/002c8503d14310ac0b608d4d909b208c
 src_title: Code to generate above text from git-log
 ---
@@ -71,11 +71,10 @@ Move Run Merge Update Add Encapsulate Move Move Move Remove Change Merge Write U
 
 Merge Refactor Make Add Remove Implemented Correctly Adjust Correct The Merge Merge Replace Merge Fix Fix Fix Remove Merge Made Keep Fix Wire Merge Fix Merge Enable Add Merge Fix Deleted Made Remove Fix Fix Merge Reformat Merge Refactor Fix Change Reenable Correct Removed Fix Fix Fix Helpbook: Merge Remove Merge Help Merge Change Merge Merge fix undo Bump Merge Add, Merge Merge Update Fix Merge Bump Merge Use Merge Break Merge Update Add Add Get Update Merge Bump Merge Update Bump Merge Now Merge Update Fix Rearrange Add Add Add Add Center Add Add Add Add Change Do Implement Add Merge Add Remove Move Add Merge Add Add Add Add Move Merge Commenting Fix Work Change fix Replace, Merge Start Port Change Optimize Remove Make Give Refetch Bump Merge Update Add Merge Hack Remove Add Fix Reload Center Center Center Bump Update Merge Bump Merge Add Leverage Merge add Change Add Update.
 
+Congratulations to Brent and others. [Enjoy NetNewsWire 5.0][nnw]...
 
-Congratulations to Brent and team. [Enjoy][nnw]...
 
-
-  [nnw]: http://netnewswireapp.com
   [vc]: https://github.com/brentsimmons/NetNewsWire/blob/master/Technotes/CodingGuidelines.md#version-control
   [home]: https://inessential.com/2018/08/31/netnewswire_comes_home "Celebrate"
+  [nnw]: https://ranchero.com/netnewswire/
 
