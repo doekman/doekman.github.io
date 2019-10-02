@@ -1,2 +1,3 @@
+# ok @ Boggus Doekmanni
 jekyll serve --open "$@"
 jekyll serve --open --drafts "$@"
