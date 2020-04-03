@@ -1,9 +1,11 @@
 ---
 layout: post
 title:  "Query Trello data with Postgres (JSON)"
-date:   2020-03-27
+date:   2020-04-03
 is_listed: false
 ---
+
+
 
 Recently, I was working on a project to automatically create Trello-cards via their API. To do that, I needed some _id_-values from the Trello-board which are not shown in the user-interface. But where does one get these values?
 
