@@ -9,7 +9,7 @@ layout: null
 	"description": {{ site.description | jsonify }},
     "icon": {{ site.logo | absolute_url | jsonify }},
 	"author": { "name": {{ site.author | jsonify }}},
-	"items": [ {% assign my_posts = site.posts | sort: 'date' %}{% for post in my_posts reversed limit:32 %} {
+	"items": [ {% assign my_posts = site.posts | where_exp: "p", "p.is_listed" | sort: 'date' | reverse %}{% for post in my_posts limit:32 %} {
 			"id": {{ post.id | jsonify }},
 			"url": {{ post.url | absolute_url | jsonify }},
 			"title": {{ post.title | jsonify }},

@@ -14,7 +14,7 @@ description: > #
   This is Bloggus Doekmanni, or Doekman's blog if you like. A bit of drivel
   about computer programming; some dead serious, some not so much...
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://blog.zanstra.com" # the base hostname & protocol for your site
+url: "https://blog.zanstra.com" # the base hostname & protocol for your site
 twitter_username: doekezanstra
 github_username:  doekman
 keybase_username: doekman
@@ -22,3 +22,10 @@ keybase_username: doekman
 # Build settings
 markdown: kramdown
 
+defaults:
+  -
+    scope:
+      path: ""      # empty string for all files
+      type: posts   # limit to posts
+    values:
+      is_listed: true # set `is_listed: false` to exclude it from json/xml feeds
