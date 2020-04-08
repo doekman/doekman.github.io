@@ -16,4 +16,4 @@ __And nOw YOU cAn dO vOwEr cAsE tOO__!
 
 **Updated**: _a correct implementation of `toVowelCase` is locale-dependend. In English, the letter `y` is sometimes a vowel, and at other times a consonant.  The above works for the Dutch language and some other languages. Your mileage may vary._
 
-**Updated**: bookmarking <https://headlinecapitalization.com>.
+**Updated**: bookmarking <https://headlinecapitalization.com> and <https://titlecaseconverter.com>.
