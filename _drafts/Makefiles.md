@@ -52,6 +52,8 @@ https://www.phillipsj.net/posts/you-told-me-to-use-make-but-im-on-windows/
 https://www.gnu.org/software/make/
 https://sigpipe.macromates.com/2018/creating-a-faster-jekyll/
 
+[ok-named]: https://github.com/secretGeek/ok-bash/issues/24
+
 
 makefile examples
 -----------------
