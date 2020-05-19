@@ -61,3 +61,4 @@ makefile examples
 https://github.com/doekman/postgres-with-trello/blob/master/makefile
 https://github.com/robconery/dox/blob/master/Makefile
 https://rob.conery.io/2018/07/18/working-smarter-not-harder-part-1/ "Generate makefile for standard projects"
+https://github.com/fengsp/flask-session/blob/master/Makefile
