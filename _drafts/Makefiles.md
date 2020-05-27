@@ -13,6 +13,8 @@ Make is perfect as an ad-hoc make system. I like:
 
 It enables composability, and specialized tools (UNIX philosophy)
 
+It supports bash completions
+
 clowncar: monolytic
 
 same, but composed:
