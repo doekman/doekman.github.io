@@ -7,7 +7,9 @@ is_listed: true
 
 **TLDR;** You _can_ pretty print JSON in a different manner. [Try it here][json_pp.js].
 
-My second programming language was Turbo Pascal. And from a BBS-pal I learned a notation in Pascal that has the _semicolon_ (statement separators) at the start of the line! Instead of at the end of the line, as most people did. And now I want to see if I can pretty-print JSON this way using Python and JavaScript. Just for the record: Pascal uses semicolons as statement _separator_, where languages like C use them as statement _terminator_.
+My second programming language was Turbo Pascal. And from a BBS-pal I learned a notation in Pascal that has the _semicolon_ at the _start_ of the line, instead of at the end of the line, as most people did. Sometimes I still do the same with JSON.
+
+In this blog, I want to explore how such formatting can be done using Python and JavaScript. Just for the record: Pascal uses semicolons as statement _separator_, where as languages like C use them as statement _terminator_.
 
 To make clear what I want, here's an example JSON file in the desired layout:
 
@@ -24,9 +26,9 @@ To make clear what I want, here's an example JSON file in the desired layout:
 	  }
 	}
 
-At first it looks pretty weird. However, there is an obvious advantage. You can visually follow the nesting-level of the data-structure in any editor. And you never place comma too many. This works, because comma's in JSON are used as _separators_. In this blog, I want to explore how such formatting can be done in Python and also JavaScript.
+At first it looks pretty weird. However, there is an obvious advantage. You can visually follow the nesting-level of the data-structure in any editor. And you never place comma too many. 
 
-But **_WHY_** would one with a sane mind want to do this? Well, for starters because it is interesting. And also fight the orthodoxy and give voice to different opinions. And it's an ideal project to learn something along the way.
+But **_why_** would one with a sane mind want to do this? Well, for starters because it is interesting. And also fight the orthodoxy. And it's an ideal project to learn something along the way.
 
 Anyways. Python's json module provides a [dump][json_dump]-method to convert a native data-structure to JSON:
 
@@ -53,12 +55,6 @@ If you run this it will print out the formatted JSON below.
 
 To better understand what's happening, I visualized what's happening with the pretty printing below with colored borders. 
 
-<span class="indent-color">blue</span> Providing the `indent` argument will kick-off the pretty printing. A positive integer will indent that many spaces per level. If you provide a string, that value is being used per indent-level.
-
-<span class="NL1-color">red</span> If `indent` is specified, a newline will be inserted just before the indentation.
-
-<span class="sep1">green</span> You can also change the separator behavior. From the documentation: _"If specified, separators should be an `(item_separator, key_separator)` tuple"_. So by providing the tuple `(';', ': ')` for `seperators`, one could create _European JSON_. Here I provide a semi-colon instead of a comma, which is obviously not valid JSON. So just be aware, you could produce invalid JSON with this option. However, when `indent` is specified, the tuple `(', ', ': ')` is automatically used, adding spaces after both separators.
-
 <html><style>
 	.JSON { font: 15px/1.5 monospace; border:1px solid #e8e8e8; background:#f8f8f8; padding: 8px 12px; margin-bottom:15px; }
 	.indent-color { border:1px solid blue;}
@@ -84,21 +80,27 @@ To better understand what's happening, I visualized what's happening with the pr
 	<div class="NL1"><span>}</span></div>
 </div></html>
 
+<span class="indent-color">blue</span> Providing the `indent` argument will kick-off the pretty printing. A positive integer will indent that many spaces per level. If you provide a string, that value is being used per indent-level. In this example I specified two spaces.
+
+<span class="NL1-color">red</span> If `indent` is specified, a newline will be inserted just before the indentation.
+
+<span class="sep1">green</span> You can also change the separator behavior. From the documentation: _"If specified, separators should be an `(item_separator, key_separator)` tuple"_. So by providing the tuple `(';', ': ')` for `separators`, one could create _European JSON_. Here I provide a semi-colon instead of a comma, which is obviously not valid JSON. So just be aware, you could produce invalid JSON with this option. However, when `indent` is specified, the tuple `(', ', ': ')` is automatically used, adding spaces after both separators.
+
 So, these arguments are a bit of a disappointment. It doesn't seem possible to format the JSON the way I wanted it.
 
-However. We could specify a custom [JSONEncoder][] subclass via the `cls` argument. You can inspect the code I linked to. This class is heavily optimized and caters for all sorts of requirements. I made a copy of the code, and made some modifications. It just seemed like a lot of work. The code is not really designed for reuse (for example: encoding value types like boolean), so I decided to take a different route to a solution at this time.
+The API provides another option. We could specify a custom [JSONEncoder][] subclass via the `cls` argument (you can inspect the code I linked to). This class is heavily optimized and caters for all sorts of requirements. I made a copy of the code, and made some modifications. It just seemed like a lot of work. The code is not really designed for reuse (for example: encoding value types like boolean), so I decided to take a different route to a solution at this time.
 
 Look at the color-coded JSON above. What if we replaced <code><span class="sep1">comma</span> <span class="NL1-color">newline</span> <span class="indent-color">indent</span></code> by <code><span class="NL1-color">newline</span> <span class="indent-color">indent</span> <span class="sep1">comma</span></code>? Yes, I'm talking string-replacement. Any newline in JSON can safely be recognized as whitespace, since newlines in strings are always encoded like `\n` (or when reading code, the newline `\n` is encoded as `\\n`). 
 
-The only tweak we need is there should be a little bit indentation _after_ the comma (group `\2` in the code below). The remaining should be _before_ the comma (group `\1`). For now, I assumed the indent to be two spaces. The `((?:  )*)` construct is to see the two spaces as one "thing", so it could be matched multiple times. The `?:` makes sure it is not remembered as a match. I want only to match _multiples_ of two spaces here, hence the double parentheses.
+The only tweak we need is there should be a little bit indentation _after_ the comma (group `\2` in the code below). The remaining should be _before_ the comma (group `\1`). For now, I assumed the indent to be two spaces. The `((?:  )*)` construct is to see the two spaces as one "thing", so it could be matched multiple times. The `?:` makes sure it is not remembered as a match. I do want to match _multiples_ of two spaces here, hence the double parentheses.
 
 	import re
 	def my_json_pretty_print(json):
 	    return re.sub(r', *\n((?:  )*)(  )', r'\n\1,\2', json)
 
-As a side-note: since this is a learning exercise, I tried to make the regular expression more readable by using [verbose regular expressions][re_X]. The idea about it whitespace (not used in special ways) is ignored, so you can use multi-line strings. You also can add comments to parts of the regular expression. However, I intend to match whitespace, but I couldn't get it working. And because I also didn't think the regular expression was more readable, I abandoned it.
+As a side-note: since this is a learning exercise, I tried to make the regular expression more readable by using [verbose regular expressions][re_X]. The idea about it whitespace (not used in special ways) is ignored, so you can use multi-line strings. You also can add comments to parts of the regular expression. However, I intend to match whitespace, but I couldn't get it working. And because I also didn't think the regular expression was more readable, I abandoned it. 
 
-If we run the json print code through this function we will get the following:
+If we combine the two code-snippets from above, we get the following output printed:
 
 	{
 	  "type": "pedant"
@@ -114,7 +116,7 @@ If we run the json print code through this function we will get the following:
 	  }
 	}
 
-Not bad. Not bad at all! If we compare this to the desired layout from above, we can note the following:
+Not bad. Not bad at all! When we compare this to the desired layout from above, we can note the following:
 
 * There are two spaces between the comma and the object-properties, instead of one. I think this is not wrong, but one space would be nicer.
 * The opening object- and list-characters are followed by a newline. This needs to be addressed.
@@ -129,7 +131,7 @@ When playing with it, I discovered that the handling of the `[`- and `{`-charact
 	def json_stringify(obj, indent=2):
 	    if not isinstance(indent, str): indent = ' ' * indent
 	    result = json.dumps(obj, indent=indent)
-	    rx_indent = r'([,{[]) *\n((?:%s)*)%s(%s)' % (r_indent, r_indent0, r_indent1N)
+	    rx_indent = r'([,{[]) *\n((?:%s)*)%s(%s)' % (indent, indent[0], indent[1:])
 	    result = re.sub(rx_indent, r'\n\2\1\3', result)
 	    # Special case: remove inserted newline with top-level array or object
 	    return result[1:] if result[0]=='\n' else result
@@ -158,7 +160,8 @@ This is exactly how we want it. As always, there are some things to be desired:
 So that brings us to the following code:
 
 	def json_stringify(obj, indent=2):
-	    if not isinstance(indent, str): indent = ' ' * indent
+	    if not isinstance(indent, str):
+	        indent = ' ' * indent
 	    result = json.dumps(obj, indent=indent)
 	    r_indent=re.escape(indent)
 	    if indent[:1]=='\t':
@@ -167,10 +170,9 @@ So that brings us to the following code:
 	    else:
 	        r_indent0 = re.escape(indent[:1])
 	        r_indent1N = re.escape(indent[1:])
-	    result = re.sub(r'([,{[]) *\n((?:' + r_indent + 
-	                    r')*)' + r_indent0 + r'(' + r_indent1N + r')', 
-	                    r'\n\2\1\3', result)
-	    return result[1:] if result[:0]=='\n' else result
+	    rx_indent = r'([,{[]) *\n((?:%s)*)%s(%s)' % (r_indent, r_indent0, r_indent1N)
+	    result = re.sub(rx_indent, r'\n\2\1\3', result)
+	    return result[1:] if result[:1]=='\n' else result
 
 So, that's it. I made this code into a [shell script][json_pp.py], so it can be run from the command line (don't forget to `chmod +x` it before you start it). So how does it perform?
 
