@@ -1,15 +1,15 @@
 ---
 layout: post
 title:  "Pretty Print JSON with a Twist"
-date:   2020-09-20
+date:   2020-10-05
 is_listed: true
 ---
 
-**TLDR;** You _can_ pretty print JSON in a different manner. [Try it here][json_pp.js].
+**TLDR;** You can pretty print JSON in a _different manner_. [Try it here][json_pp.js].
 
-My second programming language was Turbo Pascal. And from a BBS-pal I learned a notation in Pascal that has the _semicolon_ at the _start_ of the line, instead of at the end of the line, as most people did. Sometimes I still do the same with JSON.
+My second programming language was Turbo Pascal (first one GW-Basic). From a BBS-pal I learned a notation in Pascal that has the _semicolon_ at the _start_ of the line, instead of at the end of the line, as most people did. Sometimes I still apply the same formatting to JSON.
 
-In this blog, I want to explore how such formatting can be done using Python and JavaScript. Just for the record: Pascal uses semicolons as statement _separator_, where as languages like C use them as statement _terminator_.
+In this blog, I want to explore how such formatting can be done using Python and JavaScript. Just for the record: Pascal uses semicolons as statement _separator_, where as languages like C use them as statement _terminator_. JSON shares this behaviour with Pascal.
 
 To make clear what I want, here's an example JSON file in the desired layout:
 
@@ -26,9 +26,9 @@ To make clear what I want, here's an example JSON file in the desired layout:
 	  }
 	}
 
-At first it looks pretty weird. However, there is an obvious advantage. You can visually follow the nesting-level of the data-structure in any editor. And you never place comma too many. 
+At first it looks pretty weird. However, there is an obvious advantage. You can visually follow the nesting-level of the data-structure in any editor. And you never place a comma too many. 
 
-But **_why_** would one with a sane mind want to do this? Well, for starters because it is interesting. And also fight the orthodoxy. And it's an ideal project to learn something along the way.
+But **_why_** would one with a sane mind want to do this? Well, for starters because it is interesting. And also fight the orthodoxy. And it's an ideal project to learn something new along the way.
 
 Anyways. Python's json module provides a [dump][json_dump]-method to convert a native data-structure to JSON:
 
@@ -37,7 +37,7 @@ Anyways. Python's json module provides a [dump][json_dump]-method to convert a n
 	json = json.dumps(data, indent=2)
 	print(json)
 
-If you run this it will print out the formatted JSON below.
+When you run this, it will print out the formatted JSON below.
 
 	{
 	  "type": "pedant",
@@ -53,7 +53,7 @@ If you run this it will print out the formatted JSON below.
 	  }
 	}
 
-To better understand what's happening, I visualized what's happening with the pretty printing below with colored borders. 
+To better understand what's happening, I visualized this formatting by adding colored borders.
 
 <html><style>
 	.JSON { font: 15px/1.5 monospace; border:1px solid #e8e8e8; background:#f8f8f8; padding: 8px 12px; margin-bottom:15px; }
@@ -80,25 +80,25 @@ To better understand what's happening, I visualized what's happening with the pr
 	<div class="NL1"><span>}</span></div>
 </div></html>
 
-<span class="indent-color">blue</span> Providing the `indent` argument will kick-off the pretty printing. A positive integer will indent that many spaces per level. If you provide a string, that value is being used per indent-level. In this example I specified two spaces.
+<span class="indent-color">blue</span> Providing the `indent` argument will kick-off the pretty printing. A positive integer will indent that many spaces per level. If you provide a string, that value is being used per indent-level. In this example I specified two spaces. 
 
-<span class="NL1-color">red</span> If `indent` is specified, a newline will be inserted just before the indentation.
+<span class="NL1-color">red</span> If `indent` is specified, a newline will be inserted just before the indentation. 
 
 <span class="sep1">green</span> You can also change the separator behavior. From the documentation: _"If specified, separators should be an `(item_separator, key_separator)` tuple"_. So by providing the tuple `(';', ': ')` for `separators`, one could create _European JSON_. Here I provide a semi-colon instead of a comma, which is obviously not valid JSON. So just be aware, you could produce invalid JSON with this option. However, when `indent` is specified, the tuple `(', ', ': ')` is automatically used, adding spaces after both separators.
 
-So, these arguments are a bit of a disappointment. It doesn't seem possible to format the JSON the way I wanted it.
+So, these arguments were a bit of a disappointment. It didn't seem possible to format the JSON the way I wanted it.
 
-The API provides another option. We could specify a custom [JSONEncoder][] subclass via the `cls` argument (you can inspect the code I linked to). This class is heavily optimized and caters for all sorts of requirements. I made a copy of the code, and made some modifications. It just seemed like a lot of work. The code is not really designed for reuse (for example: encoding value types like boolean), so I decided to take a different route to a solution at this time.
+However, the API provides another option. We could specify a custom [JSONEncoder][] subclass via the `cls` argument (you can inspect the code I linked to). This class is heavily optimized and caters for all sorts of requirements. I made a copy of the code, and made some modifications. It just seemed like a lot of work. The code is not really designed for reuse (for example: encoding value types, like boolean, are duplicated multiple times), so I decided to take a different route to a solution at this time.
 
 Look at the color-coded JSON above. What if we replaced <code><span class="sep1">comma</span> <span class="NL1-color">newline</span> <span class="indent-color">indent</span></code> by <code><span class="NL1-color">newline</span> <span class="indent-color">indent</span> <span class="sep1">comma</span></code>? Yes, I'm talking string-replacement. Any newline in JSON can safely be recognized as whitespace, since newlines in strings are always encoded like `\n` (or when reading code, the newline `\n` is encoded as `\\n`). 
 
-The only tweak we need is there should be a little bit indentation _after_ the comma (group `\2` in the code below). The remaining should be _before_ the comma (group `\1`). For now, I assumed the indent to be two spaces. The `((?:  )*)` construct is to see the two spaces as one "thing", so it could be matched multiple times. The `?:` makes sure it is not remembered as a match. I do want to match _multiples_ of two spaces here, hence the double parentheses.
+The only tweak we need is there should be a little bit indentation _after_ the comma (group `\2` in the code below). The remaining indentation should be placed _before_ the comma (group `\1`). For now, I assumed the indent to be two spaces. The `((?:  )*)` construct is to see the two spaces as one "thing", so it could be matched multiple times. The `?:` makes sure it is not remembered as a match. I do want to match _multiples_ of two spaces here, hence the double parentheses.
 
 	import re
 	def my_json_pretty_print(json):
 	    return re.sub(r', *\n((?:  )*)(  )', r'\n\1,\2', json)
 
-As a side-note: since this is a learning exercise, I tried to make the regular expression more readable by using [verbose regular expressions][re_X]. The idea about it whitespace (not used in special ways) is ignored, so you can use multi-line strings. You also can add comments to parts of the regular expression. However, I intend to match whitespace, but I couldn't get it working. And because I also didn't think the regular expression was more readable, I abandoned it. 
+_As a side-note_: since this is a learning exercise, I tried to make the regular expression more readable by using [verbose regular expressions][re_X]. The idea about it whitespace (not used in special ways) is ignored, so you can use multi-line strings. You also can add comments to parts of the regular expression. However, I intend to match whitespace, but I couldn't get it working. And because I also didn't think the regular expression was more readable this way, I abandoned it. 
 
 If we combine the two code-snippets from above, we get the following output printed:
 
@@ -119,14 +119,14 @@ If we combine the two code-snippets from above, we get the following output prin
 Not bad. Not bad at all! When we compare this to the desired layout from above, we can note the following:
 
 * There are two spaces between the comma and the object-properties, instead of one. I think this is not wrong, but one space would be nicer.
-* The opening object- and list-characters are followed by a newline. This needs to be addressed.
-* The closing characters seem to be at the right place, so we are fine there.
+* The opening object- and list-characters (`{` and `[`) are followed by a newline. This needs to be addressed.
+* The closing characters (`}` and `]`) seem to be at the right place, so we are fine there.
 
 First thing I want to fix is to support all sorts of indentations, and not only hard coded two spaces. I figured it is best to define a new function, which will call `json.dumps`, so there is only need to pass `indent` once. Addressing the issue with the extra space in the indentation: this is caused by the comma that is also functioning as an indentation character. Basically I need to delete the first character of the last indent, marked visually by the `X`: <code><span class="indent-color">&nbsp;&nbsp;</span><span class="indent-color">&nbsp;&nbsp;</span><span class="indent-color">x&nbsp;</span></code>.
 
 I played a bit with parameterizing the indentation into the regular expression. String concatenation looked terrible. Formatting with `{}` and `.format()` wasn't a good match either, because curly braces are also special characters in regular expressions. `printf`-style formatting (`%s`) is a good alternative, while the regular expression stays readable.
 
-When playing with it, I discovered that the handling of the `[`- and `{`-characters are the same the `,`-character, so I generalized the regex by changing `,` to a capturing group that matches all three characters, and add a back-reference to the replacement. The code now looks like this:
+While playing with it, I discovered that the handling of the `[`- and `{`-characters are the same the `,`-character, so I generalized the regex by changing `,` to a capturing group that matches all three characters, and add a back-reference to the replacement. The code now looks like this:
 
 	def json_stringify(obj, indent=2):
 	    if not isinstance(indent, str): indent = ' ' * indent
@@ -154,8 +154,8 @@ So, if we run the code now, we get this:
 This is exactly how we want it. As always, there are some things to be desired:
 
 * Indentations with TAB-characters are not handled well. The code should only remove the first character of the last indent when it's not a TAB-character.
-* Using regex special characters (like `*`) make the program fail: the indent-string should be converted to a valid regular expression string first.
-* The code fails with an `IndexError: string index out of range` on the code `indent[0]`. This is easy fixable by using slices, like `indent[:1]`
+* Using regex special characters as indentation (like `*`) make the program fail: the indent-string should be converted to a valid regular expression string first.
+* The code fails when `indent=0` with an `IndexError: string index out of range` on the code `indent[0]`. This is easy fixable by using slices, like `indent[:1]`
 
 So that brings us to the following code:
 
@@ -190,14 +190,16 @@ So, that's it. I made this code into a [shell script][json_pp.py], so it can be 
 	$ 
 
 
-Not bad. Five megabytes within the second on my SSD iMac. I expected worse. 
+Not bad. Five megabytes within the second on my 2017 iMac. I expected worse. But to state the obvious: don't use this in production.
 
-As I mentioned at the start: I couldn't have ended this quest without back-porting this code to the [origins of JSON][toSource]. The advantage of string substitution: it can easily be converted to JavaScript. Also (grandpa speaking), JavaScript now comes with build-in [JSON-methods][js_stringify].
+As I mentioned at the start: I couldn't have ended this quest without back-porting this code to the [origins of JSON][toSource]. The advantage of string substitution: it can easily be converted to JavaScript.
 
-Converting the code to JavaScript was pretty straight-forward. The things worth mentioning:
+Converting the code to JavaScript was pretty straight-forward. Things worth mentioning:
 
+* JavaScript now comes with build-in [JSON-methods][js_stringify] (grandpa speaking)
 * I couldn't find a native [re_escape][] for JavaScript, so I used [Dean Edward's rescape][rescape] from the (now ancient) [base2-library][base2]. Substitutions in JavaScript are `$1` instead of `\1` in Python
 * To generate 4 spaces, in Python you would write `4*' '`. I couldn't find the JavaScript equivalent first, so I used `new Array(1+4).join(' ')` but then I found out you can use `' '.repeat(4)` in [modern browsers][str_repeat]
+* [Template Literals][js-template-literals] are still [a bit to new][can_i_use] to use everywhere, so I implemented the regular expression with string concatenation
 * Python slices `[1:2]` are calls to `.substring(1,2)` in JavaScript. Why can't I remember this?
 
 You can try the [JavaScript version here][json_pp.js]. Thanks for reading!
@@ -213,3 +215,5 @@ You can try the [JavaScript version here][json_pp.js]. Thanks for reading!
 [base2]:  https://code.google.com/archive/p/base2/
 [str_repeat]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/repeat#Browser_compatibility
 [toSource]: https://developer.mozilla.org/nl/docs/Web/JavaScript/Reference/Global_Objects/Object/toSource
+[js-template-literals]: http://es6-features.org/#StringInterpolation
+[can_i_use]: https://caniuse.com/mdn-javascript_grammar_template_literals_template_literal_revision
