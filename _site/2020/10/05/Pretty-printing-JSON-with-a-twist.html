@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pretty Print JSON with a Twist</title>
+    <meta name="description" content="TLDR; You can pretty print JSON in a different manner. Try it here.">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="https://blog.zanstra.com/2020/10/05/Pretty-printing-JSON-with-a-twist.html">
+    <link rel="alternate" type="application/json"    title="Bloggus Doekmanni" href="https://blog.zanstra.com/feed.json" />
+    <link rel="alternate" type="application/rss+xml" title="Bloggus Doekmanni" href="https://blog.zanstra.com/feed.xml">
+    <link rel="me" href="https://micro.blog/doekman"/>
+  </head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/"><span style="position:absolute"><img src="https://blog.zanstra.com/images/doekman.png" alt="Logo" style="height:36px;width:109px;position:relative;left:-125px" /></span>Bloggus Doekmanni</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/about/">about</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <a class="page-link" href="http://zanstra.com/my/">my projects</a>
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Pretty Print JSON with a Twist</h1>
+    <p class="post-meta"><time datetime="2020-10-05T00:00:00+02:00" itemprop="datePublished">October 5, 2020</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p><strong>TLDR;</strong> You can pretty print JSON in a <em>different manner</em>. <a href="https://zanstra.com/my/Json-pp.html">Try it here</a>.</p>
+
+<p>My second programming language was Turbo Pascal (first one GW-Basic). From a BBS-pal I learned a notation in Pascal that has the <em>semicolon</em> at the <em>start</em> of the line, instead of at the end of the line, as most people did. Sometimes I still apply the same formatting to JSON.</p>
+
+<p>In this blog, I want to explore how such formatting can be done using Python and JavaScript. Just for the record: Pascal uses semicolons as statement <em>separator</em>, where as languages like C use them as statement <em>terminator</em>. JSON shares this behaviour with Pascal.</p>
+
+<p>To make clear what I want, here’s an example JSON file in the desired layout:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{ "type": "pedant"
+, "enabled": true
+, "tags":
+  [ "nag"
+  , "prick"
+  , "pin"
+  ]
+, "data":
+  { "test": 123
+  , "cooperate": null
+  }
+}
+</code></pre></div></div>
+
+<p>At first it looks pretty weird. However, there is an obvious advantage. You can visually follow the nesting-level of the data-structure in any editor. And you never place a comma too many.</p>
+
+<p>But <strong><em>why</em></strong> would one with a sane mind want to do this? Well, for starters because it is interesting. And also fight the orthodoxy. And it’s an ideal project to learn something new along the way.</p>
+
+<p>Anyways. Python’s json module provides a <a href="https://docs.python.org/3.8/library/json.html#json.dump">dump</a>-method to convert a native data-structure to JSON:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import json
+data = {'type': 'pedant', 'enabled': True, 'tags': ['nag', 'prick', 'pin'], 'data': {'test': 123, 'cooperate': None}}
+json = json.dumps(data, indent=2)
+print(json)
+</code></pre></div></div>
+
+<p>When you run this, it will print out the formatted JSON below.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "type": "pedant",
+  "enabled": true,
+  "tags": [
+    "nag",
+    "prick",
+    "pin"
+  ],
+  "data": {
+    "test": 123,
+    "cooperate": null
+  }
+}
+</code></pre></div></div>
+
+<p>To better understand what’s happening, I visualized this formatting by adding colored borders.</p>
+
+<html><style>
+	.JSON { font: 15px/1.5 monospace; border:1px solid #e8e8e8; background:#f8f8f8; padding: 8px 12px; margin-bottom:15px; }
+	.indent-color { border:1px solid blue;}
+	.indent { border:1px solid blue; display:inline-block;width:3ex;height:1em;}
+	.sep1 { border:1px solid green; white-space: pre}
+	.sep2 { border:1px solid green; white-space: pre}
+	.NL1-color { border:1px solid red;}
+	.NL1 span:last-of-type { border-right:2px solid red;}
+	/*.NL2 { border-left:2px solid orange;}*/
+</style><div class="JSON">
+	<div class="NL1"><span>{</span></div>
+	<div class="NL1"><span class="NL2 indent"> </span>"type"<span class="sep2">: </span>"pedant"<span class="sep1">, </span></div>
+	<div class="NL1"><span class="NL2 indent"> </span>"enabled"<span class="sep2">: </span>true<span class="sep1">, </span></div>
+	<div class="NL1"><span class="NL2 indent"> </span>"tags"<span class="sep2">: </span><span>[</span></div>
+	<div class="NL1"><span class="NL2 indent"> </span><span class="indent"> </span>"nag"<span class="sep1">, </span></div>
+	<div class="NL1"><span class="NL2 indent"> </span><span class="indent"> </span>"prick"<span class="sep1">, </span></div>
+	<div class="NL1"><span class="NL2 indent"> </span><span class="indent"> </span><span>"pin"</span></div>
+	<div class="NL1"><span class="NL2 indent"> </span>]<span class="sep1">, </span></div>
+	<div class="NL1"><span class="NL2 indent"> </span>"data"<span class="sep2">: </span><span>{</span></div>
+	<div class="NL1"><span class="NL2 indent"> </span><span class="indent"> </span>"test"<span class="sep2">: </span>123<span class="sep1">, </span></div>
+	<div class="NL1"><span class="NL2 indent"> </span><span class="indent"> </span>"cooperate"<span class="sep2">: </span><span>null</span></div>
+	<div class="NL1"><span class="NL2 indent"> </span><span>}</span></div>
+	<div class="NL1"><span>}</span></div>
+</div></html>
+
+<p><span class="indent-color">blue</span> Providing the <code class="language-plaintext highlighter-rouge">indent</code> argument will kick-off the pretty printing. A positive integer will indent that many spaces per level. If you provide a string, that value is being used per indent-level. In this example I specified two spaces.</p>
+
+<p><span class="NL1-color">red</span> If <code class="language-plaintext highlighter-rouge">indent</code> is specified, a newline will be inserted just before the indentation.</p>
+
+<p><span class="sep1">green</span> You can also change the separator behavior. From the documentation: <em>“If specified, separators should be an <code class="language-plaintext highlighter-rouge">(item_separator, key_separator)</code> tuple”</em>. So by providing the tuple <code class="language-plaintext highlighter-rouge">(';', ': ')</code> for <code class="language-plaintext highlighter-rouge">separators</code>, one could create <em>European JSON</em>. Here I provide a semi-colon instead of a comma, which is obviously not valid JSON. So just be aware, you could produce invalid JSON with this option. However, when <code class="language-plaintext highlighter-rouge">indent</code> is specified, the tuple <code class="language-plaintext highlighter-rouge">(', ', ': ')</code> is automatically used, adding spaces after both separators.</p>
+
+<p>So, these arguments were a bit of a disappointment. It didn’t seem possible to format the JSON the way I wanted it.</p>
+
+<p>However, the API provides another option. We could specify a custom <a href="https://github.com/python/cpython/blob/3.8/Lib/json/encoder.py">JSONEncoder</a> subclass via the <code class="language-plaintext highlighter-rouge">cls</code> argument (you can inspect the code I linked to). This class is heavily optimized and caters for all sorts of requirements. I made a copy of the code, and made some modifications. It just seemed like a lot of work. The code is not really designed for reuse (for example: encoding value types, like boolean, are duplicated multiple times), so I decided to take a different route to a solution at this time.</p>
+
+<p>Look at the color-coded JSON above. What if we replaced <code><span class="sep1">comma</span> <span class="NL1-color">newline</span> <span class="indent-color">indent</span></code> by <code><span class="NL1-color">newline</span> <span class="indent-color">indent</span> <span class="sep1">comma</span></code>? Yes, I’m talking string-replacement. Any newline in JSON can safely be recognized as whitespace, since newlines in strings are always encoded like <code class="language-plaintext highlighter-rouge">\n</code> (or when reading code, the newline <code class="language-plaintext highlighter-rouge">\n</code> is encoded as <code class="language-plaintext highlighter-rouge">\\n</code>).</p>
+
+<p>The only tweak we need is there should be a little bit indentation <em>after</em> the comma (group <code class="language-plaintext highlighter-rouge">\2</code> in the code below). The remaining indentation should be placed <em>before</em> the comma (group <code class="language-plaintext highlighter-rouge">\1</code>). For now, I assumed the indent to be two spaces. The <code class="language-plaintext highlighter-rouge">((?:  )*)</code> construct is to see the two spaces as one “thing”, so it could be matched multiple times. The <code class="language-plaintext highlighter-rouge">?:</code> makes sure it is not remembered as a match. I do want to match <em>multiples</em> of two spaces here, hence the double parentheses.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import re
+def my_json_pretty_print(json):
+    return re.sub(r', *\n((?:  )*)(  )', r'\n\1,\2', json)
+</code></pre></div></div>
+
+<p><em>As a side-note</em>: since this is a learning exercise, I tried to make the regular expression more readable by using <a href="https://docs.python.org/3.8/library/re.html#re.X">verbose regular expressions</a>. The idea about it whitespace (not used in special ways) is ignored, so you can use multi-line strings. You also can add comments to parts of the regular expression. However, I intend to match whitespace, but I couldn’t get it working. And because I also didn’t think the regular expression was more readable this way, I abandoned it.</p>
+
+<p>If we combine the two code-snippets from above, we get the following output printed:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "type": "pedant"
+,  "enabled": true
+,  "tags": [
+    "nag"
+  ,  "prick"
+  ,  "pin"
+  ]
+,  "data": {
+    "test": 123
+  ,  "cooperate": null
+  }
+}
+</code></pre></div></div>
+
+<p>Not bad. Not bad at all! When we compare this to the desired layout from above, we can note the following:</p>
+
+<ul>
+  <li>There are two spaces between the comma and the object-properties, instead of one. I think this is not wrong, but one space would be nicer.</li>
+  <li>The opening object- and list-characters (<code class="language-plaintext highlighter-rouge">{</code> and <code class="language-plaintext highlighter-rouge">[</code>) are followed by a newline. This needs to be addressed.</li>
+  <li>The closing characters (<code class="language-plaintext highlighter-rouge">}</code> and <code class="language-plaintext highlighter-rouge">]</code>) seem to be at the right place, so we are fine there.</li>
+</ul>
+
+<p>First thing I want to fix is to support all sorts of indentations, and not only hard coded two spaces. I figured it is best to define a new function, which will call <code class="language-plaintext highlighter-rouge">json.dumps</code>, so there is only need to pass <code class="language-plaintext highlighter-rouge">indent</code> once. Addressing the issue with the extra space in the indentation: this is caused by the comma that is also functioning as an indentation character. Basically I need to delete the first character of the last indent, marked visually by the <code class="language-plaintext highlighter-rouge">X</code>: <code><span class="indent-color">&nbsp;&nbsp;</span><span class="indent-color">&nbsp;&nbsp;</span><span class="indent-color">x&nbsp;</span></code>.</p>
+
+<p>I played a bit with parameterizing the indentation into the regular expression. String concatenation looked terrible. Formatting with <code class="language-plaintext highlighter-rouge">{}</code> and <code class="language-plaintext highlighter-rouge">.format()</code> wasn’t a good match either, because curly braces are also special characters in regular expressions. <code class="language-plaintext highlighter-rouge">printf</code>-style formatting (<code class="language-plaintext highlighter-rouge">%s</code>) is a good alternative, while the regular expression stays readable.</p>
+
+<p>While playing with it, I discovered that the handling of the <code class="language-plaintext highlighter-rouge">[</code>- and <code class="language-plaintext highlighter-rouge">{</code>-characters are the same the <code class="language-plaintext highlighter-rouge">,</code>-character, so I generalized the regex by changing <code class="language-plaintext highlighter-rouge">,</code> to a capturing group that matches all three characters, and add a back-reference to the replacement. The code now looks like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def json_stringify(obj, indent=2):
+    if not isinstance(indent, str): indent = ' ' * indent
+    result = json.dumps(obj, indent=indent)
+    rx_indent = r'([,{[]) *\n((?:%s)*)%s(%s)' % (indent, indent[0], indent[1:])
+    result = re.sub(rx_indent, r'\n\2\1\3', result)
+    # Special case: remove inserted newline with top-level array or object
+    return result[1:] if result[0]=='\n' else result
+</code></pre></div></div>
+
+<p>So, if we run the code now, we get this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{ "type": "pedant"
+, "enabled": true
+, "tags": 
+  [ "nag"
+  , "prick"
+  , "pin"
+  ]
+, "data": 
+  { "test": 123
+  , "cooperate": null
+  }
+}
+</code></pre></div></div>
+
+<p>This is exactly how we want it. As always, there are some things to be desired:</p>
+
+<ul>
+  <li>Indentations with TAB-characters are not handled well. The code should only remove the first character of the last indent when it’s not a TAB-character.</li>
+  <li>Using regex special characters as indentation (like <code class="language-plaintext highlighter-rouge">*</code>) make the program fail: the indent-string should be converted to a valid regular expression string first.</li>
+  <li>The code fails when <code class="language-plaintext highlighter-rouge">indent=0</code> with an <code class="language-plaintext highlighter-rouge">IndexError: string index out of range</code> on the code <code class="language-plaintext highlighter-rouge">indent[0]</code>. This is easy fixable by using slices, like <code class="language-plaintext highlighter-rouge">indent[:1]</code></li>
+</ul>
+
+<p>So that brings us to the following code:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def json_stringify(obj, indent=2):
+    if not isinstance(indent, str):
+        indent = ' ' * indent
+    result = json.dumps(obj, indent=indent)
+    r_indent=re.escape(indent)
+    if indent[:1]=='\t':
+        r_indent0  = ''
+        r_indent1N = re.escape(indent)
+    else:
+        r_indent0 = re.escape(indent[:1])
+        r_indent1N = re.escape(indent[1:])
+    rx_indent = r'([,{[]) *\n((?:%s)*)%s(%s)' % (r_indent, r_indent0, r_indent1N)
+    result = re.sub(rx_indent, r'\n\2\1\3', result)
+    return result[1:] if result[:1]=='\n' else result
+</code></pre></div></div>
+
+<p>So, that’s it. I made this code into a <a href="https://gist.github.com/doekman/e6e942d03f9dee3e98c080b7a47cd04b">shell script</a>, so it can be run from the command line (don’t forget to <code class="language-plaintext highlighter-rouge">chmod +x</code> it before you start it). So how does it perform?</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ls -lh
+-rw-r--r--   1 doekman  staff   4,9M 22 sep 17:08 big_trello_export.json
+-rwxr-xr-x   1 doekman  staff   705B 22 sep 17:10 json-pp.py
+$ time ./json-pp.py &lt; big_trello_export.json &gt; big_test.json
+real	0m0.849s
+user	0m0.734s
+sys	0m0.069s
+$ ls -lh
+-rw-r--r--  1 doekman  staff   7,3M 22 sep 17:11 big_test.json
+-rw-r--r--  1 doekman  staff   4,9M 22 sep 17:08 big_trello_export.json
+-rwxr-xr-x  1 doekman  staff   705B 22 sep 17:10 json-pp.py
+$ 
+</code></pre></div></div>
+
+<p>Not bad. Five megabytes within the second on my 2017 iMac. I expected worse. But to state the obvious: don’t use this in production.</p>
+
+<p>As I mentioned at the start: I couldn’t have ended this quest without back-porting this code to the <a href="https://developer.mozilla.org/nl/docs/Web/JavaScript/Reference/Global_Objects/Object/toSource">origins of JSON</a>. The advantage of string substitution: it can easily be converted to JavaScript.</p>
+
+<p>Converting the code to JavaScript was pretty straight-forward. Things worth mentioning:</p>
+
+<ul>
+  <li>JavaScript now comes with build-in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify">JSON-methods</a> (grandpa speaking)</li>
+  <li>I couldn’t find a native <a href="https://docs.python.org/3.8/library/re.html#re.escape">re_escape</a> for JavaScript, so I used <a href="https://github.com/doekman/base2/blob/1e2eb7fb10565db7e71d2b25780783627e0773dd/src/base2/js/String2.js">Dean Edward’s rescape</a> from the (now ancient) <a href="https://code.google.com/archive/p/base2/">base2-library</a>. Substitutions in JavaScript are <code class="language-plaintext highlighter-rouge">$1</code> instead of <code class="language-plaintext highlighter-rouge">\1</code> in Python</li>
+  <li>To generate 4 spaces, in Python you would write <code class="language-plaintext highlighter-rouge">4*' '</code>. I couldn’t find the JavaScript equivalent first, so I used <code class="language-plaintext highlighter-rouge">new Array(1+4).join(' ')</code> but then I found out you can use <code class="language-plaintext highlighter-rouge">' '.repeat(4)</code> in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/repeat#Browser_compatibility">modern browsers</a></li>
+  <li><a href="http://es6-features.org/#StringInterpolation">Template Literals</a> are still <a href="https://caniuse.com/mdn-javascript_grammar_template_literals_template_literal_revision">a bit to new</a> to use everywhere, so I implemented the regular expression with string concatenation</li>
+  <li>Python slices <code class="language-plaintext highlighter-rouge">[1:2]</code> are calls to <code class="language-plaintext highlighter-rouge">.substring(1,2)</code> in JavaScript. Why can’t I remember this?</li>
+</ul>
+
+<p>You can try the <a href="https://zanstra.com/my/Json-pp.html">JavaScript version here</a>. Thanks for reading!</p>
+
+
+    
+  </div>
+
+</article>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Bloggus Doekmanni</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          
+          <li>
+            <span class="icon icon--twitter"><svg viewBox="0 0 16 16"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><a href="https://twitter.com/doekezanstra" title="Twitter"><span class="username">doekezanstra</span></a>
+
+          </li>
+          
+          
+          <li>
+            <span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><a href="https://github.com/doekman" title="GitHub"><span class="username">doekman</span></a>
+
+          </li>
+          
+          
+          <li>
+            <span class="icon icon--keybase"><?xml version="1.0" encoding="utf-8"?><svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 71 76.3" style="enable-background:new 0 0 71 76.3;" xml:space="preserve"><style type="text/css">.st0{fill:#999999;}</style><g transform="translate(-241.11756,-377.8123)"><path class="st0" d="M247.8,451.8c-0.6-1.3-1.4-3.1-1.8-4l-0.6-1.7l-2,2.2l-2,2.2 l-0.2-4.2c-0.3-6,0.2-12.2,1.2-16.6c2.3-9.8,9.5-18.7,18.8-23.4l2.1-1l-0.5-1.5c-0.3-0.8-0.6-2.5-0.7-3.6l-0.2-2.1l-2.1-0.2 c-3.2-0.3-4.9-1.2-6-3.5c-0.6-1.2-0.6-1.4-0.4-4.6c0.2-4.2,0.5-5.1,1.8-6.5c1.6-1.8,2.7-2.1,6.7-1.9c2.9,0.2,3.5,0.3,4.8,0.9 c0.8,0.4,1.5,0.8,1.6,0.8c0.1,0,1-1.1,2.1-2.6l1.9-2.7l1.2,0.7c0.7,0.4,1.5,0.9,1.9,1.1l0.7,0.4l-0.6,1.5c-0.3,0.8-0.7,2.2-0.8,2.9 l-0.2,1.4l1.7,0.2c6.1,0.6,10.7,4.3,12.4,9.9c0.5,1.8,0.5,5.3,0,7c-0.5,1.6-0.5,1.7-0.1,1.7c0.7,0,5.4,2.3,7.3,3.5 c3.7,2.4,8,6.6,10.4,10.2c4.5,6.7,6.4,14,5.6,22c-0.4,4.8-1.3,8.6-2.9,12.3l-0.6,1.4l-2.5,0l-2.5,0l1.2-2.4 c1.3-2.6,2.3-6.2,2.8-9.4c0.3-2.2,0.4-8.2,0.1-9.3l-0.2-0.7l-1.3,1.4c-3.2,3.5-7.9,4.5-14.2,2.8c-5.4-1.4-7.6-1.7-12.7-1.7 c-3.9,0-5.2,0.1-7.3,0.6c-5.8,1.3-9.9,3.2-15.6,7.3c-2.1,1.5-3.8,2.7-3.9,2.7c-0.1,0,0.2-1,0.6-2.3c0.4-1.3,1.1-3.4,1.5-4.8 l0.8-2.5l-0.9,0.9c-0.5,0.5-1.9,1.9-3.1,3.2l-2.1,2.3l0.5,1.9c0.6,2.5,2,5.6,3.5,7.9c0.6,1,1.1,1.8,1.1,1.9s-1.2,0.1-2.6,0.1h-2.6 L247.8,451.8L247.8,451.8z M256.6,427.6c4.8-5.1,8.7-9.2,8.8-9.2c0.1,0.1-0.4,1.6-0.9,3.3c-3.3,10.4-4,12.4-3.9,12.5 c0,0,1.2-0.4,2.5-0.9c8.5-3.7,18.4-4.2,28.9-1.4c4.7,1.2,6.5,1.2,8.8,0c1.3-0.7,1.8-1.1,2.4-2.1c1.1-1.7,1.2-4.1,0.5-6.3 c-1.7-4.8-8.3-11-14.5-13.7c-3.2-1.4-3.4-1.4-4.1-0.7l-0.6,0.6l2.6,3.2c1.4,1.7,2.9,3.6,3.1,4.1c0.6,1.2,0.7,3.1,0.1,4.3 c-0.8,1.7-3.2,2.9-5.1,2.5c-0.8-0.2-1.1-0.1-1.9,0.5c-2.2,1.6-4.6,1.2-6.6-1.2c-1.6-1.8-2-2.7-2.1-4.5c0-0.9-0.3-2-0.5-2.4 c-0.3-0.6-0.4-1.3-0.4-2.2l0.1-1.4l-1.3-0.3c-1.8-0.5-3.9-1.5-5.1-2.4c-0.6-0.4-1.1-0.8-1.3-0.8s-1.5,0.6-2.9,1.3 c-9.7,5-16,14.3-17,24.8c-0.1,1-0.2,2.3-0.3,2.8l-0.1,0.9l1.1-1.1C247.4,437.3,251.8,432.7,256.6,427.6L256.6,427.6z M282.5,420.2 c0.9-0.7,1.7-1.3,1.9-1.3c0.1,0,0.4,0.3,0.7,0.7c0.5,0.8,1.4,0.8,1.8,0.1c0.3-0.5,0.3-0.6-5.6-7.8c-3.5-4.3-4.2-5-4.7-5 c-1.2,0.1-0.9,1,1,3.3l1.8,2.2l-1,0.8c-1.1,1-1.2,1.2-0.5,1.8c0.5,0.5,0.6,0.4,1.6-0.3l1.1-0.7l0.7,0.6c0.4,0.3,0.6,0.8,0.6,0.9 c0,0.2-0.8,0.9-1.7,1.7c-0.9,0.7-1.6,1.5-1.6,1.7c0,0.3,0.5,1.1,1.4,2.2C280.3,421.7,280.8,421.5,282.5,420.2L282.5,420.2z  M272.2,406c0.6-1.8,2.6-3.2,4.6-3.2c1.1,0,2.7,0.9,3.8,2.1l1,1.2l0.9-1.1c2.5-2.8,2.8-6.7,0.8-10.1c-1.5-2.5-4.3-4-8.2-4.4 c-2.1-0.2-2.6-0.4-3.7-1.5l-0.8-0.8l-0.4,0.6c-0.8,1.2-2.5,5.1-3,6.6c-0.7,2.3-0.4,5.9,0.5,7.7c0.9,1.7,3.3,4,4,3.7 C271.8,406.9,272,406.5,272.2,406L272.2,406z M263.3,392.4c0.2-0.5,0.7-1.8,1.2-2.8c0.5-1,0.9-2,0.9-2.3c0-0.9-1-1.3-3.7-1.5 c-2.4-0.2-2.6-0.1-3.1,0.4c-0.4,0.4-0.6,0.9-0.6,1.6c0,0.6-0.1,1.7-0.2,2.6c-0.2,2.1,0.1,2.5,2.2,2.8 C263.1,393.4,263,393.4,263.3,392.4z M260.2,390c0-1.7,0.2-1.9,1.6-1.9h1.3v1.4v1.4h-1.4h-1.4V390z M266.5,448.3 c-0.6-0.6-0.8-1-0.8-2c0-1.9,1.1-3,2.9-3c1.7,0,2.9,1.2,2.9,2.9c0,1.8-1.1,2.8-3,2.9C267.5,449.1,267.1,448.9,266.5,448.3 L266.5,448.3z M285.8,448.6c-2.3-1.8-1.1-5.3,1.8-5.3c1.8,0,2.8,1.1,2.9,3c0,1.1-0.1,1.4-0.8,2s-1,0.8-2,0.8 C286.8,449.1,286.2,448.9,285.8,448.6L285.8,448.6z"/></g></svg>
+</span><a href="https://keybase.io/doekman" title="Keybase"><span class="username">doekman</span></a>
+
+          </li>
+          
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>This is Bloggus Doekmanni, or Doekman's blog if you like. A bit of drivel about computer programming; some dead serious, some not so much...
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+<link rel="stylesheet" href="/css/no_cookies.css">
+<script src="/js/no_cookies.js"></script>
+
+
+  </body>
+
+</html>

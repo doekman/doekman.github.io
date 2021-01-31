@@ -1,0 +1,1106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Bloggus Doekmanni</title>
+    <description>This is Bloggus Doekmanni, or Doekman's blog if you like. A bit of drivel about computer programming; some dead serious, some not so much...
+</description>
+    <link>https://blog.zanstra.com/</link>
+    <atom:link href="https://blog.zanstra.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sun, 31 Jan 2021 17:43:52 +0100</pubDate>
+    <lastBuildDate>Sun, 31 Jan 2021 17:43:52 +0100</lastBuildDate>
+    <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>Moving away from Server.app to Jamf Pro</title>
+        <description>&lt;p&gt;At &lt;a href=&quot;https://archipunt.nl&quot;&gt;Archipunt&lt;/a&gt; we manage around 100 &lt;em&gt;macOS&lt;/em&gt; computers. We used to manage them via &lt;em&gt;Server.app&lt;/em&gt;. Because of several reasons, we now are moving to an all-MDM solution with Jamf Pro.&lt;/p&gt;
+
+&lt;p&gt;To migrate the computers, we identified the following things to be fixed on these computers:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The registration to Server.app’s &lt;em&gt;Network Account&lt;/em&gt; server needs to be removed&lt;/li&gt;
+  &lt;li&gt;After this, some cleanup needs to be done in the computers local directory&lt;/li&gt;
+  &lt;li&gt;Since password authentication was done via Server.app, the &lt;em&gt;mobile account&lt;/em&gt; need to be migrated to a &lt;em&gt;local account&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;Some computers used Server.app’s MDM solution. When still present, old profiles need to be removed&lt;/li&gt;
+  &lt;li&gt;Most computers are registered via DEP, so enrolment needs to be renewed in order to configure the to be managed via Jamf Pro.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Because of COVID-19, most computers need to be migrated by the users themselves at home. Luckily, all users have elevated privileges. Otherwise, this migration would take a lot more time on our side.&lt;/p&gt;
+
+&lt;p&gt;To migration will be done by a custom application. The GUI part will be written in AppleScript because it is so well suited for this. The actual migration is done via a shell-script. I couldn’t have written this without the &lt;a href=&quot;https://github.com/rtrouton/rtrouton_scripts/blob/master/rtrouton_scripts/migrate_ad_mobile_account_to_local_account/MigrateADMobileAccounttoLocalAccount.command&quot;&gt;this script by Rich Trouton&lt;/a&gt;: I made it work with Open Directory (which Server.app users), instead of Active Directory. Another post that helped enormously was this &lt;a href=&quot;https://www.reddit.com/r/macsysadmin/comments/c97zgf/removing_apsdkeychain_to_enroll_devices_in_dep/&quot;&gt;check and fix for an expired Apple Push Service Delivery certificate&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I designed the shell-script via a “check-fix” strategy: I first check if something needs to be fixed, and if so, fix it. For example, first I check if the machine is linked to a network account server. If so, the link is disconnected. This way, the script can be run as often as one wants without breaking stuff. Most items about are coded via a check/fix pair. An added advantage is separate parts can easily be tested.&lt;/p&gt;
+
+&lt;p&gt;It’s also handy in the case the machine has to be rebooted. After that, just run the script again, and it factually starts where it was before the computer was rebooted.&lt;/p&gt;
+
+&lt;p&gt;The AppleScript front-end handles the start screen and the request for the elevated privileges. When an error occurs within the shell-script, the user is advised about this and the log file is shown in the finder. I reserved exit-code 199 via which the shell-script can tell AppleScript the computer needs to be rebooted.&lt;/p&gt;
+
+&lt;p&gt;To test the AppleScript without running the actual migration shell-script, I used the user defaults system. By writing a key/value pair to the application bundle domain (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;defaults write  nl.archipunt.public.go-jamf-pro test -string &quot;PASS&quot;&lt;/code&gt;) the test-application’s behaviour can be influenced. When the key is not present, the actual migration code will be used.&lt;/p&gt;
+
+&lt;p&gt;For source-code, please check out &lt;a href=&quot;https://bitbucket.org/archipunt/go-jamf-pro/src/master/&quot;&gt;the repository&lt;/a&gt; on bitbucket.&lt;/p&gt;
+
+&lt;p&gt;About implementation: we first asked a small group of users to test the script, so we could detect common problems early and fix them. This worked very well. After errors from this initial group were fixed, most errors we experienced where plain user errors and could be handled via the phone very quickly.&lt;/p&gt;
+
+&lt;p&gt;The hardest error to fix was a user who just didn’t get the enrolment notification. Turned out, the user accidentally had switched on &lt;em&gt;do not distrub&lt;/em&gt;. And also had no idea that option existed…&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 11 Jan 2021 00:00:00 +0100</pubDate>
+        <link>https://blog.zanstra.com/2021/01/11/go-jamf-pro.html</link>
+        <guid isPermaLink="true">https://blog.zanstra.com/2021/01/11/go-jamf-pro.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Pretty Print JSON with a Twist</title>
+        <description>&lt;p&gt;&lt;strong&gt;TLDR;&lt;/strong&gt; You can pretty print JSON in a &lt;em&gt;different manner&lt;/em&gt;. &lt;a href=&quot;https://zanstra.com/my/Json-pp.html&quot;&gt;Try it here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;My second programming language was Turbo Pascal (first one GW-Basic). From a BBS-pal I learned a notation in Pascal that has the &lt;em&gt;semicolon&lt;/em&gt; at the &lt;em&gt;start&lt;/em&gt; of the line, instead of at the end of the line, as most people did. Sometimes I still apply the same formatting to JSON.&lt;/p&gt;
+
+&lt;p&gt;In this blog, I want to explore how such formatting can be done using Python and JavaScript. Just for the record: Pascal uses semicolons as statement &lt;em&gt;separator&lt;/em&gt;, where as languages like C use them as statement &lt;em&gt;terminator&lt;/em&gt;. JSON shares this behaviour with Pascal.&lt;/p&gt;
+
+&lt;p&gt;To make clear what I want, here’s an example JSON file in the desired layout:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{ &quot;type&quot;: &quot;pedant&quot;
+, &quot;enabled&quot;: true
+, &quot;tags&quot;:
+  [ &quot;nag&quot;
+  , &quot;prick&quot;
+  , &quot;pin&quot;
+  ]
+, &quot;data&quot;:
+  { &quot;test&quot;: 123
+  , &quot;cooperate&quot;: null
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;At first it looks pretty weird. However, there is an obvious advantage. You can visually follow the nesting-level of the data-structure in any editor. And you never place a comma too many.&lt;/p&gt;
+
+&lt;p&gt;But &lt;strong&gt;&lt;em&gt;why&lt;/em&gt;&lt;/strong&gt; would one with a sane mind want to do this? Well, for starters because it is interesting. And also fight the orthodoxy. And it’s an ideal project to learn something new along the way.&lt;/p&gt;
+
+&lt;p&gt;Anyways. Python’s json module provides a &lt;a href=&quot;https://docs.python.org/3.8/library/json.html#json.dump&quot;&gt;dump&lt;/a&gt;-method to convert a native data-structure to JSON:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import json
+data = {'type': 'pedant', 'enabled': True, 'tags': ['nag', 'prick', 'pin'], 'data': {'test': 123, 'cooperate': None}}
+json = json.dumps(data, indent=2)
+print(json)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;When you run this, it will print out the formatted JSON below.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{
+  &quot;type&quot;: &quot;pedant&quot;,
+  &quot;enabled&quot;: true,
+  &quot;tags&quot;: [
+    &quot;nag&quot;,
+    &quot;prick&quot;,
+    &quot;pin&quot;
+  ],
+  &quot;data&quot;: {
+    &quot;test&quot;: 123,
+    &quot;cooperate&quot;: null
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;To better understand what’s happening, I visualized this formatting by adding colored borders.&lt;/p&gt;
+
+&lt;html&gt;&lt;style&gt;
+	.JSON { font: 15px/1.5 monospace; border:1px solid #e8e8e8; background:#f8f8f8; padding: 8px 12px; margin-bottom:15px; }
+	.indent-color { border:1px solid blue;}
+	.indent { border:1px solid blue; display:inline-block;width:3ex;height:1em;}
+	.sep1 { border:1px solid green; white-space: pre}
+	.sep2 { border:1px solid green; white-space: pre}
+	.NL1-color { border:1px solid red;}
+	.NL1 span:last-of-type { border-right:2px solid red;}
+	/*.NL2 { border-left:2px solid orange;}*/
+&lt;/style&gt;&lt;div class=&quot;JSON&quot;&gt;
+	&lt;div class=&quot;NL1&quot;&gt;&lt;span&gt;{&lt;/span&gt;&lt;/div&gt;
+	&lt;div class=&quot;NL1&quot;&gt;&lt;span class=&quot;NL2 indent&quot;&gt; &lt;/span&gt;&quot;type&quot;&lt;span class=&quot;sep2&quot;&gt;: &lt;/span&gt;&quot;pedant&quot;&lt;span class=&quot;sep1&quot;&gt;, &lt;/span&gt;&lt;/div&gt;
+	&lt;div class=&quot;NL1&quot;&gt;&lt;span class=&quot;NL2 indent&quot;&gt; &lt;/span&gt;&quot;enabled&quot;&lt;span class=&quot;sep2&quot;&gt;: &lt;/span&gt;true&lt;span class=&quot;sep1&quot;&gt;, &lt;/span&gt;&lt;/div&gt;
+	&lt;div class=&quot;NL1&quot;&gt;&lt;span class=&quot;NL2 indent&quot;&gt; &lt;/span&gt;&quot;tags&quot;&lt;span class=&quot;sep2&quot;&gt;: &lt;/span&gt;&lt;span&gt;[&lt;/span&gt;&lt;/div&gt;
+	&lt;div class=&quot;NL1&quot;&gt;&lt;span class=&quot;NL2 indent&quot;&gt; &lt;/span&gt;&lt;span class=&quot;indent&quot;&gt; &lt;/span&gt;&quot;nag&quot;&lt;span class=&quot;sep1&quot;&gt;, &lt;/span&gt;&lt;/div&gt;
+	&lt;div class=&quot;NL1&quot;&gt;&lt;span class=&quot;NL2 indent&quot;&gt; &lt;/span&gt;&lt;span class=&quot;indent&quot;&gt; &lt;/span&gt;&quot;prick&quot;&lt;span class=&quot;sep1&quot;&gt;, &lt;/span&gt;&lt;/div&gt;
+	&lt;div class=&quot;NL1&quot;&gt;&lt;span class=&quot;NL2 indent&quot;&gt; &lt;/span&gt;&lt;span class=&quot;indent&quot;&gt; &lt;/span&gt;&lt;span&gt;&quot;pin&quot;&lt;/span&gt;&lt;/div&gt;
+	&lt;div class=&quot;NL1&quot;&gt;&lt;span class=&quot;NL2 indent&quot;&gt; &lt;/span&gt;]&lt;span class=&quot;sep1&quot;&gt;, &lt;/span&gt;&lt;/div&gt;
+	&lt;div class=&quot;NL1&quot;&gt;&lt;span class=&quot;NL2 indent&quot;&gt; &lt;/span&gt;&quot;data&quot;&lt;span class=&quot;sep2&quot;&gt;: &lt;/span&gt;&lt;span&gt;{&lt;/span&gt;&lt;/div&gt;
+	&lt;div class=&quot;NL1&quot;&gt;&lt;span class=&quot;NL2 indent&quot;&gt; &lt;/span&gt;&lt;span class=&quot;indent&quot;&gt; &lt;/span&gt;&quot;test&quot;&lt;span class=&quot;sep2&quot;&gt;: &lt;/span&gt;123&lt;span class=&quot;sep1&quot;&gt;, &lt;/span&gt;&lt;/div&gt;
+	&lt;div class=&quot;NL1&quot;&gt;&lt;span class=&quot;NL2 indent&quot;&gt; &lt;/span&gt;&lt;span class=&quot;indent&quot;&gt; &lt;/span&gt;&quot;cooperate&quot;&lt;span class=&quot;sep2&quot;&gt;: &lt;/span&gt;&lt;span&gt;null&lt;/span&gt;&lt;/div&gt;
+	&lt;div class=&quot;NL1&quot;&gt;&lt;span class=&quot;NL2 indent&quot;&gt; &lt;/span&gt;&lt;span&gt;}&lt;/span&gt;&lt;/div&gt;
+	&lt;div class=&quot;NL1&quot;&gt;&lt;span&gt;}&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/html&gt;
+
+&lt;p&gt;&lt;span class=&quot;indent-color&quot;&gt;blue&lt;/span&gt; Providing the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;indent&lt;/code&gt; argument will kick-off the pretty printing. A positive integer will indent that many spaces per level. If you provide a string, that value is being used per indent-level. In this example I specified two spaces.&lt;/p&gt;
+
+&lt;p&gt;&lt;span class=&quot;NL1-color&quot;&gt;red&lt;/span&gt; If &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;indent&lt;/code&gt; is specified, a newline will be inserted just before the indentation.&lt;/p&gt;
+
+&lt;p&gt;&lt;span class=&quot;sep1&quot;&gt;green&lt;/span&gt; You can also change the separator behavior. From the documentation: &lt;em&gt;“If specified, separators should be an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(item_separator, key_separator)&lt;/code&gt; tuple”&lt;/em&gt;. So by providing the tuple &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(';', ': ')&lt;/code&gt; for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;separators&lt;/code&gt;, one could create &lt;em&gt;European JSON&lt;/em&gt;. Here I provide a semi-colon instead of a comma, which is obviously not valid JSON. So just be aware, you could produce invalid JSON with this option. However, when &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;indent&lt;/code&gt; is specified, the tuple &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(', ', ': ')&lt;/code&gt; is automatically used, adding spaces after both separators.&lt;/p&gt;
+
+&lt;p&gt;So, these arguments were a bit of a disappointment. It didn’t seem possible to format the JSON the way I wanted it.&lt;/p&gt;
+
+&lt;p&gt;However, the API provides another option. We could specify a custom &lt;a href=&quot;https://github.com/python/cpython/blob/3.8/Lib/json/encoder.py&quot;&gt;JSONEncoder&lt;/a&gt; subclass via the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cls&lt;/code&gt; argument (you can inspect the code I linked to). This class is heavily optimized and caters for all sorts of requirements. I made a copy of the code, and made some modifications. It just seemed like a lot of work. The code is not really designed for reuse (for example: encoding value types, like boolean, are duplicated multiple times), so I decided to take a different route to a solution at this time.&lt;/p&gt;
+
+&lt;p&gt;Look at the color-coded JSON above. What if we replaced &lt;code&gt;&lt;span class=&quot;sep1&quot;&gt;comma&lt;/span&gt; &lt;span class=&quot;NL1-color&quot;&gt;newline&lt;/span&gt; &lt;span class=&quot;indent-color&quot;&gt;indent&lt;/span&gt;&lt;/code&gt; by &lt;code&gt;&lt;span class=&quot;NL1-color&quot;&gt;newline&lt;/span&gt; &lt;span class=&quot;indent-color&quot;&gt;indent&lt;/span&gt; &lt;span class=&quot;sep1&quot;&gt;comma&lt;/span&gt;&lt;/code&gt;? Yes, I’m talking string-replacement. Any newline in JSON can safely be recognized as whitespace, since newlines in strings are always encoded like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;\n&lt;/code&gt; (or when reading code, the newline &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;\n&lt;/code&gt; is encoded as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;\\n&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;The only tweak we need is there should be a little bit indentation &lt;em&gt;after&lt;/em&gt; the comma (group &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;\2&lt;/code&gt; in the code below). The remaining indentation should be placed &lt;em&gt;before&lt;/em&gt; the comma (group &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;\1&lt;/code&gt;). For now, I assumed the indent to be two spaces. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;((?:  )*)&lt;/code&gt; construct is to see the two spaces as one “thing”, so it could be matched multiple times. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;?:&lt;/code&gt; makes sure it is not remembered as a match. I do want to match &lt;em&gt;multiples&lt;/em&gt; of two spaces here, hence the double parentheses.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import re
+def my_json_pretty_print(json):
+    return re.sub(r', *\n((?:  )*)(  )', r'\n\1,\2', json)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;em&gt;As a side-note&lt;/em&gt;: since this is a learning exercise, I tried to make the regular expression more readable by using &lt;a href=&quot;https://docs.python.org/3.8/library/re.html#re.X&quot;&gt;verbose regular expressions&lt;/a&gt;. The idea about it whitespace (not used in special ways) is ignored, so you can use multi-line strings. You also can add comments to parts of the regular expression. However, I intend to match whitespace, but I couldn’t get it working. And because I also didn’t think the regular expression was more readable this way, I abandoned it.&lt;/p&gt;
+
+&lt;p&gt;If we combine the two code-snippets from above, we get the following output printed:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{
+  &quot;type&quot;: &quot;pedant&quot;
+,  &quot;enabled&quot;: true
+,  &quot;tags&quot;: [
+    &quot;nag&quot;
+  ,  &quot;prick&quot;
+  ,  &quot;pin&quot;
+  ]
+,  &quot;data&quot;: {
+    &quot;test&quot;: 123
+  ,  &quot;cooperate&quot;: null
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Not bad. Not bad at all! When we compare this to the desired layout from above, we can note the following:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;There are two spaces between the comma and the object-properties, instead of one. I think this is not wrong, but one space would be nicer.&lt;/li&gt;
+  &lt;li&gt;The opening object- and list-characters (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;{&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[&lt;/code&gt;) are followed by a newline. This needs to be addressed.&lt;/li&gt;
+  &lt;li&gt;The closing characters (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;}&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;]&lt;/code&gt;) seem to be at the right place, so we are fine there.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;First thing I want to fix is to support all sorts of indentations, and not only hard coded two spaces. I figured it is best to define a new function, which will call &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;json.dumps&lt;/code&gt;, so there is only need to pass &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;indent&lt;/code&gt; once. Addressing the issue with the extra space in the indentation: this is caused by the comma that is also functioning as an indentation character. Basically I need to delete the first character of the last indent, marked visually by the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;X&lt;/code&gt;: &lt;code&gt;&lt;span class=&quot;indent-color&quot;&gt;&amp;nbsp;&amp;nbsp;&lt;/span&gt;&lt;span class=&quot;indent-color&quot;&gt;&amp;nbsp;&amp;nbsp;&lt;/span&gt;&lt;span class=&quot;indent-color&quot;&gt;x&amp;nbsp;&lt;/span&gt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;I played a bit with parameterizing the indentation into the regular expression. String concatenation looked terrible. Formatting with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;{}&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.format()&lt;/code&gt; wasn’t a good match either, because curly braces are also special characters in regular expressions. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;printf&lt;/code&gt;-style formatting (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%s&lt;/code&gt;) is a good alternative, while the regular expression stays readable.&lt;/p&gt;
+
+&lt;p&gt;While playing with it, I discovered that the handling of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[&lt;/code&gt;- and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;{&lt;/code&gt;-characters are the same the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;,&lt;/code&gt;-character, so I generalized the regex by changing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;,&lt;/code&gt; to a capturing group that matches all three characters, and add a back-reference to the replacement. The code now looks like this:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def json_stringify(obj, indent=2):
+    if not isinstance(indent, str): indent = ' ' * indent
+    result = json.dumps(obj, indent=indent)
+    rx_indent = r'([,{[]) *\n((?:%s)*)%s(%s)' % (indent, indent[0], indent[1:])
+    result = re.sub(rx_indent, r'\n\2\1\3', result)
+    # Special case: remove inserted newline with top-level array or object
+    return result[1:] if result[0]=='\n' else result
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;So, if we run the code now, we get this:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{ &quot;type&quot;: &quot;pedant&quot;
+, &quot;enabled&quot;: true
+, &quot;tags&quot;: 
+  [ &quot;nag&quot;
+  , &quot;prick&quot;
+  , &quot;pin&quot;
+  ]
+, &quot;data&quot;: 
+  { &quot;test&quot;: 123
+  , &quot;cooperate&quot;: null
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This is exactly how we want it. As always, there are some things to be desired:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Indentations with TAB-characters are not handled well. The code should only remove the first character of the last indent when it’s not a TAB-character.&lt;/li&gt;
+  &lt;li&gt;Using regex special characters as indentation (like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;*&lt;/code&gt;) make the program fail: the indent-string should be converted to a valid regular expression string first.&lt;/li&gt;
+  &lt;li&gt;The code fails when &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;indent=0&lt;/code&gt; with an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IndexError: string index out of range&lt;/code&gt; on the code &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;indent[0]&lt;/code&gt;. This is easy fixable by using slices, like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;indent[:1]&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;So that brings us to the following code:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def json_stringify(obj, indent=2):
+    if not isinstance(indent, str):
+        indent = ' ' * indent
+    result = json.dumps(obj, indent=indent)
+    r_indent=re.escape(indent)
+    if indent[:1]=='\t':
+        r_indent0  = ''
+        r_indent1N = re.escape(indent)
+    else:
+        r_indent0 = re.escape(indent[:1])
+        r_indent1N = re.escape(indent[1:])
+    rx_indent = r'([,{[]) *\n((?:%s)*)%s(%s)' % (r_indent, r_indent0, r_indent1N)
+    result = re.sub(rx_indent, r'\n\2\1\3', result)
+    return result[1:] if result[:1]=='\n' else result
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;So, that’s it. I made this code into a &lt;a href=&quot;https://gist.github.com/doekman/e6e942d03f9dee3e98c080b7a47cd04b&quot;&gt;shell script&lt;/a&gt;, so it can be run from the command line (don’t forget to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;chmod +x&lt;/code&gt; it before you start it). So how does it perform?&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ls -lh
+-rw-r--r--   1 doekman  staff   4,9M 22 sep 17:08 big_trello_export.json
+-rwxr-xr-x   1 doekman  staff   705B 22 sep 17:10 json-pp.py
+$ time ./json-pp.py &amp;lt; big_trello_export.json &amp;gt; big_test.json
+real	0m0.849s
+user	0m0.734s
+sys	0m0.069s
+$ ls -lh
+-rw-r--r--  1 doekman  staff   7,3M 22 sep 17:11 big_test.json
+-rw-r--r--  1 doekman  staff   4,9M 22 sep 17:08 big_trello_export.json
+-rwxr-xr-x  1 doekman  staff   705B 22 sep 17:10 json-pp.py
+$ 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Not bad. Five megabytes within the second on my 2017 iMac. I expected worse. But to state the obvious: don’t use this in production.&lt;/p&gt;
+
+&lt;p&gt;As I mentioned at the start: I couldn’t have ended this quest without back-porting this code to the &lt;a href=&quot;https://developer.mozilla.org/nl/docs/Web/JavaScript/Reference/Global_Objects/Object/toSource&quot;&gt;origins of JSON&lt;/a&gt;. The advantage of string substitution: it can easily be converted to JavaScript.&lt;/p&gt;
+
+&lt;p&gt;Converting the code to JavaScript was pretty straight-forward. Things worth mentioning:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;JavaScript now comes with build-in &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify&quot;&gt;JSON-methods&lt;/a&gt; (grandpa speaking)&lt;/li&gt;
+  &lt;li&gt;I couldn’t find a native &lt;a href=&quot;https://docs.python.org/3.8/library/re.html#re.escape&quot;&gt;re_escape&lt;/a&gt; for JavaScript, so I used &lt;a href=&quot;https://github.com/doekman/base2/blob/1e2eb7fb10565db7e71d2b25780783627e0773dd/src/base2/js/String2.js&quot;&gt;Dean Edward’s rescape&lt;/a&gt; from the (now ancient) &lt;a href=&quot;https://code.google.com/archive/p/base2/&quot;&gt;base2-library&lt;/a&gt;. Substitutions in JavaScript are &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$1&lt;/code&gt; instead of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;\1&lt;/code&gt; in Python&lt;/li&gt;
+  &lt;li&gt;To generate 4 spaces, in Python you would write &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;4*' '&lt;/code&gt;. I couldn’t find the JavaScript equivalent first, so I used &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;new Array(1+4).join(' ')&lt;/code&gt; but then I found out you can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;' '.repeat(4)&lt;/code&gt; in &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/repeat#Browser_compatibility&quot;&gt;modern browsers&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://es6-features.org/#StringInterpolation&quot;&gt;Template Literals&lt;/a&gt; are still &lt;a href=&quot;https://caniuse.com/mdn-javascript_grammar_template_literals_template_literal_revision&quot;&gt;a bit to new&lt;/a&gt; to use everywhere, so I implemented the regular expression with string concatenation&lt;/li&gt;
+  &lt;li&gt;Python slices &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[1:2]&lt;/code&gt; are calls to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.substring(1,2)&lt;/code&gt; in JavaScript. Why can’t I remember this?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can try the &lt;a href=&quot;https://zanstra.com/my/Json-pp.html&quot;&gt;JavaScript version here&lt;/a&gt;. Thanks for reading!&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 05 Oct 2020 00:00:00 +0200</pubDate>
+        <link>https://blog.zanstra.com/2020/10/05/Pretty-printing-JSON-with-a-twist.html</link>
+        <guid isPermaLink="true">https://blog.zanstra.com/2020/10/05/Pretty-printing-JSON-with-a-twist.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Query Trello data with Postgres (JSON)</title>
+        <description>&lt;p&gt;Recently, I was working on a project to automatically create Trello-cards via their API. To do that, I needed some &lt;em&gt;id&lt;/em&gt;-values from the Trello-board which are not shown in the user-interface. But where does one get these values?&lt;/p&gt;
+
+&lt;p&gt;Glad you asked. Every Trello-board can be &lt;a href=&quot;https://help.trello.com/article/747-exporting-data-from-trello-1&quot;&gt;exported to JSON&lt;/a&gt;, and the values I was looking for are available in this export. However, &lt;em&gt;JSON&lt;/em&gt; gives you the data in one big piece of text. Wouldn’t it be handier to have it available as &lt;strong&gt;tabular data&lt;/strong&gt; in a database?&lt;/p&gt;
+
+&lt;p&gt;So I created &lt;a href=&quot;https://github.com/doekman/postgres-with-trello&quot;&gt;this git-repository&lt;/a&gt; to do just that (you will need the &lt;a href=&quot;https://www.postgresql.org&quot;&gt;Postgres&lt;/a&gt;-database for this).&lt;/p&gt;
+
+&lt;p&gt;The table in which the JSON is stored, is modelled after an &lt;a href=&quot;https://rob.conery.io/2015/02/28/document-storage-gymnastics-in-postgres/&quot; title=&quot;Don't forget to click on the POSTGRES-tag on his site, listing a lot of interesting posts...&quot;&gt;idea of Rob Conery&lt;/a&gt; which basically is: store the JSON in a column, along with another column that uniquely identifies the document. This unique value is also available within the JSON itself.&lt;/p&gt;
+
+&lt;p&gt;For example:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;id, json
+12, '{&quot;id&quot;:12, &quot;other&quot;:&quot;data&quot;}
+13, '{&quot;id&quot;:13, &quot;other&quot;:&quot;info&quot;}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The actual table definition is different, but you get the idea. And don’t worry about storing the id-value twice: this small abstraction will make your life a bit easier.&lt;/p&gt;
+
+&lt;p&gt;On top of this document table, I created views for most used objects, like &lt;em&gt;cards&lt;/em&gt; and &lt;em&gt;lists&lt;/em&gt;. The pretty simple idea of “views on top of json” is pretty powerful. You get a lot of &lt;strong&gt;bang for your buck&lt;/strong&gt;!&lt;/p&gt;
+
+&lt;p&gt;If you’re on a Mac, &lt;a href=&quot;https://postgresapp.com&quot;&gt;Postgres.app&lt;/a&gt; is the easiest way to setup a database, but &lt;a href=&quot;https://brew.sh&quot;&gt;Homebrew&lt;/a&gt; works fine too. As client, I use &lt;a href=&quot;https://eggerapps.at/postico/&quot;&gt;Postico&lt;/a&gt; which I really like a lot.&lt;/p&gt;
+
+&lt;p&gt;So if you have a postgres database setup, and have cloned the &lt;a href=&quot;https://github.com/doekman/postgres-with-trello&quot;&gt;git project&lt;/a&gt;, it’s easy to create the database object via the terminal by typing:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;make trello
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This will create the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;trello&lt;/code&gt; schema and within the schema the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;document&lt;/code&gt; table in which the json will be loaded and a bunch of views. I’ve included a Trello export file, so you can load it by running the following command:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;tool/loaddoc.sh data/simple_board_v1.json
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;loaddoc&lt;/code&gt; inserts the JSON-document in the database, unless it already exists. In that case it will update the row. To aid this &lt;em&gt;upsert&lt;/em&gt; behaviour, I’ve added a &lt;em&gt;trigger&lt;/em&gt; to the database schema that updates the id-column. Ideally, this would be handled by the tool itself. However: this is a minimum-imlementation. I couldn’t find anything to load json into the database from the command line.&lt;/p&gt;
+
+&lt;p&gt;A note about the id-column. Trello uses hexadecimal identifiers of 24 positions. That’s easy for computers, but a little harder for humans. So to ease filtering the views, I’ve added an integer-column with auto-numbering.&lt;/p&gt;
+
+&lt;p&gt;Below the screenshot showing the result in Postico with &lt;a href=&quot;https://trello.com/b/ZWvFVK9Z/postgres-with-trello&quot;&gt;this Trello-board&lt;/a&gt; loaded; the same one as we just loaded. On the left you see the table and views. Above I’ve applied a filter, so I only see the lists from the first JSON document. All columns are type-cast. When you hover the image, the right pane is shown which also show type information.&lt;/p&gt;
+
+&lt;html&gt;
+	&lt;figure&gt;
+		&lt;img src=&quot;/images/2020-03/Query-trello-json-with-postgres_A.png&quot; alt=&quot;Screen-shot of the Postico application&quot; class=&quot;non_hoover&quot; /&gt;
+		&lt;img src=&quot;/images/2020-03/Query-trello-json-with-postgres_B.png&quot; alt=&quot;Screen-shot of the Postico application, with right pane&quot; class=&quot;hoover&quot; /&gt;
+		&lt;figcaption&gt;
+			The trello_list-view, with a filter applied &lt;span class=&quot;non_print comment&quot;&gt;(mouseover to display right pane)&lt;/span&gt;
+		&lt;/figcaption&gt;
+	&lt;/figure&gt;
+&lt;/html&gt;
+
+&lt;p&gt;Since I talked a lot about tooling: when you run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cat .ok&lt;/code&gt; on the command line, you will find some often used commands on your screen. It’s called an &lt;em&gt;ok-profile&lt;/em&gt;. The &lt;a href=&quot;https://github.com/secretGeek/ok-bash&quot;&gt;ok-bash&lt;/a&gt;-tool will make it easier to work with this. It also makes you smarter and more efficient.&lt;/p&gt;
+
+&lt;p&gt;So if you develop for Trello, you should really &lt;a href=&quot;https://github.com/doekman/postgres-with-trello&quot;&gt;give this a try&lt;/a&gt;. And if you are working with JSON documents from other origins, I’m very much interested in your ideas.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Originally published &lt;a href=&quot;https://gist.github.com/doekman/e9b1530f0150822b464c4f7b0262a4f3&quot;&gt;at this gist&lt;/a&gt; on GitHub.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 03 Apr 2020 00:00:00 +0200</pubDate>
+        <link>https://blog.zanstra.com/2020/04/03/query-trello-json-with-postgres.html</link>
+        <guid isPermaLink="true">https://blog.zanstra.com/2020/04/03/query-trello-json-with-postgres.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>ok-bash and Python on macOS</title>
+        <description>&lt;p&gt;Development on &lt;a href=&quot;https://www.python.org/doc/sunset-python-2/&quot;&gt;Python 2 has been stopped&lt;/a&gt;, and the default availability of Python on macOS &lt;a href=&quot;https://developer.apple.com/documentation/macos_release_notes/macos_catalina_10_15_release_notes#3318257&quot;&gt;will be deprecated&lt;/a&gt; anywhere in the nearby future. Last week, &lt;a href=&quot;https://scriptingosx.com/2020/02/wrangling-pythons/&quot;&gt;Scripting OS X&lt;/a&gt; wrote about how to deal with this from an admin-perspective.&lt;/p&gt;
+
+&lt;p&gt;Here I would like to explain how we deal with this from the perspective of a small but very handy tool called &lt;a href=&quot;https://github.com/secretGeek/ok-bash&quot;&gt;ok-bash&lt;/a&gt;. This nifty tool helps you free brainspace by creating &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.ok&lt;/code&gt;-folder profiles for bash. You should check it out: it really makes you smarter and more efficient.&lt;/p&gt;
+
+&lt;p&gt;Since the default availability of Python on macOS is threatened, this article is written from a macOS point of view. But the tool itself works on all systems that run &lt;em&gt;bash&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;The tool is exposed via a bash-function, with a Python-backend helping with more complex tasks like syntax highlighting and other formatting. We need a bash-frontend, so the tool can work in the current shell environment.&lt;/p&gt;
+
+&lt;p&gt;We want to keep installation of &lt;em&gt;ok-bash&lt;/em&gt; simple, so users can just clone the git-repository and initialize it via the shell startup file.&lt;/p&gt;
+
+&lt;p&gt;Since there are so many ways to manage Python, we decided to resolve the used python-binary that’s within the current &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PATH&lt;/code&gt;. This is termined via the command &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;which python3 || which python&lt;/code&gt;, so Python 3 is used when available (the Python-backend works both in versions 2 and 3). Also, when only Python 2 is available (or if Python 3 is symlinked to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;python&lt;/code&gt;), ok-bash still works.&lt;/p&gt;
+
+&lt;p&gt;It’s also possible to manually override the path to Python, by setting an environment variable.&lt;/p&gt;
+
+&lt;p&gt;In the future, ensuring Python’s availability can be done via a &lt;a href=&quot;https://docs.brew.sh/Homebrew-and-Python&quot;&gt;homebrew recipe&lt;/a&gt;. An extra advantage of homebrew is it supports the use of virtual environments.&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 17 Feb 2020 00:00:00 +0100</pubDate>
+        <link>https://blog.zanstra.com/2020/02/17/ok-bash-and-python.html</link>
+        <guid isPermaLink="true">https://blog.zanstra.com/2020/02/17/ok-bash-and-python.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>To the Point</title>
+        <description>&lt;p&gt;Already two internet aeons ago, &lt;em&gt;secretGeek&lt;/em&gt; came up with some &lt;a href=&quot;http://secretgeek.net/up_up_up&quot;&gt;handy bash-aliases&lt;/a&gt; to ease navigating the folder hierarchy:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;alias ..='cd ..'
+alias ...='cd ../..'
+#and so on
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Two dots plus an enter navigate you one directory down¹, three dots do that twice, and so on. However, a single dot doesn’t go anywhere and gives you rudely some error message. No help there:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ .
+-bash: .: filename argument required
+.: usage: . filename [arguments]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Turns out the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.&lt;/code&gt; is a &lt;a href=&quot;https://www.gnu.org/software/bash/manual/html_node/Bourne-Shell-Builtins.html#Bourne-Shell-Builtins&quot;&gt;shell buildin command&lt;/a&gt; that requires at least a filename as an argument. How rude.&lt;/p&gt;
+
+&lt;p&gt;Wouldn’t it be handy and appropriate to print the current path when no argument is given? In that case, you could try adding the following to your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.profile&lt;/code&gt; or equivalent startup file:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;function . { if [[ $# -eq 0 ]]; then pwd; else source &quot;$@&quot;; fi }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now a single dot will be more polite and will show the current path. Used with arguments, it works like before. So you still can use it to source scripts, like &lt;a href=&quot;https://github.com/secretGeek/ok-bash/&quot;&gt;ok-bash&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p style=&quot;margin-top:4em&quot;&gt;
+	&lt;small&gt;
+		¹) I've been told a hierarchy of folders/directories is a tree structure. When navigating into a folder, like &lt;code&gt;cd some_folder&lt;/code&gt;, to my earnest knowledge one moves up. Branches mostly grow to the light where the sun is, which is up in the sky. So if you go back from said folder with &lt;code&gt;cd ..&lt;/code&gt; one would move down. So secretGeek's aliases better be called &lt;code&gt;down_down_down&lt;/code&gt; but maybe that has a less engaging ring to it.  Also: the base of the hierarchy —one could go there with &lt;code&gt;cd /&lt;/code&gt;— is called the root, which is a kind of odd, because the root is as branched as the part of the tree that grows in the air. And at the file system, it's only one place! Anyways, the proposed function neither goes up nor down, so at least we have no confusion there.
+	&lt;/small&gt;
+&lt;/p&gt;
+</description>
+        <pubDate>Wed, 02 Oct 2019 00:00:00 +0200</pubDate>
+        <link>https://blog.zanstra.com/2019/10/02/To-the-point.html</link>
+        <guid isPermaLink="true">https://blog.zanstra.com/2019/10/02/To-the-point.html</guid>
+        
+        <category>cli</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>NetNewsWire 5.0 released</title>
+        <description>&lt;p&gt;From the &lt;a href=&quot;https://github.com/brentsimmons/NetNewsWire/blob/master/Technotes/CodingGuidelines.md#version-control&quot;&gt;Coding Guidelines&lt;/a&gt; of NetNewsWire:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Version Control&lt;/strong&gt;&lt;br /&gt;
+Every commit message should begin with a present-tense verb&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;2017&quot;&gt;2017&lt;/h2&gt;
+&lt;p&gt;Initial Add Add Add Add Remove Add Add Add Add Add Add Add Add Fix Make Add Unbreak Add Add Add Add Add Add Add Add Add Add Add Delete Add Remove Drop Add Add Add Add Add Add Comment Allow Put Make Update Make Show Wire Avoid Replace Add Add Ignore Add Write Update Remove Merge Generate Merge I Merge.&lt;/p&gt;
+
+&lt;p&gt;Provide If Add Merge Fix Merge Fix Merge Merge Update Merge Use Use Start Create Start Extract Start Make Make Get Start Add Turn Add Add Move Fix Add Add.&lt;/p&gt;
+
+&lt;p&gt;Commit Continue Move Add Work Continue Continue Delete Convert Convert Convert Convert Convert Remove Converrt Add Replace Set Begin Move Remove Set Continue Add Back Make Start Make Make I Rename Give Start Continue Create Add Make Do.&lt;/p&gt;
+
+&lt;p&gt;Get Make Get Attach Progress Make More Continue Make LookupTable. Using Yet More Merge Remove Start Checking Added Start Progress Make Finish Make Turn Make Decide Progress Make Fix Make Create Make Delete Progress. Implement Start.&lt;/p&gt;
+
+&lt;p&gt;Implement Create Make Make Make Make Continue Continue Make Continue Deal Get Make Use Call Add Delete Fix Make Marked Use Make Make Update Fix Make Rename Remove Add Prune Switch Save Update Move Merge Fix Update Merge Remove Update Move Update Fix Create Slightly Cache Use Delete Implement Update Update Make Update Move Create Delete Fix Get Move Delete Replace Continue Fix Continue Continue Continue Continue Continue Make Get Make Continue Continue Start Use Create Switch Simplify Update Start Remove Start Rename Do Move Make Fix Start Start Make Init Make Fix Make Init Fix Perform Edit Add.&lt;/p&gt;
+
+&lt;p&gt;Make Fix Fix Fix Fix Fix Fix Create Move Remove Make Create Make Rewrite Use Fix Fix Remove Require Add Use Use Send Move Update Keep Update Create Make Call Save Fix Avoid Avoid Set Set Simplify Save Comment-out Add Remove Update Update Include Fix Update Refactor Avoid Handle Handle Rename Update Use Show Make Add Implement Show Update Make Fix Create Update Update Define Handle Make Update Differentiate Add Use Removed Update Change Make Make Post Rejigger Send Rewrite Use Update Move Make Fix Update Maintain Update Update Start Create Switch Begin Clear Rename Update Move Fix Edit Put.&lt;/p&gt;
+
+&lt;p&gt;Flesh Craete Fix Create Start Do Start Fix Move Move Read Show Use Use Make Make Make Upgrade Upgrade Upgrade Upgrade Fix Make Switch Make Add Display When Mark Use Add Add Add Add Create Write Allow Write Check Add Remove Calculate Draw Close Start Show Draw Create Add Show Change Add Add Merge Rename Add Post Make Make Run Move Update Add Show Add Remove Add Skip Add Bump Add Add Change Add Change Bump Use Lighten Switch Set Decode Add Expand Set Bump Create Fix Use Create Add Add Add Add Fix Create Treat Update Make Use Add Delete Create Move Implement Remove Bump Switch Disallow Save Start Save Save Create Create Make Create Make Make Bump Make Update Set Darken Create Create Switch Create Make Make Replace Fix Make Create Make Use Fix Implement Use Update Show Return Add Bump Update Check Add Fix Fix Put Note Edit Avoid Log Normalize Print Log Simplify Log Add Start Adjust Pull Add Use Rebuild Add Fix Keep Add Make Parse Get Add Start Add Add Prefer Bump Add Add Add Fix Do Don’t Add Hide Add.&lt;/p&gt;
+
+&lt;p&gt;Avoid Update Update Bump Fix Save Use Make Start Add Fix Get Add Add Use Bind When Create Delete Fix Do Increase Fetch Set Show Create Refresh Make Use Update Merge Update Add Start Add Fix Continue Make Define Make Create Make Create Create Parse Fix Base Cache Update Clean Fix Remove Remove Get Increase Add Create Create Remove Remove Remove Add Add Add Make Use Add Draw Skip Add Delete Reuse Parse Remove Bump Update Merge Add Save Refresh Parse Make Add Prefer Test Add Support Add Parse Add Add Make Add Add Fix Add Add Add Add Make Implement Add Style Display Normalized Continue Progress Make Edit Implement Position Bump Update Add Add Update Fix Add Add Link Add Add Add Fix Add Add Fix Add Continue Add Fix Update Use Merge Set Add Merge Update Update Move Implement Merge Clean Move Validate Add Use Use Remove Merge Simplify Return Validate Popup Add Remove Create Improve Set Start Don’t Set Use Use Bump Remove Update Implement Go Add Use Make Bump Update Remove Remove Create Merge Make Continue Continue Show Update Add Update Fix Show Use Put Add Fix Use Update Add Add Show Make Fix Comment Bump Update Freeze Fix Make Show.&lt;/p&gt;
+
+&lt;h2 id=&quot;2018&quot;&gt;2018&lt;/h2&gt;
+&lt;p&gt;Move Move Add Show Fix Check Use Update Make Make Turn Create Remove Draw Add move Merge Merge, Bump Increase Make Start Check Remove Merge Make Decrease Make Update Continue basic Merge revert Merge Make Add Use Add Switch Make User Use Fix Increase Add Bump Change Update Update Add Add Create Add Make Use Use Bump Update Make Unbreak Create Scripting Merge Add revert Merge Add Remove Layout Create Create Make Continue Keep Adjust Remove Reopen Open Restore Hide Display Continue Increase Continue Set Share Create Send Extend Make Add Revise Refer Move Add Handle Use Update Merge Scripting revert Add Merge Remove Download Switch Remove Remove Back Use Remove Add Add Set Make Add Add Add Add Validate Set Merge Consider Register Merge Re-sort Create Build Add Add Create Change It Accept Remove Sender Merge Merge Merge.&lt;/p&gt;
+
+&lt;p&gt;Merge convert Merge Merge Start Merge Create Layout Change Add Wire Try Disable Make Delete Remake Make Remove Continue Get Add Add Move Make Remove Bump Update Reorder Remove Create Merge Merge Remove Show Make Show Change Update Restore implement Merge Merge Start Add Merge Add Pass Rearrange Add Use Add Create Add Make Add Add Remove Fetch support Merge Merge Fetch Rename Bump Update Remove Skip Make Remember Fix Make Skip Disallow Punt Make Create Implement Support Add Start Make Support Make Remove Update Bump Update When Skip Make Add Do Merge Hide When Make Update Make Create Delete Remove Add Add Use Use Use Remove Remove Use Create Use Create Use Don’t Use Add Remove Create Move Remove Move Move Fix Remove Move Darken Do Start Show Skip Add Mark Release Make Remove Rewrite Define Tweak Bump Update Give Tweak Draw Show Make Update Merge Switch Remove Create Add Turn Reenable Make Add Use Make Don’t Don’t Remove Replace Make support Remove Start Continue Use Fix Turn Reduce Lower Lighten Tweak Add Skip Make Turn Fix Match Adjust Use Make Turn Revert Hide Fix Make Make Deal Rebuild Bump Update Force Draw Reduce Save Bump Update Start Clean.&lt;/p&gt;
+
+&lt;p&gt;Support Merge revert Reset Merge Merge.&lt;/p&gt;
+
+&lt;p&gt;Add Merge add Merge better.&lt;/p&gt;
+
+&lt;p&gt;Merge Add Merge.&lt;/p&gt;
+
+&lt;p&gt;Add Remove Break Break Break Break Break First Merge use Break Break Rename Rename Add Add Add Add Build Update.&lt;/p&gt;
+
+&lt;p&gt;Add Get Get Make Add Use Nuke Fix Remove Remove Remove Use Update Merge Really Use Use Make Submodule Remove Submodule Start RSDatabase Remove Rename Move Delete Remove Include.&lt;/p&gt;
+
+&lt;p&gt;Update Add Unbreak Merge Oops Merge Add I Change Merge Fix Changes Merge Simplify Update Fix Use Unignore Use Use Use Use Update Use Update Use Use Use Use Use Use Use Use Use Update Update Update Add Update Update Use Update Merge Finish Use &lt;strong&gt;🎉&lt;a href=&quot;https://inessential.com/2018/08/31/netnewswire_comes_home&quot; title=&quot;Celebrate&quot;&gt;Start&lt;/a&gt; &lt;a href=&quot;https://inessential.com/2018/08/31/netnewswire_comes_home&quot; title=&quot;Celebrate&quot;&gt;Continue&lt;/a&gt;🏡&lt;/strong&gt; Update Update Revise Merge.&lt;/p&gt;
+
+&lt;p&gt;Removed Rename Update Change Use Use Merge Switch Merge Merge Hide Allow Normalize Normalize Fix Make Update Stop Merge Don’t Rename Add Update Add Update Start Keep Use Merge Merge Manually Add Bump Bump Hide Add Add Fixed Fix Merge Merge Don’t Merge Removed Fixed Merge Merge Update Update Change Changed fixed Merge Added Merge Remove Update Bump Update Enabled Merge Enabled Merge Bump Fix Print Fix Give Update Implemented Start Update Rolledback Enabled Changed Enabled Stop Update Update Stop Give Store Stop Merge Don’t Write Merge Merge Changed Added Merge Merge Save Merge Store Store Make Store Store Store Store Skip Write Added On Remove Stop Delete Remove Made Update Skip Merge Modified Updated Disallow Include Register Create Made Made Remove Start Make Refactor Merge Normalize Register Validate Add Accept Make Get Validate Make Added Added Sorted Redo Start Improve Merge Merge Merge 5.0d7. Update Temporarily Fix Include Merge.&lt;/p&gt;
+
+&lt;p&gt;Update Continue Complete Fix Similar Merge Merge.&lt;/p&gt;
+
+&lt;p&gt;Remove Update Re-enable Make Allow Update Make Update Increment Install Clean Update Update Update.&lt;/p&gt;
+
+&lt;p&gt;Clean Update Merge Add Add Make Override Use Enable Add Add Update Update Get Do Disable Update Move Add Remove Add Remove Start Continue Make Remove Add Remove Add Use Rename Remove Make Move Fix Remove Remove Remove Make Add Add Add Add Make Make Add Remove.&lt;/p&gt;
+
+&lt;h2 id=&quot;2019&quot;&gt;2019&lt;/h2&gt;
+&lt;p&gt;changed Merge added Merge Start Merge Send Add Fix Update Run Don’t Start Add Add Add Update Update Add Fix Update Bind Add Switch Keep Update Update Fix Set Bump Close Add Bind Refresh Check Add Fix Switch Update Remove Enable Update Make Bump Tighten Reduce Further Update Bump.&lt;/p&gt;
+
+&lt;p&gt;Moving Remove Updates Update Re-sort Restore Make Set Start Update Refresh Bump Drop Update Use Make Add Implement Add Implement Bump added Merge Don’t Don’t Update Make Allow Queue Do Remove Remove Remove Skip Fix Fix Discard Bump Update Skip Stop Update Remove Remove Remove Remove Remove Fix Merge Move Merge Remove Get Delete Delete Simplify Simplify Simplify Rationalize Import Start Make Update Quiet Merge Create Update Remove Move Make Remove Make Place Move Create Add Start Start Differentiate Merge Change Fix Merge Work Merge Make Continue Start Continue Remove Make Make Continue Rewire Fix Merge. Update Make Remove Remove Make Update Make Update Update Implement Make Add Index Update Revise Create Show Add Update Remove Revert Bump.&lt;/p&gt;
+
+&lt;p&gt;Implemented added Use Remove Get Remove Remove Create Made Recalculate Merge Merge Remove Comment-out Rolled Merge Updated Merge Switch Merge Made Merge updated Merge made Merge add Merge Change Document Delete Create Update Continue Add Import Pull Change Remove Start Continue Update Make Make Skip Remove Remove Perform Do Give Pay Start Update Continue Make Make Move Finish Continue Continue Update Merge Store Update Convert Convert Post Convert Convert.&lt;/p&gt;
+
+&lt;p&gt;Remove Set Drop Merge Remove Removed Create Merge Updated Remove Remove Remove Remove Merge Made updated Changed Updated Use Remove Remove Remove Remove Remove Remove Update Move Fixed Merge Remove Merge Delete Fix Move Move Remove Remove Major Move set Added updated Remove Work Start Update Save Update Take Made updated Added added Added adding Merge cleared Attempted Design Removed Merge Added Fixed Combined Combined Fixed Implemented Implemented Updated Group Merge Update Update Update Update Merge Updated Established Adjusted Fixed Fixed Changed Cleaned Fixed Added Added Made Added Reduced Fixed Implemented Refactored Made Added Changed Renamed Added Made Implemented Add Remove Add Update Start Create Switch Change Fix Implement Make Fix updated Update Fix Remove Tweak Fixed Change Revise Merge Removed Restored Fix Change Prevent Create Change Update implement Move Change Refactor Encapsulate Implement Add Finish Hide Move Prevent Fix Removed Hide Change Add Implement Fix Make Make Skip Remove Change Add Rename Make Change Add Refactor Enable Comment Implement Change updated Fix Add Implement Updated Add Add Prevent Add Rework Update Change Remove Add Rollback Enable Add Added Made Remove Change Add Enable Tweak Add Add Change Tweak Hack Provide Delete Rename implement Fix Fix Force Fix Made Deselect Deleted Align Make Respond Fix Align Change Slightly Increase Changed Use Add Merge Update Add Merge Add Add Merge Add Change Merge Change Create Change Fix Merge Refer Implement Make Made Merge Set Add Fix Add Fix Reuse Merge Write Add Make Merge.&lt;/p&gt;
+
+&lt;p&gt;Rename Add Add Make Rename Rename Add Load Enable Delete Refine Make Make Prevent Implement Make Make Add Implement Implement Tweak Expand Prevent Show Update Updated validate Make Update Made change Add Add refactor Upgraded Pass Modify Rename Add Add Update Fix update make Add Added Fix Add Change Add Save added Add Keep Add Add Add added Update Add Fix Add Update Add Change Use Add Capture Refactor Add Restrict Move add store make Make Place Make Added Change Delete Set Change Add Put Stub Make Speed Use Set Update Merge Add Save Add Fix Delegate Make Save Change Scale Add Add Fix Upgraded Fix Fix Removed Fix Restore Update Add Start Update Add Add Add Rename Add Align Switch Prevent Retrieve Add Fix Scale Merge Update Show Fixed Disable Merge Move Make Remove Remove Add Disable Merge Remove Rename Dismiss Don’t Removed Disable Don’t Dismiss Rename Updated Improved Further Made Add Made Updated Set Add Moved Always Made Merge Allow Update Decrement Simplify Increase Merge Add Add Merge Make Make Updated Implement Make Make Remember Fix Update Remember Add Remember Make Update Update Send Fix Enhance Use Change Merge Remove Correct Use Cleaned Left Improved Removed UI Show Centered Merge Made Fixed Use Update Add Update Remove Update Merge Reformat Remove Add Set Merge Update Merge Correct Update Add Fixed Change Add Wrap Update Update Tweak Revise Add Fix Fix Add Tweak Change Make Update Change Merge Allow Enable Updated Updated Merge Refactor Correct Remove Google Use Point Enable Prevent Remove Handle Enforce Update Authentication Update Merge Rework Enable Corrected Remove Correct Refactor Rename Rename Add Ensure Modify Enable Handle Decoding Refactor Update Validate Fix Clear Remove Make Merge Merge Update Update Remove Provide Made Bump Update Fix.&lt;/p&gt;
+
+&lt;p&gt;Cleanup Cleanup Add Make Pop Add Prevent Fix Fix Fix Ensure Fix Remove Fix Move Revert Fixed Merge Resolved Fix Merge Fix escape Fix Merge NetNewsWire upgraded Fix Changed Add Update Make Updated Updated Change Request Show add Merge Update Update Unread Mark Convert Make Add Update Add Fix Dismiss Merge Added Merge Updated Revert Add Added Updated Updated Marking moved Add Use fixed Refactor adding trying fix Merge Add Merge adjusted Made Made Refactor Add Correct Add Update center add Add Merge Revert Add Added Merge Fixes Merge Need Updated Add Merge Merge submodules Merge Move Subscribing Rename Port Add Merge Opens Update Update Update Merge Move Add Add Disbale removed Merge Merge FIrst Change use Fixed Wiring Code Begin Update Update Only Update Merge Update Remove Skip Use Merge Merge Change Move Update Implement Cleanup Merge Merge Adds Merge Renamed Merge Updated some Merge Merge Merge Merge Renamed restores restores Restrict Corrects Merge Merge Changed Switches Adds Switches Rebrand Merge Update Ensure Reduce Update Make Support Low Set SF Merge SF Rolls Deletes Merge Implement Merge Retrieve Temporarily Move Force Navigate Correct Fix Fix Removed Move Temporally Add Change Rename Fix.&lt;/p&gt;
+
+&lt;p&gt;Move Run Merge Update Add Encapsulate Move Move Move Remove Change Merge Write Update Update Make Update Add Note Remove Update Merge Update Make Merge Use Update Update Update Mark Make Merge Remove Make Delete Make Make Make Make Make Make Merge Update Use Update Merge Create Merge Merge Add Merge Add fiddle Merge Merge Use Merge Create Merge Updated Use Remove Merge Merge Create Merge Create Create Make Merge Create merge Merge Add Prevent Added Add Fix Hook Change Show Fix Initial Fix Merge Make Merge Help Remove Merge Remove Automatically Rename Change Merge Show Merge In Restore Merge Remove Merge Merge Make Merge Remove Trying Get Merge make Merge rename CLean Skip Merge Integrate Check Merge Merge Merge revert Revert Try Exempt Merge Helpbook: Merge Add Merge Prevent Merge fix Fix fix Merge Merge.&lt;/p&gt;
+
+&lt;p&gt;Merge Refactor Make Add Remove Implemented Correctly Adjust Correct The Merge Merge Replace Merge Fix Fix Fix Remove Merge Made Keep Fix Wire Merge Fix Merge Enable Add Merge Fix Deleted Made Remove Fix Fix Merge Reformat Merge Refactor Fix Change Reenable Correct Removed Fix Fix Fix Helpbook: Merge Remove Merge Help Merge Change Merge Merge fix undo Bump Merge Add, Merge Merge Update Fix Merge Bump Merge Use Merge Break Merge Update Add Add Get Update Merge Bump Merge Update Bump Merge Now Merge Update Fix Rearrange Add Add Add Add Center Add Add Add Add Change Do Implement Add Merge Add Remove Move Add Merge Add Add Add Add Move Merge Commenting Fix Work Change fix Replace, Merge Start Port Change Optimize Remove Make Give Refetch Bump Merge Update Add Merge Hack Remove Add Fix Reload Center Center Center Bump Update Merge Bump Merge Add Leverage Merge add Change Add Update.&lt;/p&gt;
+
+&lt;p&gt;Congratulations to Brent and others. &lt;a href=&quot;https://ranchero.com/netnewswire/&quot;&gt;Enjoy NetNewsWire 5.0&lt;/a&gt;…&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 26 Aug 2019 00:00:00 +0200</pubDate>
+        <link>https://blog.zanstra.com/2019/08/26/NetNewsWire.html</link>
+        <guid isPermaLink="true">https://blog.zanstra.com/2019/08/26/NetNewsWire.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Office for OS X icons</title>
+        <description>&lt;p&gt;OS X, now called macOS, was based on the &lt;a href=&quot;https://en.wikipedia.org/wiki/NeXTSTEP&quot;&gt;NeXTSTEP&lt;/a&gt; operating system. And one innovation of this operating system was large full-color icons.&lt;/p&gt;
+
+&lt;p&gt;With the introduction of new icons this year with Office 365 (including the 2019 retail version), I felt the need to create this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/office-for-os-x-icons.png&quot; alt=&quot;OS X Office icons&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In 2001, Office v. X was released. It’s design was very distinct from Windows, and also very &lt;a href=&quot;https://en.wikipedia.org/wiki/Aqua_(user_interface)&quot;&gt;aqua-y&lt;/a&gt;. The maximum size was 256×256 pixels. The 2004 icons I found were oddly sized 128×128 pixels. The resolution of the 2008 and 2011 icons went up to 512×512 pixels. These were also the last OS X-specific icons for Office.&lt;/p&gt;
+
+&lt;p&gt;Starting with the 2016 version, the icons design of the Windows version was also used with macOS. And because of higher resolutions of displays, the dpi-count of the icons went up from 72dpi to 144dpi, making the 2016 and 2019 icons sized 1024×1024 pixels.&lt;/p&gt;
+
+&lt;p&gt;Haven’t had enough? At the excellent Version Museum they have &lt;a href=&quot;https://www.versionmuseum.com/history-of/microsoft-word&quot;&gt;all Windows icons of Word&lt;/a&gt; including screenshots. They also have a page on &lt;a href=&quot;https://www.versionmuseum.com/history-of/microsoft-excel&quot;&gt;Excel&lt;/a&gt; .&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 17 Aug 2019 00:00:00 +0200</pubDate>
+        <link>https://blog.zanstra.com/2019/08/17/Office-for-OS-X-icons.html</link>
+        <guid isPermaLink="true">https://blog.zanstra.com/2019/08/17/Office-for-OS-X-icons.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>On renaming a GitHub repository</title>
+        <description>&lt;p&gt;Did you know you can rename GitHub-repositories? There are some quirks though.&lt;/p&gt;
+
+&lt;p&gt;Check it out: &lt;a href=&quot;https://github.com/doekman/You-are-so-lame&quot;&gt;https://github.com/doekman/You-are-so-lame&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Wed, 12 Jun 2019 00:00:00 +0200</pubDate>
+        <link>https://blog.zanstra.com/2019/06/12/Rename-github-repo.html</link>
+        <guid isPermaLink="true">https://blog.zanstra.com/2019/06/12/Rename-github-repo.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>A third way of putting AppleScript into git</title>
+        <description>&lt;p&gt;There are currently two ways of putting AppleScript into git. First is just by adding the binary &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.scpt&lt;/code&gt;-files. You don’t get much benefit from using git, but it works.&lt;/p&gt;
+
+&lt;p&gt;The &lt;em&gt;second way&lt;/em&gt; is to save your AppleScript source as text-files, and put these into git. You get advantages from git, but it is not as seamless as the first way.&lt;/p&gt;
+
+&lt;h1 id=&quot;introducing-osagitfilter&quot;&gt;Introducing osagitfilter&lt;/h1&gt;
+&lt;p&gt;Now you can combine those two ways by using the &lt;a href=&quot;https://github.com/doekman/osagitfilter/&quot;&gt;osagitfilter utility&lt;/a&gt;. Technically, it’s a &lt;a href=&quot;https://git-scm.com/book/en/v2/Customizing-Git-Git-Attributes#filters_a&quot;&gt;git filter&lt;/a&gt; that translates AppleScript’s binary format into the text-representation which then will be used by git’s internal workings.&lt;/p&gt;
+
+&lt;p&gt;See the &lt;a href=&quot;https://github.com/doekman/osagitfilter/blob/master/README.md&quot;&gt;repository’s readme&lt;/a&gt; for installation instructions. After that, you can put compiled script files, AppleScript applications and script bundles in git as if they where regular text-files. When you then clone this repository, the files are re-assembled bit-perfect.&lt;/p&gt;
+
+&lt;p&gt;Let me demonstrate this by an example. First create a git-repository:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git init osagitfilter-demo
+cd osagitfilter-demo
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now create the AppleScript-file &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;my_script.scpt&lt;/code&gt; in this folder with the following contents:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;display dialog &quot;What's your name&quot; default answer &quot;&quot;
+say &quot;Hi there, &quot; &amp;amp; text returned of result
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Since we don’t want to add a binary file to git, we first need to associate the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.scpt&lt;/code&gt;-extension with the osagitfilter (you need to explicitly &lt;em&gt;opt-in&lt;/em&gt; every repository). This can be done by adding a line to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.gitattributes&lt;/code&gt;-file, connecting the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.scpt&lt;/code&gt;-extension to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;osa&lt;/code&gt; filter:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;echo &quot;*.scpt filter=osa&quot; &amp;gt;&amp;gt; .gitattributes
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now the files can be added to git:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git add .gitattributes my_script.scpt
+git commit -m Initial
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now let’s change the script by appending &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;amp; &quot;, I like your name&quot;&lt;/code&gt; to the say command in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;my-script.scpt&lt;/code&gt; file. Don’t forget to save.&lt;/p&gt;
+
+&lt;p&gt;Now when you run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git diff&lt;/code&gt;, you can see the changes you made as you would with text-files. You don’t need to stick with the command-line: I can confirm it works with GitHub Desktop. It should also work with other GUI’s, but I haven’t tested this.&lt;/p&gt;
+
+&lt;h1 id=&quot;not-only-applescript&quot;&gt;Not only AppleScript&lt;/h1&gt;
+&lt;p&gt;The program is called &lt;a href=&quot;https://developer.apple.com/library/archive/documentation/AppleScript/Conceptual/AppleScriptX/Concepts/osa.html&quot; title=&quot;The Open Scripting Architecture (OSA) provides a standard and extensible mechanism for interapplication communication in OS X.&quot;&gt;osa&lt;/a&gt;gitfilter, so you can also add JavaScript &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.scpt&lt;/code&gt;-files. There is also a feature that prevents you from accidently adding AppleScript-debugger files to git (a special file format used by the indispensible &lt;a href=&quot;scriptdebugger&quot;&gt;Script Debugger&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;I hope osagitfilter will be useful tool. It will not completely replace the first two methods, but it’s nice to have an alternative to them.&lt;/p&gt;
+
+&lt;p&gt;Let me know what you think on &lt;a href=&quot;https://twitter.com/doekezanstra/status/1125696216573140993&quot;&gt;twitter&lt;/a&gt; or &lt;a href=&quot;https://forum.latenightsw.com/t/a-third-way-of-putting-applescript-into-git/1932?u=doekman&quot;&gt;at this thread&lt;/a&gt; on Late Night Software’s AppleScript forum.&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 06 May 2019 00:00:00 +0200</pubDate>
+        <link>https://blog.zanstra.com/2019/05/06/Introducing-osagitfilter.html</link>
+        <guid isPermaLink="true">https://blog.zanstra.com/2019/05/06/Introducing-osagitfilter.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>git-url</title>
+        <description>&lt;p&gt;A while ago, &lt;a href=&quot;https://gist.github.com/doekman/45acdb0ceedd9dc9dc6105d0b058b06a&quot;&gt;I created a shell script&lt;/a&gt; called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git-url&lt;/code&gt;. It prints the remote origin URL of your current git-repository (or exit 1 if no git-repo is found). If the URL is in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git:&lt;/code&gt; format, it is converted to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http:&lt;/code&gt; format.&lt;/p&gt;
+
+&lt;p&gt;Why would one write this? Because of &lt;code&gt;open `git-url`&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;This will open the GitHub- or BitBucket-repository in your favorite browser. I use it all the time!&lt;/p&gt;
+
+&lt;p&gt;Above works on macOS. Windows uses &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;start&lt;/code&gt; instead of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;open&lt;/code&gt;, but I don’t know how it works with Windows Subsystem for Linux.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Updated 2019-12-04&lt;/em&gt;&lt;/strong&gt;: you now can add a SHA1 hash to go directly to that commit in the browser (GitHub and BitBucket) like
+&lt;code&gt;open `git-url 7593e1a`&lt;/code&gt;, which &lt;a href=&quot;https://github.com/doekman/doekman.github.io/commit/7593e1a631df4769853948b31b610a13a4525665&quot;&gt;opens this link&lt;/a&gt;).&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 08 Mar 2019 00:00:00 +0100</pubDate>
+        <link>https://blog.zanstra.com/2019/03/08/Git-Url.html</link>
+        <guid isPermaLink="true">https://blog.zanstra.com/2019/03/08/Git-Url.html</guid>
+        
+        <category>cli</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Networking with iOS via Ethernet</title>
+        <description>&lt;p&gt;This summer I went to &lt;a href=&quot;https://www.ecolonie.eu/en&quot;&gt;Ecolonie&lt;/a&gt;, a very nice place in &lt;strong&gt;France&lt;/strong&gt;. It is an idealistic place that doesn’t want to exclude anyone.
+So they don’t allow digital wireless connections like Wifi and Bluetooth, because this can make some people sick.&lt;/p&gt;
+
+&lt;p&gt;So I thought of connecting my iPad via Ethernet to internet.
+&lt;a href=&quot;https://www.lifewire.com/connect-ipad-to-wired-ethernet-port-1994242&quot;&gt;I’m not&lt;/a&gt; &lt;a href=&quot;https://sixcolors.com/post/2016/07/ios-10-a-place-for-ethernet/&quot;&gt;the first one&lt;/a&gt; &lt;a href=&quot;https://9to5mac.com/2017/03/01/ios-10-2-ethernet-adapter-ui-settings-app/&quot;&gt;to try this&lt;/a&gt;, but I wanted to share my experiences.
+I first bought the &lt;a href=&quot;https://www.apple.com/nl/shop/product/MK0W2ZM/A/lightning-naar-usb-3-camera-adapter?fnode=5a77c06a31d0e5022a688a2defec8127910a5c967ad27547e77a7424219ab7f0a55463cd85fcdd333d6606c4fa120dfcc8c4531e057b6b3771cf23ba049aaa7807f3e771f4c29345bec09a21c843c02ccb64fe33ce5ec4bf8ae31ebbf3f1d902&quot;&gt;Apple Lightning to USB 3 camera adapter&lt;/a&gt; (you can get cheaper clones, but non-Apple periferals can suffer from some kind of compatiblity issue).
+Next was a &lt;a href=&quot;https://www.amazon.de/gp/product/B00QWYJSUG/ref=oh_aui_detailpage_o00_s01?ie=UTF8&amp;amp;psc=1&quot;&gt;powered USB hub&lt;/a&gt; from the Aukey, which already has an ethernet LAN adapter build in!
+So there’s no need to buy an external USB Ethernet Adapter.&lt;/p&gt;
+
+&lt;p&gt;This setup works (almost) perfectly with both iPhone 5 (iOS 10.3.3), iPhone SE and iPad Air 2 (both iOS 11.4.1).
+I didn’t test my original iPad, since I don’t have a camera adapter with a &lt;a href=&quot;https://en.wikipedia.org/wiki/Dock_connector&quot;&gt;dock connector&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;When connecting the setup, you’ll get an entry between Wifi and Bluetooth in the settings menu, where you can check your TCP/IP settings.
+When I plugged in my Apple USB Ethernet Adapter, the Ethernet menu shows two adapters (also one for the build-in Aukey ethernet).
+Like in macOS, it will prioritize the adapters automatically and choose the “best” one.
+I performed some speed tests, and I didn’t find significant differences between Wifi and Ethernet.&lt;/p&gt;
+
+&lt;p&gt;I found one downside which stops it from working perfectly. I switch on Airplane Mode to make sure no digital wireless signals were emitted.
+However, in that case for almost every app you open, you’ll get a warning to switch off Airplane Mode.
+Luckily these warnings can be dismissed without any problems, and bytes will happily flow between your device and the internet.&lt;/p&gt;
+
+&lt;p&gt;Other findings: I charged by iPad via a cable between the lightning connector in the Camera Adapter and the fast-charge port in the USB hub.
+This caused noise on the speaker I had connected to the iPad via the 3½mm audio jack.
+The noise disappeared when removing the charging cable from the USB hub and did not return when connecting to iPad’s charging adapter.&lt;/p&gt;
+
+&lt;p&gt;One final note on USB Ethernet adapters: naturally they have built-in MAC-addresses. But you can expect some complications on your network when you use a MAC-addresses to identify all allowed devices.
+Devices, like in Lisa’s tablet and Bart’s iPhone… D’oh!&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 31 Dec 2018 00:00:00 +0100</pubDate>
+        <link>https://blog.zanstra.com/2018/12/31/iOS_ethernet.html</link>
+        <guid isPermaLink="true">https://blog.zanstra.com/2018/12/31/iOS_ethernet.html</guid>
+        
+        <category>does-it-work</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Jump around</title>
+        <description>&lt;style&gt;code {white-space:nowrap;}&lt;/style&gt;
+
+&lt;p&gt;There are more ways &lt;a href=&quot;https://scriptingosx.com/2017/08/navigating-the-file-system/&quot;&gt;to navigate the file system&lt;/a&gt; in &lt;em&gt;bash&lt;/em&gt; than I imagined when I still was using &lt;em&gt;cmd.exe&lt;/em&gt;. Let me name some:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cd&lt;/code&gt; navigates to the home folder. Like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cd /users/$(whoami)&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cd &quot;$HOME&quot;&lt;/code&gt; but shorter.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cd -&lt;/code&gt; navigates to the previous directory. It’s like the &lt;em&gt;zap-button&lt;/em&gt; on your television remote control!&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;cd ~/Doc&lt;span title=&quot;HORIZONTAL TABULATION&quot;&gt;␉&lt;/span&gt;&lt;/code&gt; &lt;em&gt;tab-completion&lt;/em&gt; works like Visual Studio’s intelli-sense, but without the dropdown and it’s case sensitive. If there is one choice, it will complete it. If there is more, you need to press &lt;abbr title=&quot;␉ or Horizontal Tab&quot;&gt;tab&lt;/abbr&gt; twice, and it will show a list.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pushd&lt;/code&gt;/&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;popd&lt;/code&gt;/&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dirs&lt;/code&gt; save/load/show a directory to/from the stack. Especially handy in complex scripts.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;However, I noticed I was always navigating to not that many different number of folders. I thought, wouldn’t it be handy if one could save/load folders to some kind of &lt;a href=&quot;https://en.wikipedia.org/wiki/Associative_array&quot; title=&quot;In computer science, an associative array, map, symbol table, or dictionary is an abstract data type composed of a collection of (key, value) pairs, such that each possible key appears at most once in the collection&quot;&gt;dictionary&lt;/a&gt;. I did extensive research and couldn’t find anything, so I created &lt;a href=&quot;https://github.com/doekman/go&quot;&gt;go&lt;/a&gt;. It was great. Typing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;go gh&lt;/code&gt; performed &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cd ~/prj/GitHub&lt;/code&gt;. To save the current folder under the name &lt;em&gt;“here”&lt;/em&gt; would be performed by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;go here .&lt;/code&gt;. And &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;go&lt;/code&gt; would show all the current stored definitions.&lt;/p&gt;
+
+&lt;p&gt;As I mentioned before, I performed thorough extensive research. I didn’t take it lightly. However. Apperently, the subject sometimes needs time to sink in. As today I learned from &lt;a href=&quot;http://www.secretgeek.net/pp2018&quot;&gt;a guy I have known some time&lt;/a&gt;, that he created a tool called &lt;a href=&quot;https://github.com/secretGeek/markjump&quot;&gt;markjump&lt;/a&gt;. This is basically what I made, only for &lt;em&gt;powershell&lt;/em&gt;. But his work was inspired by &lt;a href=&quot;http://jeroenjanssens.com/2013/08/16/quickly-navigate-your-filesystem-from-the-command-line.html&quot;&gt;Jeroen Janssens’&lt;/a&gt; &lt;em&gt;shell script&lt;/em&gt;, from five years ago. And he’s a Dutchie too! How could I have missed that? And his code is 1500% better!&lt;/p&gt;
+
+&lt;p&gt;To complete my story line: Half a year ago I ran into the &lt;a href=&quot;https://github.com/rupa/z/&quot;&gt;z-utility&lt;/a&gt; (can’t remember how), which has the description &lt;a href=&quot;https://en.wikipedia.org/wiki/Jump_Around&quot;&gt;jump&lt;/a&gt; &lt;a href=&quot;https://www.youtube.com/watch?v=XhzpxjuwZy0&quot;&gt;around&lt;/a&gt;. I was intrigued! I learnt descriptions of utilities are pretty important. And it turns out to be a pretty clever and helpful utility. It automatically remembers where you navigate to; no need to keep a list manually. And it will also keep &lt;em&gt;statistics&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;It uses &lt;em&gt;regular expressions&lt;/em&gt; to find which folder you want to navigate to. And it’s case-insensitive, so &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;z dow&lt;/code&gt; will navigate to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/Downloads&lt;/code&gt;. No need to type a capital-D. When the regular expression matches multiple folders, it uses the statistics (how recent and how frequent) to decide where to navigate to.&lt;/p&gt;
+
+&lt;p&gt;I must say I was a bit hesitant to use it, because it seemed so… technical. In the beginning of the man-page it says something like &lt;em&gt;“Tracks your most used directories, based on ‘frecency’..”&lt;/em&gt; But the &lt;em&gt;“jump around”&lt;/em&gt; reeled me in. I never used my own &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;go&lt;/code&gt;-utility, and only just now looked back. Thanks &lt;a href=&quot;https://github.com/rupa&quot;&gt;rupa&lt;/a&gt;!&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 13 Sep 2018 00:00:00 +0200</pubDate>
+        <link>https://blog.zanstra.com/2018/09/13/Jump-around.html</link>
+        <guid isPermaLink="true">https://blog.zanstra.com/2018/09/13/Jump-around.html</guid>
+        
+        <category>cli</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Emoji's missing from emojis.wiki</title>
+        <description>&lt;p&gt;The following entries are supposedly missing from &lt;a href=&quot;https://emojis.wiki&quot;&gt;emojis.wiki&lt;/a&gt;. However, you could also read this article as a proposal for alternate descriptions of a part of the &lt;a href=&quot;https://en.wikipedia.org/wiki/Miscellaneous_Technical#(2340–237F)&quot;&gt;Miscellaneous Technical range&lt;/a&gt; of the &lt;a href=&quot;https://en.wikipedia.org/wiki/Plane_(Unicode)#Basic_Multilingual_Plane&quot;&gt;Basic Multilingual Plane&lt;/a&gt; of the &lt;a href=&quot;https://en.wikipedia.org/wiki/Unicode&quot;&gt;Unicode&lt;/a&gt; standard.&lt;/p&gt;
+
+&lt;style&gt;
+	big  { font-size:150%; line-height:100%; cursor:help;}
+&lt;/style&gt;
+
+&lt;ul style=&quot;list-style-type:none&quot;&gt;
+	&lt;li title=&quot;U+2361: APL FUNCTIONAL SYMBOL UP TACK DIAERESIS&quot;&gt;     &lt;big&gt;⍡&lt;/big&gt; Chin on fist on arm&lt;/li&gt;
+	&lt;li title=&quot;U+2362: APL FUNCTIONAL SYMBOL DEL DIAERESIS&quot;&gt;         &lt;big&gt;⍢&lt;/big&gt; Super happy&lt;/li&gt;
+	&lt;li title=&quot;U+2363: APL FUNCTIONAL SYMBOL STAR DIAERESIS&quot;&gt;        &lt;big&gt;⍣&lt;/big&gt; Moustache concealing mouth&lt;/li&gt;
+	&lt;li title=&quot;U+2364: APL FUNCTIONAL SYMBOL JOT DIAERESIS&quot;&gt;         &lt;big&gt;⍤&lt;/big&gt; Disbelieve&lt;/li&gt;
+	&lt;li title=&quot;U+2365: APL FUNCTIONAL SYMBOL CIRCLE DIAERESIS&quot;&gt;      &lt;big&gt;⍥&lt;/big&gt; Big surprise&lt;/li&gt;
+	&lt;li title=&quot;U+2368: APL FUNCTIONAL SYMBOL TILDE DIAERESIS&quot;&gt;       &lt;big&gt;⍨&lt;/big&gt; Unsure&lt;/li&gt;
+	&lt;li title=&quot;U+2369: APL FUNCTIONAL SYMBOL GREATER-THAN DIAERESIS&quot;&gt;&lt;big&gt;⍩&lt;/big&gt; Talking frolicsome&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you have any corrections or addendums, please let me know on Twitter.&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 28 Aug 2018 00:00:00 +0200</pubDate>
+        <link>https://blog.zanstra.com/2018/08/28/Missing-emoji.html</link>
+        <guid isPermaLink="true">https://blog.zanstra.com/2018/08/28/Missing-emoji.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>To vowel case</title>
+        <description>&lt;p&gt;There already was &lt;em&gt;Sentence case&lt;/em&gt;, &lt;em&gt;lower case&lt;/em&gt;, &lt;em&gt;UPPER CASE&lt;/em&gt;, &lt;em&gt;Capitalized Case&lt;/em&gt;, &lt;em&gt;AlTeRnAtInG CaSe&lt;/em&gt; and &lt;em&gt;Title Case&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;And nOw YOU cAn dO vOwEr cAsE tOO&lt;/strong&gt;!&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;function toVowelCase(text) {
+  return text.toLowerCase().replace(/[aeiouy]+/g, match =&amp;gt; match.toUpperCase());
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Updated&lt;/strong&gt;: &lt;em&gt;a correct implementation of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;toVowelCase&lt;/code&gt; is locale-dependend. In English, the letter &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;y&lt;/code&gt; is sometimes a vowel, and at other times a consonant.  The above works for the Dutch language and some other languages. Your mileage may vary.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Updated&lt;/strong&gt;: bookmarking &lt;a href=&quot;https://headlinecapitalization.com&quot;&gt;https://headlinecapitalization.com&lt;/a&gt; and &lt;a href=&quot;https://titlecaseconverter.com&quot;&gt;https://titlecaseconverter.com&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 08 Jul 2018 00:00:00 +0200</pubDate>
+        <link>https://blog.zanstra.com/2018/07/08/Vowel-case.html</link>
+        <guid isPermaLink="true">https://blog.zanstra.com/2018/07/08/Vowel-case.html</guid>
+        
+        <category>one-liner</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>To refactor, or not to refactor</title>
+        <description>&lt;p&gt;The code iteration below is a contemporary comment on the use of refactoring.&lt;br /&gt;
+We start with this code:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;function isLeapYear(year) {
+  if (year % 4) {
+    return false;
+  } else {
+    if (year % 100) {
+      return true;
+    } else {
+      if (year % 400)
+        return false;
+      else return true;
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;All code has to be &lt;a href=&quot;https://github.com/jasmine/jasmine&quot;&gt;unit tested&lt;/a&gt;, so we write this (&lt;em&gt;normally I start with this before writing actual code, but you know…&lt;/em&gt;):&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;function unitTests() {
+  describe(&quot;leapYear tests&quot;, function() {
+    expect(isLeapYear(1900)).toBe(false);
+    expect(isLeapYear(1971)).toBe(false);
+    expect(isLeapYear(1972)).toBe(true);
+    expect(isLeapYear(2000)).toBe(true);
+    expect(isLeapYear(2003)).toBe(false);
+  });
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And to stay very agile, I wrote some minimal unit testing “library” (&lt;a href=&quot;http://agilemanifesto.org&quot;&gt;individuals over tools&lt;/a&gt;, anyone?):&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;function describe(testName, tests) {
+    var groupTitle = 'Name: '+testName+' - Start: '+(new Date).toISOString();
+    console.group(groupTitle);
+    expect.nr = 0;
+    expect.errors = 0;
+    tests();
+    if (expect.errors == 0) console.info('All %s tests OK', expect.nr);
+    else console.error('%s of %s tests failed', expect.errors, expect.nr);
+    console.groupEnd(groupTitle);
+}
+
+function expect(x) {
+    return {
+        toBe: function(y) {
+            if (x === y) console.info(&quot;%s: OK 👍&quot;, expect.nr++);
+            else console.error(&quot;%s: Error 👹&quot;, expect.nr++), expect.errors++;
+        }
+    };
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The unit tests all passed. Can’t wait to start with refactor step 1: removing unnecessary nesting. One step at a time.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;function isLeapYear(year) {
+    if (year % 4) {
+        return false;
+    }
+    if (year % 100) {
+        return true;
+    }
+    if (year % 400) {
+        return false;
+    }
+    return true;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Yes…, much better! All tests pass. Refactor step 2, fold down into one if:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;function isLeapYear(year) {
+    if (year % 4 || (!(year % 100) &amp;amp;&amp;amp; year % 400)) {
+        return false;
+    }
+    return true;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And for the heck of it, remove the unnecessary if as well:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;function isLeapYear(year) {
+    return !(year % 4 || (!(year % 100) &amp;amp;&amp;amp; year % 4000));
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Oopsy. The fourth test failed. Just a typo, no worries. And since there’s already too much negativity around, I’ll fix that in the next iteration, and while we are at it, move the negation to another function.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;function isLeapYear(year) {
+    return !isCommonYear(year);
+}
+function isCommonYear(year) {
+    return year % 4 || (!(year % 100) &amp;amp;&amp;amp; year % 400);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The committee unanimously decided: don’t rely on javascript’s truthiness, we want explicit code! So fixing that:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;function isLeapYear(year) {
+    return !isCommonYear(year);
+}
+function isCommonYear(year) {
+    return year % 4 != 0 || (!(year % 100 != 0) &amp;amp;&amp;amp; year % 400 != 0);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Refactor step 6, the overload of negativity was back. Fixing:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;function isLeapYear(year) {
+    return !isCommonYear(year);
+}
+function isCommonYear(year) {
+    return year % 4 != 0 || (year % 100 == 0 &amp;amp;&amp;amp; year % 400 != 0);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Refactor step 7 should be a charm. I still don’t like the code at all, so f$*# it, just use the native function:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;function isLeapYear(year) {
+    return new Date(year, 2 - 1, 29).getDate() == 29;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Done!&lt;/p&gt;
+
+&lt;p&gt;Code can also be found &lt;a href=&quot;https://github.com/doekman/to-refactor...&quot;&gt;here on GitHub&lt;/a&gt;.&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 29 Jun 2018 00:00:00 +0200</pubDate>
+        <link>https://blog.zanstra.com/2018/06/29/Refactoring.html</link>
+        <guid isPermaLink="true">https://blog.zanstra.com/2018/06/29/Refactoring.html</guid>
+        
+        <category>refactor</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Jekyll template for JSON Feed</title>
+        <description>&lt;p&gt;When I learned about &lt;a href=&quot;https://jsonfeed.org/2017/05/17/announcing_json_feed&quot;&gt;JSON Feed&lt;/a&gt;, I immediately liked the idea. It’s like RSS/Atom, with the good parts (it’s de-central) and without the bad parts (no more XML, well thought of standard attributes).&lt;/p&gt;
+
+&lt;p&gt;I’m not to sure how it will be used in practise, but it was easy enough to create a Jekyll template (&lt;a href=&quot;https://github.com/doekman/doekman.github.io/blob/master/feed.json&quot; title=&quot;Source code on GitHub&quot;&gt;source on GitHub&lt;/a&gt;). I learned it’s handy to add a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;base&lt;/code&gt;-tag to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;content_html&lt;/code&gt;-attribute, after trying &lt;a href=&quot;http://json-feed-viewer.herokuapp.com&quot;&gt;this app&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;And I made myself a &lt;a href=&quot;http://json-feed-viewer.herokuapp.com/?feed_url=http%3A%2F%2Fblog.zanstra.com%2Ffeed.json&quot;&gt;nice square logo&lt;/a&gt; too.&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 19 May 2017 00:00:00 +0200</pubDate>
+        <link>https://blog.zanstra.com/2017/05/19/JSON-feed.html</link>
+        <guid isPermaLink="true">https://blog.zanstra.com/2017/05/19/JSON-feed.html</guid>
+        
+        <category>meta</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>JSON, the game #2: The parsings</title>
+        <description>&lt;p&gt;For some reason, I imagined the next step in the development of the game was to make the ‘block’ move. Like up and down, and sliding to the left. For &lt;a href=&quot;http://agilemanifesto.org&quot;&gt;agile&lt;/a&gt; reasons, I want to make progress that is reflected and visible in the software. So no spending time at writing libraries first. You probably end up writing stuff you don’t even need. But when starting, I realized the partial-JSON part needed to be worked on first.&lt;/p&gt;
+
+&lt;p&gt;To display the partial-JSON, I need a &lt;em&gt;model&lt;/em&gt; of that JSON. That model should be capable of annotating the partial-JSON with grammar issues (like missing bracket/comma, incomplete strings or just plain errors). Indentation should be addressed too. Also some dimension-data is needed, so we can determine whether the block can move up/down and when it has reached the partial-JSON surface (sorry, I can’t stop thinking in planet metaphors).&lt;/p&gt;
+
+&lt;p&gt;When pondering on these requirements, I realized a tokenizer/parser was necessary. A library! Not very agile, right? Perhaps skipping the grammar issues first and add it later would have been a wiser choice. We will never know. Writing a parser does takes some time, but it &lt;a href=&quot;http://zanstra.com/my/RegexMate.html&quot;&gt;sure&lt;/a&gt; &lt;a href=&quot;https://cdn.rawgit.com/doekman/base2/7466e0d79d4f049dfb07e44b78f9e4c23a2ec9f0/src/utils/Parsers/samples/Uri.html&quot;&gt;is&lt;/a&gt; &lt;a href=&quot;https://cdn.rawgit.com/doekman/base2/7466e0d79d4f049dfb07e44b78f9e4c23a2ec9f0/src/utils/Parsers/samples/GWParser.html&quot;&gt;fun&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;First I started writing a &lt;a href=&quot;https://github.com/doekman/Json-the-Game/blob/61fcc2afed7bc6647ebd07510dd8af5f59d5960a/json_parser.js&quot; title=&quot;Source-code at GitHub, first version&quot;&gt;tokenizer&lt;/a&gt;. And since it’s not your average code, I used the most annoying coding convention I could think of. I learned this style with Turbo Pascal in my BBS days. Years later I discovered you can use it with languages like JavaScript, CSS, C# and even PL/SQL. But it’s too annoying for everyday use. Not only do you get &lt;em&gt;The Eye&lt;/em&gt; from your colleagues; every editor I’ve tried actively works against you by messing up the indentation. Again, and again. With. Every. Single. Edit.&lt;/p&gt;
+
+&lt;p&gt;The tokenizer splits the JSON into tokens like a string, boolean value or comma. With the parser we then can reason about tokens instead of characters, which makes life much simpler. Because we work with partial JSON, the tokenizer is made to recognizes unfinished strings and other values. Every token has an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;is_complete&lt;/code&gt;-attribute, so when rendering we can show if a brace is missing, or a string is unfinished.&lt;/p&gt;
+
+&lt;html&gt;&lt;center style=&quot;margin-bottom:1em&quot;&gt;&lt;img src=&quot;/images/json-state-machine.jpg&quot; alt=&quot;HTML/CSS mock&quot; title=&quot;HTML/CSS mock: the 'ue' token will go from the right to the left&quot; /&gt;&lt;/center&gt;&lt;/html&gt;
+
+&lt;p&gt;The parser was a dragon to me. I made a lot of diagrams to create a &lt;a href=&quot;https://en.wikipedia.org/wiki/Finite-state_machine&quot;&gt;state machine&lt;/a&gt;, see above, and played with &lt;a href=&quot;http://webgraphviz.com&quot;&gt;GraphViz&lt;/a&gt; (which is pretty cool, and a little weird). Finally I thought the state machine was right, and started coding. After writing some unit tests and identifying some failures, I did realize I went in the wrong direction. A state machine is apparently not the best solution to parse JSON and the answer was right in front of me. While I was focussing on the  nice flow diagram at &lt;a href=&quot;http://json.org&quot;&gt;json.org&lt;/a&gt; (which I coincidently also knew from the Turbo Pascal manual; I know, grandpa speaking), the program I needed to write was listed as an inset on the right of that same web page! &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;object := {} | { members }&lt;/code&gt;… Elementary, dear Watson…&lt;/p&gt;
+
+&lt;p&gt;A well, &lt;a href=&quot;https://www.youtube.com/watch?v=AWwQsdHMT7Y&quot; title=&quot;Adventures in Failure, by MC 900ft Jesus&quot;&gt;adventures in failure&lt;/a&gt;. Start all over, and everything will be fine. At the moment, I have a validating parser (&lt;a href=&quot;https://github.com/doekman/Json-the-Game/tree/c6f9cdfd302df48813c9a1f86a85d53b45f68303&quot; title=&quot;Tokenizer &amp;amp; validating parser&quot;&gt;source here&lt;/a&gt;). It says whether the JSON is correct or not. There are still loose ends, which I will fix when needed. For example, I ignored Unicode for a big part and focussed on ASCII for now.&lt;/p&gt;
+
+&lt;p&gt;On a side note: I also wanted to check out those new &lt;a href=&quot;http://es6-features.org/&quot;&gt;EcmaScript 2016 features&lt;/a&gt;, since every browser seems to be &lt;a href=&quot;http://kangax.github.io/compat-table/es6/&quot;&gt;supporting them&lt;/a&gt;. It’s nice to see the language is evolving, after multiple timespans of stagnation. The best feature IMHO is string interpolation.&lt;/p&gt;
+
+&lt;p&gt;Next step is adding code to the parser for annotating tokens, and insert &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;missing&lt;/code&gt;-tokens. And render the thing in HTML naturally.&lt;/p&gt;
+
+</description>
+        <pubDate>Sun, 14 May 2017 00:00:00 +0200</pubDate>
+        <link>https://blog.zanstra.com/2017/05/14/JSON-the-game-nr2.html</link>
+        <guid isPermaLink="true">https://blog.zanstra.com/2017/05/14/JSON-the-game-nr2.html</guid>
+        
+        <category>game</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>JSON, the game #1: Bootstrapping it</title>
+        <description>&lt;p&gt;Around a year ago, I had the daft idea to create some nerdy JSON-game. I had good fun thinking about some concepts, made some notes, and that was about it. Until now that is. The game: It’s coming… It has already started. To keep me focussed, I will keep a journal of the creation, and you’re reading the first part.&lt;/p&gt;
+
+&lt;p&gt;I got the ideas from series like the Brent Simmons’s &lt;a href=&quot;http://inessential.com/vespersyncdiary&quot;&gt;Vesper Sync Diary&lt;/a&gt; and Jon Skeet’s &lt;a href=&quot;https://codeblog.jonskeet.uk/2011/02/23/reimplementing-linq-to-objects-part-45-conclusion-and-list-of-posts/&quot;&gt;Reimplementing Linq to Objects&lt;/a&gt;. I found them enjoyable; a bit of a nerdy soap opera. And now is the time for me to get of my comfy sofa and produce some soap of my own.&lt;/p&gt;
+
+&lt;p&gt;The idea of the game: &lt;a href=&quot;http://json.org&quot;&gt;JSON&lt;/a&gt; tokens are coming in, and you need to place them correctly. The initial form of the game will be Tetris-like with your head on your right shoulder: the tokens come in from the right and go to the left (alternative gravity you can think). However, this form might change from level to level (I’m thinking of the partial JSON document as a starship, crashing into JSON stars/tokens as it cruises through the JSON universe).&lt;/p&gt;
+
+&lt;p&gt;The first step is to create some user interface mockup. A guy gotta start somewhere. My weapon of choice is HTML/CSS. At the top we have a dashboard providing some game details. Unformatted JSON will do for now. The playing field (where the partial JSON is) will have a fixed width, while the height might grow during gameplay when tokens are inserted between lines.&lt;/p&gt;
+
+&lt;html&gt;&lt;center style=&quot;margin-bottom:1em&quot;&gt;&lt;img src=&quot;/images/json-html-mock.png&quot; alt=&quot;HTML/CSS mock&quot; title=&quot;HTML/CSS mock: the 'ue' token will go from the right to the left&quot; /&gt;&lt;/center&gt;&lt;/html&gt;
+
+&lt;p&gt;Positioning is done with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;em&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ch&lt;/code&gt; CSS units with a position &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;relative&lt;/code&gt;/&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;absolute&lt;/code&gt; container-combo, so I can  position things absolute within the relative container. Every character is one &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ch&lt;/code&gt; and every line is one &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;em&lt;/code&gt;. One little problem though: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;em&lt;/code&gt; is font-height, not line-height. And a line-height of 100% just doesn’t look right. But there is no such thing as a line-height unit. (&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/length#Font-relative_lengths&quot; title=&quot;Line-height unit ln; unimplemented with an unknown specification&quot;&gt;Or is there?&lt;/a&gt;) This is easy fixable with a calculation, but line-height will appear in multiple places in CSS.&lt;/p&gt;
+
+&lt;p&gt;Also some color coding needs to be added, so we can identify unbalanced grouping tokens, missing separators, incomplete tokens and downright errors. That’s why I’m not using a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pre&lt;/code&gt;-element. I don’t have a definite idea about gameplay, but some ideas come to mind. An obvious solution for an error would be “Game over”. This can also be postponed by counting “lives”. The error will vanish and you loose a life. Or an error could be cleared with the incoming JSON token &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;\b&lt;/code&gt;. That choice will depend on the level. But I digress.&lt;/p&gt;
+
+&lt;p&gt;This is not all markup we need (we will need a dialog-box, for the start and end of a level), but it will do for now. I put the &lt;a href=&quot;https://github.com/doekman/Json-the-Game/tree/8f14c49ec871a35cbb85d2d0b0e751ea054489c5&quot;&gt;source-code on GitHub&lt;/a&gt;, and every instalment will point to a commit so you can see how this game comes to shape. You can also &lt;a href=&quot;https://cdn.rawgit.com/doekman/Json-the-Game/8f14c49ec871a35cbb85d2d0b0e751ea054489c5/index.html&quot;&gt;“run” the game here&lt;/a&gt; (nothing to play for now).&lt;/p&gt;
+
+&lt;p&gt;I hope to find a good balance between enjoyability, a bit of fun and some technical remarks. And I like to hear your thoughts on &lt;a href=&quot;https://twitter.com/doekezanstra&quot;&gt;Twitter&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The next instalment will be about moving those incoming tokens.&lt;/p&gt;
+
+</description>
+        <pubDate>Sun, 30 Apr 2017 00:00:00 +0200</pubDate>
+        <link>https://blog.zanstra.com/2017/04/30/JSON-the-game-nr1.html</link>
+        <guid isPermaLink="true">https://blog.zanstra.com/2017/04/30/JSON-the-game-nr1.html</guid>
+        
+        <category>game</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Only my warnings</title>
+        <description>&lt;p&gt;Don’t you hate to be put in a situation like the following?&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;You are assigned by your company to add some functionality to some software at
+some client. The client has standards and practices in place stating you can’t checkin code that produces warnings, only to find
+out that a clean checkout produces loads of warnings when building!&lt;/p&gt;
+
+  &lt;p&gt;But you can’t fix &lt;span style=&quot;font-style:normal&quot;&gt;😢&lt;/span&gt; those warnings. You, the super star programmer™ (whose boss is getting
+paid big dollars for high quality, virtually bug-free software), cannot get rid of those pesky lines of inability…&lt;/p&gt;
+
+  &lt;p&gt;For starters, why judge those warnings in the first place. You’re just the new guy, you don’t want to get into any trouble. Also, 
+by solving warnings, you may introduce new bugs (even though you’re super competent, after all creating bugs is just a matter of probability). 
+Nobody wants that! And finally, you’re a professional. The client is only paying for the new functionality, not for you to clean
+up the place. And about your collegues, you don’t want to hurt anyones feelings. 
+So in short: the man says no. No way fixing those warnings, José!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Situations like these inspired us to envision a new kind of solution to those issues at hand. Let me introduce to you, without further ado, the Visual Studio extension &lt;strong&gt;Only My Warnings&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;When your solution is under source control a new list button is added to the Error List pane, with the options &lt;em&gt;All&lt;/em&gt;, &lt;em&gt;Only Mine&lt;/em&gt; and &lt;em&gt;Local Only&lt;/em&gt;. 
+With the option &lt;em&gt;Local Only&lt;/em&gt; selected, the pane will only show errors, warnings and messages caused by local changes, i.e. by you!
+All other messages are hidden, so you don’t have to deal with them. Victory!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/Only-my-warnings_error-list.png&quot; alt=&quot;screen shot&quot; title=&quot;Error List window from Visual Studio 2015 Community Edition&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The extension doesn’t get in the way; it only adds this one list button.
+When selecting &lt;em&gt;Only Mine&lt;/em&gt;-option, the tool will gather all messages from your checkins, and show only the messages caused by you. 
+And it follows branches, so you can focus at the feature that is imporant at any given moment.&lt;/p&gt;
+
+&lt;p&gt;Now you can be productive, and still have a chat with your collegues without having an argument! While using this extension, you
+will contribute to your team’s productivity. You will be a team productivity enabler! That’s how 10× developers are bred!
+In a way, &lt;em&gt;only my warnings&lt;/em&gt; contributes to world peace.&lt;/p&gt;
+
+&lt;p&gt;For now, the extension is still in its early alpha phase. If you want to participate in the beta-program, or want to get notified
+when the extention will be released to the Visual Studio Gallery, please 
+&lt;a href=&quot;https://docs.google.com/forms/d/e/1FAIpQLScMYh6JqrQn-dEA8hzIGJdJsV5-9ufCuTkfczPeXlBjNoB7KA/viewform&quot;&gt;fill out this form&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;(this is a blog post in the series: I’m perfect, communicate better with tools)&lt;/p&gt;
+</description>
+        <pubDate>Thu, 08 Sep 2016 00:00:00 +0200</pubDate>
+        <link>https://blog.zanstra.com/2016/09/08/Only-my-warnings.html</link>
+        <guid isPermaLink="true">https://blog.zanstra.com/2016/09/08/Only-my-warnings.html</guid>
+        
+        <category>tools</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>A console.log() adventure; pimped</title>
+        <description>&lt;p&gt;Over a year ago, my interwebfriend &lt;a href=&quot;https://twitter.com/secretGeek&quot;&gt;secretGeek&lt;/a&gt; created a thing. I created a fork, and pimped it &lt;a href=&quot;https://rawgit.com/doekman/console-adventure/master/console.html&quot;&gt;into this&lt;/a&gt; (&lt;em&gt;and copied some of his blog lines too&lt;/em&gt;). I urge you to go and try it out before you read on. Unfortunately you’ll need to be on a desktop computer, not a mobile phone.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://rawgit.com/doekman/console-adventure/master/console.html&quot;&gt;&lt;img src=&quot;/images/console_best.png&quot; style=&quot;border:8px solid #333;box-shadow:3px 3px 7px #888&quot; title=&quot;a console.log() adventure.&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://rawgit.com/doekman/console-adventure/master/console.html&quot;&gt;Go there now&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;In case you don’t have a desktop computer anymore (woah, futuristic!), or have already tried it out, I’ll give some spoilers and discussion now.&lt;/p&gt;
+
+&lt;h1 id=&quot;spoilers&quot;&gt;Spoilers&lt;/h1&gt;
+
+&lt;p&gt;Actually, I’ll give some space before the spoilers. Scroll now for spoilers.&lt;/p&gt;
+
+&lt;p&gt;↓ spoilers ahead ↓&lt;/p&gt;
+
+&lt;p&gt;↓ spoilers ahead ↓&lt;/p&gt;
+
+&lt;p&gt;↓ spoilers ahead ↓&lt;/p&gt;
+
+&lt;p&gt;↓ spoilers ahead ↓&lt;/p&gt;
+
+&lt;p&gt;↓ spoilers ahead ↓&lt;/p&gt;
+
+&lt;p&gt;↓ spoilers ahead ↓&lt;/p&gt;
+
+&lt;p&gt;↓ spoilers ahead ↓&lt;/p&gt;
+
+&lt;p&gt;↓ spoilers ahead ↓&lt;/p&gt;
+
+&lt;p&gt;↓ spoilers ahead ↓&lt;/p&gt;
+
+&lt;p&gt;↓ spoilers ahead ↓&lt;/p&gt;
+
+&lt;p&gt;↓ spoilers ahead ↓&lt;/p&gt;
+
+&lt;p&gt;↓ spoilers ahead ↓&lt;/p&gt;
+
+&lt;p&gt;↓ spoilers ahead ↓&lt;/p&gt;
+
+&lt;p&gt;↓ spoilers ahead ↓&lt;/p&gt;
+
+&lt;p&gt;↓ spoilers ahead ↓&lt;/p&gt;
+
+&lt;p&gt;↓ spoilers ahead ↓&lt;/p&gt;
+
+&lt;p&gt;Here is &lt;a href=&quot;http://www.secretgeek.net/console_log&quot;&gt;secretGeek’s blog-entry&lt;/a&gt;. When playing the game I had loads of fun. 
+Keeping a map on graph paper, just to make sure the map is deterministic and doesn’t use some random numbers. 
+After some more playing, I started looking at the code and wanted to tinker with it. So I forked it. I had some wild and interesting ideas.&lt;/p&gt;
+
+&lt;p&gt;But somehow, nothing happened.&lt;/p&gt;
+
+&lt;p&gt;I guess I was overthinking it. A year later, I remembered one time at work while being bored, I created the so called &lt;a href=&quot;https://zanstra.com/arc/xs4all/dds.arc/miniwebventure/index.htm&quot; title=&quot;Originally hosted at http://www.worldaccess.nl/~mobitdz around 1997 I think&quot;&gt;mini-webventure&lt;/a&gt;. I didn’t think too much back then, so why do it now?&lt;/p&gt;
+
+&lt;p&gt;So I just started. After running around in the forest (in the game, that is), I got tired of entering parenthesis. And with 
+&lt;a href=&quot;http://ejohn.org/blog/ecmascript-5-objects-and-properties/&quot;&gt;properties&lt;/a&gt; around in all browsers nowadays, there’s no need for it. So instead of typing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;n()&lt;/code&gt;, you now can enter &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;n&lt;/code&gt; to go north.&lt;/p&gt;
+
+&lt;p&gt;An other thing: in a JavaScript game, I don’t consider inspecting and modifying variables cheating.
+So I prevented that with an &lt;a href=&quot;http://benalman.com/news/2010/11/immediately-invoked-function-expression/&quot;&gt;iife&lt;/a&gt; and some help of &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode&quot;&gt;strict mode&lt;/a&gt; (to eliminate global variables).&lt;/p&gt;
+
+&lt;p&gt;Multiple lines are now returned after entering a command, so they are displayed in the same font and color. And deaths 
+are a bit more dramatic now. You should really try it, if you haven’t already…&lt;/p&gt;
+
+&lt;p&gt;After dying too often, implementing load/save was next. First I just saved the game state, but then I realized
+this was another way to cheat, so now only the entered commands are stored. Then I realized, a demo-mode
+is very easy to implement. Couldn’t resist it, but it’s hidden somewhere in the game.&lt;/p&gt;
+
+&lt;p&gt;I didn’t want to change the map or story. Just wanted to share the fun I had, both playing and pimping the game.&lt;/p&gt;
+
+</description>
+        <pubDate>Sun, 06 Mar 2016 13:45:00 +0100</pubDate>
+        <link>https://blog.zanstra.com/2016/03/06/Console-log-adventure.html</link>
+        <guid isPermaLink="true">https://blog.zanstra.com/2016/03/06/Console-log-adventure.html</guid>
+        
+        <category>refactor</category>
+        
+        <category>game</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>First post!</title>
+        <description>&lt;p&gt;OK, I started yet another blog.&lt;/p&gt;
+
+&lt;p&gt;Here are the predecessors (and thank my &lt;a href=&quot;https://archive.org/donate/&quot; title=&quot;Internet Archive&quot;&gt;public backup service&lt;/a&gt; for most of this):&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;2006-2011:
+&lt;a href=&quot;https://web.archive.org/web/20120918224636/http://zanstra.com/base/blog&quot;&gt;http://zanstra.com/base/blog&lt;/a&gt;, 
+&lt;a href=&quot;https://web.archive.org/web/20071101024331/http://zanstra.com/base/tag&quot;&gt;archive 1&lt;/a&gt; and 
+&lt;a href=&quot;https://web.archive.org/web/20120802022851/http://zanstra.com/base/tag&quot;&gt;archive 2&lt;/a&gt; (DokuWiki with plugin)&lt;/li&gt;
+  &lt;li&gt;2004-2006: 
+&lt;a href=&quot;https://web.archive.org/web/20080206012725/http://doekman.web-log.nl/&quot;&gt;http://doekman.web-log.nl&lt;/a&gt; (hosted)&lt;/li&gt;
+  &lt;li&gt;2004-2006: 
+&lt;a href=&quot;https://web.archive.org/web/20061116004043/http://blogger.xs4all.nl/zanstra/&quot;&gt;http://blogger.xs4all.nl/zanstra/&lt;/a&gt; (hosted)&lt;/li&gt;
+  &lt;li&gt;2002-2006: 
+&lt;a href=&quot;https://zanstra.com/arc/xs4all/logs/jsLog-2004.htm&quot; title=&quot;Later: http://zanstra.home.xs4all.nl&quot;&gt;http://www.xs4all.nl/~zanstra/logs/&lt;/a&gt;
+&lt;a href=&quot;https://zanstra.com/arc/xs4all/logs/jsLog.htm&quot;&gt;more entries&lt;/a&gt; and 
+&lt;a href=&quot;https://zanstra.com/arc/xs4all/logs/ideaLog.htm&quot;&gt;some idea’s&lt;/a&gt; (&lt;a href=&quot;https://zanstra.com/arc/xs4all/logs/gen.bat.txt&quot;&gt;batch-file&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I also have a Tumblr micro-blogging thing called &lt;a href=&quot;https://www.tumblr.com/blog/dd3v&quot; title=&quot;Doekman Dev&quot;&gt;dd3v&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 09 Jan 2016 20:30:00 +0100</pubDate>
+        <link>https://blog.zanstra.com/2016/01/09/First-post.html</link>
+        <guid isPermaLink="true">https://blog.zanstra.com/2016/01/09/First-post.html</guid>
+        
+        <category>meta</category>
+        
+        
+      </item>
+    
+  </channel>
+</rss>
