@@ -76,7 +76,7 @@ I didn't want to change the map or story. Just wanted to share the fun I had, bo
 [secretGeek]: https://twitter.com/secretGeek
 [console-log]: http://www.secretgeek.net/console_log
 [play-it]: https://rawgit.com/doekman/console-adventure/master/console.html
-[mini-webventure]: http://zanstra.home.xs4all.nl/dds.arc/miniwebventure/index.htm 
+[mini-webventure]: https://zanstra.com/arc/xs4all/dds.arc/miniwebventure/index.htm 
                    "Originally hosted at http://www.worldaccess.nl/~mobitdz around 1997 I think"
 [properties]: http://ejohn.org/blog/ecmascript-5-objects-and-properties/
 [iife]: http://benalman.com/news/2010/11/immediately-invoked-function-expression/

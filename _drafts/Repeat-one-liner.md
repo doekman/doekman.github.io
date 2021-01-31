@@ -17,6 +17,6 @@ However, a while ago I came these [tweet sized d3][d3-1line] creations. Seems a 
 So check it out...
 
 
-[one-liners]: http://zanstra.home.xs4all.nl/logs/oneLiners.htm "Text in Dutch, code in international JavaScript"
+[one-liners]: https://zanstra.com/arc/xs4all/logs/oneLiners.htm "Text in Dutch, code in international JavaScript"
 [polyfills]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/repeat#Polyfill 
 [d3-1line]: https://t.d3fc.io
