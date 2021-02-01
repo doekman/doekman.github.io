@@ -19,17 +19,17 @@ We now have an (almost) empty branch. How do we get the output from Jekyll's bui
 
 One way might be by having the ignored folder `_site` (which contains the Jekyll build result) on the _master_ branch. Somehow  bring the changes to the _web-stek_ branch by switching branches. That would work with new files, but I don't know how to transfer _modified_ files this way.
 
-Two solutions come to mind. Either use two _git_ repositories on the same machine in different folders. Or use an intermediate folder for Jekyll's build result. For simplicity and less confusion, I've chosen to work with an intermediate folder.
+Two alternatives come to mind. Either use two _git_ repositories on the same machine in different folders. Or use an intermediate folder for Jekyll's build result. For simplicity and less confusion, I've chosen to work with an intermediate folder.
 
-In the example, _rsync_ transfers the build result to the `/docs` folder instead of `/_site`. With the settings for the [publication source][github-pages] on GitHub Pages, you can only choose `/` (root) or the `/docs`. So `/docs` it is. The build process works like this:
+In the example below, _rsync_ transfers the build result to the `/docs` folder instead of `/_site`. I've changed the name, because `/_site` is not listed with the settings for the [publication source][github-pages] on GitHub Pages. So `/docs` it is. The build process works like this:
 
 	jekyll build --destination "$jekyll_build"
 	git checkout web-stek
 	rsync -av "$jekyll_build" ./docs/
 
-To finish up, I needed to add the folders `.jekyll-cache` and `.sass-cache` to the `.gitignore` file on the _web-stek_ branch. Also, some empty folders might be there, because git only works with actual files. Finally, you might want to remove the files from the initial commit in the branch.
+To finish up, I need to add the folders `.jekyll-cache` and `.sass-cache` to the `.gitignore` file on the _web-stek_ branch. Also, some empty folders might be there, because git only works with actual files. Finally, you might want to remove the files from the initial commit in the branch.
 
-I compared the result in `/docs` with GitHub's copy by fetching the pages via `wget -r https\://blog.zanstra.com`. I only found one major difference. GitHub Pages would normalize time-zone offsets to zero. That might be an issue for RSS readers, but I can live with it.
+I compared the result in `/docs` with GitHub's copy by fetching the pages via `wget -r https\://blog.zanstra.com`. I only found one major difference. GitHub Pages would normalizes time-zone offsets to zero. That might be an issue for RSS readers, but I can live with it.
 
 So after pushing all this, and setting up the publication source you are good to go. The next step is to automate publishing, but that has to wait for an other time.
 
