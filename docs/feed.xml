@@ -6,9 +6,50 @@
 </description>
     <link>https://blog.zanstra.com/</link>
     <atom:link href="https://blog.zanstra.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 31 Jan 2021 17:43:52 +0100</pubDate>
-    <lastBuildDate>Sun, 31 Jan 2021 17:43:52 +0100</lastBuildDate>
+    <pubDate>Mon, 01 Feb 2021 21:10:47 +0100</pubDate>
+    <lastBuildDate>Mon, 01 Feb 2021 21:10:47 +0100</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>Building Another Blog Engine</title>
+        <description>&lt;p&gt;I have some ideas for a blog engine I want to explore. Instead of creating a new website, I’m planning to make incremental changes/improvements to this website. Baby steps. That’s why I’ve named this project BABE: Building Another Blog Engine.&lt;/p&gt;
+
+&lt;p&gt;At the moment I’m using GitHub Pages for this blog. When I push a commit, GitHub schedules a task of transforming the source via Jekyll. And the resulting files live somewhere on a webserver. It’s convenient, but it doesn’t give me the control I need.&lt;/p&gt;
+
+&lt;p&gt;Step one is to build the website local, and push the resulting files to GitHub. I don’t want to create another repository for the build result, as this adds confusion. Fortunate, &lt;em&gt;git&lt;/em&gt; has a nice solution for this. Create a branch for Jekyll’s build result, and tell GitHub Pages to serve the website from there.&lt;/p&gt;
+
+&lt;p&gt;This branch should contain no files other than the build result. The obvious choice to do this would be to create a branch and remove all files. But why not use the powers of &lt;em&gt;git&lt;/em&gt; and create a branch from the initial commit, way in the past!&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;initial_hash=$(git rev-list HEAD | tail -n 1)
+git branch web-stek $initial_hash
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We now have an (almost) empty branch. How do we get the output from Jekyll’s build command to this branch?&lt;/p&gt;
+
+&lt;p&gt;One way might be by having the ignored folder &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_site&lt;/code&gt; (which contains the Jekyll build result) on the &lt;em&gt;master&lt;/em&gt; branch. Somehow  bring the changes to the &lt;em&gt;web-stek&lt;/em&gt; branch by switching branches. That would work with new files, but I don’t know how to transfer &lt;em&gt;modified&lt;/em&gt; files this way.&lt;/p&gt;
+
+&lt;p&gt;Two solutions come to mind. Either use two &lt;em&gt;git&lt;/em&gt; repositories on the same machine in different folders. Or use an intermediate folder for Jekyll’s build result. For simplicity and less confusion, I’ve chosen to work with an intermediate folder.&lt;/p&gt;
+
+&lt;p&gt;In the example, &lt;em&gt;rsync&lt;/em&gt; transfers the build result to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/docs&lt;/code&gt; folder instead of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/_site&lt;/code&gt;. With the settings for the &lt;a href=&quot;https://docs.github.com/en/github/working-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site&quot;&gt;publication source&lt;/a&gt; on GitHub Pages, you can only choose &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/&lt;/code&gt; (root) or the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/docs&lt;/code&gt;. So &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/docs&lt;/code&gt; it is. The build process works like this:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;jekyll build --destination &quot;$jekyll_build&quot;
+git checkout web-stek
+rsync -av &quot;$jekyll_build&quot; ./docs/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;To finish up, I needed to add the folders &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.jekyll-cache&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.sass-cache&lt;/code&gt; to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.gitignore&lt;/code&gt; file on the &lt;em&gt;web-stek&lt;/em&gt; branch. Also, some empty folders might be there, because git only works with actual files. Finally, you might want to remove the files from the initial commit in the branch.&lt;/p&gt;
+
+&lt;p&gt;I compared the result in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/docs&lt;/code&gt; with GitHub’s copy by fetching the pages via &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wget -r https\://blog.zanstra.com&lt;/code&gt;. I only found one major difference. GitHub Pages would normalize time-zone offsets to zero. That might be an issue for RSS readers, but I can live with it.&lt;/p&gt;
+
+&lt;p&gt;So after pushing all this, and setting up the publication source you are good to go. The next step is to automate publishing, but that has to wait for an other time.&lt;/p&gt;
+
+</description>
+        <pubDate>Sun, 31 Jan 2021 00:00:00 +0100</pubDate>
+        <link>https://blog.zanstra.com/2021/01/31/Building-Another-Blog-Engine.html</link>
+        <guid isPermaLink="true">https://blog.zanstra.com/2021/01/31/Building-Another-Blog-Engine.html</guid>
+        
+        
+      </item>
     
       <item>
         <title>Moving away from Server.app to Jamf Pro</title>
