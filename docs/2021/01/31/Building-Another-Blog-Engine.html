@@ -83,18 +83,18 @@ git branch web-stek $initial_hash
 
 <p>One way might be by having the ignored folder <code class="language-plaintext highlighter-rouge">_site</code> (which contains the Jekyll build result) on the <em>master</em> branch. Somehow  bring the changes to the <em>web-stek</em> branch by switching branches. That would work with new files, but I don’t know how to transfer <em>modified</em> files this way.</p>
 
-<p>Two solutions come to mind. Either use two <em>git</em> repositories on the same machine in different folders. Or use an intermediate folder for Jekyll’s build result. For simplicity and less confusion, I’ve chosen to work with an intermediate folder.</p>
+<p>Two alternatives come to mind. Either use two <em>git</em> repositories on the same machine in different folders. Or use an intermediate folder for Jekyll’s build result. For simplicity and less confusion, I’ve chosen to work with an intermediate folder.</p>
 
-<p>In the example, <em>rsync</em> transfers the build result to the <code class="language-plaintext highlighter-rouge">/docs</code> folder instead of <code class="language-plaintext highlighter-rouge">/_site</code>. With the settings for the <a href="https://docs.github.com/en/github/working-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site">publication source</a> on GitHub Pages, you can only choose <code class="language-plaintext highlighter-rouge">/</code> (root) or the <code class="language-plaintext highlighter-rouge">/docs</code>. So <code class="language-plaintext highlighter-rouge">/docs</code> it is. The build process works like this:</p>
+<p>In the example below, <em>rsync</em> transfers the build result to the <code class="language-plaintext highlighter-rouge">/docs</code> folder instead of <code class="language-plaintext highlighter-rouge">/_site</code>. I’ve changed the name, because <code class="language-plaintext highlighter-rouge">/_site</code> is not listed with the settings for the <a href="https://docs.github.com/en/github/working-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site">publication source</a> on GitHub Pages. So <code class="language-plaintext highlighter-rouge">/docs</code> it is. The build process works like this:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jekyll build --destination "$jekyll_build"
 git checkout web-stek
 rsync -av "$jekyll_build" ./docs/
 </code></pre></div></div>
 
-<p>To finish up, I needed to add the folders <code class="language-plaintext highlighter-rouge">.jekyll-cache</code> and <code class="language-plaintext highlighter-rouge">.sass-cache</code> to the <code class="language-plaintext highlighter-rouge">.gitignore</code> file on the <em>web-stek</em> branch. Also, some empty folders might be there, because git only works with actual files. Finally, you might want to remove the files from the initial commit in the branch.</p>
+<p>To finish up, I need to add the folders <code class="language-plaintext highlighter-rouge">.jekyll-cache</code> and <code class="language-plaintext highlighter-rouge">.sass-cache</code> to the <code class="language-plaintext highlighter-rouge">.gitignore</code> file on the <em>web-stek</em> branch. Also, some empty folders might be there, because git only works with actual files. Finally, you might want to remove the files from the initial commit in the branch.</p>
 
-<p>I compared the result in <code class="language-plaintext highlighter-rouge">/docs</code> with GitHub’s copy by fetching the pages via <code class="language-plaintext highlighter-rouge">wget -r https\://blog.zanstra.com</code>. I only found one major difference. GitHub Pages would normalize time-zone offsets to zero. That might be an issue for RSS readers, but I can live with it.</p>
+<p>I compared the result in <code class="language-plaintext highlighter-rouge">/docs</code> with GitHub’s copy by fetching the pages via <code class="language-plaintext highlighter-rouge">wget -r https\://blog.zanstra.com</code>. I only found one major difference. GitHub Pages would normalizes time-zone offsets to zero. That might be an issue for RSS readers, but I can live with it.</p>
 
 <p>So after pushing all this, and setting up the publication source you are good to go. The next step is to automate publishing, but that has to wait for an other time.</p>
 

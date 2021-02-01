@@ -1,0 +1,3 @@
+# Don't work in this branch, as it is maintained by a bot 👾
+git status
+git checkout master
