@@ -10,6 +10,8 @@ At the moment I'm using GitHub Pages for this blog. When I push a commit, GitHub
 
 Step one is to build the website local, and push the resulting files to GitHub. I don't want to create another repository for the build result, as this adds confusion. Fortunate, _git_ has a nice solution for this. Create a branch for Jekyll's build result, and tell GitHub Pages to serve the website from there.
 
+I'm using the branch feature in an unusual way: it is not intended for merging into the main branch. And this way, the published source doesn't show up in my blog's history.
+
 This branch should contain no files other than the build result. The obvious choice to do this would be to create a branch and remove all files. But why not use the powers of _git_ and create a branch from the initial commit, way in the past!
 
 	initial_hash=$(git rev-list HEAD | tail -n 1)
