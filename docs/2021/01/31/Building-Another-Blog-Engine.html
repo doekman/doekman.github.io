@@ -100,6 +100,8 @@ rsync -av "$jekyll_build" ./docs/
 
 <p>So after pushing all this, and setting up the publication source you are good to go. The next step is to automate publishing, but that has to wait for an other time.</p>
 
+<p><strong>UPDATED 2021-04-06</strong>: A bit mind-bending, but the <em>publication source</em> is considered to be in Jekyll format. How I learned this? I wanted the folder <code class="language-plaintext highlighter-rouge">.well-known</code> to be copied to my website, but Jekyll ignored this file. Hidden files are on the ignore list. Luckily there is an easy fix. Add a file at the root of your site called <code class="language-plaintext highlighter-rouge">.nojekyll</code>. The file can be empty.</p>
+
 
     
   </div>

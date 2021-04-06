@@ -6,8 +6,8 @@
 </description>
     <link>https://blog.zanstra.com/</link>
     <atom:link href="https://blog.zanstra.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 01 Feb 2021 21:33:19 +0100</pubDate>
-    <lastBuildDate>Mon, 01 Feb 2021 21:33:19 +0100</lastBuildDate>
+    <pubDate>Tue, 06 Apr 2021 12:55:56 +0200</pubDate>
+    <lastBuildDate>Tue, 06 Apr 2021 12:55:56 +0200</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -44,6 +44,8 @@ rsync -av &quot;$jekyll_build&quot; ./docs/
 &lt;p&gt;I compared the result in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/docs&lt;/code&gt; with GitHub’s copy by fetching the pages via &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wget -r https\://blog.zanstra.com&lt;/code&gt;. I only found one major difference. GitHub Pages would normalizes time-zone offsets to zero. That might be an issue for RSS readers, but I can live with it.&lt;/p&gt;
 
 &lt;p&gt;So after pushing all this, and setting up the publication source you are good to go. The next step is to automate publishing, but that has to wait for an other time.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;UPDATED 2021-04-06&lt;/strong&gt;: A bit mind-bending, but the &lt;em&gt;publication source&lt;/em&gt; is considered to be in Jekyll format. How I learned this? I wanted the folder &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.well-known&lt;/code&gt; to be copied to my website, but Jekyll ignored this file. Hidden files are on the ignore list. Luckily there is an easy fix. Add a file at the root of your site called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.nojekyll&lt;/code&gt;. The file can be empty.&lt;/p&gt;
 
 </description>
         <pubDate>Sun, 31 Jan 2021 00:00:00 +0100</pubDate>
