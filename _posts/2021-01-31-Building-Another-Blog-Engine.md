@@ -2,6 +2,7 @@
 layout: post
 title:  Building Another Blog Engine
 date:   2021-01-31
+changed: 2021-04-06
 ---
 
 I have some ideas for a blog engine I want to explore. Instead of creating a new website, I'm planning to make incremental changes/improvements to this website. Baby steps. That's why I've named this project BABE: Building Another Blog Engine.
@@ -34,6 +35,8 @@ To finish up, I need to add the folders `.jekyll-cache` and `.sass-cache` to the
 I compared the result in `/docs` with GitHub's copy by fetching the pages via `wget -r https\://blog.zanstra.com`. I only found one major difference. GitHub Pages would normalizes time-zone offsets to zero. That might be an issue for RSS readers, but I can live with it.
 
 So after pushing all this, and setting up the publication source you are good to go. The next step is to automate publishing, but that has to wait for an other time.
+
+**UPDATED 2021-04-06**: A bit mind-bending, but the _publication source_ is considered to be in Jekyll format. How I learned this? I wanted the folder `.well-known` to be copied to my website, but Jekyll ignored this file. Hidden files are on the ignore list. Luckily there is an easy fix. Add a file at the root of your site called `.nojekyll`. The file can be empty.
 
 [github-pages]: https://docs.github.com/en/github/working-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site
 
