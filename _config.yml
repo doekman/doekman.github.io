@@ -19,6 +19,9 @@ twitter_username: doekezanstra
 github_username:  doekman
 keybase_username: doekman
 
+exclude:
+  - publi.sh
+
 # Build settings
 markdown: kramdown
 
