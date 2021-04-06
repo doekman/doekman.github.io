@@ -3,6 +3,9 @@
 set -euo pipefail
 IFS=$'\n\t'
 
+cd "$(dirname "$0")"
+jekyll_source="$(pwd)"
+
 # Check publication destination
 jekyll_build="${1:-$HOME/prj/Websites/doekman.github.io__web-stek/docs/}"
 if [[ ! -d "$jekyll_build" ]]; then
@@ -23,18 +26,13 @@ if [[ "$(git status --porcelain=v1)" ]]; then
 fi
 
 # Transform
-cd "$(dirname "$0")"
-if [[ "$(git status --porcelain=v1)" ]]; then
-	echo "There is unresolved status; aborting..."
-	exit 1
-fi
-
+cd "$jekyll_source"
 jekyll build --destination "$jekyll_build"
-touch "$jekyll_build/.nojekyll" #always regenerate
-
 
 # Now push the publication destination
 cd "$jekyll_build"
+touch "$jekyll_build/.nojekyll" #always regenerate
+
 if [[ "$(git status --porcelain=v1)" ]]; then
 	git add *
 	# CHECK: some files are not added automatically
