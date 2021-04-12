@@ -6,9 +6,96 @@
 </description>
     <link>https://blog.zanstra.com/</link>
     <atom:link href="https://blog.zanstra.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 06 Apr 2021 13:06:42 +0200</pubDate>
-    <lastBuildDate>Tue, 06 Apr 2021 13:06:42 +0200</lastBuildDate>
+    <pubDate>Mon, 12 Apr 2021 22:09:59 +0200</pubDate>
+    <lastBuildDate>Mon, 12 Apr 2021 22:09:59 +0200</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>One Closure Explanation</title>
+        <description>&lt;p&gt;Closures in programming languages are pretty intuitive to use. Understand what they are is actually a bit more difficult.&lt;/p&gt;
+
+&lt;p&gt;A closure is a function, but not a regular function. And to better understand closures, it helps me to understand regular functions. So first I explain how regular functions work. After that I’ll make the connection to functional closures.&lt;/p&gt;
+
+&lt;h2 id=&quot;regular-functions&quot;&gt;Regular functions&lt;/h2&gt;
+
+&lt;p&gt;When you call a regular function, a lot of things are going on. Under the hood a stack-structure is used.
+Things the function needs, like arguments and the return address, get pushed up this stack. This is a bit of a simplification. There are optimising compilers, but I want explain the principle here. If you want to delve into the nitty-gritty details, please checkout &lt;a href=&quot;https://en.wikipedia.org/wiki/Calling_convention&quot;&gt;calling conventions&lt;/a&gt; on Wikipedia.&lt;/p&gt;
+
+&lt;p&gt;So how does this work, what gets pushed up our stack-for-algorithmic-purposes? Let’s explain this with a JavaScript example.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1: function test(a, b) {
+2: 	var c = a + b;
+3: 	console.info('The sum of %s + %s is %s', a, b, c);
+4: }
+5: test(1, 2);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The program runs the following steps.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Before calling &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;test&lt;/code&gt;, the return address is pushed onto the stack. With this info, the function knows where to “return” to. So let’s push the address of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;line 5&lt;/code&gt; onto the stack.&lt;/li&gt;
+  &lt;li&gt;After that, the arguments &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;2&lt;/code&gt; are pushed onto the stack. Now there are 3 items on the stack.&lt;/li&gt;
+  &lt;li&gt;Now we actually can start running the function. This is done via a jump to the entry point of the function, like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;goto line 1&lt;/code&gt;. I will indent steps that are within the function call:
+    &lt;ul&gt;
+      &lt;li&gt;At line 1 there is nothing to do.&lt;/li&gt;
+      &lt;li&gt;At line 2, there is some arithmetic, and the result is stored in the &lt;em&gt;local variable&lt;/em&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;c&lt;/code&gt;. Locals are stored on the stack too, so &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;3&lt;/code&gt; will get pushed onto the stack, and we have 4 items on the stack.&lt;/li&gt;
+      &lt;li&gt;Line 3 will print a line to the console, while referencing three items on the stack.&lt;/li&gt;
+      &lt;li&gt;At line 4, the function returns. All local variables, arguments and return address are popped from the stack. The return address is used to jump back to (the end of) line 5.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;And at that point there is no more code to execute, and our program has finished running.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;At first glance this may seem a bit tedious and boring. Yet, some smart stuff is going on. When the function returned at line 4, all local variables, arguments and return address have been cleaned up. No need for &lt;em&gt;garbage collection&lt;/em&gt; or &lt;em&gt;reference counting&lt;/em&gt;. Very efficient.&lt;/p&gt;
+
+&lt;p&gt;And it works pretty well when calling other functions or even with recursive calls. The stack-size is the limit! Only a stack-overflow comes after that, but that is about it.&lt;/p&gt;
+
+&lt;p&gt;And yes, I left out handling return values, stack pointers and reference types. We do not need to worry about those for this explanation.&lt;/p&gt;
+
+&lt;p&gt;To summarise: arguments and local variables live on the stack. They only exist between function entry and exit. In regular functions, that is.&lt;/p&gt;
+
+&lt;h2 id=&quot;first-class-functions&quot;&gt;First class functions&lt;/h2&gt;
+
+&lt;p&gt;Before we go to closures, it is important to know what &lt;em&gt;first class functions&lt;/em&gt; are. JavaScript has them, but what defines them? At first you might think &lt;em&gt;nesting functions&lt;/em&gt; is a property of first class functions, but it is not. Turbo Pascal &lt;a href=&quot;https://twitter.com/doekezanstra/status/1380426215757070336&quot;&gt;supports inner functions&lt;/a&gt;, yet it doesn’t have support for first class functions.&lt;/p&gt;
+
+&lt;p&gt;When you can assign a function to a variable, the language supports functions as a first class citizen. It should be no different as assigning an integer or a string to a variable.&lt;/p&gt;
+
+&lt;p&gt;And when you can assign a function to a variable, you also can pass them around to other functions. Or let functions &lt;em&gt;return&lt;/em&gt; functions or assign functions to data structures. This also seems reasonable, but Turbo Pascal can’t do this. For that one needs something extra.&lt;/p&gt;
+
+&lt;h2 id=&quot;functional-closures&quot;&gt;Functional closures&lt;/h2&gt;
+
+&lt;p&gt;So let us explore functional closures. By the way: &lt;em&gt;closure&lt;/em&gt;, &lt;em&gt;lexical closure&lt;/em&gt; or &lt;em&gt;function closure&lt;/em&gt;; all the same thing. Take the following example:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;function test_two(a, b) {
+	var c = a + b;
+	return function inner() {
+		console.info('The sum of %s + %s is %s', a, b, c);
+	}
+}
+var result = test_two(1, 2);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The function &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;test_two&lt;/code&gt; returns a nested function, which is assigned to the variable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;result&lt;/code&gt;. So you would expect to execute the inner function by running &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;result()&lt;/code&gt;. And this indeed works in JavaScript.&lt;/p&gt;
+
+&lt;p&gt;But, when you think of the stack-based system of regular functions, as described above, something is off. The stack-algorithm says when the function &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;test_two&lt;/code&gt; returns, the arguments &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;a&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;b&lt;/code&gt; and variable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;c&lt;/code&gt; are popped from the stack, and would not be accessible anymore. A call to the inner function would refer to variables that don’t exist anymore!&lt;/p&gt;
+
+&lt;p&gt;Functional closures solve this. I like to think of a closure as function with a shopping bag that contains all the variables (state) which are necessary to perform its function. So the variable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;result&lt;/code&gt; contains a reference to the function &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;test_two&lt;/code&gt; together with a bag with values for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;a&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;b&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;c&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;When you would run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;var result2 = test_two(3, 4)&lt;/code&gt;, the variable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;result2&lt;/code&gt; will not contain the same thing as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;result&lt;/code&gt;. The reference to the function is the same, but this closure has its own bag of state.&lt;/p&gt;
+
+&lt;p&gt;How exactly this is implemented is not important for my explanation. Different languages do implement this behaviour differently, but the principle is the same. I found some more &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures#closure_scope_chain&quot;&gt;technical info about JavaScript closures on MDN&lt;/a&gt;, and also a blog about &lt;a href=&quot;https://vkontech.com/the-intuitive-guide-to-understanding-closures-in-c/&quot;&gt;C# closures&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The Wikipedia article &lt;a href=&quot;https://en.wikipedia.org/wiki/Closure_(computer_programming)&quot;&gt;on closures&lt;/a&gt; has the line &lt;em&gt;“Operationally, a closure is a record storing a function together with an environment.”&lt;/em&gt; in the introduction. That summarises the point of my explanation pretty well. I hope you now have a better understanding of closures. Let me know what you think.&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 12 Apr 2021 00:00:00 +0200</pubDate>
+        <link>https://blog.zanstra.com/ict/2021/04/12/a-closure-explanation.html</link>
+        <guid isPermaLink="true">https://blog.zanstra.com/ict/2021/04/12/a-closure-explanation.html</guid>
+        
+        
+        <category>ICT</category>
+        
+      </item>
     
       <item>
         <title>Building Another Blog Engine</title>
