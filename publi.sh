@@ -7,7 +7,7 @@ cd "$(dirname "$0")"
 jekyll_source="$(pwd)"
 
 # Check publication destination
-jekyll_build="${1:-$HOME/prj/Websites/doekman.github.io__web-stek/docs/}"
+jekyll_build="${1:-$HOME/prj/Websites/doekman.github.io__web-stek/docs}"
 if [[ ! -d "$jekyll_build" ]]; then
 	echo "The jekyll-build folder is not found ($jekyll_build)"
 	exit 1

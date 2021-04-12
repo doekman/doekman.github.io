@@ -21,6 +21,7 @@ keybase_username: doekman
 
 exclude:
   - publi.sh
+  - new-post.sh
 
 # Build settings
 markdown: kramdown
