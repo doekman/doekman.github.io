@@ -1,7 +1,8 @@
-# ok @ Boggus Doekmanni
+# ok @ Bloggus Doekmanni
 jekyll serve --open "$@"
 jekyll serve --open --drafts "$@"
 # writing help
+./new-post.sh "$@" # please provide a title
 open http://hemingwayapp.com # grammar
 open https://headlinecapitalization.com
 open https://titlecaseconverter.com
