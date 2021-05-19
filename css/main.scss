@@ -82,10 +82,12 @@ figure figcaption {
 figure img.hoover {
 	display: none;
 }
-figure:hover img.non_hoover {
+figure:hover img.non_hoover,
+figure:focus img.non_hoover {
 	display: none;
 }
-figure:hover img.hoover {
+figure:hover img.hoover,
+figure:focus img.hoover {
 	display: block;
 }
 @media print {

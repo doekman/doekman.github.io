@@ -40,7 +40,7 @@ A note about the id-column. Trello uses hexadecimal identifiers of 24 positions.
 Below the screenshot showing the result in Postico with [this Trello-board][simple_board] loaded; the same one as we just loaded. On the left you see the table and views. Above I've applied a filter, so I only see the lists from the first JSON document. All columns are type-cast. When you hover the image, the right pane is shown which also show type information.
 
 <html>
-	<figure>
+	<figure tabindex="0">
 		<img src="{% link images/2020-03/Query-trello-json-with-postgres_A.png %}" alt="Screen-shot of the Postico application" class="non_hoover">
 		<img src="{% link images/2020-03/Query-trello-json-with-postgres_B.png %}" alt="Screen-shot of the Postico application, with right pane" class="hoover">
 		<figcaption>
