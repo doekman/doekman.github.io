@@ -147,9 +147,9 @@ figure figcaption { text-align: center; }
 
 figure img.hoover { display: none; }
 
-figure:hover img.non_hoover { display: none; }
+figure:hover img.non_hoover, figure:focus img.non_hoover { display: none; }
 
-figure:hover img.hoover { display: block; }
+figure:hover img.hoover, figure:focus img.hoover { display: block; }
 
 @media print { figure figcaption .non_print { display: none; } figure img.hoover, figure img.non_hover { display: block; } }
 

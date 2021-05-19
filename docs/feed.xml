@@ -6,8 +6,8 @@
 </description>
     <link>https://blog.zanstra.com/</link>
     <atom:link href="https://blog.zanstra.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 12 Apr 2021 22:09:59 +0200</pubDate>
-    <lastBuildDate>Mon, 12 Apr 2021 22:09:59 +0200</lastBuildDate>
+    <pubDate>Wed, 19 May 2021 17:32:19 +0200</pubDate>
+    <lastBuildDate>Wed, 19 May 2021 17:32:19 +0200</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
     
       <item>
@@ -445,7 +445,7 @@ $
 &lt;p&gt;Below the screenshot showing the result in Postico with &lt;a href=&quot;https://trello.com/b/ZWvFVK9Z/postgres-with-trello&quot;&gt;this Trello-board&lt;/a&gt; loaded; the same one as we just loaded. On the left you see the table and views. Above I’ve applied a filter, so I only see the lists from the first JSON document. All columns are type-cast. When you hover the image, the right pane is shown which also show type information.&lt;/p&gt;
 
 &lt;html&gt;
-	&lt;figure&gt;
+	&lt;figure tabindex=&quot;0&quot;&gt;
 		&lt;img src=&quot;/images/2020-03/Query-trello-json-with-postgres_A.png&quot; alt=&quot;Screen-shot of the Postico application&quot; class=&quot;non_hoover&quot; /&gt;
 		&lt;img src=&quot;/images/2020-03/Query-trello-json-with-postgres_B.png&quot; alt=&quot;Screen-shot of the Postico application, with right pane&quot; class=&quot;hoover&quot; /&gt;
 		&lt;figcaption&gt;
@@ -615,11 +615,21 @@ Every commit message should begin with a present-tense verb&lt;/p&gt;
     
       <item>
         <title>Office for OS X icons</title>
-        <description>&lt;p&gt;OS X, now called macOS, was based on the &lt;a href=&quot;https://en.wikipedia.org/wiki/NeXTSTEP&quot;&gt;NeXTSTEP&lt;/a&gt; operating system. And one innovation of this operating system was large full-color icons.&lt;/p&gt;
+        <description>&lt;p&gt;&lt;strong&gt;Updated&lt;/strong&gt;: &lt;em&gt;added Big Sur icons.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;OS X, now called macOS, was based on the &lt;a href=&quot;https://en.wikipedia.org/wiki/NeXTSTEP&quot;&gt;NeXTSTEP&lt;/a&gt; operating system. And one innovation of this operating system was large full-color icons.&lt;/p&gt;
 
 &lt;p&gt;With the introduction of new icons this year with Office 365 (including the 2019 retail version), I felt the need to create this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/office-for-os-x-icons.png&quot; alt=&quot;OS X Office icons&quot; /&gt;&lt;/p&gt;
+&lt;html&gt;
+	&lt;figure tabindex=&quot;0&quot;&gt;
+		&lt;img src=&quot;/images/office-for-os-x-icons.png&quot; alt=&quot;Office for OS X icons (original)&quot; class=&quot;non_hoover&quot; /&gt;
+		&lt;img src=&quot;/images/office-for-os-x-icons-2021.png&quot; alt=&quot;Office for OS X icons (2021 Big Sur update)&quot; class=&quot;hoover&quot; /&gt;
+		&lt;figcaption&gt;
+			Office for OS X icons &lt;span class=&quot;non_print comment&quot;&gt;(focus or hover to display 2021 update)&lt;/span&gt;
+		&lt;/figcaption&gt;
+	&lt;/figure&gt;
+&lt;/html&gt;
 
 &lt;p&gt;In 2001, Office v. X was released. It’s design was very distinct from Windows, and also very &lt;a href=&quot;https://en.wikipedia.org/wiki/Aqua_(user_interface)&quot;&gt;aqua-y&lt;/a&gt;. The maximum size was 256×256 pixels. The 2004 icons I found were oddly sized 128×128 pixels. The resolution of the 2008 and 2011 icons went up to 512×512 pixels. These were also the last OS X-specific icons for Office.&lt;/p&gt;
 
