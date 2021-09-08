@@ -33,3 +33,4 @@ defaults:
       type: posts   # limit to posts
     values:
       is_listed: true # set `is_listed: false` to exclude it from json/xml feeds
+      lang: en

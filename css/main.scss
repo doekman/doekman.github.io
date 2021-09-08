@@ -71,7 +71,11 @@ small code {
 		column-count: 2; // doesn't work in Safari..
 	}
 }
-
+.postscript {
+	margin-top:2em;
+	font-weight: bold;
+	color: $grey-color;
+}
 // CSS for post-images with hover effect
 figure img {
 	margin: 0 auto;
