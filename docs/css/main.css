@@ -141,6 +141,8 @@ small code { font-size: smaller; }
 
 @media print { .post-content { column-count: 2; } }
 
+.postscript { margin-top: 2em; font-weight: bold; color: #828282; }
+
 figure img { margin: 0 auto; }
 
 figure figcaption { text-align: center; }

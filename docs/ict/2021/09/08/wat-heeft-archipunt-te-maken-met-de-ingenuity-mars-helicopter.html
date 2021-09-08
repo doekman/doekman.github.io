@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 
     <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>JSON, the game #1: Bootstrapping it</title>
-    <meta name="description" content="Around a year ago, I had the daft idea to create some nerdy JSON-game. I had good fun thinking about some concepts, made some notes, and that was about it. U...">
+    <title>Wat heeft Archipunt te maken met de Ingenuity Mars Helicopter?</title>
+    <meta name="description" content="Op 30 april 2021 keek ik op m’n GitHub pagina, en zag ik dat ik de volgende “achievement” erbij had gekregen:">
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="canonical" href="https://blog.zanstra.com/2017/04/30/JSON-the-game-nr1.html">
+    <link rel="canonical" href="https://blog.zanstra.com/ict/2021/09/08/wat-heeft-archipunt-te-maken-met-de-ingenuity-mars-helicopter.html">
     <link rel="alternate" type="application/json"    title="Bloggus Doekmanni" href="https://blog.zanstra.com/feed.json" />
     <link rel="alternate" type="application/rss+xml" title="Bloggus Doekmanni" href="https://blog.zanstra.com/feed.xml">
     <link rel="me" href="https://micro.blog/doekman"/>
@@ -62,30 +62,52 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">JSON, the game #1: Bootstrapping it</h1>
-    <p class="post-meta"><time datetime="2017-04-30T00:00:00+02:00" itemprop="datePublished">April 30, 2017</time></p>
+    <h1 class="post-title" itemprop="name headline">Wat heeft Archipunt te maken met de Ingenuity Mars Helicopter?</h1>
+    <p class="post-meta"><time datetime="2021-09-08T00:00:00+02:00" itemprop="datePublished">September 8, 2021</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Doeke Zanstra</span></span></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>Around a year ago, I had the daft idea to create some nerdy JSON-game. I had good fun thinking about some concepts, made some notes, and that was about it. Until now that is. The game: It’s coming… It has already started. To keep me focussed, I will keep a journal of the creation, and you’re reading the first part.</p>
+    <p>Op 30 april 2021 keek ik op <a href="https://github.com/doekman/">m’n GitHub pagina</a>, en zag ik dat ik de volgende “achievement” erbij had gekregen:</p>
 
-<p>I got the ideas from series like the Brent Simmons’s <a href="http://inessential.com/vespersyncdiary">Vesper Sync Diary</a> and Jon Skeet’s <a href="https://codeblog.jonskeet.uk/2011/02/23/reimplementing-linq-to-objects-part-45-conclusion-and-list-of-posts/">Reimplementing Linq to Objects</a>. I found them enjoyable; a bit of a nerdy soap opera. And now is the time for me to get of my comfy sofa and produce some soap of my own.</p>
+<blockquote>
+  <p><strong>Mars 2020 Helicopter Contributor</strong><br />
+<strong><a href="https://github.com/doekman/">Doeke Zanstra</a></strong> contributed code to 1 repository used in the <a href="https://github.com/readme/nasa-ingenuity-helicopter">Mars 2020 Helicopter Mission</a><br />
+<a href="https://github.com/pallets/werkzeug">pallets/werkzeug</a></p>
+</blockquote>
 
-<p>The idea of the game: <a href="http://json.org">JSON</a> tokens are coming in, and you need to place them correctly. The initial form of the game will be Tetris-like with your head on your right shoulder: the tokens come in from the right and go to the left (alternative gravity you can think). However, this form might change from level to level (I’m thinking of the partial JSON document as a starship, crashing into JSON stars/tokens as it cruises through the JSON universe).</p>
+<p>Ik was echt <em>totaal</em> verbaasd. Hoe kan dit? Wat heb ik hieraan gedaan? Maar ik las de tekst hierboven nog een keer, en toen viel het kwartje bij me. Tijdens het werken bij <a href="https://archipunt.nl/">Archipunt</a> heb ik aan software gewerkt wat ook gebruikt is bij het laten vliegen van een helicopter op Mars.</p>
 
-<p>The first step is to create some user interface mockup. A guy gotta start somewhere. My weapon of choice is HTML/CSS. At the top we have a dashboard providing some game details. Unformatted JSON will do for now. The playing field (where the partial JSON is) will have a fixed width, while the height might grow during gameplay when tokens are inserted between lines.</p>
+<p>OK. Dit behoeft enige toelichting.</p>
 
-<html><center style="margin-bottom:1em"><img src="/images/json-html-mock.png" alt="HTML/CSS mock" title="HTML/CSS mock: the 'ue' token will go from the right to the left" /></center></html>
+<h2 id="apawa">APAWA</h2>
 
-<p>Positioning is done with the <code class="language-plaintext highlighter-rouge">em</code> and <code class="language-plaintext highlighter-rouge">ch</code> CSS units with a position <code class="language-plaintext highlighter-rouge">relative</code>/<code class="language-plaintext highlighter-rouge">absolute</code> container-combo, so I can  position things absolute within the relative container. Every character is one <code class="language-plaintext highlighter-rouge">ch</code> and every line is one <code class="language-plaintext highlighter-rouge">em</code>. One little problem though: <code class="language-plaintext highlighter-rouge">em</code> is font-height, not line-height. And a line-height of 100% just doesn’t look right. But there is no such thing as a line-height unit. (<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/length#Font-relative_lengths" title="Line-height unit ln; unimplemented with an unknown specification">Or is there?</a>) This is easy fixable with a calculation, but line-height will appear in multiple places in CSS.</p>
+<p>Aan het eind van 2017 was ik bij Archipunt aan het werk aan <a href="https://apawa.archipunt.nl/" title="Archipunt Piekgrond Acceleratie Web Applicatie.">APAWA</a>. Dit is een <em>web-applicatie</em> voor het berekenen van het lokale effect (voor een specifiek adres dus) van aardbevingen. Ik kan hier verder uitleggen wat dat precies is, maar het is misschien gemakkelijker om voorgenoemde link te klikken en zelf een kijkje te nemen.</p>
 
-<p>Also some color coding needs to be added, so we can identify unbalanced grouping tokens, missing separators, incomplete tokens and downright errors. That’s why I’m not using a <code class="language-plaintext highlighter-rouge">pre</code>-element. I don’t have a definite idea about gameplay, but some ideas come to mind. An obvious solution for an error would be “Game over”. This can also be postponed by counting “lives”. The error will vanish and you loose a life. Or an error could be cleared with the incoming JSON token <code class="language-plaintext highlighter-rouge">\b</code>. That choice will depend on the level. But I digress.</p>
+<p>Terloops noemde ik het woord “web-applicatie”: dit is de software van het internet. In feite een gewone applicatie, zoals bijvoorbeeld Microsoft Word, alleen dan voor het <em>web</em>.</p>
 
-<p>This is not all markup we need (we will need a dialog-box, for the start and end of a level), but it will do for now. I put the <a href="https://github.com/doekman/Json-the-Game/tree/8f14c49ec871a35cbb85d2d0b0e751ea054489c5">source-code on GitHub</a>, and every instalment will point to a commit so you can see how this game comes to shape. You can also <a href="https://cdn.rawgit.com/doekman/Json-the-Game/8f14c49ec871a35cbb85d2d0b0e751ea054489c5/index.html">“run” the game here</a> (nothing to play for now).</p>
+<p>En die software was ik dus aan het schrijven. Maar om het wiel niet iedere keer opnieuw uit te vinden maak ik gebruik van software componenten. En voor het web-applicatie aspect van deze software maak ik gebruik van het <em>open source</em> component met de naam <a href="https://flask.palletsprojects.com/en/2.0.x/">Flask</a>.</p>
 
-<p>I hope to find a good balance between enjoyability, a bit of fun and some technical remarks. And I like to hear your thoughts on <a href="https://twitter.com/doekezanstra">Twitter</a>.</p>
+<p>Open source is erg handig. De broncode is beschikbaar. Zodat als je een fout tegenkomt, kun je deze analyseren. Meestal heb je zelf een fout gemaakt, en is de broncode handig om daar achter te komen. Heel, heel soms kom je iets tegen wat verbetering behoeft. Ook dan is open source handig: niet alleen de broncode is open, maar het hele proces is open. Ook verbeter trajecten. Voordat ik hier op in ga nog even het volgende.</p>
 
-<p>The next instalment will be about moving those incoming tokens.</p>
+<p>Flask zelf bestaat ook weer uit componenten. Ik liep tegen een onvolkomenheid aan in het component <em>Werkzeug</em> (overigens: zowel Flask als Werkzeug is niet in Amerika, maar bij onze Oosterburen bedacht).</p>
+
+<p>Eén van de functionaliteiten van Werkzeug is het bepalen welke <em>browser</em> (zoals Chrome, Safari of Firefox) een eind-gebruiker gebruikt. In een moderne applicatie wil je niet dat er een gedateerde browser gebruikt: de belangrijkste reden hiervoor is om de test-inspanning niet te groot te laten worden.</p>
+
+<p>Nu was er een gebruiker die <em>Microsoft Edge</em> (de opvolger van Internet Explorer) gebruikte. En deze werd niet herkend door <em>Werkzeug</em>, en dus ook niet door Apawa. Edge maakt onder water gebruik van hetzelfde component als Chrome, en is dus modern. Reden om Edge toe te voegen. Als je wilt zien hoe dit er exact uit ziet, <a href="https://github.com/pallets/werkzeug/pull/1216" title="Pull Request om edge browser detectie aan Werkzeug toe te voegen">kijk dan hier</a> voor de details.</p>
+
+<p>Tot hier heb ik uitgelegd hoe software ontwikkeling kan leiden tot een toevoeging van een open source component. Maar wat heeft dit met Helicopters, Mars en NASA te maken?</p>
+
+<h2 id="helicopters-mars-en-nasa">Helicopters, Mars en NASA</h2>
+
+<p>Laat ik om te beginnen verwijzen naar het Engelstalige artikel <a href="https://github.com/readme/nasa-ingenuity-helicopter">Open Source on Mars: Community powers NASA’s Ingenuity Helicopter</a>. Erg interessant om te lezen. NASA maakt dus gebruik van open source code. Waarschijnlijk worden <em>Flask</em> en dus ook <em>Werkzeug</em> gebruikt bij <em>ground control</em> om de helicopter aan te sturen.</p>
+
+<p>In het stuk valt ook te lezen hoe men bepaald heeft welke software gebruikt werd voor het project. NASA heeft een lijst van componenten en hun versienummers aangeleverd aan GitHub, de centrale plek waar open source opgeslagen wordt.</p>
+
+<p>Omdat open source ontwikkeling zich in de openbaarheid voltrekt, kan elke wijziging in open source code gekoppeld worden aan een identiteit. De lijst van componenten en hun versienummers levert dan ook een éénduidige lijst op van namen. Mijn wijziging is opgenomen in <em>Werkzeug versie 0.14</em> en voor Ingenuity wordt versie 0.16 gebruikt. Inmiddels is versie 2.0.0 net uit. Degene die aan versies na 0.16 hebben bijgedragen worden derhalve niet genoemd bij de “achievement”. Maar wellicht wordt deze code in toekomstige missies gebruikt.</p>
+
+<p>Ik vond het leuk om achter dit feit te komen, en uit te zoeken hoe het precies zit. En ik hoop in de toekomst nog aan andere projecten te kunnen bijdragen.</p>
+
+<div class="postscript"><span>Eerder gepubliceert</span> als <a href="https://www.archipunt.nl/archipunt-op-mars/">Archipunt op Mars</a>.</div>
 
 
     

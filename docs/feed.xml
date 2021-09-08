@@ -6,9 +6,63 @@
 </description>
     <link>https://blog.zanstra.com/</link>
     <atom:link href="https://blog.zanstra.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 19 May 2021 17:32:19 +0200</pubDate>
-    <lastBuildDate>Wed, 19 May 2021 17:32:19 +0200</lastBuildDate>
+    <pubDate>Wed, 08 Sep 2021 15:24:09 +0200</pubDate>
+    <lastBuildDate>Wed, 08 Sep 2021 15:24:09 +0200</lastBuildDate>
     <generator>Jekyll v4.2.0</generator>
+    
+      <item>
+        <title>Wat heeft Archipunt te maken met de Ingenuity Mars Helicopter?</title>
+        <description>&lt;p&gt;Op 30 april 2021 keek ik op &lt;a href=&quot;https://github.com/doekman/&quot;&gt;m’n GitHub pagina&lt;/a&gt;, en zag ik dat ik de volgende “achievement” erbij had gekregen:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Mars 2020 Helicopter Contributor&lt;/strong&gt;&lt;br /&gt;
+&lt;strong&gt;&lt;a href=&quot;https://github.com/doekman/&quot;&gt;Doeke Zanstra&lt;/a&gt;&lt;/strong&gt; contributed code to 1 repository used in the &lt;a href=&quot;https://github.com/readme/nasa-ingenuity-helicopter&quot;&gt;Mars 2020 Helicopter Mission&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://github.com/pallets/werkzeug&quot;&gt;pallets/werkzeug&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Ik was echt &lt;em&gt;totaal&lt;/em&gt; verbaasd. Hoe kan dit? Wat heb ik hieraan gedaan? Maar ik las de tekst hierboven nog een keer, en toen viel het kwartje bij me. Tijdens het werken bij &lt;a href=&quot;https://archipunt.nl/&quot;&gt;Archipunt&lt;/a&gt; heb ik aan software gewerkt wat ook gebruikt is bij het laten vliegen van een helicopter op Mars.&lt;/p&gt;
+
+&lt;p&gt;OK. Dit behoeft enige toelichting.&lt;/p&gt;
+
+&lt;h2 id=&quot;apawa&quot;&gt;APAWA&lt;/h2&gt;
+
+&lt;p&gt;Aan het eind van 2017 was ik bij Archipunt aan het werk aan &lt;a href=&quot;https://apawa.archipunt.nl/&quot; title=&quot;Archipunt Piekgrond Acceleratie Web Applicatie.&quot;&gt;APAWA&lt;/a&gt;. Dit is een &lt;em&gt;web-applicatie&lt;/em&gt; voor het berekenen van het lokale effect (voor een specifiek adres dus) van aardbevingen. Ik kan hier verder uitleggen wat dat precies is, maar het is misschien gemakkelijker om voorgenoemde link te klikken en zelf een kijkje te nemen.&lt;/p&gt;
+
+&lt;p&gt;Terloops noemde ik het woord “web-applicatie”: dit is de software van het internet. In feite een gewone applicatie, zoals bijvoorbeeld Microsoft Word, alleen dan voor het &lt;em&gt;web&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;En die software was ik dus aan het schrijven. Maar om het wiel niet iedere keer opnieuw uit te vinden maak ik gebruik van software componenten. En voor het web-applicatie aspect van deze software maak ik gebruik van het &lt;em&gt;open source&lt;/em&gt; component met de naam &lt;a href=&quot;https://flask.palletsprojects.com/en/2.0.x/&quot;&gt;Flask&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Open source is erg handig. De broncode is beschikbaar. Zodat als je een fout tegenkomt, kun je deze analyseren. Meestal heb je zelf een fout gemaakt, en is de broncode handig om daar achter te komen. Heel, heel soms kom je iets tegen wat verbetering behoeft. Ook dan is open source handig: niet alleen de broncode is open, maar het hele proces is open. Ook verbeter trajecten. Voordat ik hier op in ga nog even het volgende.&lt;/p&gt;
+
+&lt;p&gt;Flask zelf bestaat ook weer uit componenten. Ik liep tegen een onvolkomenheid aan in het component &lt;em&gt;Werkzeug&lt;/em&gt; (overigens: zowel Flask als Werkzeug is niet in Amerika, maar bij onze Oosterburen bedacht).&lt;/p&gt;
+
+&lt;p&gt;Eén van de functionaliteiten van Werkzeug is het bepalen welke &lt;em&gt;browser&lt;/em&gt; (zoals Chrome, Safari of Firefox) een eind-gebruiker gebruikt. In een moderne applicatie wil je niet dat er een gedateerde browser gebruikt: de belangrijkste reden hiervoor is om de test-inspanning niet te groot te laten worden.&lt;/p&gt;
+
+&lt;p&gt;Nu was er een gebruiker die &lt;em&gt;Microsoft Edge&lt;/em&gt; (de opvolger van Internet Explorer) gebruikte. En deze werd niet herkend door &lt;em&gt;Werkzeug&lt;/em&gt;, en dus ook niet door Apawa. Edge maakt onder water gebruik van hetzelfde component als Chrome, en is dus modern. Reden om Edge toe te voegen. Als je wilt zien hoe dit er exact uit ziet, &lt;a href=&quot;https://github.com/pallets/werkzeug/pull/1216&quot; title=&quot;Pull Request om edge browser detectie aan Werkzeug toe te voegen&quot;&gt;kijk dan hier&lt;/a&gt; voor de details.&lt;/p&gt;
+
+&lt;p&gt;Tot hier heb ik uitgelegd hoe software ontwikkeling kan leiden tot een toevoeging van een open source component. Maar wat heeft dit met Helicopters, Mars en NASA te maken?&lt;/p&gt;
+
+&lt;h2 id=&quot;helicopters-mars-en-nasa&quot;&gt;Helicopters, Mars en NASA&lt;/h2&gt;
+
+&lt;p&gt;Laat ik om te beginnen verwijzen naar het Engelstalige artikel &lt;a href=&quot;https://github.com/readme/nasa-ingenuity-helicopter&quot;&gt;Open Source on Mars: Community powers NASA’s Ingenuity Helicopter&lt;/a&gt;. Erg interessant om te lezen. NASA maakt dus gebruik van open source code. Waarschijnlijk worden &lt;em&gt;Flask&lt;/em&gt; en dus ook &lt;em&gt;Werkzeug&lt;/em&gt; gebruikt bij &lt;em&gt;ground control&lt;/em&gt; om de helicopter aan te sturen.&lt;/p&gt;
+
+&lt;p&gt;In het stuk valt ook te lezen hoe men bepaald heeft welke software gebruikt werd voor het project. NASA heeft een lijst van componenten en hun versienummers aangeleverd aan GitHub, de centrale plek waar open source opgeslagen wordt.&lt;/p&gt;
+
+&lt;p&gt;Omdat open source ontwikkeling zich in de openbaarheid voltrekt, kan elke wijziging in open source code gekoppeld worden aan een identiteit. De lijst van componenten en hun versienummers levert dan ook een éénduidige lijst op van namen. Mijn wijziging is opgenomen in &lt;em&gt;Werkzeug versie 0.14&lt;/em&gt; en voor Ingenuity wordt versie 0.16 gebruikt. Inmiddels is versie 2.0.0 net uit. Degene die aan versies na 0.16 hebben bijgedragen worden derhalve niet genoemd bij de “achievement”. Maar wellicht wordt deze code in toekomstige missies gebruikt.&lt;/p&gt;
+
+&lt;p&gt;Ik vond het leuk om achter dit feit te komen, en uit te zoeken hoe het precies zit. En ik hoop in de toekomst nog aan andere projecten te kunnen bijdragen.&lt;/p&gt;
+
+&lt;div class=&quot;postscript&quot;&gt;&lt;span&gt;Eerder gepubliceert&lt;/span&gt; als &lt;a href=&quot;https://www.archipunt.nl/archipunt-op-mars/&quot;&gt;Archipunt op Mars&lt;/a&gt;.&lt;/div&gt;
+
+</description>
+        <pubDate>Wed, 08 Sep 2021 00:00:00 +0200</pubDate>
+        <link>https://blog.zanstra.com/ict/2021/09/08/wat-heeft-archipunt-te-maken-met-de-ingenuity-mars-helicopter.html</link>
+        <guid isPermaLink="true">https://blog.zanstra.com/ict/2021/09/08/wat-heeft-archipunt-te-maken-met-de-ingenuity-mars-helicopter.html</guid>
+        
+        
+        <category>ICT</category>
+        
+      </item>
     
       <item>
         <title>One Closure Explanation</title>
