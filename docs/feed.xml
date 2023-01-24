@@ -2,13 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Bloggus Doekmanni</title>
-    <description>This is Bloggus Doekmanni, or Doekman's blog if you like. A bit of drivel about computer programming; some dead serious, some not so much...
+    <description>This is Bloggus Doekmanni, or Doekman&apos;s blog if you like. A bit of drivel about computer programming; some dead serious, some not so much...
 </description>
     <link>https://blog.zanstra.com/</link>
     <atom:link href="https://blog.zanstra.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 08 Sep 2021 15:24:09 +0200</pubDate>
-    <lastBuildDate>Wed, 08 Sep 2021 15:24:09 +0200</lastBuildDate>
-    <generator>Jekyll v4.2.0</generator>
+    <pubDate>Tue, 24 Jan 2023 21:33:40 +0100</pubDate>
+    <lastBuildDate>Tue, 24 Jan 2023 21:33:40 +0100</lastBuildDate>
+    <generator>Jekyll v4.3.1</generator>
     
       <item>
         <title>Wat heeft Archipunt te maken met de Ingenuity Mars Helicopter?</title>
@@ -79,7 +79,7 @@ Things the function needs, like arguments and the return address, get pushed up 
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1: function test(a, b) {
 2: 	var c = a + b;
-3: 	console.info('The sum of %s + %s is %s', a, b, c);
+3: 	console.info(&apos;The sum of %s + %s is %s&apos;, a, b, c);
 4: }
 5: test(1, 2);
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -123,7 +123,7 @@ Things the function needs, like arguments and the return address, get pushed up 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;function test_two(a, b) {
 	var c = a + b;
 	return function inner() {
-		console.info('The sum of %s + %s is %s', a, b, c);
+		console.info(&apos;The sum of %s + %s is %s&apos;, a, b, c);
 	}
 }
 var result = test_two(1, 2);
@@ -267,7 +267,7 @@ rsync -av &quot;$jekyll_build&quot; ./docs/
 &lt;p&gt;Anyways. Python’s json module provides a &lt;a href=&quot;https://docs.python.org/3.8/library/json.html#json.dump&quot;&gt;dump&lt;/a&gt;-method to convert a native data-structure to JSON:&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import json
-data = {'type': 'pedant', 'enabled': True, 'tags': ['nag', 'prick', 'pin'], 'data': {'test': 123, 'cooperate': None}}
+data = {&apos;type&apos;: &apos;pedant&apos;, &apos;enabled&apos;: True, &apos;tags&apos;: [&apos;nag&apos;, &apos;prick&apos;, &apos;pin&apos;], &apos;data&apos;: {&apos;test&apos;: 123, &apos;cooperate&apos;: None}}
 json = json.dumps(data, indent=2)
 print(json)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -320,7 +320,7 @@ print(json)
 
 &lt;p&gt;&lt;span class=&quot;NL1-color&quot;&gt;red&lt;/span&gt; If &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;indent&lt;/code&gt; is specified, a newline will be inserted just before the indentation.&lt;/p&gt;
 
-&lt;p&gt;&lt;span class=&quot;sep1&quot;&gt;green&lt;/span&gt; You can also change the separator behavior. From the documentation: &lt;em&gt;“If specified, separators should be an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(item_separator, key_separator)&lt;/code&gt; tuple”&lt;/em&gt;. So by providing the tuple &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(';', ': ')&lt;/code&gt; for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;separators&lt;/code&gt;, one could create &lt;em&gt;European JSON&lt;/em&gt;. Here I provide a semi-colon instead of a comma, which is obviously not valid JSON. So just be aware, you could produce invalid JSON with this option. However, when &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;indent&lt;/code&gt; is specified, the tuple &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(', ', ': ')&lt;/code&gt; is automatically used, adding spaces after both separators.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;sep1&quot;&gt;green&lt;/span&gt; You can also change the separator behavior. From the documentation: &lt;em&gt;“If specified, separators should be an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(item_separator, key_separator)&lt;/code&gt; tuple”&lt;/em&gt;. So by providing the tuple &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(&apos;;&apos;, &apos;: &apos;)&lt;/code&gt; for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;separators&lt;/code&gt;, one could create &lt;em&gt;European JSON&lt;/em&gt;. Here I provide a semi-colon instead of a comma, which is obviously not valid JSON. So just be aware, you could produce invalid JSON with this option. However, when &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;indent&lt;/code&gt; is specified, the tuple &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(&apos;, &apos;, &apos;: &apos;)&lt;/code&gt; is automatically used, adding spaces after both separators.&lt;/p&gt;
 
 &lt;p&gt;So, these arguments were a bit of a disappointment. It didn’t seem possible to format the JSON the way I wanted it.&lt;/p&gt;
 
@@ -332,7 +332,7 @@ print(json)
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import re
 def my_json_pretty_print(json):
-    return re.sub(r', *\n((?:  )*)(  )', r'\n\1,\2', json)
+    return re.sub(r&apos;, *\n((?:  )*)(  )&apos;, r&apos;\n\1,\2&apos;, json)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;em&gt;As a side-note&lt;/em&gt;: since this is a learning exercise, I tried to make the regular expression more readable by using &lt;a href=&quot;https://docs.python.org/3.8/library/re.html#re.X&quot;&gt;verbose regular expressions&lt;/a&gt;. The idea about it whitespace (not used in special ways) is ignored, so you can use multi-line strings. You also can add comments to parts of the regular expression. However, I intend to match whitespace, but I couldn’t get it working. And because I also didn’t think the regular expression was more readable this way, I abandoned it.&lt;/p&gt;
@@ -369,12 +369,12 @@ def my_json_pretty_print(json):
 &lt;p&gt;While playing with it, I discovered that the handling of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[&lt;/code&gt;- and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;{&lt;/code&gt;-characters are the same the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;,&lt;/code&gt;-character, so I generalized the regex by changing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;,&lt;/code&gt; to a capturing group that matches all three characters, and add a back-reference to the replacement. The code now looks like this:&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def json_stringify(obj, indent=2):
-    if not isinstance(indent, str): indent = ' ' * indent
+    if not isinstance(indent, str): indent = &apos; &apos; * indent
     result = json.dumps(obj, indent=indent)
-    rx_indent = r'([,{[]) *\n((?:%s)*)%s(%s)' % (indent, indent[0], indent[1:])
-    result = re.sub(rx_indent, r'\n\2\1\3', result)
+    rx_indent = r&apos;([,{[]) *\n((?:%s)*)%s(%s)&apos; % (indent, indent[0], indent[1:])
+    result = re.sub(rx_indent, r&apos;\n\2\1\3&apos;, result)
     # Special case: remove inserted newline with top-level array or object
-    return result[1:] if result[0]=='\n' else result
+    return result[1:] if result[0]==&apos;\n&apos; else result
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;So, if we run the code now, we get this:&lt;/p&gt;
@@ -405,18 +405,18 @@ def my_json_pretty_print(json):
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def json_stringify(obj, indent=2):
     if not isinstance(indent, str):
-        indent = ' ' * indent
+        indent = &apos; &apos; * indent
     result = json.dumps(obj, indent=indent)
     r_indent=re.escape(indent)
-    if indent[:1]=='\t':
-        r_indent0  = ''
+    if indent[:1]==&apos;\t&apos;:
+        r_indent0  = &apos;&apos;
         r_indent1N = re.escape(indent)
     else:
         r_indent0 = re.escape(indent[:1])
         r_indent1N = re.escape(indent[1:])
-    rx_indent = r'([,{[]) *\n((?:%s)*)%s(%s)' % (r_indent, r_indent0, r_indent1N)
-    result = re.sub(rx_indent, r'\n\2\1\3', result)
-    return result[1:] if result[:1]=='\n' else result
+    rx_indent = r&apos;([,{[]) *\n((?:%s)*)%s(%s)&apos; % (r_indent, r_indent0, r_indent1N)
+    result = re.sub(rx_indent, r&apos;\n\2\1\3&apos;, result)
+    return result[1:] if result[:1]==&apos;\n&apos; else result
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;So, that’s it. I made this code into a &lt;a href=&quot;https://gist.github.com/doekman/e6e942d03f9dee3e98c080b7a47cd04b&quot;&gt;shell script&lt;/a&gt;, so it can be run from the command line (don’t forget to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;chmod +x&lt;/code&gt; it before you start it). So how does it perform?&lt;/p&gt;
@@ -444,7 +444,7 @@ $
 &lt;ul&gt;
   &lt;li&gt;JavaScript now comes with build-in &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify&quot;&gt;JSON-methods&lt;/a&gt; (grandpa speaking)&lt;/li&gt;
   &lt;li&gt;I couldn’t find a native &lt;a href=&quot;https://docs.python.org/3.8/library/re.html#re.escape&quot;&gt;re_escape&lt;/a&gt; for JavaScript, so I used &lt;a href=&quot;https://github.com/doekman/base2/blob/1e2eb7fb10565db7e71d2b25780783627e0773dd/src/base2/js/String2.js&quot;&gt;Dean Edward’s rescape&lt;/a&gt; from the (now ancient) &lt;a href=&quot;https://code.google.com/archive/p/base2/&quot;&gt;base2-library&lt;/a&gt;. Substitutions in JavaScript are &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$1&lt;/code&gt; instead of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;\1&lt;/code&gt; in Python&lt;/li&gt;
-  &lt;li&gt;To generate 4 spaces, in Python you would write &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;4*' '&lt;/code&gt;. I couldn’t find the JavaScript equivalent first, so I used &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;new Array(1+4).join(' ')&lt;/code&gt; but then I found out you can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;' '.repeat(4)&lt;/code&gt; in &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/repeat#Browser_compatibility&quot;&gt;modern browsers&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;To generate 4 spaces, in Python you would write &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;4*&apos; &apos;&lt;/code&gt;. I couldn’t find the JavaScript equivalent first, so I used &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;new Array(1+4).join(&apos; &apos;)&lt;/code&gt; but then I found out you can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&apos; &apos;.repeat(4)&lt;/code&gt; in &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/repeat#Browser_compatibility&quot;&gt;modern browsers&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://es6-features.org/#StringInterpolation&quot;&gt;Template Literals&lt;/a&gt; are still &lt;a href=&quot;https://caniuse.com/mdn-javascript_grammar_template_literals_template_literal_revision&quot;&gt;a bit to new&lt;/a&gt; to use everywhere, so I implemented the regular expression with string concatenation&lt;/li&gt;
   &lt;li&gt;Python slices &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[1:2]&lt;/code&gt; are calls to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.substring(1,2)&lt;/code&gt; in JavaScript. Why can’t I remember this?&lt;/li&gt;
 &lt;/ul&gt;
@@ -467,13 +467,13 @@ $
 
 &lt;p&gt;So I created &lt;a href=&quot;https://github.com/doekman/postgres-with-trello&quot;&gt;this git-repository&lt;/a&gt; to do just that (you will need the &lt;a href=&quot;https://www.postgresql.org&quot;&gt;Postgres&lt;/a&gt;-database for this).&lt;/p&gt;
 
-&lt;p&gt;The table in which the JSON is stored, is modelled after an &lt;a href=&quot;https://rob.conery.io/2015/02/28/document-storage-gymnastics-in-postgres/&quot; title=&quot;Don't forget to click on the POSTGRES-tag on his site, listing a lot of interesting posts...&quot;&gt;idea of Rob Conery&lt;/a&gt; which basically is: store the JSON in a column, along with another column that uniquely identifies the document. This unique value is also available within the JSON itself.&lt;/p&gt;
+&lt;p&gt;The table in which the JSON is stored, is modelled after an &lt;a href=&quot;https://rob.conery.io/2015/02/28/document-storage-gymnastics-in-postgres/&quot; title=&quot;Don&apos;t forget to click on the POSTGRES-tag on his site, listing a lot of interesting posts...&quot;&gt;idea of Rob Conery&lt;/a&gt; which basically is: store the JSON in a column, along with another column that uniquely identifies the document. This unique value is also available within the JSON itself.&lt;/p&gt;
 
 &lt;p&gt;For example:&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;id, json
-12, '{&quot;id&quot;:12, &quot;other&quot;:&quot;data&quot;}
-13, '{&quot;id&quot;:13, &quot;other&quot;:&quot;info&quot;}
+12, &apos;{&quot;id&quot;:12, &quot;other&quot;:&quot;data&quot;}
+13, &apos;{&quot;id&quot;:13, &quot;other&quot;:&quot;info&quot;}
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;The actual table definition is different, but you get the idea. And don’t worry about storing the id-value twice: this small abstraction will make your life a bit easier.&lt;/p&gt;
@@ -553,8 +553,8 @@ $
         <title>To the Point</title>
         <description>&lt;p&gt;Already two internet aeons ago, &lt;em&gt;secretGeek&lt;/em&gt; came up with some &lt;a href=&quot;http://secretgeek.net/up_up_up&quot;&gt;handy bash-aliases&lt;/a&gt; to ease navigating the folder hierarchy:&lt;/p&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;alias ..='cd ..'
-alias ...='cd ../..'
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;alias ..=&apos;cd ..&apos;
+alias ...=&apos;cd ../..&apos;
 #and so on
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -576,7 +576,7 @@ alias ...='cd ../..'
 
 &lt;p style=&quot;margin-top:4em&quot;&gt;
 	&lt;small&gt;
-		¹) I've been told a hierarchy of folders/directories is a tree structure. When navigating into a folder, like &lt;code&gt;cd some_folder&lt;/code&gt;, to my earnest knowledge one moves up. Branches mostly grow to the light where the sun is, which is up in the sky. So if you go back from said folder with &lt;code&gt;cd ..&lt;/code&gt; one would move down. So secretGeek's aliases better be called &lt;code&gt;down_down_down&lt;/code&gt; but maybe that has a less engaging ring to it.  Also: the base of the hierarchy —one could go there with &lt;code&gt;cd /&lt;/code&gt;— is called the root, which is a kind of odd, because the root is as branched as the part of the tree that grows in the air. And at the file system, it's only one place! Anyways, the proposed function neither goes up nor down, so at least we have no confusion there.
+		¹) I&apos;ve been told a hierarchy of folders/directories is a tree structure. When navigating into a folder, like &lt;code&gt;cd some_folder&lt;/code&gt;, to my earnest knowledge one moves up. Branches mostly grow to the light where the sun is, which is up in the sky. So if you go back from said folder with &lt;code&gt;cd ..&lt;/code&gt; one would move down. So secretGeek&apos;s aliases better be called &lt;code&gt;down_down_down&lt;/code&gt; but maybe that has a less engaging ring to it.  Also: the base of the hierarchy —one could go there with &lt;code&gt;cd /&lt;/code&gt;— is called the root, which is a kind of odd, because the root is as branched as the part of the tree that grows in the air. And at the file system, it&apos;s only one place! Anyways, the proposed function neither goes up nor down, so at least we have no confusion there.
 	&lt;/small&gt;
 &lt;/p&gt;
 </description>
@@ -731,7 +731,7 @@ cd osagitfilter-demo
 
 &lt;p&gt;Now create the AppleScript-file &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;my_script.scpt&lt;/code&gt; in this folder with the following contents:&lt;/p&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;display dialog &quot;What's your name&quot; default answer &quot;&quot;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;display dialog &quot;What&apos;s your name&quot; default answer &quot;&quot;
 say &quot;Hi there, &quot; &amp;amp; text returned of result
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -862,7 +862,7 @@ Devices, like in Lisa’s tablet and Bart’s iPhone… D’oh!&lt;/p&gt;
       </item>
     
       <item>
-        <title>Emoji's missing from emojis.wiki</title>
+        <title>Emoji&apos;s missing from emojis.wiki</title>
         <description>&lt;p&gt;The following entries are supposedly missing from &lt;a href=&quot;https://emojis.wiki&quot;&gt;emojis.wiki&lt;/a&gt;. However, you could also read this article as a proposal for alternate descriptions of a part of the &lt;a href=&quot;https://en.wikipedia.org/wiki/Miscellaneous_Technical#(2340–237F)&quot;&gt;Miscellaneous Technical range&lt;/a&gt; of the &lt;a href=&quot;https://en.wikipedia.org/wiki/Plane_(Unicode)#Basic_Multilingual_Plane&quot;&gt;Basic Multilingual Plane&lt;/a&gt; of the &lt;a href=&quot;https://en.wikipedia.org/wiki/Unicode&quot;&gt;Unicode&lt;/a&gt; standard.&lt;/p&gt;
 
 &lt;style&gt;
@@ -949,13 +949,13 @@ We start with this code:&lt;/p&gt;
 &lt;p&gt;And to stay very agile, I wrote some minimal unit testing “library” (&lt;a href=&quot;http://agilemanifesto.org&quot;&gt;individuals over tools&lt;/a&gt;, anyone?):&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;function describe(testName, tests) {
-    var groupTitle = 'Name: '+testName+' - Start: '+(new Date).toISOString();
+    var groupTitle = &apos;Name: &apos;+testName+&apos; - Start: &apos;+(new Date).toISOString();
     console.group(groupTitle);
     expect.nr = 0;
     expect.errors = 0;
     tests();
-    if (expect.errors == 0) console.info('All %s tests OK', expect.nr);
-    else console.error('%s of %s tests failed', expect.errors, expect.nr);
+    if (expect.errors == 0) console.info(&apos;All %s tests OK&apos;, expect.nr);
+    else console.error(&apos;%s of %s tests failed&apos;, expect.errors, expect.nr);
     console.groupEnd(groupTitle);
 }
 
@@ -1083,7 +1083,7 @@ function isCommonYear(year) {
 
 &lt;p&gt;The tokenizer splits the JSON into tokens like a string, boolean value or comma. With the parser we then can reason about tokens instead of characters, which makes life much simpler. Because we work with partial JSON, the tokenizer is made to recognizes unfinished strings and other values. Every token has an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;is_complete&lt;/code&gt;-attribute, so when rendering we can show if a brace is missing, or a string is unfinished.&lt;/p&gt;
 
-&lt;html&gt;&lt;center style=&quot;margin-bottom:1em&quot;&gt;&lt;img src=&quot;/images/json-state-machine.jpg&quot; alt=&quot;HTML/CSS mock&quot; title=&quot;HTML/CSS mock: the 'ue' token will go from the right to the left&quot; /&gt;&lt;/center&gt;&lt;/html&gt;
+&lt;html&gt;&lt;center style=&quot;margin-bottom:1em&quot;&gt;&lt;img src=&quot;/images/json-state-machine.jpg&quot; alt=&quot;HTML/CSS mock&quot; title=&quot;HTML/CSS mock: the &apos;ue&apos; token will go from the right to the left&quot; /&gt;&lt;/center&gt;&lt;/html&gt;
 
 &lt;p&gt;The parser was a dragon to me. I made a lot of diagrams to create a &lt;a href=&quot;https://en.wikipedia.org/wiki/Finite-state_machine&quot;&gt;state machine&lt;/a&gt;, see above, and played with &lt;a href=&quot;http://webgraphviz.com&quot;&gt;GraphViz&lt;/a&gt; (which is pretty cool, and a little weird). Finally I thought the state machine was right, and started coding. After writing some unit tests and identifying some failures, I did realize I went in the wrong direction. A state machine is apparently not the best solution to parse JSON and the answer was right in front of me. While I was focussing on the  nice flow diagram at &lt;a href=&quot;http://json.org&quot;&gt;json.org&lt;/a&gt; (which I coincidently also knew from the Turbo Pascal manual; I know, grandpa speaking), the program I needed to write was listed as an inset on the right of that same web page! &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;object := {} | { members }&lt;/code&gt;… Elementary, dear Watson…&lt;/p&gt;
 
@@ -1113,7 +1113,7 @@ function isCommonYear(year) {
 
 &lt;p&gt;The first step is to create some user interface mockup. A guy gotta start somewhere. My weapon of choice is HTML/CSS. At the top we have a dashboard providing some game details. Unformatted JSON will do for now. The playing field (where the partial JSON is) will have a fixed width, while the height might grow during gameplay when tokens are inserted between lines.&lt;/p&gt;
 
-&lt;html&gt;&lt;center style=&quot;margin-bottom:1em&quot;&gt;&lt;img src=&quot;/images/json-html-mock.png&quot; alt=&quot;HTML/CSS mock&quot; title=&quot;HTML/CSS mock: the 'ue' token will go from the right to the left&quot; /&gt;&lt;/center&gt;&lt;/html&gt;
+&lt;html&gt;&lt;center style=&quot;margin-bottom:1em&quot;&gt;&lt;img src=&quot;/images/json-html-mock.png&quot; alt=&quot;HTML/CSS mock&quot; title=&quot;HTML/CSS mock: the &apos;ue&apos; token will go from the right to the left&quot; /&gt;&lt;/center&gt;&lt;/html&gt;
 
 &lt;p&gt;Positioning is done with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;em&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ch&lt;/code&gt; CSS units with a position &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;relative&lt;/code&gt;/&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;absolute&lt;/code&gt; container-combo, so I can  position things absolute within the relative container. Every character is one &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ch&lt;/code&gt; and every line is one &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;em&lt;/code&gt;. One little problem though: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;em&lt;/code&gt; is font-height, not line-height. And a line-height of 100% just doesn’t look right. But there is no such thing as a line-height unit. (&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/CSS/length#Font-relative_lengths&quot; title=&quot;Line-height unit ln; unimplemented with an unknown specification&quot;&gt;Or is there?&lt;/a&gt;) This is easy fixable with a calculation, but line-height will appear in multiple places in CSS.&lt;/p&gt;
 
