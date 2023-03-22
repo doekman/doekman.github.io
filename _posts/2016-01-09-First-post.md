@@ -22,4 +22,4 @@ Here are the predecessors (and thank my [public backup service](https://archive.
     [more entries](https://zanstra.com/arc/xs4all/logs/jsLog.htm) and 
     [some idea's](https://zanstra.com/arc/xs4all/logs/ideaLog.htm) ([batch-file](https://zanstra.com/arc/xs4all/logs/gen.bat.txt))
 
-I also have a Tumblr micro-blogging thing called [dd3v](https://www.tumblr.com/blog/dd3v "Doekman Dev").
+I also have a Tumblr micro-blogging thing called [dd3v](https://www.tumblr.com/blog/dd3v "Doekman Dev"), and I used to have a micro blogging service on _doekman.micro.blog_ backed via Kickstarter ([png archive]({{ site.baseurl }}{% link images/archive/doekman.microblog.png %}) or [PDF print]({{ site.baseurl }}{% link images/archive/doekman.microblog.pdf %})).
