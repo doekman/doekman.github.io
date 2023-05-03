@@ -19,6 +19,11 @@ if [[ "$(git status --porcelain=v1)" ]]; then
 	exit 1
 fi
 
+if [[ "$(git branch --show-current)" != "web-stek" ]]; then
+	echo "The jekyll-build folder has checked out the wrong branch..."
+	exit 1
+fi
+
 git pull
 if [[ "$(git status --porcelain=v1)" ]]; then
 	echo "The jekyll-build folder is dirty after pulling; aborting..."
