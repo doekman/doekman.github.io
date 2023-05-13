@@ -2,8 +2,10 @@
 layout: post
 title: "Integer Exposed Rewrite"
 date: 2023-05-03
+changed: 2023-05-12
 author: Doeke Zanstra
 category: ICT
+src_href:	https://github.com/doekman/integer.exposed
 ---
 
 For a company-internal web application I've used [NoTemplate.js][notemplate] (disclosure: I'm a contributor to the project). It's a minimal library for dynamically generating DOM nodes. And really like it. It hardly introduces abstractions. It wraps the W3C DOM API with a simple interface. And with "simple" I mean more JavaScriptesque, if that's a word.
@@ -67,6 +69,30 @@ It has been a fun project. The outcome is not completely what I wanted, but I le
 I discovered that writing the blog while doing the project has a lot of advantages. It keeps me focussed, and it let me do a bit of work while being on the train. I hope this blog makes sense, and like to hear your thoughts on this topic.
 
 
+Update
+======
+
+Via [Mastodon][mast_thread] I got the tip to defer the blur-event handler, to find out the actual active element. I directly used `setTimeout`, and I got the result I wanted: the `activeElement` was the element I tabbed to.
+
+But since it's not 2002 anymore, and `setTimeout` feels like a hack I looked into promises. So I replaced `setTimeout` with `Promise.resolve(null).then`. But this didn't work. The activeElement was document.body again.... What's going on?
+
+After reading about [the event loop][event_loop] on MDN, I read about using promises, and found [this quote][task_vs_micro]:
+
+> Promise callbacks are handled as a microtask whereas setTimeout() callbacks are handled as task queues.
+
+Long story short: defering code with `setTimeout` works because it's a task, and not a [microtask][microtasks]. My understanding is that a microtask would be ran right after the event-handler, while a task would be scheduled in the next iteration of the event loop. Apparently after the blur-handler, there is a task or microtask setting the activeElement. But now I know setTimeout is not as much as a hack I thought it was. It's just wat I needed.
+
+So now we can make the render-method preserve the activeElement. To do so, I first gave every element that can be active an `id`-attribute. And after that, I altered the render-method to remember and set the active element around the render. The render is wrapped within a setTimeout, so it is executed as a seperate task. I also used the optional chaining operator (`?.`), because the activeElement can be `null` and focusable elements may be disappear between renders.
+
+Also, I changed the `blur`-events to `change`, because we don't need a render when a text-value hasn't been changed. Also, I wanted to make all the controls accessible by the keyboard. So I changed the `span`-items for the bit selector and the bit pattern to `button` elements, and gave them an `id`- and `tabindex`-attribute. To fix their appearance, I only needed to set a couple of CSS properties. As value I used `unset`, and it works like a charm. Now we can tab through all controls, and use the spacebar (or enter) to select or toggle them `(commit e98e782 Retaining active element)`.
+
+On thing that still bugged me a bit were the bit buttons (pun not intended, but still enjoyed). In the user interface, they differ from the other controls (tab-bar, buttons, text inputs). On macOS, when pressing tab links are skipped. Only "proper" controls get the focus. If you want the next link to get the focus, one can press option+tab (also known as alt+tab). So `a`-elements for the bits seemed a better fit.
+
+But how should this work? A click handler would not suffice, I would need a keyboard-handler as well. And also [MDN suggested to use buttons instead][a_onclick]. But then I realized, I just can use a hash-link, like `<a href="#0x01"…`. When I supply the right value for the right bit, no additional scripting is needed. The `hashchange`-handler will handle it all. And tabbing (or option-tabbing) to the elements, and pressing enter toggles the bit `(commit xxx A@href bits)`.
+
+That's it. With this addition I learned even more about JavaScript and the microtasks. Also, the playground is now a bit more accessible, and that's nice. 
+
+
 
 [no_build]: https://jvns.ca/blog/2023/02/16/writing-javascript-without-a-build-system/ "Writing Javascript without a build system, by Julia Evans"
 [int_exposed]: https://jvns.ca/blog/2023/04/19/new-playground-integer-exposed/ "New playground: integer.exposed, by Julia Evans"
@@ -75,4 +101,8 @@ I discovered that writing the blog while doing the project has a lot of advantag
 [repo]: https://github.com/doekman/integer.exposed
 [jsb]: http://dean.edwards.name/jsb/ "JavaScript Bindings"
 [wwwapp]: https://blog.iconfactory.com/2022/06/worldwideweb-part-2/
-
+[mast_thread]: https://mastodon.nl/@dukoid@mastodon.social/110329152286258188
+[event_loop]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Event_loop
+[task_vs_micro]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#task_queues_vs._microtasks
+[microtasks]: https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide
+[a_onclick]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#onclick_events
