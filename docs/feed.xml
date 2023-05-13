@@ -6,13 +6,13 @@
 </description>
     <link>https://blog.zanstra.com/</link>
     <atom:link href="https://blog.zanstra.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 13 May 2023 19:24:01 +0200</pubDate>
-    <lastBuildDate>Sat, 13 May 2023 19:24:01 +0200</lastBuildDate>
+    <pubDate>Sat, 13 May 2023 21:06:14 +0200</pubDate>
+    <lastBuildDate>Sat, 13 May 2023 21:06:14 +0200</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
-    
       <item>
         <title>Integer Exposed Rewrite</title>
-        <description>&lt;p&gt;For a company-internal web application I’ve used &lt;a href=&quot;https://github.com/stefanhaustein/notemplate&quot;&gt;NoTemplate.js&lt;/a&gt; (disclosure: I’m a contributor to the project). It’s a minimal library for dynamically generating DOM nodes. And really like it. It hardly introduces abstractions. It wraps the W3C DOM API with a simple interface. And with “simple” I mean more JavaScriptesque, if that’s a word.&lt;/p&gt;
+        <description>
+          &lt;p&gt;For a company-internal web application I’ve used &lt;a href=&quot;https://github.com/stefanhaustein/notemplate&quot;&gt;NoTemplate.js&lt;/a&gt; (disclosure: I’m a contributor to the project). It’s a minimal library for dynamically generating DOM nodes. And really like it. It hardly introduces abstractions. It wraps the W3C DOM API with a simple interface. And with “simple” I mean more JavaScriptesque, if that’s a word.&lt;/p&gt;
 
 &lt;p&gt;The biggest reason to use &lt;em&gt;NoTemplate&lt;/em&gt; was its simplicity. I probably won’t work much on this internal application, but when I do I don’t want to spend a lot of time getting up to speed. I won’t be working on it within 6 months, but it also can be 2 years. So I was happily surprised I’m not alone in wanting to keep things simple. See for example this piece about &lt;a href=&quot;https://jvns.ca/blog/2023/02/16/writing-javascript-without-a-build-system/&quot; title=&quot;Writing Javascript without a build system, by Julia Evans&quot;&gt;Writing Javascript without a build system&lt;/a&gt;. So when Julia Evans wrote about her &lt;a href=&quot;https://jvns.ca/blog/2023/04/19/new-playground-integer-exposed/&quot; title=&quot;New playground: integer.exposed, by Julia Evans&quot;&gt;new playground&lt;/a&gt;, I got the idea to rewrite this playground with NoTemplate.&lt;/p&gt;
 
@@ -90,19 +90,18 @@
 
 &lt;p&gt;That’s it. With this addition I learned even more about JavaScript and the microtasks. Also, the playground is now a bit more accessible, and that’s nice.&lt;/p&gt;
 
-</description>
+
+        </description>
         <pubDate>Wed, 03 May 2023 00:00:00 +0200</pubDate>
+        <lastBuildDate>Sat, 13 May 2023 00:00:00 +0200</lastBuildDate>
         <link>https://blog.zanstra.com/ict/2023/05/03/integer-exposed-rewrite.html</link>
         <guid isPermaLink="true">https://blog.zanstra.com/ict/2023/05/03/integer-exposed-rewrite.html</guid>
-        
-        
         <category>ICT</category>
-        
       </item>
-    
       <item>
         <title>Wat heeft Archipunt te maken met de Ingenuity Mars Helicopter?</title>
-        <description>&lt;p&gt;Op 30 april 2021 keek ik op &lt;a href=&quot;https://github.com/doekman/&quot;&gt;m’n GitHub pagina&lt;/a&gt;, en zag ik dat ik de volgende “achievement” erbij had gekregen:&lt;/p&gt;
+        <description>
+          &lt;p&gt;Op 30 april 2021 keek ik op &lt;a href=&quot;https://github.com/doekman/&quot;&gt;m’n GitHub pagina&lt;/a&gt;, en zag ik dat ik de volgende “achievement” erbij had gekregen:&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;strong&gt;Mars 2020 Helicopter Contributor&lt;/strong&gt;&lt;br /&gt;
@@ -144,19 +143,17 @@
 
 &lt;div class=&quot;postscript&quot;&gt;&lt;span&gt;Eerder gepubliceert&lt;/span&gt; als &lt;a href=&quot;https://www.archipunt.nl/archipunt-op-mars/&quot;&gt;Archipunt op Mars&lt;/a&gt;.&lt;/div&gt;
 
-</description>
+
+        </description>
         <pubDate>Wed, 08 Sep 2021 00:00:00 +0200</pubDate>
         <link>https://blog.zanstra.com/ict/2021/09/08/wat-heeft-archipunt-te-maken-met-de-ingenuity-mars-helicopter.html</link>
         <guid isPermaLink="true">https://blog.zanstra.com/ict/2021/09/08/wat-heeft-archipunt-te-maken-met-de-ingenuity-mars-helicopter.html</guid>
-        
-        
         <category>ICT</category>
-        
       </item>
-    
       <item>
         <title>One Closure Explanation</title>
-        <description>&lt;p&gt;Closures in programming languages are pretty intuitive to use. Understand what they are is actually a bit more difficult.&lt;/p&gt;
+        <description>
+          &lt;p&gt;Closures in programming languages are pretty intuitive to use. Understand what they are is actually a bit more difficult.&lt;/p&gt;
 
 &lt;p&gt;A closure is a function, but not a regular function. And to better understand closures, it helps me to understand regular functions. So first I explain how regular functions work. After that I’ll make the connection to functional closures.&lt;/p&gt;
 
@@ -231,19 +228,17 @@ var result = test_two(1, 2);
 
 &lt;p&gt;The Wikipedia article &lt;a href=&quot;https://en.wikipedia.org/wiki/Closure_(computer_programming)&quot;&gt;on closures&lt;/a&gt; has the line &lt;em&gt;“Operationally, a closure is a record storing a function together with an environment.”&lt;/em&gt; in the introduction. That summarises the point of my explanation pretty well. I hope you now have a better understanding of closures. Let me know what you think.&lt;/p&gt;
 
-</description>
+
+        </description>
         <pubDate>Mon, 12 Apr 2021 00:00:00 +0200</pubDate>
         <link>https://blog.zanstra.com/ict/2021/04/12/a-closure-explanation.html</link>
         <guid isPermaLink="true">https://blog.zanstra.com/ict/2021/04/12/a-closure-explanation.html</guid>
-        
-        
         <category>ICT</category>
-        
       </item>
-    
       <item>
         <title>Building Another Blog Engine</title>
-        <description>&lt;p&gt;I have some ideas for a blog engine I want to explore. Instead of creating a new website, I’m planning to make incremental changes/improvements to this website. Baby steps. That’s why I’ve named this project BABE: Building Another Blog Engine.&lt;/p&gt;
+        <description>
+          &lt;p&gt;I have some ideas for a blog engine I want to explore. Instead of creating a new website, I’m planning to make incremental changes/improvements to this website. Baby steps. That’s why I’ve named this project BABE: Building Another Blog Engine.&lt;/p&gt;
 
 &lt;p&gt;At the moment I’m using GitHub Pages for this blog. When I push a commit, GitHub schedules a task of transforming the source via Jekyll. And the resulting files live somewhere on a webserver. It’s convenient, but it doesn’t give me the control I need.&lt;/p&gt;
 
@@ -278,17 +273,16 @@ rsync -av &quot;$jekyll_build&quot; ./docs/
 
 &lt;p&gt;&lt;strong&gt;UPDATED 2021-04-06&lt;/strong&gt;: A bit mind-bending, but the &lt;em&gt;publication source&lt;/em&gt; is considered to be in Jekyll format. How I learned this? I wanted the folder &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.well-known&lt;/code&gt; to be copied to my website, but Jekyll ignored this file. Hidden files are on the ignore list. Luckily there is an easy fix. Add a file at the root of your site called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.nojekyll&lt;/code&gt;. The file can be empty.&lt;/p&gt;
 
-</description>
+
+        </description>
         <pubDate>Sun, 31 Jan 2021 00:00:00 +0100</pubDate>
         <link>https://blog.zanstra.com/2021/01/31/Building-Another-Blog-Engine.html</link>
         <guid isPermaLink="true">https://blog.zanstra.com/2021/01/31/Building-Another-Blog-Engine.html</guid>
-        
-        
       </item>
-    
       <item>
         <title>Moving away from Server.app to Jamf Pro</title>
-        <description>&lt;p&gt;At &lt;a href=&quot;https://archipunt.nl&quot;&gt;Archipunt&lt;/a&gt; we manage around 100 &lt;em&gt;macOS&lt;/em&gt; computers. We used to manage them via &lt;em&gt;Server.app&lt;/em&gt;. Because of several reasons, we now are moving to an all-MDM solution with Jamf Pro.&lt;/p&gt;
+        <description>
+          &lt;p&gt;At &lt;a href=&quot;https://archipunt.nl&quot;&gt;Archipunt&lt;/a&gt; we manage around 100 &lt;em&gt;macOS&lt;/em&gt; computers. We used to manage them via &lt;em&gt;Server.app&lt;/em&gt;. Because of several reasons, we now are moving to an all-MDM solution with Jamf Pro.&lt;/p&gt;
 
 &lt;p&gt;To migrate the computers, we identified the following things to be fixed on these computers:&lt;/p&gt;
 
@@ -318,17 +312,16 @@ rsync -av &quot;$jekyll_build&quot; ./docs/
 
 &lt;p&gt;The hardest error to fix was a user who just didn’t get the enrolment notification. Turned out, the user accidentally had switched on &lt;em&gt;do not distrub&lt;/em&gt;. And also had no idea that option existed…&lt;/p&gt;
 
-</description>
+
+        </description>
         <pubDate>Mon, 11 Jan 2021 00:00:00 +0100</pubDate>
         <link>https://blog.zanstra.com/2021/01/11/go-jamf-pro.html</link>
         <guid isPermaLink="true">https://blog.zanstra.com/2021/01/11/go-jamf-pro.html</guid>
-        
-        
       </item>
-    
       <item>
         <title>Pretty Print JSON with a Twist</title>
-        <description>&lt;p&gt;&lt;strong&gt;TLDR;&lt;/strong&gt; You can pretty print JSON in a &lt;em&gt;different manner&lt;/em&gt;. &lt;a href=&quot;https://zanstra.com/my/Json-pp.html&quot;&gt;Try it here&lt;/a&gt;.&lt;/p&gt;
+        <description>
+          &lt;p&gt;&lt;strong&gt;TLDR;&lt;/strong&gt; You can pretty print JSON in a &lt;em&gt;different manner&lt;/em&gt;. &lt;a href=&quot;https://zanstra.com/my/Json-pp.html&quot;&gt;Try it here&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;My second programming language was Turbo Pascal (first one GW-Basic). From a BBS-pal I learned a notation in Pascal that has the &lt;em&gt;semicolon&lt;/em&gt; at the &lt;em&gt;start&lt;/em&gt; of the line, instead of at the end of the line, as most people did. Sometimes I still apply the same formatting to JSON.&lt;/p&gt;
 
@@ -541,17 +534,16 @@ $
 
 &lt;p&gt;You can try the &lt;a href=&quot;https://zanstra.com/my/Json-pp.html&quot;&gt;JavaScript version here&lt;/a&gt;. Thanks for reading!&lt;/p&gt;
 
-</description>
+
+        </description>
         <pubDate>Mon, 05 Oct 2020 00:00:00 +0200</pubDate>
         <link>https://blog.zanstra.com/2020/10/05/Pretty-printing-JSON-with-a-twist.html</link>
         <guid isPermaLink="true">https://blog.zanstra.com/2020/10/05/Pretty-printing-JSON-with-a-twist.html</guid>
-        
-        
       </item>
-    
       <item>
         <title>Query Trello data with Postgres (JSON)</title>
-        <description>&lt;p&gt;Recently, I was working on a project to automatically create Trello-cards via their API. To do that, I needed some &lt;em&gt;id&lt;/em&gt;-values from the Trello-board which are not shown in the user-interface. But where does one get these values?&lt;/p&gt;
+        <description>
+          &lt;p&gt;Recently, I was working on a project to automatically create Trello-cards via their API. To do that, I needed some &lt;em&gt;id&lt;/em&gt;-values from the Trello-board which are not shown in the user-interface. But where does one get these values?&lt;/p&gt;
 
 &lt;p&gt;Glad you asked. Every Trello-board can be &lt;a href=&quot;https://help.trello.com/article/747-exporting-data-from-trello-1&quot;&gt;exported to JSON&lt;/a&gt;, and the values I was looking for are available in this export. However, &lt;em&gt;JSON&lt;/em&gt; gives you the data in one big piece of text. Wouldn’t it be handier to have it available as &lt;strong&gt;tabular data&lt;/strong&gt; in a database?&lt;/p&gt;
 
@@ -605,17 +597,16 @@ $
 &lt;hr /&gt;
 
 &lt;p&gt;Originally published &lt;a href=&quot;https://gist.github.com/doekman/e9b1530f0150822b464c4f7b0262a4f3&quot;&gt;at this gist&lt;/a&gt; on GitHub.&lt;/p&gt;
-</description>
+
+        </description>
         <pubDate>Fri, 03 Apr 2020 00:00:00 +0200</pubDate>
         <link>https://blog.zanstra.com/2020/04/03/query-trello-json-with-postgres.html</link>
         <guid isPermaLink="true">https://blog.zanstra.com/2020/04/03/query-trello-json-with-postgres.html</guid>
-        
-        
       </item>
-    
       <item>
         <title>ok-bash and Python on macOS</title>
-        <description>&lt;p&gt;Development on &lt;a href=&quot;https://www.python.org/doc/sunset-python-2/&quot;&gt;Python 2 has been stopped&lt;/a&gt;, and the default availability of Python on macOS &lt;a href=&quot;https://developer.apple.com/documentation/macos_release_notes/macos_catalina_10_15_release_notes#3318257&quot;&gt;will be deprecated&lt;/a&gt; anywhere in the nearby future. Last week, &lt;a href=&quot;https://scriptingosx.com/2020/02/wrangling-pythons/&quot;&gt;Scripting OS X&lt;/a&gt; wrote about how to deal with this from an admin-perspective.&lt;/p&gt;
+        <description>
+          &lt;p&gt;Development on &lt;a href=&quot;https://www.python.org/doc/sunset-python-2/&quot;&gt;Python 2 has been stopped&lt;/a&gt;, and the default availability of Python on macOS &lt;a href=&quot;https://developer.apple.com/documentation/macos_release_notes/macos_catalina_10_15_release_notes#3318257&quot;&gt;will be deprecated&lt;/a&gt; anywhere in the nearby future. Last week, &lt;a href=&quot;https://scriptingosx.com/2020/02/wrangling-pythons/&quot;&gt;Scripting OS X&lt;/a&gt; wrote about how to deal with this from an admin-perspective.&lt;/p&gt;
 
 &lt;p&gt;Here I would like to explain how we deal with this from the perspective of a small but very handy tool called &lt;a href=&quot;https://github.com/secretGeek/ok-bash&quot;&gt;ok-bash&lt;/a&gt;. This nifty tool helps you free brainspace by creating &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.ok&lt;/code&gt;-folder profiles for bash. You should check it out: it really makes you smarter and more efficient.&lt;/p&gt;
 
@@ -631,17 +622,16 @@ $
 
 &lt;p&gt;In the future, ensuring Python’s availability can be done via a &lt;a href=&quot;https://docs.brew.sh/Homebrew-and-Python&quot;&gt;homebrew recipe&lt;/a&gt;. An extra advantage of homebrew is it supports the use of virtual environments.&lt;/p&gt;
 
-</description>
+
+        </description>
         <pubDate>Mon, 17 Feb 2020 00:00:00 +0100</pubDate>
         <link>https://blog.zanstra.com/2020/02/17/ok-bash-and-python.html</link>
         <guid isPermaLink="true">https://blog.zanstra.com/2020/02/17/ok-bash-and-python.html</guid>
-        
-        
       </item>
-    
       <item>
         <title>To the Point</title>
-        <description>&lt;p&gt;Already two internet aeons ago, &lt;em&gt;secretGeek&lt;/em&gt; came up with some &lt;a href=&quot;http://secretgeek.net/up_up_up&quot;&gt;handy bash-aliases&lt;/a&gt; to ease navigating the folder hierarchy:&lt;/p&gt;
+        <description>
+          &lt;p&gt;Already two internet aeons ago, &lt;em&gt;secretGeek&lt;/em&gt; came up with some &lt;a href=&quot;http://secretgeek.net/up_up_up&quot;&gt;handy bash-aliases&lt;/a&gt; to ease navigating the folder hierarchy:&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;alias ..=&apos;cd ..&apos;
 alias ...=&apos;cd ../..&apos;
@@ -669,19 +659,17 @@ alias ...=&apos;cd ../..&apos;
 		¹) I&apos;ve been told a hierarchy of folders/directories is a tree structure. When navigating into a folder, like &lt;code&gt;cd some_folder&lt;/code&gt;, to my earnest knowledge one moves up. Branches mostly grow to the light where the sun is, which is up in the sky. So if you go back from said folder with &lt;code&gt;cd ..&lt;/code&gt; one would move down. So secretGeek&apos;s aliases better be called &lt;code&gt;down_down_down&lt;/code&gt; but maybe that has a less engaging ring to it.  Also: the base of the hierarchy —one could go there with &lt;code&gt;cd /&lt;/code&gt;— is called the root, which is a kind of odd, because the root is as branched as the part of the tree that grows in the air. And at the file system, it&apos;s only one place! Anyways, the proposed function neither goes up nor down, so at least we have no confusion there.
 	&lt;/small&gt;
 &lt;/p&gt;
-</description>
+
+        </description>
         <pubDate>Wed, 02 Oct 2019 00:00:00 +0200</pubDate>
         <link>https://blog.zanstra.com/2019/10/02/To-the-point.html</link>
         <guid isPermaLink="true">https://blog.zanstra.com/2019/10/02/To-the-point.html</guid>
-        
         <category>cli</category>
-        
-        
       </item>
-    
       <item>
         <title>NetNewsWire 5.0 released</title>
-        <description>&lt;p&gt;From the &lt;a href=&quot;https://github.com/brentsimmons/NetNewsWire/blob/master/Technotes/CodingGuidelines.md#version-control&quot;&gt;Coding Guidelines&lt;/a&gt; of NetNewsWire:&lt;/p&gt;
+        <description>
+          &lt;p&gt;From the &lt;a href=&quot;https://github.com/brentsimmons/NetNewsWire/blob/master/Technotes/CodingGuidelines.md#version-control&quot;&gt;Coding Guidelines&lt;/a&gt; of NetNewsWire:&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;strong&gt;Version Control&lt;/strong&gt;&lt;br /&gt;
@@ -749,17 +737,16 @@ Every commit message should begin with a present-tense verb&lt;/p&gt;
 
 &lt;p&gt;Congratulations to Brent and others. &lt;a href=&quot;https://ranchero.com/netnewswire/&quot;&gt;Enjoy NetNewsWire 5.0&lt;/a&gt;…&lt;/p&gt;
 
-</description>
+
+        </description>
         <pubDate>Mon, 26 Aug 2019 00:00:00 +0200</pubDate>
         <link>https://blog.zanstra.com/2019/08/26/NetNewsWire.html</link>
         <guid isPermaLink="true">https://blog.zanstra.com/2019/08/26/NetNewsWire.html</guid>
-        
-        
       </item>
-    
       <item>
         <title>Office for OS X icons</title>
-        <description>&lt;p&gt;&lt;strong&gt;Updated&lt;/strong&gt;: &lt;em&gt;added Big Sur icons.&lt;/em&gt;&lt;/p&gt;
+        <description>
+          &lt;p&gt;&lt;strong&gt;Updated&lt;/strong&gt;: &lt;em&gt;added Big Sur icons.&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;OS X, now called macOS, was based on the &lt;a href=&quot;https://en.wikipedia.org/wiki/NeXTSTEP&quot;&gt;NeXTSTEP&lt;/a&gt; operating system. And one innovation of this operating system was large full-color icons.&lt;/p&gt;
 
@@ -781,30 +768,29 @@ Every commit message should begin with a present-tense verb&lt;/p&gt;
 
 &lt;p&gt;Haven’t had enough? At the excellent Version Museum they have &lt;a href=&quot;https://www.versionmuseum.com/history-of/microsoft-word&quot;&gt;all Windows icons of Word&lt;/a&gt; including screenshots. They also have a page on &lt;a href=&quot;https://www.versionmuseum.com/history-of/microsoft-excel&quot;&gt;Excel&lt;/a&gt; .&lt;/p&gt;
 
-</description>
+
+        </description>
         <pubDate>Sat, 17 Aug 2019 00:00:00 +0200</pubDate>
+        <lastBuildDate>Wed, 19 May 2021 00:00:00 +0200</lastBuildDate>
         <link>https://blog.zanstra.com/2019/08/17/Office-for-OS-X-icons.html</link>
         <guid isPermaLink="true">https://blog.zanstra.com/2019/08/17/Office-for-OS-X-icons.html</guid>
-        
-        
       </item>
-    
       <item>
         <title>On renaming a GitHub repository</title>
-        <description>&lt;p&gt;Did you know you can rename GitHub-repositories? There are some quirks though.&lt;/p&gt;
+        <description>
+          &lt;p&gt;Did you know you can rename GitHub-repositories? There are some quirks though.&lt;/p&gt;
 
 &lt;p&gt;Check it out: &lt;a href=&quot;https://github.com/doekman/You-are-so-lame&quot;&gt;https://github.com/doekman/You-are-so-lame&lt;/a&gt;&lt;/p&gt;
-</description>
+
+        </description>
         <pubDate>Wed, 12 Jun 2019 00:00:00 +0200</pubDate>
         <link>https://blog.zanstra.com/2019/06/12/Rename-github-repo.html</link>
         <guid isPermaLink="true">https://blog.zanstra.com/2019/06/12/Rename-github-repo.html</guid>
-        
-        
       </item>
-    
       <item>
         <title>A third way of putting AppleScript into git</title>
-        <description>&lt;p&gt;There are currently two ways of putting AppleScript into git. First is just by adding the binary &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.scpt&lt;/code&gt;-files. You don’t get much benefit from using git, but it works.&lt;/p&gt;
+        <description>
+          &lt;p&gt;There are currently two ways of putting AppleScript into git. First is just by adding the binary &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.scpt&lt;/code&gt;-files. You don’t get much benefit from using git, but it works.&lt;/p&gt;
 
 &lt;p&gt;The &lt;em&gt;second way&lt;/em&gt; is to save your AppleScript source as text-files, and put these into git. You get advantages from git, but it is not as seamless as the first way.&lt;/p&gt;
 
@@ -847,17 +833,16 @@ git commit -m Initial
 
 &lt;p&gt;Let me know what you think on &lt;a href=&quot;https://twitter.com/doekezanstra/status/1125696216573140993&quot;&gt;twitter&lt;/a&gt; or &lt;a href=&quot;https://forum.latenightsw.com/t/a-third-way-of-putting-applescript-into-git/1932?u=doekman&quot;&gt;at this thread&lt;/a&gt; on Late Night Software’s AppleScript forum.&lt;/p&gt;
 
-</description>
+
+        </description>
         <pubDate>Mon, 06 May 2019 00:00:00 +0200</pubDate>
         <link>https://blog.zanstra.com/2019/05/06/Introducing-osagitfilter.html</link>
         <guid isPermaLink="true">https://blog.zanstra.com/2019/05/06/Introducing-osagitfilter.html</guid>
-        
-        
       </item>
-    
       <item>
         <title>git-url</title>
-        <description>&lt;p&gt;A while ago, &lt;a href=&quot;https://gist.github.com/doekman/45acdb0ceedd9dc9dc6105d0b058b06a&quot;&gt;I created a shell script&lt;/a&gt; called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git-url&lt;/code&gt;. It prints the remote origin URL of your current git-repository (or exit 1 if no git-repo is found). If the URL is in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git:&lt;/code&gt; format, it is converted to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http:&lt;/code&gt; format.&lt;/p&gt;
+        <description>
+          &lt;p&gt;A while ago, &lt;a href=&quot;https://gist.github.com/doekman/45acdb0ceedd9dc9dc6105d0b058b06a&quot;&gt;I created a shell script&lt;/a&gt; called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git-url&lt;/code&gt;. It prints the remote origin URL of your current git-repository (or exit 1 if no git-repo is found). If the URL is in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git:&lt;/code&gt; format, it is converted to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http:&lt;/code&gt; format.&lt;/p&gt;
 
 &lt;p&gt;Why would one write this? Because of &lt;code&gt;open `git-url`&lt;/code&gt;.&lt;/p&gt;
 
@@ -868,19 +853,17 @@ git commit -m Initial
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;Updated 2019-12-04&lt;/em&gt;&lt;/strong&gt;: you now can add a SHA1 hash to go directly to that commit in the browser (GitHub and BitBucket) like
 &lt;code&gt;open `git-url 7593e1a`&lt;/code&gt;, which &lt;a href=&quot;https://github.com/doekman/doekman.github.io/commit/7593e1a631df4769853948b31b610a13a4525665&quot;&gt;opens this link&lt;/a&gt;).&lt;/p&gt;
 
-</description>
+
+        </description>
         <pubDate>Fri, 08 Mar 2019 00:00:00 +0100</pubDate>
         <link>https://blog.zanstra.com/2019/03/08/Git-Url.html</link>
         <guid isPermaLink="true">https://blog.zanstra.com/2019/03/08/Git-Url.html</guid>
-        
         <category>cli</category>
-        
-        
       </item>
-    
       <item>
         <title>Networking with iOS via Ethernet</title>
-        <description>&lt;p&gt;This summer I went to &lt;a href=&quot;https://www.ecolonie.eu/en&quot;&gt;Ecolonie&lt;/a&gt;, a very nice place in &lt;strong&gt;France&lt;/strong&gt;. It is an idealistic place that doesn’t want to exclude anyone.
+        <description>
+          &lt;p&gt;This summer I went to &lt;a href=&quot;https://www.ecolonie.eu/en&quot;&gt;Ecolonie&lt;/a&gt;, a very nice place in &lt;strong&gt;France&lt;/strong&gt;. It is an idealistic place that doesn’t want to exclude anyone.
 So they don’t allow digital wireless connections like Wifi and Bluetooth, because this can make some people sick.&lt;/p&gt;
 
 &lt;p&gt;So I thought of connecting my iPad via Ethernet to internet.
@@ -908,19 +891,17 @@ The noise disappeared when removing the charging cable from the USB hub and did 
 &lt;p&gt;One final note on USB Ethernet adapters: naturally they have built-in MAC-addresses. But you can expect some complications on your network when you use a MAC-addresses to identify all allowed devices.
 Devices, like in Lisa’s tablet and Bart’s iPhone… D’oh!&lt;/p&gt;
 
-</description>
+
+        </description>
         <pubDate>Mon, 31 Dec 2018 00:00:00 +0100</pubDate>
         <link>https://blog.zanstra.com/2018/12/31/iOS_ethernet.html</link>
         <guid isPermaLink="true">https://blog.zanstra.com/2018/12/31/iOS_ethernet.html</guid>
-        
         <category>does-it-work</category>
-        
-        
       </item>
-    
       <item>
         <title>Jump around</title>
-        <description>&lt;style&gt;code {white-space:nowrap;}&lt;/style&gt;
+        <description>
+          &lt;style&gt;code {white-space:nowrap;}&lt;/style&gt;
 
 &lt;p&gt;There are more ways &lt;a href=&quot;https://scriptingosx.com/2017/08/navigating-the-file-system/&quot;&gt;to navigate the file system&lt;/a&gt; in &lt;em&gt;bash&lt;/em&gt; than I imagined when I still was using &lt;em&gt;cmd.exe&lt;/em&gt;. Let me name some:&lt;/p&gt;
 
@@ -941,19 +922,17 @@ Devices, like in Lisa’s tablet and Bart’s iPhone… D’oh!&lt;/p&gt;
 
 &lt;p&gt;I must say I was a bit hesitant to use it, because it seemed so… technical. In the beginning of the man-page it says something like &lt;em&gt;“Tracks your most used directories, based on ‘frecency’..”&lt;/em&gt; But the &lt;em&gt;“jump around”&lt;/em&gt; reeled me in. I never used my own &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;go&lt;/code&gt;-utility, and only just now looked back. Thanks &lt;a href=&quot;https://github.com/rupa&quot;&gt;rupa&lt;/a&gt;!&lt;/p&gt;
 
-</description>
+
+        </description>
         <pubDate>Thu, 13 Sep 2018 00:00:00 +0200</pubDate>
         <link>https://blog.zanstra.com/2018/09/13/Jump-around.html</link>
         <guid isPermaLink="true">https://blog.zanstra.com/2018/09/13/Jump-around.html</guid>
-        
         <category>cli</category>
-        
-        
       </item>
-    
       <item>
         <title>Emoji&apos;s missing from emojis.wiki</title>
-        <description>&lt;p&gt;The following entries are supposedly missing from &lt;a href=&quot;https://emojis.wiki&quot;&gt;emojis.wiki&lt;/a&gt;. However, you could also read this article as a proposal for alternate descriptions of a part of the &lt;a href=&quot;https://en.wikipedia.org/wiki/Miscellaneous_Technical#(2340–237F)&quot;&gt;Miscellaneous Technical range&lt;/a&gt; of the &lt;a href=&quot;https://en.wikipedia.org/wiki/Plane_(Unicode)#Basic_Multilingual_Plane&quot;&gt;Basic Multilingual Plane&lt;/a&gt; of the &lt;a href=&quot;https://en.wikipedia.org/wiki/Unicode&quot;&gt;Unicode&lt;/a&gt; standard.&lt;/p&gt;
+        <description>
+          &lt;p&gt;The following entries are supposedly missing from &lt;a href=&quot;https://emojis.wiki&quot;&gt;emojis.wiki&lt;/a&gt;. However, you could also read this article as a proposal for alternate descriptions of a part of the &lt;a href=&quot;https://en.wikipedia.org/wiki/Miscellaneous_Technical#(2340–237F)&quot;&gt;Miscellaneous Technical range&lt;/a&gt; of the &lt;a href=&quot;https://en.wikipedia.org/wiki/Plane_(Unicode)#Basic_Multilingual_Plane&quot;&gt;Basic Multilingual Plane&lt;/a&gt; of the &lt;a href=&quot;https://en.wikipedia.org/wiki/Unicode&quot;&gt;Unicode&lt;/a&gt; standard.&lt;/p&gt;
 
 &lt;style&gt;
 	big  { font-size:150%; line-height:100%; cursor:help;}
@@ -971,17 +950,16 @@ Devices, like in Lisa’s tablet and Bart’s iPhone… D’oh!&lt;/p&gt;
 
 &lt;p&gt;If you have any corrections or addendums, please let me know on Twitter.&lt;/p&gt;
 
-</description>
+
+        </description>
         <pubDate>Tue, 28 Aug 2018 00:00:00 +0200</pubDate>
         <link>https://blog.zanstra.com/2018/08/28/Missing-emoji.html</link>
         <guid isPermaLink="true">https://blog.zanstra.com/2018/08/28/Missing-emoji.html</guid>
-        
-        
       </item>
-    
       <item>
         <title>To vowel case</title>
-        <description>&lt;p&gt;There already was &lt;em&gt;Sentence case&lt;/em&gt;, &lt;em&gt;lower case&lt;/em&gt;, &lt;em&gt;UPPER CASE&lt;/em&gt;, &lt;em&gt;Capitalized Case&lt;/em&gt;, &lt;em&gt;AlTeRnAtInG CaSe&lt;/em&gt; and &lt;em&gt;Title Case&lt;/em&gt;.&lt;/p&gt;
+        <description>
+          &lt;p&gt;There already was &lt;em&gt;Sentence case&lt;/em&gt;, &lt;em&gt;lower case&lt;/em&gt;, &lt;em&gt;UPPER CASE&lt;/em&gt;, &lt;em&gt;Capitalized Case&lt;/em&gt;, &lt;em&gt;AlTeRnAtInG CaSe&lt;/em&gt; and &lt;em&gt;Title Case&lt;/em&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;And nOw YOU cAn dO vOwEr cAsE tOO&lt;/strong&gt;!&lt;/p&gt;
 
@@ -993,19 +971,17 @@ Devices, like in Lisa’s tablet and Bart’s iPhone… D’oh!&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Updated&lt;/strong&gt;: &lt;em&gt;a correct implementation of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;toVowelCase&lt;/code&gt; is locale-dependend. In English, the letter &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;y&lt;/code&gt; is sometimes a vowel, and at other times a consonant.  The above works for the Dutch language and some other languages. Your mileage may vary.&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Updated&lt;/strong&gt;: bookmarking &lt;a href=&quot;https://headlinecapitalization.com&quot;&gt;https://headlinecapitalization.com&lt;/a&gt; and &lt;a href=&quot;https://titlecaseconverter.com&quot;&gt;https://titlecaseconverter.com&lt;/a&gt;.&lt;/p&gt;
-</description>
+
+        </description>
         <pubDate>Sun, 08 Jul 2018 00:00:00 +0200</pubDate>
         <link>https://blog.zanstra.com/2018/07/08/Vowel-case.html</link>
         <guid isPermaLink="true">https://blog.zanstra.com/2018/07/08/Vowel-case.html</guid>
-        
         <category>one-liner</category>
-        
-        
       </item>
-    
       <item>
         <title>To refactor, or not to refactor</title>
-        <description>&lt;p&gt;The code iteration below is a contemporary comment on the use of refactoring.&lt;br /&gt;
+        <description>
+          &lt;p&gt;The code iteration below is a contemporary comment on the use of refactoring.&lt;br /&gt;
 We start with this code:&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;function isLeapYear(year) {
@@ -1133,37 +1109,33 @@ function isCommonYear(year) {
 
 &lt;p&gt;Code can also be found &lt;a href=&quot;https://github.com/doekman/to-refactor...&quot;&gt;here on GitHub&lt;/a&gt;.&lt;/p&gt;
 
-</description>
+
+        </description>
         <pubDate>Fri, 29 Jun 2018 00:00:00 +0200</pubDate>
         <link>https://blog.zanstra.com/2018/06/29/Refactoring.html</link>
         <guid isPermaLink="true">https://blog.zanstra.com/2018/06/29/Refactoring.html</guid>
-        
         <category>refactor</category>
-        
-        
       </item>
-    
       <item>
         <title>Jekyll template for JSON Feed</title>
-        <description>&lt;p&gt;When I learned about &lt;a href=&quot;https://jsonfeed.org/2017/05/17/announcing_json_feed&quot;&gt;JSON Feed&lt;/a&gt;, I immediately liked the idea. It’s like RSS/Atom, with the good parts (it’s de-central) and without the bad parts (no more XML, well thought of standard attributes).&lt;/p&gt;
+        <description>
+          &lt;p&gt;When I learned about &lt;a href=&quot;https://jsonfeed.org/2017/05/17/announcing_json_feed&quot;&gt;JSON Feed&lt;/a&gt;, I immediately liked the idea. It’s like RSS/Atom, with the good parts (it’s de-central) and without the bad parts (no more XML, well thought of standard attributes).&lt;/p&gt;
 
 &lt;p&gt;I’m not to sure how it will be used in practise, but it was easy enough to create a Jekyll template (&lt;a href=&quot;https://github.com/doekman/doekman.github.io/blob/master/feed.json&quot; title=&quot;Source code on GitHub&quot;&gt;source on GitHub&lt;/a&gt;). I learned it’s handy to add a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;base&lt;/code&gt;-tag to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;content_html&lt;/code&gt;-attribute, after trying &lt;a href=&quot;http://json-feed-viewer.herokuapp.com&quot;&gt;this app&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;And I made myself a &lt;a href=&quot;http://json-feed-viewer.herokuapp.com/?feed_url=http%3A%2F%2Fblog.zanstra.com%2Ffeed.json&quot;&gt;nice square logo&lt;/a&gt; too.&lt;/p&gt;
 
-</description>
+
+        </description>
         <pubDate>Fri, 19 May 2017 00:00:00 +0200</pubDate>
         <link>https://blog.zanstra.com/2017/05/19/JSON-feed.html</link>
         <guid isPermaLink="true">https://blog.zanstra.com/2017/05/19/JSON-feed.html</guid>
-        
         <category>meta</category>
-        
-        
       </item>
-    
       <item>
         <title>JSON, the game #2: The parsings</title>
-        <description>&lt;p&gt;For some reason, I imagined the next step in the development of the game was to make the ‘block’ move. Like up and down, and sliding to the left. For &lt;a href=&quot;http://agilemanifesto.org&quot;&gt;agile&lt;/a&gt; reasons, I want to make progress that is reflected and visible in the software. So no spending time at writing libraries first. You probably end up writing stuff you don’t even need. But when starting, I realized the partial-JSON part needed to be worked on first.&lt;/p&gt;
+        <description>
+          &lt;p&gt;For some reason, I imagined the next step in the development of the game was to make the ‘block’ move. Like up and down, and sliding to the left. For &lt;a href=&quot;http://agilemanifesto.org&quot;&gt;agile&lt;/a&gt; reasons, I want to make progress that is reflected and visible in the software. So no spending time at writing libraries first. You probably end up writing stuff you don’t even need. But when starting, I realized the partial-JSON part needed to be worked on first.&lt;/p&gt;
 
 &lt;p&gt;To display the partial-JSON, I need a &lt;em&gt;model&lt;/em&gt; of that JSON. That model should be capable of annotating the partial-JSON with grammar issues (like missing bracket/comma, incomplete strings or just plain errors). Indentation should be addressed too. Also some dimension-data is needed, so we can determine whether the block can move up/down and when it has reached the partial-JSON surface (sorry, I can’t stop thinking in planet metaphors).&lt;/p&gt;
 
@@ -1183,19 +1155,17 @@ function isCommonYear(year) {
 
 &lt;p&gt;Next step is adding code to the parser for annotating tokens, and insert &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;missing&lt;/code&gt;-tokens. And render the thing in HTML naturally.&lt;/p&gt;
 
-</description>
+
+        </description>
         <pubDate>Sun, 14 May 2017 00:00:00 +0200</pubDate>
         <link>https://blog.zanstra.com/2017/05/14/JSON-the-game-nr2.html</link>
         <guid isPermaLink="true">https://blog.zanstra.com/2017/05/14/JSON-the-game-nr2.html</guid>
-        
         <category>game</category>
-        
-        
       </item>
-    
       <item>
         <title>JSON, the game #1: Bootstrapping it</title>
-        <description>&lt;p&gt;Around a year ago, I had the daft idea to create some nerdy JSON-game. I had good fun thinking about some concepts, made some notes, and that was about it. Until now that is. The game: It’s coming… It has already started. To keep me focussed, I will keep a journal of the creation, and you’re reading the first part.&lt;/p&gt;
+        <description>
+          &lt;p&gt;Around a year ago, I had the daft idea to create some nerdy JSON-game. I had good fun thinking about some concepts, made some notes, and that was about it. Until now that is. The game: It’s coming… It has already started. To keep me focussed, I will keep a journal of the creation, and you’re reading the first part.&lt;/p&gt;
 
 &lt;p&gt;I got the ideas from series like the Brent Simmons’s &lt;a href=&quot;http://inessential.com/vespersyncdiary&quot;&gt;Vesper Sync Diary&lt;/a&gt; and Jon Skeet’s &lt;a href=&quot;https://codeblog.jonskeet.uk/2011/02/23/reimplementing-linq-to-objects-part-45-conclusion-and-list-of-posts/&quot;&gt;Reimplementing Linq to Objects&lt;/a&gt;. I found them enjoyable; a bit of a nerdy soap opera. And now is the time for me to get of my comfy sofa and produce some soap of my own.&lt;/p&gt;
 
@@ -1215,19 +1185,17 @@ function isCommonYear(year) {
 
 &lt;p&gt;The next instalment will be about moving those incoming tokens.&lt;/p&gt;
 
-</description>
+
+        </description>
         <pubDate>Sun, 30 Apr 2017 00:00:00 +0200</pubDate>
         <link>https://blog.zanstra.com/2017/04/30/JSON-the-game-nr1.html</link>
         <guid isPermaLink="true">https://blog.zanstra.com/2017/04/30/JSON-the-game-nr1.html</guid>
-        
         <category>game</category>
-        
-        
       </item>
-    
       <item>
         <title>Only my warnings</title>
-        <description>&lt;p&gt;Don’t you hate to be put in a situation like the following?&lt;/p&gt;
+        <description>
+          &lt;p&gt;Don’t you hate to be put in a situation like the following?&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;You are assigned by your company to add some functionality to some software at
@@ -1265,19 +1233,17 @@ when the extention will be released to the Visual Studio Gallery, please
 &lt;a href=&quot;https://docs.google.com/forms/d/e/1FAIpQLScMYh6JqrQn-dEA8hzIGJdJsV5-9ufCuTkfczPeXlBjNoB7KA/viewform&quot;&gt;fill out this form&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;(this is a blog post in the series: I’m perfect, communicate better with tools)&lt;/p&gt;
-</description>
+
+        </description>
         <pubDate>Thu, 08 Sep 2016 00:00:00 +0200</pubDate>
         <link>https://blog.zanstra.com/2016/09/08/Only-my-warnings.html</link>
         <guid isPermaLink="true">https://blog.zanstra.com/2016/09/08/Only-my-warnings.html</guid>
-        
         <category>tools</category>
-        
-        
       </item>
-    
       <item>
         <title>A console.log() adventure; pimped</title>
-        <description>&lt;p&gt;Over a year ago, my interwebfriend &lt;a href=&quot;https://twitter.com/secretGeek&quot;&gt;secretGeek&lt;/a&gt; created a thing. I created a fork, and pimped it &lt;a href=&quot;https://rawgit.com/doekman/console-adventure/master/console.html&quot;&gt;into this&lt;/a&gt; (&lt;em&gt;and copied some of his blog lines too&lt;/em&gt;). I urge you to go and try it out before you read on. Unfortunately you’ll need to be on a desktop computer, not a mobile phone.&lt;/p&gt;
+        <description>
+          &lt;p&gt;Over a year ago, my interwebfriend &lt;a href=&quot;https://twitter.com/secretGeek&quot;&gt;secretGeek&lt;/a&gt; created a thing. I created a fork, and pimped it &lt;a href=&quot;https://rawgit.com/doekman/console-adventure/master/console.html&quot;&gt;into this&lt;/a&gt; (&lt;em&gt;and copied some of his blog lines too&lt;/em&gt;). I urge you to go and try it out before you read on. Unfortunately you’ll need to be on a desktop computer, not a mobile phone.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://rawgit.com/doekman/console-adventure/master/console.html&quot;&gt;&lt;img src=&quot;/images/console_best.png&quot; style=&quot;border:8px solid #333;box-shadow:3px 3px 7px #888&quot; title=&quot;a console.log() adventure.&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
@@ -1344,21 +1310,18 @@ is very easy to implement. Couldn’t resist it, but it’s hidden somewhere in 
 
 &lt;p&gt;I didn’t want to change the map or story. Just wanted to share the fun I had, both playing and pimping the game.&lt;/p&gt;
 
-</description>
+
+        </description>
         <pubDate>Sun, 06 Mar 2016 13:45:00 +0100</pubDate>
         <link>https://blog.zanstra.com/2016/03/06/Console-log-adventure.html</link>
         <guid isPermaLink="true">https://blog.zanstra.com/2016/03/06/Console-log-adventure.html</guid>
-        
         <category>refactor</category>
-        
         <category>game</category>
-        
-        
       </item>
-    
       <item>
         <title>First post!</title>
-        <description>&lt;p&gt;OK, I started yet another blog.&lt;/p&gt;
+        <description>
+          &lt;p&gt;OK, I started yet another blog.&lt;/p&gt;
 
 &lt;p&gt;Here are the predecessors (and thank my &lt;a href=&quot;https://archive.org/donate/&quot; title=&quot;Internet Archive&quot;&gt;public backup service&lt;/a&gt; for most of this):&lt;/p&gt;
 
@@ -1378,15 +1341,12 @@ is very easy to implement. Couldn’t resist it, but it’s hidden somewhere in 
 &lt;/ul&gt;
 
 &lt;p&gt;I also have a Tumblr micro-blogging thing called &lt;a href=&quot;https://www.tumblr.com/blog/dd3v&quot; title=&quot;Doekman Dev&quot;&gt;dd3v&lt;/a&gt;, and I used to have a micro blogging service on &lt;em&gt;doekman.micro.blog&lt;/em&gt; backed via Kickstarter (&lt;a href=&quot;/images/archive/doekman.micro.blog.png&quot;&gt;png archive&lt;/a&gt; or &lt;a href=&quot;/images/archive/doekman.micro.blog.pdf&quot;&gt;PDF print&lt;/a&gt;).&lt;/p&gt;
-</description>
+
+        </description>
         <pubDate>Sat, 09 Jan 2016 20:30:00 +0100</pubDate>
         <link>https://blog.zanstra.com/2016/01/09/First-post.html</link>
         <guid isPermaLink="true">https://blog.zanstra.com/2016/01/09/First-post.html</guid>
-        
         <category>meta</category>
-        
-        
       </item>
-    
   </channel>
 </rss>
