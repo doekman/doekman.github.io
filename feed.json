@@ -7,7 +7,7 @@ layout: null
 	"home_page_url": {{ "" | absolute_url | jsonify }},
 	"feed_url": {{ "/feed.json" | absolute_url | jsonify }},
 	"description": {{ site.description | jsonify }},
-    "icon": {{ site.logo | absolute_url | jsonify }},
+	"icon": {{ site.logo | absolute_url | jsonify }},
 	"author": { "name": {{ site.author | jsonify }}},
 	"items": [ {% assign my_posts = site.posts | where_exp: "p", "p.is_listed" | sort: 'date' | reverse %}{% for post in my_posts limit:32 %} {
 			"id": {{ post.id | jsonify }},
@@ -15,7 +15,8 @@ layout: null
 			"title": {{ post.title | jsonify }},
 			"content_html": {{ post.content | prepend: base_tag | jsonify }},
 			"summary": {{ post.excerpt | strip_html | strip_newlines | jsonify}},
-			"date_published": {{ post.date | date_to_xmlschema | jsonify }},
+			"date_published": {{ post.date | date_to_xmlschema | jsonify }},{% if post.updated %}
+			"date_modified": {{ post.updated | date_to_xmlschema | jsonify }},{% endif %}
 			"tags": {{ post.tags | jsonify }}
 		}{% if forloop.last == false %},{% endif %}
 		{% endfor %}

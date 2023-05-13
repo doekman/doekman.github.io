@@ -2,7 +2,7 @@
 layout: post
 title: "Integer Exposed Rewrite"
 date: 2023-05-03
-changed: 2023-05-12
+updated: 2023-05-13
 author: Doeke Zanstra
 category: ICT
 src_href:	https://github.com/doekman/integer.exposed
@@ -90,7 +90,7 @@ On thing that still bugged me a bit were the bit buttons (pun not intended, but 
 
 But how should this work? A click handler would not suffice, I would need a keyboard-handler as well. And also [MDN suggested to use buttons instead][a_onclick]. But then I realized, I just can use a hash-link, like `<a href="#0x01"…`. When I supply the right value for the right bit, no additional scripting is needed. The `hashchange`-handler will handle it all. And tabbing (or option-tabbing) to the elements, and pressing enter toggles the bit `(commit xxx A@href bits)`.
 
-That's it. With this addition I learned even more about JavaScript and the microtasks. Also, the playground is now a bit more accessible, and that's nice. 
+That's it. With this addition I learned even more about JavaScript and the microtasks. Also, the playground is now a bit more accessible, and that's nice.
 
 
 
