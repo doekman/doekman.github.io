@@ -121,8 +121,32 @@
 
 <p>I discovered that writing the blog while doing the project has a lot of advantages. It keeps me focussed, and it let me do a bit of work while being on the train. I hope this blog makes sense, and like to hear your thoughts on this topic.</p>
 
+<h1 id="update">Update</h1>
 
-    
+<p>Via <a href="https://mastodon.nl/@dukoid@mastodon.social/110329152286258188">Mastodon</a> I got the tip to defer the blur-event handler, to find out the actual active element. I directly used <code class="language-plaintext highlighter-rouge">setTimeout</code>, and I got the result I wanted: the <code class="language-plaintext highlighter-rouge">activeElement</code> was the element I tabbed to.</p>
+
+<p>But since it’s not 2002 anymore, and <code class="language-plaintext highlighter-rouge">setTimeout</code> feels like a hack I looked into promises. So I replaced <code class="language-plaintext highlighter-rouge">setTimeout</code> with <code class="language-plaintext highlighter-rouge">Promise.resolve(null).then</code>. But this didn’t work. The activeElement was document.body again…. What’s going on?</p>
+
+<p>After reading about <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Event_loop">the event loop</a> on MDN, I read about using promises, and found <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#task_queues_vs._microtasks">this quote</a>:</p>
+
+<blockquote>
+  <p>Promise callbacks are handled as a microtask whereas setTimeout() callbacks are handled as task queues.</p>
+</blockquote>
+
+<p>Long story short: defering code with <code class="language-plaintext highlighter-rouge">setTimeout</code> works because it’s a task, and not a <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide">microtask</a>. My understanding is that a microtask would be ran right after the event-handler, while a task would be scheduled in the next iteration of the event loop. Apparently after the blur-handler, there is a task or microtask setting the activeElement. But now I know setTimeout is not as much as a hack I thought it was. It’s just wat I needed.</p>
+
+<p>So now we can make the render-method preserve the activeElement. To do so, I first gave every element that can be active an <code class="language-plaintext highlighter-rouge">id</code>-attribute. And after that, I altered the render-method to remember and set the active element around the render. The render is wrapped within a setTimeout, so it is executed as a seperate task. I also used the optional chaining operator (<code class="language-plaintext highlighter-rouge">?.</code>), because the activeElement can be <code class="language-plaintext highlighter-rouge">null</code> and focusable elements may be disappear between renders.</p>
+
+<p>Also, I changed the <code class="language-plaintext highlighter-rouge">blur</code>-events to <code class="language-plaintext highlighter-rouge">change</code>, because we don’t need a render when a text-value hasn’t been changed. Also, I wanted to make all the controls accessible by the keyboard. So I changed the <code class="language-plaintext highlighter-rouge">span</code>-items for the bit selector and the bit pattern to <code class="language-plaintext highlighter-rouge">button</code> elements, and gave them an <code class="language-plaintext highlighter-rouge">id</code>- and <code class="language-plaintext highlighter-rouge">tabindex</code>-attribute. To fix their appearance, I only needed to set a couple of CSS properties. As value I used <code class="language-plaintext highlighter-rouge">unset</code>, and it works like a charm. Now we can tab through all controls, and use the spacebar (or enter) to select or toggle them <code class="language-plaintext highlighter-rouge">(commit e98e782 Retaining active element)</code>.</p>
+
+<p>On thing that still bugged me a bit were the bit buttons (pun not intended, but still enjoyed). In the user interface, they differ from the other controls (tab-bar, buttons, text inputs). On macOS, when pressing tab links are skipped. Only “proper” controls get the focus. If you want the next link to get the focus, one can press option+tab (also known as alt+tab). So <code class="language-plaintext highlighter-rouge">a</code>-elements for the bits seemed a better fit.</p>
+
+<p>But how should this work? A click handler would not suffice, I would need a keyboard-handler as well. And also <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#onclick_events">MDN suggested to use buttons instead</a>. But then I realized, I just can use a hash-link, like <code class="language-plaintext highlighter-rouge">&lt;a href="#0x01"…</code>. When I supply the right value for the right bit, no additional scripting is needed. The <code class="language-plaintext highlighter-rouge">hashchange</code>-handler will handle it all. And tabbing (or option-tabbing) to the elements, and pressing enter toggles the bit <code class="language-plaintext highlighter-rouge">(commit xxx A@href bits)</code>.</p>
+
+<p>That’s it. With this addition I learned even more about JavaScript and the microtasks. Also, the playground is now a bit more accessible, and that’s nice.</p>
+
+
+    <a href="https://github.com/doekman/integer.exposed" title="Link to code" class="right icon">※</a>
   </div>
 
 </article>

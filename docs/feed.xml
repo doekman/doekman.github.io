@@ -6,8 +6,8 @@
 </description>
     <link>https://blog.zanstra.com/</link>
     <atom:link href="https://blog.zanstra.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 03 May 2023 16:07:58 +0200</pubDate>
-    <lastBuildDate>Wed, 03 May 2023 16:07:58 +0200</lastBuildDate>
+    <pubDate>Sat, 13 May 2023 19:24:01 +0200</pubDate>
+    <lastBuildDate>Sat, 13 May 2023 19:24:01 +0200</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
     
       <item>
@@ -65,6 +65,30 @@
 &lt;p&gt;It has been a fun project. The outcome is not completely what I wanted, but I learned a lot. The goal was not to create a working app, but to explore after all.&lt;/p&gt;
 
 &lt;p&gt;I discovered that writing the blog while doing the project has a lot of advantages. It keeps me focussed, and it let me do a bit of work while being on the train. I hope this blog makes sense, and like to hear your thoughts on this topic.&lt;/p&gt;
+
+&lt;h1 id=&quot;update&quot;&gt;Update&lt;/h1&gt;
+
+&lt;p&gt;Via &lt;a href=&quot;https://mastodon.nl/@dukoid@mastodon.social/110329152286258188&quot;&gt;Mastodon&lt;/a&gt; I got the tip to defer the blur-event handler, to find out the actual active element. I directly used &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setTimeout&lt;/code&gt;, and I got the result I wanted: the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;activeElement&lt;/code&gt; was the element I tabbed to.&lt;/p&gt;
+
+&lt;p&gt;But since it’s not 2002 anymore, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setTimeout&lt;/code&gt; feels like a hack I looked into promises. So I replaced &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setTimeout&lt;/code&gt; with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Promise.resolve(null).then&lt;/code&gt;. But this didn’t work. The activeElement was document.body again…. What’s going on?&lt;/p&gt;
+
+&lt;p&gt;After reading about &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Event_loop&quot;&gt;the event loop&lt;/a&gt; on MDN, I read about using promises, and found &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#task_queues_vs._microtasks&quot;&gt;this quote&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Promise callbacks are handled as a microtask whereas setTimeout() callbacks are handled as task queues.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Long story short: defering code with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setTimeout&lt;/code&gt; works because it’s a task, and not a &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide&quot;&gt;microtask&lt;/a&gt;. My understanding is that a microtask would be ran right after the event-handler, while a task would be scheduled in the next iteration of the event loop. Apparently after the blur-handler, there is a task or microtask setting the activeElement. But now I know setTimeout is not as much as a hack I thought it was. It’s just wat I needed.&lt;/p&gt;
+
+&lt;p&gt;So now we can make the render-method preserve the activeElement. To do so, I first gave every element that can be active an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;id&lt;/code&gt;-attribute. And after that, I altered the render-method to remember and set the active element around the render. The render is wrapped within a setTimeout, so it is executed as a seperate task. I also used the optional chaining operator (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;?.&lt;/code&gt;), because the activeElement can be &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;null&lt;/code&gt; and focusable elements may be disappear between renders.&lt;/p&gt;
+
+&lt;p&gt;Also, I changed the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;blur&lt;/code&gt;-events to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;change&lt;/code&gt;, because we don’t need a render when a text-value hasn’t been changed. Also, I wanted to make all the controls accessible by the keyboard. So I changed the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;span&lt;/code&gt;-items for the bit selector and the bit pattern to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;button&lt;/code&gt; elements, and gave them an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;id&lt;/code&gt;- and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tabindex&lt;/code&gt;-attribute. To fix their appearance, I only needed to set a couple of CSS properties. As value I used &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;unset&lt;/code&gt;, and it works like a charm. Now we can tab through all controls, and use the spacebar (or enter) to select or toggle them &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(commit e98e782 Retaining active element)&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;On thing that still bugged me a bit were the bit buttons (pun not intended, but still enjoyed). In the user interface, they differ from the other controls (tab-bar, buttons, text inputs). On macOS, when pressing tab links are skipped. Only “proper” controls get the focus. If you want the next link to get the focus, one can press option+tab (also known as alt+tab). So &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;a&lt;/code&gt;-elements for the bits seemed a better fit.&lt;/p&gt;
+
+&lt;p&gt;But how should this work? A click handler would not suffice, I would need a keyboard-handler as well. And also &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#onclick_events&quot;&gt;MDN suggested to use buttons instead&lt;/a&gt;. But then I realized, I just can use a hash-link, like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;a href=&quot;#0x01&quot;…&lt;/code&gt;. When I supply the right value for the right bit, no additional scripting is needed. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hashchange&lt;/code&gt;-handler will handle it all. And tabbing (or option-tabbing) to the elements, and pressing enter toggles the bit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(commit xxx A@href bits)&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;That’s it. With this addition I learned even more about JavaScript and the microtasks. Also, the playground is now a bit more accessible, and that’s nice.&lt;/p&gt;
 
 </description>
         <pubDate>Wed, 03 May 2023 00:00:00 +0200</pubDate>
