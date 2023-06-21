@@ -6,8 +6,8 @@
 </description>
     <link>https://blog.zanstra.com/</link>
     <atom:link href="https://blog.zanstra.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 13 May 2023 21:06:14 +0200</pubDate>
-    <lastBuildDate>Sat, 13 May 2023 21:06:14 +0200</lastBuildDate>
+    <pubDate>Wed, 21 Jun 2023 12:55:59 +0200</pubDate>
+    <lastBuildDate>Wed, 21 Jun 2023 12:55:59 +0200</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
       <item>
         <title>Integer Exposed Rewrite</title>
@@ -746,7 +746,8 @@ Every commit message should begin with a present-tense verb&lt;/p&gt;
       <item>
         <title>Office for OS X icons</title>
         <description>
-          &lt;p&gt;&lt;strong&gt;Updated&lt;/strong&gt;: &lt;em&gt;added Big Sur icons.&lt;/em&gt;&lt;/p&gt;
+          &lt;p&gt;&lt;strong&gt;Updated 2021-05-19&lt;/strong&gt;: &lt;em&gt;added Big Sur icons.&lt;/em&gt;&lt;br /&gt;
+&lt;strong&gt;Updated 2023-06-21&lt;/strong&gt;: &lt;em&gt;Added 2023 “Show your pride”-variation (&lt;a href=&quot;https://blogs.microsoft.com/blog/2022/06/01/microsoft-celebrates-pride-around-the-world-even-in-the-metaverse-as-we-donate-to-lgbtqia-nonprofits-release-xbox-pride-controller-and-more/&quot;&gt;2022 update apparently&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;OS X, now called macOS, was based on the &lt;a href=&quot;https://en.wikipedia.org/wiki/NeXTSTEP&quot;&gt;NeXTSTEP&lt;/a&gt; operating system. And one innovation of this operating system was large full-color icons.&lt;/p&gt;
 
@@ -754,10 +755,10 @@ Every commit message should begin with a present-tense verb&lt;/p&gt;
 
 &lt;html&gt;
 	&lt;figure tabindex=&quot;0&quot;&gt;
-		&lt;img src=&quot;/images/office-for-os-x-icons.png&quot; alt=&quot;Office for OS X icons (original)&quot; class=&quot;non_hoover&quot; /&gt;
-		&lt;img src=&quot;/images/office-for-os-x-icons-2021.png&quot; alt=&quot;Office for OS X icons (2021 Big Sur update)&quot; class=&quot;hoover&quot; /&gt;
+		&lt;img src=&quot;/images/office-for-os-x-icons-2023.png&quot; alt=&quot;Office for OS X icons (2022 Pride update)&quot; class=&quot;non_hoover&quot; /&gt;
+		&lt;img src=&quot;/images/office-for-os-x-icons.png&quot; alt=&quot;Office for OS X icons (original)&quot; class=&quot;hoover&quot; /&gt;
 		&lt;figcaption&gt;
-			Office for OS X icons &lt;span class=&quot;non_print comment&quot;&gt;(focus or hover to display 2021 update)&lt;/span&gt;
+			Office for OS X icons 2022 Pride update &lt;span class=&quot;non_print comment&quot;&gt;(focus or hover to display original)&lt;/span&gt;
 		&lt;/figcaption&gt;
 	&lt;/figure&gt;
 &lt;/html&gt;
@@ -771,7 +772,7 @@ Every commit message should begin with a present-tense verb&lt;/p&gt;
 
         </description>
         <pubDate>Sat, 17 Aug 2019 00:00:00 +0200</pubDate>
-        <lastBuildDate>Wed, 19 May 2021 00:00:00 +0200</lastBuildDate>
+        <lastBuildDate>Wed, 21 Jun 2023 00:00:00 +0200</lastBuildDate>
         <link>https://blog.zanstra.com/2019/08/17/Office-for-OS-X-icons.html</link>
         <guid isPermaLink="true">https://blog.zanstra.com/2019/08/17/Office-for-OS-X-icons.html</guid>
       </item>
