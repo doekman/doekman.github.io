@@ -1,11 +1,12 @@
 # install ruby
 open https://jekyllrb.com/docs/installation/macos/#step-2-install-chruby-and-the-latest-ruby-with-ruby-install
 # ok @ Bloggus Doekmanni
-bundle install
-bundle exec jekyll serve --open "$@"
-bundle exec jekyll serve --open --drafts "$@"
+gem install jekyll
+open: jekyll serve --open "$@"
+jekyll serve --open --drafts "$@"
 # writing help
-./new-post.sh "$@" # please provide a title
+new: ./new-post.sh "$@" # please provide a title
 open http://hemingwayapp.com # grammar
 open https://headlinecapitalization.com
 open https://titlecaseconverter.com
+publish: ./publish.sh
