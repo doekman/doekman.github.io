@@ -6,9 +6,131 @@
 </description>
     <link>https://blog.zanstra.com/</link>
     <atom:link href="https://blog.zanstra.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 21 Jun 2023 12:55:59 +0200</pubDate>
-    <lastBuildDate>Wed, 21 Jun 2023 12:55:59 +0200</lastBuildDate>
-    <generator>Jekyll v4.3.2</generator>
+    <pubDate>Thu, 18 Apr 2024 11:46:54 +0200</pubDate>
+    <lastBuildDate>Thu, 18 Apr 2024 11:46:54 +0200</lastBuildDate>
+    <generator>Jekyll v4.3.3</generator>
+      <item>
+        <title>Stylize Text Files on the Terminal With awkcss</title>
+        <description>
+          &lt;p&gt;Since I’ve been introduced to UNIX, I’ve been intrigued by the &lt;em&gt;awk&lt;/em&gt; program. Most of the time when I use it, it’s to extract a value from a text file. Yet it can do so much more than that: it’s a full blown programming language. It’s a text processing language, which runs one or more pattern/action combinations:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pattern { action }
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;When the pattern matches a line, the action is executed. But at a certain moment I realized the pattern/action-combo looked a lot like CSS. In CSS you have rules, which are made up by selectors and property assignments. &lt;em&gt;awk&lt;/em&gt; also calls them rules. Selectors and properties. Patterns and actions. A light bulb 💡 moment: &lt;strong&gt;awkcss&lt;/strong&gt; was born.&lt;/p&gt;
+
+&lt;p&gt;The pattern in awk can be seen as an expression which selects a line or not. In the actions part we can use function calls as property setters. So, what properties would be easy to set? I would like to show the capabilities of awkcss by providing some examples.&lt;/p&gt;
+
+&lt;p&gt;Take for example this &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;zebra.awkcss&lt;/code&gt; stylesheet:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;NR % 2 == 1 { 
+    color(black);
+    background_color(gray);
+}
+NR % 2 == 0 { 
+    color(white);
+    background_color(black);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;To show the file &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;README.md&lt;/code&gt; with zebra stripes, run the following command:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; $ awkcss -f zebra.awkcss README.md
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The first pattern/action combo (“rule”) selects odd lines (in awk, the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NR&lt;/code&gt; variable contains the 1-based line number). For properties I’ve created the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;color&lt;/code&gt;- and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;background_color&lt;/code&gt;-functions. As property values I’ve used variables, although you can also use strings.&lt;/p&gt;
+
+&lt;p&gt;About the naming convention: CSS claimed the &lt;em&gt;dash-separator&lt;/em&gt;, and JavaScript is doing &lt;em&gt;camelCasing&lt;/em&gt;. To differentiate awkcss from the CSS and JavaScript, I was forced to use &lt;em&gt;snake_casing&lt;/em&gt; as a naming convention. Having the best readable CSS-dialect is considered a bonus.&lt;/p&gt;
+
+&lt;p&gt;To create a simple MarkDown stylizer, checkout this &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;markdown.awkcss&lt;/code&gt; stylesheet:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;BEGIN {
+    width(72);
+}
+/^#+ / {
+    color(yellow);
+    font_weight(bold);
+}
+/^\t| {4,}/ {
+    color(&quot;gray&quot;);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BEGIN&lt;/code&gt;-rule sets the default width. It’s like the CSS &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;*&lt;/code&gt;-selector. The second rule matches any lines starting with a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#&lt;/code&gt;-sign to match MarkDown headings. And the third rule matches code-blocks, starting with a tab character, or 4 spaces.&lt;/p&gt;
+
+&lt;p&gt;Suppose you don’t want to render code-blocks, you can use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;display&lt;/code&gt;-property with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;none&lt;/code&gt;-variable:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/^\t| {4,}/ {
+    display(none); 
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;There is also a box-model:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/^&amp;gt;/ {
+    block_name(&quot;block_quote&quot;);
+    border(ascii);
+    border_style_left(none);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This rule matches block quotes, and draws a border around it. Since a block quote already starts with a border-like character, the left border is set to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;none&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;An issue with awk is that a pattern selects one line only. For inline-properties like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;color&lt;/code&gt; this is not a problem. But we don’t want to draw a border around every line. We need a mechanism to draw a border around the whole block quote instead. For this the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;block_name&lt;/code&gt; property can be used. All consecutive lines with the same block name are considered to be part of the same block.&lt;/p&gt;
+
+&lt;p&gt;There is also support for media-queries:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/^\t| {4,}/ {
+    color(&quot;gray&quot;);
+}
+/^\t| {4,}/ &amp;amp;&amp;amp; LINES &amp;lt;= 25 {
+    white_space(pre);
+    text_overflow(ellipsis);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This stylesheet renders MarkDown-code gray. For terminals with limited height, lines are not wrapped (default &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;white_space&lt;/code&gt; is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pre_wrap&lt;/code&gt;). And when the line overflows, it is truncated and an ellipsis (…) is shown at the end. Besides the &lt;em&gt;number of lines&lt;/em&gt;, there are also variables for &lt;em&gt;number of columns&lt;/em&gt; and &lt;em&gt;colors&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Finally, you can use some pseudo-elements as well:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/^#+ / {
+    color(bright_blue);
+}
+/^#+ / &amp;amp;&amp;amp; select(&quot;::after&quot;) {
+    content(&quot;------------------------------------------------&quot;);
+    select();
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This will display a line under every heading. Because of the way &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;awk&lt;/code&gt; works, the selector will need to be reset at the end of the rule by calling &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;select&lt;/code&gt; with no arguments. The inserted pseudo-element is block level, meaning it will insert a line below the heading. Of course, the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;::before&lt;/code&gt; pseudo-element is also supported.&lt;/p&gt;
+
+&lt;p&gt;Although I used MarkDown in this blog as an example, the use cases don’t stop there. It can be used to better inspect &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/passwd&lt;/code&gt; by hiding system accounts, printing comments gray and high lighting accounts.&lt;/p&gt;
+
+&lt;p&gt;And I didn’t even touch everything. Check out the properties &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;margin&lt;/code&gt; (including margin-collapse), &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tab_size&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;text_decoration&lt;/code&gt; (both &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;underline&lt;/code&gt; and/or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;blink&lt;/code&gt;) and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;width&lt;/code&gt;: they are all documented in the &lt;a href=&quot;https://github.com/doekman/awkcss/blob/main/reference.md&quot;&gt;AWKCSS Reference&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Getting started: Check out the &lt;a href=&quot;https://github.com/doekman/awkcss/tree/main&quot;&gt;repository on GitHub&lt;/a&gt;; the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;README.md&lt;/code&gt; contains all information to get you started using awkcss!&lt;/p&gt;
+
+&lt;h2 id=&quot;how-does-this-all-work&quot;&gt;How Does This All Work&lt;/h2&gt;
+
+&lt;p&gt;If you want to know exactly how &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;awk&lt;/code&gt; is called, just add the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--debug&lt;/code&gt; argument, and the command that would have been ran is displayed (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;§&lt;/code&gt; is the repository-home):&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; $ awkcss --debug -f zebra.awkcss README.md
+ awk -v COLS=180 -v LINES=50 -v COLORS=256 -f §/library.awk -f §/awkcss/defaults.awkcss 
+     -f §/awkcss/examples/zebra.awkcss -f §/awkcss/render.awk README.md
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://github.com/doekman/awkcss/blob/main/reference.md#awk-specific-information&quot;&gt;reference&lt;/a&gt; also contains some technical information about this &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;awk&lt;/code&gt;-implementation. Finally, if you are interested in the source code, I suggest to check out the &lt;a href=&quot;https://github.com/doekman/awkcss/tree/version-0.1&quot;&gt;version 0.1-branch&lt;/a&gt; first. This contains the initial implementation without buffering and other more advanced stuff.&lt;/p&gt;
+
+&lt;p&gt;There is still a lot left to be desired. There are bugs, more test coverage will be very helpful. But the biggest missing feature is table-support. After all, working with columns/cells (like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$3&lt;/code&gt;) is awk’s biggest feature. However, to implement support for that, the render engine needs to be re-architected. We’ll see what the future holds.&lt;/p&gt;
+
+
+        </description>
+        <pubDate>Thu, 18 Apr 2024 00:00:00 +0200</pubDate>
+        <link>https://blog.zanstra.com/ict/2024/04/18/stylize-text-files-on-the-terminal-with-awkcss.html</link>
+        <guid isPermaLink="true">https://blog.zanstra.com/ict/2024/04/18/stylize-text-files-on-the-terminal-with-awkcss.html</guid>
+        <category>ICT</category>
+      </item>
       <item>
         <title>Integer Exposed Rewrite</title>
         <description>
