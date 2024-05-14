@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
 
     <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bloggus Doekmanni</title>
-    <meta name="description" content="This is Bloggus Doekmanni, or Doekman's blog if you like. A bit of drivel about computer programming; some dead serious, some not so much...">
+    <title>Google OAuth "Invalid-Grant" Nightmare — and How I Fixed It</title>
+    <meta name="description" content="I’m maintaining a couple of web applications, which use login-with-google for authentication. It also uses OAuth to access some of Google API’s. They are pri...">
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="canonical" href="https://blog.zanstra.com/">
+    <link rel="canonical" href="https://blog.zanstra.com/ict/2024/05/14/google-oauth-invalid-grant-nightmare-and-how-i-fixed-it.html">
     <link rel="alternate" type="application/json"    title="Bloggus Doekmanni" href="https://blog.zanstra.com/feed.json" />
     <link rel="alternate" type="application/rss+xml" title="Bloggus Doekmanni" href="https://blog.zanstra.com/feed.xml">
     <link rel="me" href="https://micro.blog/doekman"/>
@@ -59,233 +59,31 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <div class="home">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <h1 class="page-heading">Posts</h1>
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Google OAuth "Invalid-Grant" Nightmare — and How I Fixed It</h1>
+    <p class="post-meta"><time datetime="2024-05-14T00:00:00+02:00" itemprop="datePublished">May 14, 2024</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Doeke Zanstra</span></span></p>
+  </header>
 
-  <ul class="post-list">
+  <div class="post-content" itemprop="articleBody">
+    <p>I’m maintaining a couple of web applications, which use <em>login-with-google</em> for authentication. It also uses <em>OAuth</em> to access some of Google API’s. They are private applications, with less than 100 users.</p>
+
+<p>A while ago, one user reported an error with an application. Said user could log in, but when accessing a Google API, it would return the error “invalid-grant”.</p>
+
+<p>I tried a lot of things, but <a href="https://blog.timekit.io/google-oauth-invalid-grant-nightmare-and-how-to-fix-it-9f4efaf1da35">this blog article</a> was most helpful (see also this <a href="https://stackoverflow.com/a/38433986/56">Stack Overflow</a> entry). But solving the problem was not possible at the time. Nothing from the article worked. The user didn’t need to call the Google API since there was a workaround, so I left it at that.</p>
+
+<p>Months later, one direct collegue reported the same thing. Again, nothing I could think of or found on the internet seemed to work. This was more of a problem, since the collegue actually needed the functionality. And also, this not understood behaviour of OAuth was a ticking time bomb. And then, without an plain reason, I had an epiphany. Why not generate new credentials within the same project?</p>
+
+<p>It was worth a try. So I generated a <a href="https://support.google.com/cloud/answer/6158849?hl=en-GB">new “OAuth 2.0 Client IDs” entry</a> within the Google Cloud console. In the database, I emptied the oauth-session table. I made a backup, so I could revert the change if necessary. I also emptied the web application’s session table in the database. Via this way, all users are forced to re-authenticate. The web session table doesn’t have important data in it, so in my case this was possible.</p>
+
+<p>And the fix worked well. Users did need to re-authenticate, but they didn’t need to grant permissions to use the app. I guess permissions are stored on project level, so this was not neccssary. It still is a bit unsatisfactory the underlying problem isn’t known, but I’m pretty happy the error is gone now.</p>
+
+
     
-      <li>
-        <span class="post-meta">May 14, 2024</span>
+  </div>
 
-        <h2>
-          <a class="post-link" href="/ict/2024/05/14/google-oauth-invalid-grant-nightmare-and-how-i-fixed-it.html">Google OAuth "Invalid-Grant" Nightmare — and How I Fixed It</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">April 18, 2024</span>
-
-        <h2>
-          <a class="post-link" href="/ict/2024/04/18/stylize-text-files-on-the-terminal-with-awkcss.html">Stylize Text Files on the Terminal With awkcss</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 3, 2023</span>
-
-        <h2>
-          <a class="post-link" href="/ict/2023/05/03/integer-exposed-rewrite.html">Integer Exposed Rewrite</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">September 8, 2021</span>
-
-        <h2>
-          <a class="post-link" href="/ict/2021/09/08/wat-heeft-archipunt-te-maken-met-de-ingenuity-mars-helicopter.html">Wat heeft Archipunt te maken met de Ingenuity Mars Helicopter?</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">April 12, 2021</span>
-
-        <h2>
-          <a class="post-link" href="/ict/2021/04/12/a-closure-explanation.html">One Closure Explanation</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">January 31, 2021</span>
-
-        <h2>
-          <a class="post-link" href="/2021/01/31/Building-Another-Blog-Engine.html">Building Another Blog Engine</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">January 11, 2021</span>
-
-        <h2>
-          <a class="post-link" href="/2021/01/11/go-jamf-pro.html">Moving away from Server.app to Jamf Pro</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">October 5, 2020</span>
-
-        <h2>
-          <a class="post-link" href="/2020/10/05/Pretty-printing-JSON-with-a-twist.html">Pretty Print JSON with a Twist</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">April 3, 2020</span>
-
-        <h2>
-          <a class="post-link" href="/2020/04/03/query-trello-json-with-postgres.html">Query Trello data with Postgres (JSON)</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">February 17, 2020</span>
-
-        <h2>
-          <a class="post-link" href="/2020/02/17/ok-bash-and-python.html">ok-bash and Python on macOS</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">October 2, 2019</span>
-
-        <h2>
-          <a class="post-link" href="/2019/10/02/To-the-point.html">To the Point</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">August 26, 2019</span>
-
-        <h2>
-          <a class="post-link" href="/2019/08/26/NetNewsWire.html">NetNewsWire 5.0 released</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">August 17, 2019</span>
-
-        <h2>
-          <a class="post-link" href="/2019/08/17/Office-for-OS-X-icons.html">Office for OS X icons</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">June 12, 2019</span>
-
-        <h2>
-          <a class="post-link" href="/2019/06/12/Rename-github-repo.html">On renaming a GitHub repository</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 6, 2019</span>
-
-        <h2>
-          <a class="post-link" href="/2019/05/06/Introducing-osagitfilter.html">A third way of putting AppleScript into git</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">March 8, 2019</span>
-
-        <h2>
-          <a class="post-link" href="/2019/03/08/Git-Url.html">git-url</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">December 31, 2018</span>
-
-        <h2>
-          <a class="post-link" href="/2018/12/31/iOS_ethernet.html">Networking with iOS via Ethernet</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">September 13, 2018</span>
-
-        <h2>
-          <a class="post-link" href="/2018/09/13/Jump-around.html">Jump around</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">August 28, 2018</span>
-
-        <h2>
-          <a class="post-link" href="/2018/08/28/Missing-emoji.html">Emoji's missing from emojis.wiki</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">July 8, 2018</span>
-
-        <h2>
-          <a class="post-link" href="/2018/07/08/Vowel-case.html">To vowel case</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">June 29, 2018</span>
-
-        <h2>
-          <a class="post-link" href="/2018/06/29/Refactoring.html">To refactor, or not to refactor</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 19, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/2017/05/19/JSON-feed.html">Jekyll template for JSON Feed</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 14, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/2017/05/14/JSON-the-game-nr2.html">JSON, the game #2: The parsings</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">April 30, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/2017/04/30/JSON-the-game-nr1.html">JSON, the game #1: Bootstrapping it</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">September 8, 2016</span>
-
-        <h2>
-          <a class="post-link" href="/2016/09/08/Only-my-warnings.html">Only my warnings</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">March 6, 2016</span>
-
-        <h2>
-          <a class="post-link" href="/2016/03/06/Console-log-adventure.html">A console.log() adventure; pimped</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">January 9, 2016</span>
-
-        <h2>
-          <a class="post-link" href="/2016/01/09/First-post.html">First post!</a>
-        </h2>
-      </li>
-    
-  </ul>
-
-  <p class="rss-subscribe">subscribe via <a href="/feed.json">JSON</a> or <a href="/feed.xml">RSS</a></p>
-
-</div>
+</article>
 
       </div>
     </div>

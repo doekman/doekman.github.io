@@ -6,9 +6,31 @@
 </description>
     <link>https://blog.zanstra.com/</link>
     <atom:link href="https://blog.zanstra.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 18 Apr 2024 11:46:54 +0200</pubDate>
-    <lastBuildDate>Thu, 18 Apr 2024 11:46:54 +0200</lastBuildDate>
+    <pubDate>Tue, 14 May 2024 11:32:46 +0200</pubDate>
+    <lastBuildDate>Tue, 14 May 2024 11:32:46 +0200</lastBuildDate>
     <generator>Jekyll v4.3.3</generator>
+      <item>
+        <title>Google OAuth &quot;Invalid-Grant&quot; Nightmare — and How I Fixed It</title>
+        <description>
+          &lt;p&gt;I’m maintaining a couple of web applications, which use &lt;em&gt;login-with-google&lt;/em&gt; for authentication. It also uses &lt;em&gt;OAuth&lt;/em&gt; to access some of Google API’s. They are private applications, with less than 100 users.&lt;/p&gt;
+
+&lt;p&gt;A while ago, one user reported an error with an application. Said user could log in, but when accessing a Google API, it would return the error “invalid-grant”.&lt;/p&gt;
+
+&lt;p&gt;I tried a lot of things, but &lt;a href=&quot;https://blog.timekit.io/google-oauth-invalid-grant-nightmare-and-how-to-fix-it-9f4efaf1da35&quot;&gt;this blog article&lt;/a&gt; was most helpful (see also this &lt;a href=&quot;https://stackoverflow.com/a/38433986/56&quot;&gt;Stack Overflow&lt;/a&gt; entry). But solving the problem was not possible at the time. Nothing from the article worked. The user didn’t need to call the Google API since there was a workaround, so I left it at that.&lt;/p&gt;
+
+&lt;p&gt;Months later, one direct collegue reported the same thing. Again, nothing I could think of or found on the internet seemed to work. This was more of a problem, since the collegue actually needed the functionality. And also, this not understood behaviour of OAuth was a ticking time bomb. And then, without an plain reason, I had an epiphany. Why not generate new credentials within the same project?&lt;/p&gt;
+
+&lt;p&gt;It was worth a try. So I generated a &lt;a href=&quot;https://support.google.com/cloud/answer/6158849?hl=en-GB&quot;&gt;new “OAuth 2.0 Client IDs” entry&lt;/a&gt; within the Google Cloud console. In the database, I emptied the oauth-session table. I made a backup, so I could revert the change if necessary. I also emptied the web application’s session table in the database. Via this way, all users are forced to re-authenticate. The web session table doesn’t have important data in it, so in my case this was possible.&lt;/p&gt;
+
+&lt;p&gt;And the fix worked well. Users did need to re-authenticate, but they didn’t need to grant permissions to use the app. I guess permissions are stored on project level, so this was not neccssary. It still is a bit unsatisfactory the underlying problem isn’t known, but I’m pretty happy the error is gone now.&lt;/p&gt;
+
+
+        </description>
+        <pubDate>Tue, 14 May 2024 00:00:00 +0200</pubDate>
+        <link>https://blog.zanstra.com/ict/2024/05/14/google-oauth-invalid-grant-nightmare-and-how-i-fixed-it.html</link>
+        <guid isPermaLink="true">https://blog.zanstra.com/ict/2024/05/14/google-oauth-invalid-grant-nightmare-and-how-i-fixed-it.html</guid>
+        <category>ICT</category>
+      </item>
       <item>
         <title>Stylize Text Files on the Terminal With awkcss</title>
         <description>
