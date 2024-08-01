@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
 
     <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bloggus Doekmanni</title>
-    <meta name="description" content="This is Bloggus Doekmanni, or Doekman's blog if you like. A bit of drivel about computer programming; some dead serious, some not so much...">
+    <title>Transfer git Changes With a Pasteboard-Workflow</title>
+    <meta name="description" content="Sometimes you want to transfer changes you made to a source tree from one computer to the other. The source tree on both computers are managed by git. One re...">
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="canonical" href="https://blog.zanstra.com/">
+    <link rel="canonical" href="https://blog.zanstra.com/ict/2024/08/01/transfer-git-changes-with-a-pasteboard-workflow.html">
     <link rel="alternate" type="application/json"    title="Bloggus Doekmanni" href="https://blog.zanstra.com/feed.json" />
     <link rel="alternate" type="application/rss+xml" title="Bloggus Doekmanni" href="https://blog.zanstra.com/feed.xml">
     <link rel="me" href="https://micro.blog/doekman"/>
@@ -59,241 +59,56 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <div class="home">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <h1 class="page-heading">Posts</h1>
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Transfer git Changes With a Pasteboard-Workflow</h1>
+    <p class="post-meta"><time datetime="2024-08-01T00:00:00+02:00" itemprop="datePublished">August 1, 2024</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Doeke Zanstra</span></span></p>
+  </header>
 
-  <ul class="post-list">
+  <div class="post-content" itemprop="articleBody">
+    <p>Sometimes you want to transfer changes you made to a source tree from one computer to the other. The source tree on both computers are managed by <em>git</em>. One reason to do this, is because you tried something on your laptop. But you changed your mind, and want to work on a desktop computer with a big screen and real keyboard. And you don’t want to re-type everything.</p>
+
+<p>Another reason might be, because you debugged a problem on a production machine (I never do this, of course). The production machine only has readonly access to git. You want to secure these changes exactly, because they work.</p>
+
+<p>The commands are pretty simple, but I keep forgetting them. The commands use the diff format. If possible, I try not to create temporary files, because often they leave a mess. If the <strong>source machine</strong> is on MacOS, I use this command to secure patch:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git --no-pager diff | pbcopy
+</code></pre></div></div>
+
+<p>When on <em>Linux</em> via <em>ssh</em> in a <em>Terminal.app</em> window, I copy by hand:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git --no-pager diff
+# Press cmd+A to select output from last command, and press cmd+C to copy
+</code></pre></div></div>
+
+<p>With help of the universal clipboard, I can paste this on the <strong>target machine</strong>. But before I do that, I first check the status of the target repository:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Checking if the index is clean, and we are on the right branch
+$ git status
+# Now we can apply the patch
+$ pbpaste | git apply -
+</code></pre></div></div>
+
+<p>Now I can review and commit the changes, and push the changes to our origin. Normally I would use GitHub Desktop for this, because I like working with GUI’s for this kind of work.</p>
+
+<p>After pushing, we have to cleanup things on the <strong>source machine</strong>. With older git-versions, you didn’t need to reset the working folder. But since I don’t know when this is necessary:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Undo all the changes we secured in previous steps
+$ git reset --hard
+# Now get the changes 
+$ git pull
+</code></pre></div></div>
+
+<p>Finally you might want to restart any processes that need restarting.</p>
+
+<p>You can of course use temporary files. <a href="https://appleinsider.com/inside/macos/tips/how-to-fix-universal-clipboard-problems-on-macos">Files</a> <a href="https://discussions.apple.com/thread/7913125">are</a> <a href="https://beebom.com/fix-universal-clipboard-not-working-iphone-mac/">more</a> <a href="https://www.idownloadblog.com/2022/06/30/how-to-fix-universal-clipboard-not-working-on-iphone-ipad-mac/">reliable</a> <a href="https://www.igeeksblog.com/universal-clipboard-not-working-between-mac-and-iphone/">anyways</a>.</p>
+
+
     
-      <li>
-        <span class="post-meta">August 1, 2024</span>
+  </div>
 
-        <h2>
-          <a class="post-link" href="/ict/2024/08/01/transfer-git-changes-with-a-pasteboard-workflow.html">Transfer git Changes With a Pasteboard-Workflow</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 14, 2024</span>
-
-        <h2>
-          <a class="post-link" href="/ict/2024/05/14/google-oauth-invalid-grant-nightmare-and-how-i-fixed-it.html">Google OAuth "Invalid-Grant" Nightmare — and How I Fixed It</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">April 18, 2024</span>
-
-        <h2>
-          <a class="post-link" href="/ict/2024/04/18/stylize-text-files-on-the-terminal-with-awkcss.html">Stylize Text Files on the Terminal With awkcss</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 3, 2023</span>
-
-        <h2>
-          <a class="post-link" href="/ict/2023/05/03/integer-exposed-rewrite.html">Integer Exposed Rewrite</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">September 8, 2021</span>
-
-        <h2>
-          <a class="post-link" href="/ict/2021/09/08/wat-heeft-archipunt-te-maken-met-de-ingenuity-mars-helicopter.html">Wat heeft Archipunt te maken met de Ingenuity Mars Helicopter?</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">April 12, 2021</span>
-
-        <h2>
-          <a class="post-link" href="/ict/2021/04/12/a-closure-explanation.html">One Closure Explanation</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">January 31, 2021</span>
-
-        <h2>
-          <a class="post-link" href="/2021/01/31/Building-Another-Blog-Engine.html">Building Another Blog Engine</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">January 11, 2021</span>
-
-        <h2>
-          <a class="post-link" href="/2021/01/11/go-jamf-pro.html">Moving away from Server.app to Jamf Pro</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">October 5, 2020</span>
-
-        <h2>
-          <a class="post-link" href="/2020/10/05/Pretty-printing-JSON-with-a-twist.html">Pretty Print JSON with a Twist</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">April 3, 2020</span>
-
-        <h2>
-          <a class="post-link" href="/2020/04/03/query-trello-json-with-postgres.html">Query Trello data with Postgres (JSON)</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">February 17, 2020</span>
-
-        <h2>
-          <a class="post-link" href="/2020/02/17/ok-bash-and-python.html">ok-bash and Python on macOS</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">October 2, 2019</span>
-
-        <h2>
-          <a class="post-link" href="/2019/10/02/To-the-point.html">To the Point</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">August 26, 2019</span>
-
-        <h2>
-          <a class="post-link" href="/2019/08/26/NetNewsWire.html">NetNewsWire 5.0 released</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">August 17, 2019</span>
-
-        <h2>
-          <a class="post-link" href="/2019/08/17/Office-for-OS-X-icons.html">Office for OS X icons</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">June 12, 2019</span>
-
-        <h2>
-          <a class="post-link" href="/2019/06/12/Rename-github-repo.html">On renaming a GitHub repository</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 6, 2019</span>
-
-        <h2>
-          <a class="post-link" href="/2019/05/06/Introducing-osagitfilter.html">A third way of putting AppleScript into git</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">March 8, 2019</span>
-
-        <h2>
-          <a class="post-link" href="/2019/03/08/Git-Url.html">git-url</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">December 31, 2018</span>
-
-        <h2>
-          <a class="post-link" href="/2018/12/31/iOS_ethernet.html">Networking with iOS via Ethernet</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">September 13, 2018</span>
-
-        <h2>
-          <a class="post-link" href="/2018/09/13/Jump-around.html">Jump around</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">August 28, 2018</span>
-
-        <h2>
-          <a class="post-link" href="/2018/08/28/Missing-emoji.html">Emoji's missing from emojis.wiki</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">July 8, 2018</span>
-
-        <h2>
-          <a class="post-link" href="/2018/07/08/Vowel-case.html">To vowel case</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">June 29, 2018</span>
-
-        <h2>
-          <a class="post-link" href="/2018/06/29/Refactoring.html">To refactor, or not to refactor</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 19, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/2017/05/19/JSON-feed.html">Jekyll template for JSON Feed</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 14, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/2017/05/14/JSON-the-game-nr2.html">JSON, the game #2: The parsings</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">April 30, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/2017/04/30/JSON-the-game-nr1.html">JSON, the game #1: Bootstrapping it</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">September 8, 2016</span>
-
-        <h2>
-          <a class="post-link" href="/2016/09/08/Only-my-warnings.html">Only my warnings</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">March 6, 2016</span>
-
-        <h2>
-          <a class="post-link" href="/2016/03/06/Console-log-adventure.html">A console.log() adventure; pimped</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">January 9, 2016</span>
-
-        <h2>
-          <a class="post-link" href="/2016/01/09/First-post.html">First post!</a>
-        </h2>
-      </li>
-    
-  </ul>
-
-  <p class="rss-subscribe">subscribe via <a href="/feed.json">JSON</a> or <a href="/feed.xml">RSS</a></p>
-
-</div>
+</article>
 
       </div>
     </div>
