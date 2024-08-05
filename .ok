@@ -1,3 +1,4 @@
 # Don't work in this branch, as it is maintained by a bot 👾
-git status
-git checkout master
+git status	# Should be on branch <web-stek>
+git reset --hard
+back: cd "../$(basename $(pwd) | sed 's/__web-stek//')"
