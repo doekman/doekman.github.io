@@ -1,8 +1,10 @@
 ---
 layout: page
-title: Pocket Archive
 permalink: /archive/pocket/
 ---
+
+Pocket Archive
+--------------
 
 Below the export of my [Pocket](https://support.mozilla.org/en-US/kb/future-of-pocket)-account.
 
