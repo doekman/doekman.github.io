@@ -12,7 +12,7 @@ What happened? I changed my default shell via de GUI (`System Settings > Users &
 
 If you do that, the path to specific version of bash will be stored. It even does that if you choose the path `/opt/homebrew/bin/bash` (which is a symbolic link to the latest version). So when you update, and start a new shell, you get the old version of the shell. And when brew cleaned it's cellar, the old version would have been deleted. This is when I noticed my shell was broken.
 
-You can solve this problem in two ways. What I did: I added the path to the symbolic link to the approved list of shells. First I ran `sudo mate /etc/shells` (I still use `mate`, but you can use your favorite editor). After taht I added the line `/opt/homebrew/bin/bash` to the end of the file. And finally I saved it.
+You can solve this problem in two ways. What I did: I added the path to the symbolic link to the approved list of shells. First I ran `sudo mate /etc/shells` (I still use `mate`, but you can use your favorite editor). After that I added the line `/opt/homebrew/bin/bash` to the end of the file. And finally I saved it.
 
 The new entry didn't show in System Settings, so I restarted it. After that, it showed up, so I could choose the symbolic linked version of bash from homebrew.
 
