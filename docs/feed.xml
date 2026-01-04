@@ -6,8 +6,8 @@
 </description>
     <link>https://blog.zanstra.com/</link>
     <atom:link href="https://blog.zanstra.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 04 Jan 2026 12:03:00 +0100</pubDate>
-    <lastBuildDate>Sun, 04 Jan 2026 12:03:00 +0100</lastBuildDate>
+    <pubDate>Sun, 04 Jan 2026 12:08:45 +0100</pubDate>
+    <lastBuildDate>Sun, 04 Jan 2026 12:08:45 +0100</lastBuildDate>
     <generator>Jekyll v4.4.1</generator>
       <item>
         <title>Installing Bash via Brew on MacOS</title>
@@ -26,9 +26,9 @@
 
         </description>
         <pubDate>Sun, 04 Jan 2026 00:00:00 +0100</pubDate>
-        <link>https://blog.zanstra.com/ict%20note2self/2026/01/04/installing-bash-via-brew-on-macos.html</link>
-        <guid isPermaLink="true">https://blog.zanstra.com/ict%20note2self/2026/01/04/installing-bash-via-brew-on-macos.html</guid>
-        <category>ICT note2self</category>
+        <link>https://blog.zanstra.com/ict/2026/01/04/installing-bash-via-brew-on-macos.html</link>
+        <guid isPermaLink="true">https://blog.zanstra.com/ict/2026/01/04/installing-bash-via-brew-on-macos.html</guid>
+        <category>ICT</category>
       </item>
       <item>
         <title>Hosting My Pocket Archive</title>
