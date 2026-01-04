@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
 
     <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bloggus Doekmanni</title>
-    <meta name="description" content="This is Bloggus Doekmanni, or Doekman's blog if you like. A bit of drivel about computer programming; some dead serious, some not so much...">
+    <title>Installing Bash via Brew on MacOS</title>
+    <meta name="description" content="MacOS comes with an ancient version of bash, due to licensing issues. You can install a modern version of bash with brew, but I broke my shell after updating...">
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="canonical" href="https://blog.zanstra.com/">
+    <link rel="canonical" href="https://blog.zanstra.com/ict%20note2self/2026/01/04/installing-bash-via-brew-on-macos.html">
     <link rel="alternate" type="application/json"    title="Bloggus Doekmanni" href="https://blog.zanstra.com/feed.json" />
     <link rel="alternate" type="application/rss+xml" title="Bloggus Doekmanni" href="https://blog.zanstra.com/feed.xml">
     <link rel="me" href="https://micro.blog/doekman"/>
@@ -61,257 +61,30 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <div class="home">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <h1 class="page-heading">Posts</h1>
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Installing Bash via Brew on MacOS</h1>
+    <p class="post-meta"><time datetime="2026-01-04T00:00:00+01:00" itemprop="datePublished">January 4, 2026</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Doeke Zanstra</span></span></p>
+  </header>
 
-  <ul class="post-list">
+  <div class="post-content" itemprop="articleBody">
+    <p>MacOS comes with an ancient version of bash, due to licensing issues. You can install a modern version of bash with brew, but I broke my shell after updating bash.</p>
+
+<p>What happened? I changed my default shell via de GUI (<code class="language-plaintext highlighter-rouge">System Settings &gt; Users &amp; Groups &gt; Advanced options... (ctrl+option-click on your own name or avatar) &gt; Login shell &gt; Choose</code>).</p>
+
+<p>If you do that, the path to specific version of bash will be stored. It even does that if you choose the path <code class="language-plaintext highlighter-rouge">/opt/homebrew/bin/bash</code> (which is a symbolic link to the latest version). So when you update, and start a new shell, you get the old version of the shell. And when brew cleaned it’s cellar, the old version would have been deleted. This is when I noticed my shell was broken.</p>
+
+<p>You can solve this problem in two ways. What I did: I added the path to the symbolic link to the approved list of shells. First I ran <code class="language-plaintext highlighter-rouge">sudo mate /etc/shells</code> (I still use <code class="language-plaintext highlighter-rouge">mate</code>, but you can use your favorite editor). After taht I added the line <code class="language-plaintext highlighter-rouge">/opt/homebrew/bin/bash</code> to the end of the file. And finally I saved it.</p>
+
+<p>The new entry didn’t show in System Settings, so I restarted it. After that, it showed up, so I could choose the symbolic linked version of bash from homebrew.</p>
+
+<p>Another way might be <code class="language-plaintext highlighter-rouge">sudo chsh -s /opt/homebrew/bin/bash</code>, but I didn’t try this one.</p>
+
     
-      <li>
-        <span class="post-meta">January 4, 2026</span>
+  </div>
 
-        <h2>
-          <a class="post-link" href="/ict%20note2self/2026/01/04/installing-bash-via-brew-on-macos.html">Installing Bash via Brew on MacOS</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 26, 2025</span>
-
-        <h2>
-          <a class="post-link" href="/ict/2025/05/26/hosting-my-pocket-archive.html">Hosting My Pocket Archive</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">August 1, 2024</span>
-
-        <h2>
-          <a class="post-link" href="/ict/2024/08/01/transfer-git-changes-with-a-pasteboard-workflow.html">Transfer git Changes With a Pasteboard-Workflow</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 14, 2024</span>
-
-        <h2>
-          <a class="post-link" href="/ict/2024/05/14/google-oauth-invalid-grant-nightmare-and-how-i-fixed-it.html">Google OAuth "Invalid-Grant" Nightmare — and How I Fixed It</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">April 18, 2024</span>
-
-        <h2>
-          <a class="post-link" href="/ict/2024/04/18/stylize-text-files-on-the-terminal-with-awkcss.html">Stylize Text Files on the Terminal With awkcss</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 3, 2023</span>
-
-        <h2>
-          <a class="post-link" href="/ict/2023/05/03/integer-exposed-rewrite.html">Integer Exposed Rewrite</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">September 8, 2021</span>
-
-        <h2>
-          <a class="post-link" href="/ict/2021/09/08/wat-heeft-archipunt-te-maken-met-de-ingenuity-mars-helicopter.html">Wat heeft Archipunt te maken met de Ingenuity Mars Helicopter?</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">April 12, 2021</span>
-
-        <h2>
-          <a class="post-link" href="/ict/2021/04/12/a-closure-explanation.html">One Closure Explanation</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">January 31, 2021</span>
-
-        <h2>
-          <a class="post-link" href="/2021/01/31/Building-Another-Blog-Engine.html">Building Another Blog Engine</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">January 11, 2021</span>
-
-        <h2>
-          <a class="post-link" href="/2021/01/11/go-jamf-pro.html">Moving away from Server.app to Jamf Pro</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">October 5, 2020</span>
-
-        <h2>
-          <a class="post-link" href="/2020/10/05/Pretty-printing-JSON-with-a-twist.html">Pretty Print JSON with a Twist</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">April 3, 2020</span>
-
-        <h2>
-          <a class="post-link" href="/2020/04/03/query-trello-json-with-postgres.html">Query Trello data with Postgres (JSON)</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">February 17, 2020</span>
-
-        <h2>
-          <a class="post-link" href="/2020/02/17/ok-bash-and-python.html">ok-bash and Python on macOS</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">October 2, 2019</span>
-
-        <h2>
-          <a class="post-link" href="/2019/10/02/To-the-point.html">To the Point</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">August 26, 2019</span>
-
-        <h2>
-          <a class="post-link" href="/2019/08/26/NetNewsWire.html">NetNewsWire 5.0 released</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">August 17, 2019</span>
-
-        <h2>
-          <a class="post-link" href="/2019/08/17/Office-for-OS-X-icons.html">Office for OS X icons</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">June 12, 2019</span>
-
-        <h2>
-          <a class="post-link" href="/2019/06/12/Rename-github-repo.html">On renaming a GitHub repository</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 6, 2019</span>
-
-        <h2>
-          <a class="post-link" href="/2019/05/06/Introducing-osagitfilter.html">A third way of putting AppleScript into git</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">March 8, 2019</span>
-
-        <h2>
-          <a class="post-link" href="/2019/03/08/Git-Url.html">git-url</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">December 31, 2018</span>
-
-        <h2>
-          <a class="post-link" href="/2018/12/31/iOS_ethernet.html">Networking with iOS via Ethernet</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">September 13, 2018</span>
-
-        <h2>
-          <a class="post-link" href="/2018/09/13/Jump-around.html">Jump around</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">August 28, 2018</span>
-
-        <h2>
-          <a class="post-link" href="/2018/08/28/Missing-emoji.html">Emoji's missing from emojis.wiki</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">July 8, 2018</span>
-
-        <h2>
-          <a class="post-link" href="/2018/07/08/Vowel-case.html">To vowel case</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">June 29, 2018</span>
-
-        <h2>
-          <a class="post-link" href="/2018/06/29/Refactoring.html">To refactor, or not to refactor</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 19, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/2017/05/19/JSON-feed.html">Jekyll template for JSON Feed</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 14, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/2017/05/14/JSON-the-game-nr2.html">JSON, the game #2: The parsings</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">April 30, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/2017/04/30/JSON-the-game-nr1.html">JSON, the game #1: Bootstrapping it</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">September 8, 2016</span>
-
-        <h2>
-          <a class="post-link" href="/2016/09/08/Only-my-warnings.html">Only my warnings</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">March 6, 2016</span>
-
-        <h2>
-          <a class="post-link" href="/2016/03/06/Console-log-adventure.html">A console.log() adventure; pimped</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">January 9, 2016</span>
-
-        <h2>
-          <a class="post-link" href="/2016/01/09/First-post.html">First post!</a>
-        </h2>
-      </li>
-    
-  </ul>
-
-  <p class="rss-subscribe">subscribe via <a href="/feed.json">JSON</a> or <a href="/feed.xml">RSS</a></p>
-
-</div>
+</article>
 
       </div>
     </div>

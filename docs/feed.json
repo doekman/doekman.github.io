@@ -7,6 +7,15 @@
 	"icon": "https://blog.zanstra.com/images/doekman-square.png",
 	"author": { "name": "Doeke Zanstra"},
 	"items": [  {
+			"id": "/ict%20note2self/2026/01/04/installing-bash-via-brew-on-macos",
+			"url": "https://blog.zanstra.com/ict%20note2self/2026/01/04/installing-bash-via-brew-on-macos.html",
+			"title": "Installing Bash via Brew on MacOS",
+			"content_html": "<base href=\"https://blog.zanstra.com/\"><p>MacOS comes with an ancient version of bash, due to licensing issues. You can install a modern version of bash with brew, but I broke my shell after updating bash.</p>\n\n<p>What happened? I changed my default shell via de GUI (<code class=\"language-plaintext highlighter-rouge\">System Settings &gt; Users &amp; Groups &gt; Advanced options... (ctrl+option-click on your own name or avatar) &gt; Login shell &gt; Choose</code>).</p>\n\n<p>If you do that, the path to specific version of bash will be stored. It even does that if you choose the path <code class=\"language-plaintext highlighter-rouge\">/opt/homebrew/bin/bash</code> (which is a symbolic link to the latest version). So when you update, and start a new shell, you get the old version of the shell. And when brew cleaned it’s cellar, the old version would have been deleted. This is when I noticed my shell was broken.</p>\n\n<p>You can solve this problem in two ways. What I did: I added the path to the symbolic link to the approved list of shells. First I ran <code class=\"language-plaintext highlighter-rouge\">sudo mate /etc/shells</code> (I still use <code class=\"language-plaintext highlighter-rouge\">mate</code>, but you can use your favorite editor). After taht I added the line <code class=\"language-plaintext highlighter-rouge\">/opt/homebrew/bin/bash</code> to the end of the file. And finally I saved it.</p>\n\n<p>The new entry didn’t show in System Settings, so I restarted it. After that, it showed up, so I could choose the symbolic linked version of bash from homebrew.</p>\n\n<p>Another way might be <code class=\"language-plaintext highlighter-rouge\">sudo chsh -s /opt/homebrew/bin/bash</code>, but I didn’t try this one.</p>\n",
+			"summary": "MacOS comes with an ancient version of bash, due to licensing issues. You can install a modern version of bash with brew, but I broke my shell after updating bash.",
+			"date_published": "2026-01-04T00:00:00+01:00",
+			"tags": []
+		},
+		 {
 			"id": "/ict/2025/05/26/hosting-my-pocket-archive",
 			"url": "https://blog.zanstra.com/ict/2025/05/26/hosting-my-pocket-archive.html",
 			"title": "Hosting My Pocket Archive",
