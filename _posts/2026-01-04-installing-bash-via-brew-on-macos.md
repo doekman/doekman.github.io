@@ -3,7 +3,7 @@ layout: post
 title: "Installing Bash via Brew on MacOS"
 date: 2026-01-04
 author: Doeke Zanstra
-category: ICT note2self
+category: ICT
 ---
 
 MacOS comes with an ancient version of bash, due to licensing issues. You can install a modern version of bash with brew, but I broke my shell after updating bash.
