@@ -75,7 +75,7 @@
 
 <p>If you do that, the path to specific version of bash will be stored. It even does that if you choose the path <code class="language-plaintext highlighter-rouge">/opt/homebrew/bin/bash</code> (which is a symbolic link to the latest version). So when you update, and start a new shell, you get the old version of the shell. And when brew cleaned it’s cellar, the old version would have been deleted. This is when I noticed my shell was broken.</p>
 
-<p>You can solve this problem in two ways. What I did: I added the path to the symbolic link to the approved list of shells. First I ran <code class="language-plaintext highlighter-rouge">sudo mate /etc/shells</code> (I still use <code class="language-plaintext highlighter-rouge">mate</code>, but you can use your favorite editor). After taht I added the line <code class="language-plaintext highlighter-rouge">/opt/homebrew/bin/bash</code> to the end of the file. And finally I saved it.</p>
+<p>You can solve this problem in two ways. What I did: I added the path to the symbolic link to the approved list of shells. First I ran <code class="language-plaintext highlighter-rouge">sudo mate /etc/shells</code> (I still use <code class="language-plaintext highlighter-rouge">mate</code>, but you can use your favorite editor). After that I added the line <code class="language-plaintext highlighter-rouge">/opt/homebrew/bin/bash</code> to the end of the file. And finally I saved it.</p>
 
 <p>The new entry didn’t show in System Settings, so I restarted it. After that, it showed up, so I could choose the symbolic linked version of bash from homebrew.</p>
 
