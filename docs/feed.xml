@@ -6,9 +6,490 @@
 </description>
     <link>https://blog.zanstra.com/</link>
     <atom:link href="https://blog.zanstra.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 04 Jan 2026 13:50:01 +0100</pubDate>
-    <lastBuildDate>Sun, 04 Jan 2026 13:50:01 +0100</lastBuildDate>
+    <pubDate>Wed, 07 Jan 2026 17:19:54 +0100</pubDate>
+    <lastBuildDate>Wed, 07 Jan 2026 17:19:54 +0100</lastBuildDate>
     <generator>Jekyll v4.4.1</generator>
+      <item>
+        <title>Open Tab&apos;s on My Devices</title>
+        <description>
+          &lt;p&gt;Below are the links on the internet-tab’s I found on my devices. I did a virtual cleanup of my browsers. I’ll keep the links for reference, but I doubt I’ll need them again. The list is obviously slightly redacted.&lt;/p&gt;
+
+&lt;p&gt;I used &lt;a href=&quot;https://www.idownloadblog.com/2025/10/17/copy-all-open-tab-links-safari/#On-iPhone&quot;&gt;these instructions&lt;/a&gt; (I’m using Safari on my Apple devices) to save the links. With the use of an editor and macro’s, I converted the list to MarkDown. However, the iPhone-list didn’t come with titles, so I wrote a &lt;a href=&quot;https://gist.github.com/doekman/121cc8e71368aaf2396f97b232b58f2a&quot;&gt;simple Python script&lt;/a&gt; to fetch the titles. I did get around 10 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;403 Forbidden&lt;/code&gt; responses, they probably thought I was an AI crawler. I fixed the titles by hand. Then I did a visual inspection, and fixed some other problems (no &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|&lt;/code&gt; allowed in MarkDown link-text? Some WFT-8 problems with my script).&lt;/p&gt;
+
+&lt;html&gt;
+&lt;p&gt;
+    To add some actual use to this page, I&apos;ve added the following button (style by &lt;a href=&quot;https://codepen.io/zastrow/pen/eYxvQZW&quot;&gt;this CodePen&lt;/a&gt;):
+    &lt;br /&gt;
+    &lt;button onclick=&quot;window.open(getRandomLink());&quot;&gt;I&apos;m feeling adventurous and nostalgic&lt;/button&gt;
+&lt;/p&gt;
+&lt;script&gt;
+    function getRandomLink() {
+        const nr_of_links_above = 3;
+        let container = document.getElementsByClassName(&apos;post-content&apos;)[0];
+        let links = container.getElementsByTagName(&apos;A&apos;);
+        let nr = Math.floor(Math.random() * (links.length - nr_of_links_above) + nr_of_links_above);
+        let link = links[nr];
+        console.info(&quot;Opening link nr %s.&quot;, nr, links);
+        return link.href;
+    }
+&lt;/script&gt;
+&lt;style&gt;
+    header {
+        
+    }
+    body {
+    	font-family: &quot;Lucida Grande&quot;, system-ui, sans-serif;
+    	min-height: 100vh;
+        /*
+    	display: flex;
+    	justify-content: center;
+    	align-items: center;
+        */
+    	background-image: repeating-linear-gradient(
+    		#fff 0%,
+    		#fff 50%,
+    		#f0f0f0 50%,
+    		#f0f0f0 100%
+    	);
+    	background-size: 0.5ch 0.5ch;
+    	/* Try changing these values to change the color	 */
+    	--light-adjust: 0%;
+    	--chroma-base: 41; /* Default: 41 */
+    	--chroma-range: 13; /* Default: 13 */
+    	--hue-base: 267deg; /* Default: 267deg */
+    }
+
+    button {
+    	appearance: none;
+    	font-family: inherit;
+    	font-size: 1rem;
+    	text-shadow: 0 0.25ch 0.25ch
+    		lch(calc(30% + var(--light-adjust)) var(--chroma-base) var(--hue-base) / 50%);
+    	position: relative;
+    	border: none;
+    	color: lch(0% 0 0deg);
+    }
+
+    button,
+    button::after {
+    	border-radius: 1.5ch;
+    	padding: 0.5ch 1.5ch;
+    	background-color: lch(
+    		calc(98% + var(--light-adjust))
+    			calc(var(--chroma-base) + (var(--chroma-range) * 2)) var(--hue-base) / 50%
+    	);
+    	box-shadow: inset 0 0 0.05ch 0.025ch
+    			lch(
+    				calc(100% + var(--light-adjust))
+    					calc(var(--chroma-base) + var(--chroma-range)) var(--hue-base) / 10%
+    			),
+    		inset 0 0 0.1ch 0.05ch
+    			lch(
+    				calc(100% + var(--light-adjust))
+    					calc(var(--chroma-base) + var(--chroma-range)) var(--hue-base) / 50%
+    			),
+    		inset 0 0.2ch 0.4ch 0.1ch
+    			lch(calc(60% + var(--light-adjust)) var(--chroma-base) var(--hue-base) / 50%),
+    		inset 0 -0.25ch 0.25ch 0 lch(calc(20% + var(--light-adjust)) 41
+    					var(--hue-base) / 10%),
+    		inset -0.25ch 0 0.25ch 0 lch(calc(20% + var(--light-adjust))
+    					calc(var(--chroma-base) + var(--chroma-range)) var(--hue-base) / 40%),
+    		inset 0.25ch 0 0.25ch 0
+    			lch(
+    				calc(20% + var(--light-adjust))
+    					calc(var(--chroma-base) + var(--chroma-range)) var(--hue-base) / 40%
+    			),
+    		inset 0 0.5ch 1ch 0.5ch
+    			lch(
+    				calc(30% + var(--light-adjust))
+    					calc(var(--chroma-base) + var(--chroma-range)) var(--hue-base) / 60%
+    			);
+    	transition: all ease-in-out 250ms;
+    }
+
+    button:hover {
+    	--light-adjust: 10%;
+    }
+
+    button::before,
+    button::after {
+    	content: &quot;&quot;;
+    	display: block;
+    	position: absolute;
+    }
+
+    button::before {
+    	inset: 0.25ch 0.75ch auto;
+    	background: linear-gradient(
+    		lch(calc(100% + var(--light-adjust)) 0 var(--hue-base) / 50%),
+    		lch(
+    			calc(100% + var(--light-adjust)) var(--chroma-base) var(--hue-base) / 30%
+    		),
+    		lch(calc(98% + var(--light-adjust)) var(--chroma-base) var(--hue-base) / 5%)
+    	);
+    	height: 0.875ch;
+    	border-radius: 2ch 2ch 0.5ch 0.5ch;
+    	z-index: 1;
+    }
+
+    button::after {
+    	inset: 0;
+    	opacity: 80%;
+    	filter: blur(0.25ch);
+    	translate: 0 0.875ch;
+    	z-index: -1;
+    }
+&lt;/style&gt;
+&lt;/html&gt;
+
+&lt;h2 id=&quot;tabs-on-my-imac&quot;&gt;Tab’s on my iMac&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Window 1
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://hackaday.com/2023/11/12/the-ibm-mda-should-have-been-the-cda/&quot;&gt;The IBM MDA Should Have Been The CDA | Hackaday&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://ports.macports.org/&quot;&gt;Ports | MacPorts&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://docs.brew.sh/Support-Tiers#tier-3&quot;&gt;Support Tiers — Homebrew Documentation&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Dyson_sphere&quot;&gt;Dyson sphere - Wikipedia&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://garagehq.deuxfleurs.fr/documentation/quick-start/&quot;&gt;Quick Start | Garage HQ&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://jyn.dev/the-terminal-of-the-future/&quot;&gt;the terminal of the future&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://asahilinux.org/2025/12/progress-report-6-18/&quot;&gt;Progress Report: Linux 6.18 - Asahi Linux&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://pivot-to-ai.com/&quot;&gt;Pivot to AI – It can’t be that stupid, you must be prompting it wrong&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://course.ysap.sh/&quot;&gt;The Complete Bash Scripting Course - ysap.sh&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.martinnobel.com/techresearch/ios-6-screenshots&quot;&gt;iOS 6 Revisited — Martin Nobel&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.qwant.com/?client=ext-safari-macos-sb&amp;amp;t=web&amp;amp;q=shortcut+to+export+all+opened+tabs+in+safari&quot;&gt;shortcut to export all opened tabs in safari – Qwant&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.idownloadblog.com/2025/10/17/copy-all-open-tab-links-safari/&quot;&gt;How to copy website links of all open tabs in Safari&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.howtogeek.com/758131/how-to-copy-urls-of-all-open-tabs-in-safari/&quot;&gt;How to Copy URLs of All Open Tabs in Safari&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Window 2
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://zed.dev/&quot;&gt;Zed — Love your editor again&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://jpmens.net/2024/02/23/totp-codes-in-the-terminal/&quot;&gt;Jan-Piet Mens :: Using 2FAS TOTP codes in the terminal&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://github.com/phuocng/html-dom&quot;&gt;phuocng/html-dom: Common tasks of managing HTML DOM with vanilla JavaScript. Give me 1 ⭐if it’s useful.&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.bikebaze.nl/user-account&quot;&gt;Mijn account - Beheer Je BIKEBAZE® Fietsregistraties&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.sfgate.com/tech/article/time-to-declare-war-ai-21221535.php&quot;&gt;The time has come to declare war on AI&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://codeberg.org/doekman/PySQL&quot;&gt;doekman/PySQL: Use raw SQL directly from python. Inspired by PugSQL, but with more Pythonesque. - Codeberg.org&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://pugsql.org/&quot;&gt;PugSQL :: SQL is Extremely Good, Actually&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Window 3 (minimized to dock)
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://fastpen.lecaro.me/#H4sIAAAAAAAAE31TQZKbMBC8%2BxUqckmqQjDxHlIy5pCfCGmA2ZUllSRssym%2FIB%2FYWz6SPyVPiAQ2YHsrOlCt6ZY008wUzHrkEgiKXcJb5pNyRcIq2rw8MCUYa4os4DFoCJfMuV2ifQs2KQtnmCr%2F%2Fnp7K7IBFpm5lzqQ9X%2BVtbb7EQ7bqvNeq%2FLP759FdsEzicp0nvjewC7xcPIJMZJxaLUUYHfJd7DI26mGbLy6yC5FBsiZOjA3VjvAkFo2onK1KpzvoyyerrTof0wv6wPYWuojbVEIUFsyMS1g03qar9eHdjtFBbqQWU9rCac5GnepQAvco1aUa9nt1UwziY1K0cPeUQ7Kg5255855rPuU6xBX%2FoGvQzyt2R5lT4ljyqUumFHPgvCYtvTDZrNZJG%2FAOhOzOQAl39Zrc0n2PHwvts0uDEe0wyF7C5LFg9sb%2BjVFJeBE89twxfhLY3WnBD22ocJb9ojCt%2FTr%2FP51GSYEqiZQ90ylbfjlqWUCO0ef3qdpbk7EaYmCVKFPXpbFtflcV2yldHD%2Fwdc9sw0qul4YKYFZyqRc3mZI7GoyXzn8D4evQJ%2FuXP0yDM9SKjXzlEio%2FY0uTs6DzMZuu08vHaL0xqS7fOK6NiUqiQrSSuqrJdflbeicODWhhziT8DHNP5P80yw6LxKMusULoy9VqO7SYOcweZeBCpPFLRofUTbBKJqOvw9mzT%2FmWRMPqgQAAA%3D%3D&quot;&gt;Fastpen : a client side only codepen alternative&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://aaadaaam.com/notes/tools-that-build-you/&quot;&gt;Tools that build you | Adam Stoddard&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://maclabs.jazzace.ca/2025/06/07/blog-or-wiki.html&quot;&gt;Anthony’s Mac Labs Blog | Blog Post or Wiki Edit? (📦)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://alexwlchan.net/2025/swift-bird-animation/?ref=mastodon&quot;&gt;Recreating the bird animation from Swift.org – alexwlchan&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Window 4 (minimized to dock)
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.hotsoup.nl/nl/herkomst/nepalese-thee.html&quot;&gt;Nepalese thee | Hotsoup.nl online thee voor fijnproevers&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://mikrotik.com/&quot;&gt;MikroTik · Routers and Wireless&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.ebay.nl/mye/myebay/summary&quot;&gt;Overzicht | Mijn eBay | eBay&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Window 5 (minimized to dock)
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.kleine-klussen.nl/#klusplanner&quot;&gt;Klusjesman in Groningen, Haren, Meerstad, Eelderwolde&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.monumenten.nl/ontzorgingsprogramma&quot;&gt;Ontzorgingsprogramma Verduurzaming Monumenten | Monumenten.nl&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.bitsoffreedom.nl/2025/10/16/weg-van-big-tech-stap-4-navigatie-en-kaarten/&quot;&gt;Weg van Big Tech stap 4: navigatie en kaarten – Bits of Freedom&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.bitrecover.com/blog/export-gmail-to-maildir/&quot;&gt;Export Gmail/GSuite to Maildir with All Components&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://soverin.nl/help/migratie-van-google-naar-soverin&quot;&gt;Soverin: Migratie van Google naar Soverin&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.lastdodo.nl/nl/my/shop_orders/12093119&quot;&gt;LastDodo - ’s Werelds grootste catalogus &amp;amp; community voor verzamelaars&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Window 6 (minimized to dock)
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://noorderlink.nl/vacature/74268-01422-079603050116-senior-devops-engineer-idp-ministerie-van-economische-zaken-en-klimaat-ezk?utm_medium=email&amp;amp;utm_source=transactional&amp;amp;utm_campaign=vacatures@noorderlink.nl&quot;&gt;Senior DevOps Engineer IDP bij Ministerie van Economische Zaken en Klimaat (EZK) | Noorderlink&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.mijnmovum.nl/folders/27/blocks&quot;&gt;Mijn Movum&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://runwaylanderspot.com/?d=durdraw.org&amp;amp;pkAId=2143526812&quot;&gt;Parking Page&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;tabs-on-my-macbook-pro&quot;&gt;Tab’s on my MacBook Pro&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Window 1
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.joanwestenberg.com/the-case-for-blogging-in-the-ruins/&quot;&gt;he Case for Blogging in the Ruins&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://shantellsans.com/process&quot;&gt;Shantell Sans → ArrowType&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.felienne.nl/2026-01/&quot;&gt;Special Schrijven | Writing&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.ns.nl/reisplanner/#/?vertrek=Zwolle&amp;amp;vertrektype=treinstation&amp;amp;aankomst=Groningen&amp;amp;aankomsttype=treinstation&amp;amp;type=vertrek&amp;amp;tijd=2026-01-04T19:30&amp;amp;firstMileModality=PUBLIC_TRANSPORT&amp;amp;lastMileModality=PUBLIC_TRANSPORT&amp;amp;context=arnu%7CfromStation%3D8400747%7CrequestedFromStation%3D8400747%7CtoStation%3D8400263%7CrequestedToStation%3D8400263%7CplannedFromTime%3D2026-01-04T19:16:00%2B01:00%7CplannedArrivalTime%3D2026-01-04T20:12:00%2B01:00%7CexcludeHighSpeedTrains%3Dfalse%7CsearchForAccessibleTrip%3Dfalse%7ClocalTrainsOnly%3Dfalse%7CtravelAssistance%3Dfalse%7CtripSummaryHash%3D3604313121&amp;amp;ritnummers=765&quot;&gt;Reisplanner | Plan je reis | NS&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://nos.nl/artikel/2596943-topdrukte-voor-strooiers-dit-is-onze-wintersport&quot;&gt;Topdrukte voor strooiers: ‘Dit is onze wintersport’&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://nos.nl/artikel/2596914-vk-en-frankrijk-bombarderen-is-complex-in-syrie&quot;&gt;VK en Frankrijk bombarderen IS-complex in Syrië&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.unilin.com/nl&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://evabits.com/&quot;&gt;This Connection Is Not Private&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.wadcon.nl/&quot;&gt;Wadcon | Speciaalmachinebouw | Automatisering | Transfersystemen&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Window 2
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://voorbereidboek.nl/&quot;&gt;Voorbereid – Zo zien de grootste Nederlandse rampscenario’s eruit&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://lab.alexanderobenauer.com/updates/the-jasper-report&quot;&gt;Recreating the Canon Cat document interface - Little Lab&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.w3tutorials.net/python-tutorial/how-to-use-linting-for-python-code-quality/&quot;&gt;How to Use Linting for Python Code Quality — w3tutorials.net&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://realpython.com/ruff-python/&quot;&gt;Ruff: A Modern Python Linter for Error-Free and Maintainable Code – Real Python&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Window 3
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.linusakesson.net/programming/tty/&quot;&gt;The TTY demystified&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://typographyforlawyers.com/&quot;&gt;Typography for Lawyers&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;http://scripting.com/&quot;&gt;Scripting News&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://blog.codinghorror.com/the-trap-you-set-for-yourself/&quot;&gt;The Trap You Set For Yourself&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://aspect.bildhuus.com/#file-system&quot;&gt;Bildhuus Aspect&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.bitsoffreedom.nl/2025/09/16/stap-over-op-privacyvriendelijke-e-mail-agenda/&quot;&gt;Weg van Big Tech stap 1: e-mail &amp;amp; agenda – Bits of Freedom&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://tonsky.me/blog/syntax-highlighting/&quot;&gt;I am sorry, but everyone is getting syntax highlighting wrong @ tonsky.me&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://tangiblemediacollection.com/&quot;&gt;Tangible Media: A Historical Collection of Information Storage Technology&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Window 4
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.photosync-app.com/home&quot;&gt;PhotoSync – Photo Transfer and Backup App | For iOS &amp;amp; Android - PhotoSync&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://github.com/git/git/blob/master/Documentation/gitdatamodel.adoc&quot;&gt;git/Documentation/gitdatamodel.adoc at master · git/git&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://community.signalusers.org/c/ux/ios-ux-ui/29&quot;&gt;(4) Latest UI/UX Feedback/iOS UI/UX topics - Signal Community&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://bitbucket.org/doekman/workspace/repositories/&quot;&gt;doekman / Repositories — Bitbucket&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Window 5
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://jekyllrb.com/docs/collections/#output&quot;&gt;Collections | Jekyll • Simple, blog-aware, static sites&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;http://127.0.0.1:4000/like/&quot;&gt;Pagina openen mislukt&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://nora.codes/post/infrastructure-photography-manifesto-and-decker-in-html/&quot;&gt;Infrastructure photography manifesto&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://beyondloom.com/decker/&quot;&gt;https://beyondloom.com/decker/&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Window 6
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://calpaterson.com/bank-python.html&quot;&gt;n oral history of Bank Python&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://togetherlondon.com/insights/active-listening-swiss-army-knife&quot;&gt;Active Listening: Swiss Army Knife of Communication (with Examples)&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Window 7 (hidden in a virtual desktop)
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://buttondown.com/whatever_jamie/archive/the-many-many-many-javascript-runtimes-of-the-last-decade/&quot;&gt;The many, many, many JavaScript runtimes of the last decade • Buttondown&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://github.com/mcfunley/pugsql&quot;&gt;mcfunley/pugsql: A HugSQL-inspired database library for Python&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=GfH4QL4VqJ0&amp;amp;list=WL&amp;amp;index=11&quot;&gt;(35) Python: The Documentary | An origin story - YouTube&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.devalkzalk.nl/nl/molenwinkel&quot;&gt;molenwinkel&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://anno.nl/contact/&quot;&gt;Contact museum ANNO Zwolle&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://hetanderenepal.nl/familiereizen-nepal/&quot;&gt;Familiereizen Nepal | Het Andere Nepal&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.anwb.nl/vakantie/nepal/beste-reistijd&quot;&gt;Beste reistijd Nepal | Weer en klimaat Nepal » ANWB&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.google.com/travel/flights/search?tfs=CBwQAhonEgoyMDI2LTAzLTAyagsIAhIHL20vMGszcHIMCAMSCC9tLzA0Y3g1GicSCjIwMjYtMDMtMjNqDAgDEggvbS8wNGN4NXILCAISBy9tLzBrM3BAAUgBcAGCAQsI____________AZgBAQ&quot;&gt;Amsterdam to Kathmandu | Google Flights&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Nepal&quot;&gt;Nepal - Wikipedia&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.bestereistijd.nl/nepal/#weerervaringen&quot;&gt;Nepal temperatuur, klimaat en weer per maand&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;tabs-on-my-iphone-mini&quot;&gt;Tab’s on my iPhone mini&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://datasette.io/&quot;&gt;Datasette: An open source multi-tool for exploring and publishing data&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://lekkerder.nl/groentekwekerij-noordlaren&quot;&gt;Groentekwekerij Noordlaren  - Boerderijwinkel, Kwekerij en Anders in Noordlaren&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://zuriga.com/de/Produkte/ZURIGA-E2/ZEEU401&quot;&gt;https://zuriga.com/de/Produkte/ZURIGA-E2/ZEEU401 (no title)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://pine64.com/product/pinecil-smart-mini-portable-soldering-iron/&quot;&gt;PINECIL – Smart Mini Portable Soldering Iron (Version 2) - PINE STORE&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://bluescsi.com/v2#new&quot;&gt;BlueSCSI v2 Pico Announcement - BlueSCSI&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.m.wikipedia.org/wiki/The_Ozark_Mountain_Daredevils&quot;&gt;The Ozark Mountain Daredevils&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.npr.org/sections/health-shots/2016/04/13/474071268/how-lsd-makes-your-brain-one-with-the-universe&quot;&gt;Brain Connections May Cause Blurring Sense Of Self With LSD : Shots - Health News : NPR&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://duckduckgo.com/?q=cat+lee+king+and+his+cooks&amp;amp;t=iphone&amp;amp;ia=web&quot;&gt;cat lee king and his cooks at DuckDuckGo&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://weblogs.vpro.nl/plots/&quot;&gt;https://weblogs.vpro.nl/plots/&lt;/a&gt; – 404 Not Found&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.vpro.nl/programmas/tegenlicht/kijk/afleveringen/2019-2020/houtbouwers.html&quot;&gt;Houtbouwers | VPRO Tegenlicht&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ralphammer.com/make-me-think/&quot;&gt;Make me think! – Ralph Ammer&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://unsplash.com/&quot;&gt;Beautiful Free Images &amp;amp; Pictures | Unsplash&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.o42interieur.nl/&quot;&gt;De mooiste interieurstudio en showroom van Groningen - O’42 interieur&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.mantherapy.org/&quot;&gt;https://www.mantherapy.org/ (no title)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://vimeo.com/showcase/9459437/video/838408969/embed&quot;&gt;Vimeo: Vera Weekly&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.templatemaker.nl/en/&quot;&gt;✂Templatemaker&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://soundtracker.com/&quot;&gt;Official Website: Gordon Hempton – The Sound Tracker®&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://decorrespondent.nl/11931/jij-dacht-dat-je-goed-kon-luisteren-luister-dan-eens-naar-deze-man-met-microfoon/3ae02ea8-67fb-0e9a-27cb-2eef1bd1ee06&quot;&gt;Jij dacht dat je goed kon luisteren? Luister dan eens naar deze man met microfoon  - De Correspondent&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://hackaday.com/2023/01/09/all-about-usb-c-power-delivery/&quot;&gt;All About USB-C: Power Delivery | Hackaday&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.npr.org/2017/07/12/533862948/lets-get-graphic-100-favorite-comics-and-graphic-novels&quot;&gt;100 Best Comics And Graphic Novels : NPR&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://lithub.com/tag/climate-change-library/&quot;&gt;Literary Hub » Climate Change Library&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://yewtu.be/&quot;&gt;Invidious - search&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.npr.org/sections/altlatino/2013/09/30/227834004/cumbia-the-musical-backbone-of-latin-america&quot;&gt;Cumbia: The Musical Backbone Of Latin America : Alt.Latino : NPR&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.c-support.nu/&quot;&gt;C-support | Wij ondersteunen mensen met langdurige corona klachten&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://mtlynch.io/aardvarkd/&quot;&gt;Aardvark’d: The Fog Creek Documentary, 18 Years Later ·mtlynch.io&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.abortretry.fail/p/an-introduction-to-linux-part-1&quot;&gt;https://www.abortretry.fail/p/an-introduction-to-linux-part-1&lt;/a&gt; – 404 Not Found&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.thomann.de/nl/shure_sm57lc_bundle_ii.htm?msclkid=fcfac665a0f915896003a3681845bcf5&amp;amp;utm_source=bing&amp;amp;utm_medium=cpc&amp;amp;utm_campaign=Shopping%20NL&amp;amp;utm_term=4576717170826333&amp;amp;utm_content=MI&quot;&gt;Shure SM57LC Bundle II – Thomann Nederland&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.lovemysalad.com/nl/recepten/lasagne-met-pompoen-ricotta-spinazie-en-salie&quot;&gt;LASAGNE MET POMPOEN, RICOTTA, SPINAZIE EN SALIE&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://duckduckgo.com/?q=jon+spencer+blues+explosion&amp;amp;t=iphone&amp;amp;ia=web&quot;&gt;jon spencer blues explosion at DuckDuckGo&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://jennyodell.com/writing.html&quot;&gt;jenny odell - writing&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://chrisfitzgeraldmusic.com/watch/&quot;&gt;Watch – Chris Fitzgerald&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://chrisfitzgeraldmusic.com/download/walking-bass-line-theory-basics/?wpdmdl=1258&amp;amp;refresh=652eb84518c8f1697560645&quot;&gt;https://chrisfitzgeraldmusic.com/download/walking-bass-line-theory-basics/?wpdmdl=1258&amp;amp;refresh=652eb84518c8f1697560645 (no title)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://neal.fun/internet-artifacts/amazon-order/&quot;&gt;First Amazon Order&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://plantbaseddennis.nl/nl/recepten/diner/de-lekkerste-tempeh-marinades/&quot;&gt;De lekkerste tempeh-marinade - Plantbased Dennis&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://tome.one/slides/amiet-pelissier-security-keys-workshop-ph0wn-2023-slides.pdf&quot;&gt;https://tome.one/slides/amiet-pelissier-security-keys-workshop-ph0wn-2023-slides.pdf (no title)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.m.wikipedia.org/wiki/Primer_(film)&quot;&gt;Primer (film)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://standardebooks.org/ebooks&quot;&gt;Browse Standard Ebooks - Standard Ebooks: Free and liberated ebooks, carefully produced for the true book lover&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.airdancer.nl/airdancer/natuurlijke-luchtverfrisser/luchtverfrisser-buiten/13823&quot;&gt;Luchtverfrisser Buiten: Natuurlijke luchtverfrisser: Airdancer.nl&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.hawalili.com/&quot;&gt;Shop Hawaiian Shirts-Hawalili | hawalili&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.macintoshrepository.org/48943-shuriken&quot;&gt;Shuriken - Macintosh Repository&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://rvessen.wordpress.com/2023/07/30/korte-cursus-korte-verhalen-schrijven/&quot;&gt;korte cursus korte  verhalen schrijven | reddend zwemmen&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://duckduckgo.com/?q=data+model+web+shop&amp;amp;t=iphone&amp;amp;ia=web&quot;&gt;data model web shop at DuckDuckGo&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://shkspr.mobi/blog/2024/02/activitypub-server-in-a-single-file/&quot;&gt;ActivityPub Server in a Single PHP File – Terence Eden’s Blog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.nytimes.com/interactive/2023/03/03/well/mind/breathing-exercises.html&quot;&gt;3 Breathing Exercises to Relieve Stress and Improve Health - The New York Times&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.tammo80.nl/&quot;&gt;Tammo80.nl - Tammo Jan Dijkema&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://kerkour.com/sqlite-for-servers&quot;&gt;Optimizing SQLite for servers&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://goedmaken.org/index.php/2024/04/15/wie-bepaalt-het-narratief-rond-ai/&quot;&gt;Wie bepaalt het narratief rond AI? – Goed Maken ❤️&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://axleos.com/building-a-gps-receiver-part-1-hearing-whispers/&quot;&gt;Building a GPS Receiver, Part 1: Hearing Whispers | Phillip Tennen&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://anderetijden.nl/aflevering/707/Op-vakantie-naar-Afghanistan&quot;&gt;Op vakantie naar Afghanistan - Andere Tijden&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://alinpanaitiu.com/blog/woodworking-escape-from-software-absurdity/#other-small-wood-things&quot;&gt;Woodworking as an escape from the absurdity of software&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://chriscoyier.net/2024/07/22/practical-svg-is-now-free-to-read-online/&quot;&gt;Practical SVG is Now Free to Read Online – Chris Coyier&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://nl.jvc.com/compare/?cat=93&amp;amp;products=4228,1584,591,585&quot;&gt;Compare • JVC Nederland&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.bol.com/nl/nl/p/breaker-s-revenge-original-b-boy-and-b-girl-breakdance-classics/9300000178253704/?s2a=#productTitle&quot;&gt;Arthur Baker - Arthur Baker presents Breaker’s Revenge And Original B-Boy and B-Girl… | bol&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://pagedout.institute/download/PagedOut_001_beta1.pdf&quot;&gt;https://pagedout.institute/download/PagedOut_001_beta1.pdf (no title)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://endler.dev/2024/the-dying-web/&quot;&gt;The Dying Web | Matthias Endler&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.cdfinder.de/index.html&quot;&gt;NeoFinder – The Digital Asset Manager for macOS and iOS&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://sourcefiles.app/&quot;&gt;Source Files for iPhone, iPad &amp;amp; Mac&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://freron.com/&quot;&gt;MailMate&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://landsat.gsfc.nasa.gov/apps/YourNameInLandsat-main/index.html&quot;&gt;Landsat - NASA Science&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://sunshowers.io/posts/beyond-ctrl-c-signals/&quot;&gt;Beyond Ctrl-C: The dark corners of Unix signal handling · sunshowers&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://shop.tropicfeel.com/&quot;&gt;Tropicfeel | The Ultimate Travel Gear&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.musictheory.net/exercises/fretboard&quot;&gt;Fretboard Note Identification&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/Body-Keeps-Score-Healing-Trauma/dp/0143127748&quot;&gt;The Body Keeps the Score: Brain, Mind, and Body in the Healing of Trauma&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://tonsky.me/sign-in/&quot;&gt;Sign In @ tonsky.me&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.schiermonnikoog.nl/trouwambtenaren&quot;&gt;Trouwambtenaren | Gemeente Schiermonnikoog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://duckduckgo.com/?q=velux+dakraam+monteren&amp;amp;t=iphone&amp;amp;ia=web&quot;&gt;velux dakraam monteren at DuckDuckGo&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://foxilicious.nl/harira-marokkaanse-tomatensoep/&quot;&gt;Harira: Marokkaanse tomatensoep met linzen en kikkererwten&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://speakerdeck.com/pycon2016/sumana-harihareswara-http-can-do-that?slide=9&quot;&gt;Sumana Harihareswara - HTTP Can Do That?! - Speaker Deck&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://pipe.pico.sh/&quot;&gt;pipe: authenticated pubsub over ssh&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://hi-lo-art.com/links&quot;&gt;Links | Hi-Lo&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.groene.nl/artikel/werk-is-politiek?utm_campaign=website&amp;amp;utm_medium=owned_social&amp;amp;utm_source=mastodon&quot;&gt;‘Werk is politiek’ –  De Groene Amsterdammer&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://moviesjoy.kim/&quot;&gt;https://moviesjoy.kim/&lt;/a&gt; – (exception when retrieving: HTTPSConnectionPool(host=’moviesjoy.kim’, port=443): Max retries exceeded with url: / (Caused by NameResolutionError(“HTTPSConnection(host=’moviesjoy.kim’, port=443): Failed to resolve ‘moviesjoy.kim’ ([Errno 8] nodename nor servname provided, or not known)”)))&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ztoz.blog/posts/postscript-code/&quot;&gt;PostScript® 1.0 - A Code Study | ℤ→ℤ&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.mollywhite.net/micro/entry/202403091817&quot;&gt;POSSE&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://theartofbeingaman.nl/#contact&quot;&gt;At Home - TheartofbeingaMAN&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://european-alternatives.eu/category/search-engines&quot;&gt;European search engines | European Alternatives&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://archive.org/details/TheInternetsOwnBoyTheStoryOfAaronSwartz&quot;&gt;The Internet’s Own Boy: The Story of Aaron Swartz : Brian Knappenberger : Free Download, Borrow, and Streaming : Internet Archive&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.mijnpensioenoverzicht.nl/&quot;&gt;Mijn pensioenoverzicht&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.nemokennislink.nl/publicaties/waarom-leerstijlen-niet-bestaan/&quot;&gt;Waarom leerstijlen niet bestaan - NEMO Kennislink&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://klevgrand.com/products/speldosa&quot;&gt;Klevgrand - Dream Louder&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.odoo.com/nl_NL/app/planning&quot;&gt;Odoo Planning - Gratis Software voor Planningbeheer&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://daylightcomputer.com/&quot;&gt;Daylight | A More Caring Computer&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/oils-for-unix/oils/wiki/How-Interactive-Shells-Work#1-processing-user-inputs&quot;&gt;How Interactive Shells Work · oils-for-unix/oils Wiki · GitHub&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://bit-101.com/blog/posts/2024-12-28/journal/&quot;&gt;BIT-101 | Journal&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.etsy.com/nl/listing/1322634709/handgemaakte-14k-edel-champagnegoud-voor?ga_order=most_relevant&amp;amp;ga_search_type=all&amp;amp;ga_view_type=gallery&amp;amp;ga_search_query=trouwringen&amp;amp;ref=sc_gallery-4-2&amp;amp;frs=1&amp;amp;cns=1&amp;amp;sts=1&amp;amp;search_preloaded_img=1&amp;amp;plkey=7a0ef5e3202ca95ec326a37978c1df8f23023c95%3A1322634709&amp;amp;variation1=2931233890&amp;amp;variation0=2947772965&quot;&gt;Handgemaakte 14k edel champagnegoud voor hem en haar Mobius-trouwringset&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://100r.co/site/small_space.html&quot;&gt;100R — small space&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://muffinman.io/blog/the-tiny-book-of-great-joys/&quot;&gt;The Tiny Book of Great Joys · Muffin Man&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.zanglesvoormannen.nl/&quot;&gt;Zangles voor Mannen | Zangles voor Mannen in Zwolle&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://duckduckgo.com/?q=offerte+velux+dakkspel+groningen&amp;amp;t=iphone&amp;amp;ia=web&quot;&gt;offerte velux dakkspel groningen at DuckDuckGo&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://it-notes.dragas.net/2025/02/26/fedimeteo-how-a-tiny-freebsd-vps-became-a-global-weather-service-for-thousands/&quot;&gt;FediMeteo: How a Tiny €4 FreeBSD VPS Became a Global Weather Service for Thousands - IT Notes&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.bol.com/nl/nl/p/woodoro-led-leeslampje-bevordert-slaap-3-lichtstanden-oplaadbaar/9300000001817264/&quot;&gt;Led Leeslampje voor boek – 3 Standen oogvriendelijk licht – Dimbare oplaadbare… | bol&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://localghost.dev/blog/this-page-is-under-construction/&quot;&gt;This page is under construction - localghost&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://nl.m.wikipedia.org/wiki/Tjeerd_Bottema&quot;&gt;Tjeerd Bottema&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.ecohovenier.nl/wp/artikelen/onkruid-bestrijden-op-verhardingen-2/&quot;&gt;Ecologisch onkruid bestrijden op verhardingen – ecohovenier.nl&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.hornbach.nl/p/altrex-huishoudtrap-double-decker-5-treden/4100185/&quot;&gt;ALTREX Huishoudtrap Double Decker, 5 treden kopen! | HORNBACH&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://retool.com/visual-basic&quot;&gt;Something Pretty Right: A History of Visual Basic | Retool&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://alexwlchan.net/2025/bookmarks-static-site/?utm_source=mastodon&quot;&gt;Creating a static website for all my bookmarks – alexwlchan&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://veltkampenstam.nl/woning/zalk-van-dijksweg-31/&quot;&gt;Zalk – van Dijksweg 31 | Veltkamp &amp;amp; Stam Admono Makelaars&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://speld.nl/2025/05/13/knmi-meet-langste-periode-ooit-dat-nederlanders-niet-zeiken-over-het-weer/&quot;&gt;KNMI meet langste periode ooit dat Nederlanders niet zeiken over het weer&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.kleinanzeigen.de/s-anzeige/dell-6k-32-monitor-u3224kba/3084829569-225-3490&quot;&gt;PC &amp;amp; Zubehör &amp;amp; Software gebraucht kaufen in Prenzlauer Berg - Pankow | kleinanzeigen.de&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://decorrespondent.nl/16100/de-zwakke-plek-van-de-verenigde-staten-vind-je-op-zee/ebd85e6c-351c-00c5-10c2-b4db9c79ee42&quot;&gt;De zwakke plek van de Verenigde Staten vind je op zee&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://youmightnotneedjquery.com/&quot;&gt;You Might Not Need jQuery&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.hoelangmoetkoken.nl/knolselderij/&quot;&gt;Knolselderij koken, bakken of grillen&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.joanwestenberg.com/how-convenience-kills-curiosity/&quot;&gt;How Convenience Kills Curiosity&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://direnv.net/&quot;&gt;direnv – unclutter your .profile | direnv&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://efkobeton.nl/positieve-ervaringen-met-open-hiring-solliciteren-zonder-sollicitatieprocedure/&quot;&gt;Positieve ervaringen met open hiring: solliciteren zonder sollicitatieprocedure - EFKO Beton&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://justfuckingusehtml.com/&quot;&gt;Just fucking use HTML&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://guide.elm-lang.org/core_language.html&quot;&gt;Core Language · An Introduction to Elm&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://straun.nl/&quot;&gt;Straun – Natuureducatie Schiermonnikoog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.netmeister.org/blog/http-123.html&quot;&gt;Bootstrapping HTTP/1.1, HTTP/2, and HTTP/3&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://appdocumentary.com/2015/01/08/neven-mrgan-on-why-skeuomorphism-is-like-a-classic-car/&quot;&gt;Neven Mrgan on Why Skeuomorphism Is Like a Classic Car | App: The Human Story - Available Now&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://m.soundcloud.com/thepowersharingseries/ps165-clip-sculley-atkinson-hypercard&quot;&gt;Stream episode PS165 - Clip - Sculley - Atkinson - Hypercard by The Powersharing Series podcast | Listen online for free on SoundCloud&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://berthub.eu/articles/posts/dutch-postcode-and-building-database/&quot;&gt;Welcome to the BAG: The Dutch Building and Addresses database - Bert Hubert’s writings&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://transeurotrail.org/netherlands/#5.84/52.131/5.659&quot;&gt;TET Netherlands - Trans Euro Trail - Europe’s Dirt Road Adventure&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://crackedmirrorinshalott.wordpress.com/2013/04/12/autistic-allistic-neurodiverse-and-neurotypical-say-what/&quot;&gt;Autistic, Allistic, Neurodiverse, and Neurotypical: Say what? | Cracked Mirror in Shalott&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cablespaghetti.dev/hosting-a-fediverse-instance-on-an-original-raspberry-pi.html&quot;&gt;Hosting a Fediverse instance on an original Raspberry Pi&lt;/a&gt; – (exception when retrieving: HTTPSConnectionPool(host=’cablespaghetti.dev’, port=443): Max retries exceeded with url: /hosting-a-fediverse-instance-on-an-original-raspberry-pi.html (Caused by NewConnectionError(“HTTPSConnection(host=’cablespaghetti.dev’, port=443): Failed to establish a new connection: [Errno 51] Network is unreachable”)))&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://crescentro.se/posts/writing-drivers/&quot;&gt;Writing a basic Linux device driver when you know nothing about Linux drivers or USB // crescentro.se&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://hetdorpzalk.nl/?s=Zalkerbos&amp;amp;doing_wp_cron=1751886056.3051149845123291015625&quot;&gt;Je zocht naar Zalkerbos - Het dorp Zalk&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.crowdsupply.com/excamera/termdriver-2&quot;&gt;TermDriver 2 | Crowd Supply&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.feynmanlectures.caltech.edu/&quot;&gt;Feynman Lecures on Physics&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.homecomputermuseum.nl/en/collectie/aster/&quot;&gt;HomeComputerMuseum - Aster Computers&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://borretti.me/article/notes-on-managing-adhd#strategies&quot;&gt;Notes on Managing ADHD&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://isolatie.nijbegun.nl/over-de-isolatieaanpak/wat-is-een-isolatieplan/&quot;&gt;Nij Begun&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://copy.sh/v86/&quot;&gt;v86&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://descargasalsa.nl/handig/&quot;&gt;Handige bronnen – Dansschool Descarga Salsa&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aaadaaam.com/notes/useful-defaults/&quot;&gt;There’s no such thing as a CSS reset | Adam Stoddard&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://web-platform-dx.github.io/web-features-explorer/&quot;&gt;Web platform features explorer - Home&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://web-platform-dx.github.io/web-features-explorer/widely-available/&quot;&gt;Web platform features explorer - Widely available&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.bostonmagazine.com/news/lost-at-sea/&quot;&gt;Shipwrecked: A Shocking Tale of Love, Loss, and Survival in the Deep Blue Sea&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://nl.ifixit.com/Guide/How+to+Clean+your+iPhone&apos;s+Lightning+Port/164631&quot;&gt;How to Clean your iPhone’s Lightning Port - iFixit reparatiehandleiding&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.klompen.frl/webshop/&quot;&gt;Online houten scherjon klompen kopen&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://usetrmnl.com/&quot;&gt;TRMNL | E-ink dashboard to stay focused&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/schlagmichdoch/pairdrop/blob/master/docs/faq.md&quot;&gt;PairDrop/docs/faq.md at master · schlagmichdoch/PairDrop · GitHub&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.ursulakleguin.com/blog&quot;&gt;Ursula K. Le Guin — Blog (2010–2017)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.newmasculinity.org/&quot;&gt;Ibiza Retreat for Men | New Masculinity | Ibiza Men’s Group&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://simoneskitchen.nl/socca-glutenvrije-kikkererwten-pannenkoek/&quot;&gt;Socca: glutenvrije kikkererwten pannenkoek - Simone’s Kitchen&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://jpmens.net/2019/04/04/i-clone-all-repositories-i-ve-starred/&quot;&gt;Jan-Piet Mens :: I clone all GitHub repositories I’ve starred&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://jacobian.org/2025/aug/8/two-scenario-threat-modeling/&quot;&gt;Two Scenario Threat Modeling - Jacob Kaplan-Moss&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.emclient.com/&quot;&gt;eM Client | The Best Email Client for Windows and Mac&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://overtype.dev/&quot;&gt;OverType - The Markdown Editor That’s a Textarea&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://kiwix.org/en/&quot;&gt;Explore Offline Wikipedia and Educational Content with Kiwix- Kiwix&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://djot.net/&quot;&gt;djot&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cpldcpu.com/2025/08/13/candle-flame-oscillations-as-a-clock/&quot;&gt;Candle Flame Oscillations as a Clock – Tim’s Blog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.noorderzon.nl/programma/hanggai&quot;&gt;Hanggai › Noorderzon&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.linusakesson.net/programming/tty/&quot;&gt;The TTY demystified&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aeon.co/essays/why-might-the-big-bang-theory-be-in-crisis-very-soon?ref=readtangle.com&quot;&gt;Why might the Big Bang theory be in crisis very soon? | Aeon Essays&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://m.soundcloud.com/sudhir-ibiza/mindful-magic-mushrum?in=sudhir-ibiza%2Fsets%2Fmedittions&quot;&gt;Listen to Mindful Magic Mushrum Mircordosing Meditation for Men 2.wav by Sudhir, Zorah &amp;amp; friends in Meditations playlist online for free on SoundCloud&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.macstories.net/stories/ios-and-ipados-26-the-macstories-review/&quot;&gt;iOS and iPadOS 26: The MacStories Review&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.flickr.com/photos/mwichary/albums/72177720329068272/&quot;&gt;Houweling Telecomm Museum, Rotterdam | Flickr&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://iamvishnu.com/posts/utf8-is-brilliant-design&quot;&gt;UTF-8 is a Brilliant Design — Vishnu’s Pages&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.reflectionframe.com/&quot;&gt;Reflection Frame&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.filfre.net/sitemap/&quot;&gt;» Table of Contents The Digital Antiquarian&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://harpers.org/archive/1941/08/who-goes-nazi/&quot;&gt;Who Goes Nazi?, by Dorothy Thompson&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://sunpig.com/martin/2025/09/28/roman-mars-on-the-curse-of-efficiency/&quot;&gt;Roman Mars on the curse of efficiency – Legends of the Sun Pig&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://the-web-we-want.com/&quot;&gt;The web you want&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://mysamasati.com/?mid=223&quot;&gt;mySamasati - Today’s Meditation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://pyfound.blogspot.com/2025/10/NSF-funding-statement.html?m=1&quot;&gt;Python Software Foundation News: The PSF has withdrawn a $1.5 million proposal to US government grant program&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/non-ai-licenses/non-ai-licenses/blob/main/README.md&quot;&gt;non-ai-licenses/README.md at main · non-ai-licenses/non-ai-licenses · GitHub&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.avrotros.nl/program/ondertussen-aan-de-hofvijver~75/&quot;&gt;Ondertussen aan de Hofvijver | AVROTROS&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Malicious_compliance&quot;&gt;Malicious compliance&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://visualrambling.space/dithering-part-1/&quot;&gt;Dithering - Part 1&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aaadaaam.com/notes/pumped-up/&quot;&gt;Pumped up | Adam Stoddard&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://createadaptablelife.com/2025/10/how-can-we-see-and-steer-through-our-life-crises-to-find-a-new-path.html&quot;&gt;How Can We See and Steer Through Our Life “Crises” to Find a New Path? - Create an Adaptable Life&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://smallthingsconsidered.blog/&quot;&gt;Small Things Considered&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.tbray.org/ongoing/When/202x/2025/11/01/Blog-Search-Pagefind&quot;&gt;ongoing by Tim Bray · Bye, Google Search&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.asnbank.nl/betalen/nieuw-in-de-asn-app-en-asn-online-bankieren.html&quot;&gt;Nieuw in de ASN-app en ASN Online Bankieren - ASN Bank&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://the-web-you-want.org/?css=vasilis2&quot;&gt;The web you want&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://scripting.com/2022/07/19/152235.html?title=devNotesForMarkdownInRss&quot;&gt;https://scripting.com/2022/07/19/152235.html?title=devNotesForMarkdownInRss&lt;/a&gt; – (exception when retrieving: (‘Connection aborted.’, ConnectionResetError(54, ‘Connection reset by peer’)))&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.stayokay.com/nl/tips/overnachten-in-een-wikkelhouse&quot;&gt;Op vakantie midden in de natuur, overnacht in een Wikkelhouse bij Stayokay | Stayokay&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://tickets.spotgroningen.nl/mtTicket/performance?id=108512&amp;amp;lang=nl#seats&quot;&gt;Kies je stoelen | Kaartverkoop SPOT Groningen&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.ah.nl/allerhande/recept/R-R1189426/pannenkoeken-basisrecept?as_templateId=23793&amp;amp;msclkid=8bcf0be5da3519893b6462f062e3fbcd&amp;amp;utm_source=bing&amp;amp;utm_medium=cpc&amp;amp;utm_campaign=NL%2FNL%20-%20AO%20-%20Search%20-%20API%20-%20NB%20-%20Gerechten%20-%20Top%20100&amp;amp;utm_term=pannenkoeken&amp;amp;utm_content=Gerecht%20-%C2%A0Pannenkoeken%20-%C2%A0HV&quot;&gt;Pannenkoeken basisrecept&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://byte.tsundoku.io/#198610b-266&quot;&gt;Byte - a visual archive&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://jimmyhmiller.com/overly-humble-programmer&quot;&gt;The Overly Humble Programmer&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.webdesignmuseum.org/&quot;&gt;Web Design Museum - Discover old websites, apps and software&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://stemvan.groningen.nl/toekomst-haddingestraatgarage/?utm_campaign=Nieuwsbrief+Centrum+&amp;amp;utm_medium=email&amp;amp;utm_source=Mailer#reageren&quot;&gt;Informatie - Toekomst Haddingestraatgarage&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.nevel.org/&quot;&gt;Nevel Wild Ales bier&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://nl.wikipedia.org/wiki/Zonnesteen_(kompas)&quot;&gt;Zonnesteen (kompas)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://eemstuin.nl/&quot;&gt;Biologisch-dynamische groente met smaak - Eemstuin&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://eikemaheert.nl/&quot;&gt;Eikemaheert | Biologisch landbouwbedrijf in Loppersum dat natuur en cultuur verbindt&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://filiph.github.io/unsure/&quot;&gt;Unsure Calculator&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://hpsv-vissen.nl/Lusknopen.htm&quot;&gt;Lusknopen&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.laptoprevive.nl/&quot;&gt;Laptop Revive – Sociaal, duurzaam en open&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://simsalabimwebshop.com/alternatieve-herenkleding/&quot;&gt;Alternatieve herenkleding kopen? Simsalabim&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://nkbv.nl/kenniscentrum/inbinden-bij-sportklimmen.html&quot;&gt;Inbinden bij sportklimmen | NKBV&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.provinciegroningen.nl/actueel/nieuws/nieuwsartikel/herinrichtingsplannen-pol-gebied-zes-weken-ter-inzage/&quot;&gt;Herinrichtingsplannen POL-gebied zes weken ter inzage - Provincie Groningen&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://app.tasteventura.nl/nl/quiz/intro/oNMd&quot;&gt;Taste Ventura&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.theatlantic.com/technology/2025/12/people-outsourcing-their-thinking-ai/685093/?gift=iWa_iB9lkw4UuiWbIbrWGTqj_UFH3shy9qJgLM4CAq4&amp;amp;utm_source=copy-link&amp;amp;utm_medium=social&amp;amp;utm_campaign=share&quot;&gt;The People Outsourcing Their Thinking to AI - The Atlantic&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.danmcquillan.org/resisting_genai_highered_cjuu.html&quot;&gt;Resisting GenAI &amp;amp; Big Tech in Higher Education&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://floorp.app/&quot;&gt;Floorp Browser&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://librewolf.net/&quot;&gt;LibreWolf&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://gwij.nl/&quot;&gt;Deen Design Zandbak is under construction&lt;/a&gt; – The Woodsmen&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://marikebol.com/2023/04/26/glutenvrije-soezen/&quot;&gt;Glutenvrije soezen, basisrecept&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.ninakalinina.com/&quot;&gt;Nina Kalinina’s home page&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://nl.wikipedia.org/wiki/Escapisme&quot;&gt;Escapisme&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Ambient_1:_Music_for_Airports&quot;&gt;Ambient 1: Music for Airports&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://berthub.eu/articles/posts/on-being-useful/&quot;&gt;On Being Useful - Bert Hubert’s writings&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/HDMI#ARC&quot;&gt;HDMI&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+        </description>
+        <pubDate>Tue, 06 Jan 2026 00:00:00 +0100</pubDate>
+        <link>https://blog.zanstra.com/ict/2026/01/06/open-tab-s-on-my-devices.html</link>
+        <guid isPermaLink="true">https://blog.zanstra.com/ict/2026/01/06/open-tab-s-on-my-devices.html</guid>
+        <category>ICT</category>
+      </item>
       <item>
         <title>Installing Bash via Brew on MacOS</title>
         <description>

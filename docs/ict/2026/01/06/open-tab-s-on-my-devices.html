@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Open Tab's on My Devices</title>
+    <meta name="description" content="Below are the links on the internet-tab’s I found on my devices. I did a virtual cleanup of my browsers. I’ll keep the links for reference, but I doubt I’ll ...">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="https://blog.zanstra.com/ict/2026/01/06/open-tab-s-on-my-devices.html">
+    <link rel="alternate" type="application/json"    title="Bloggus Doekmanni" href="https://blog.zanstra.com/feed.json" />
+    <link rel="alternate" type="application/rss+xml" title="Bloggus Doekmanni" href="https://blog.zanstra.com/feed.xml">
+    <link rel="me" href="https://micro.blog/doekman"/>
+  </head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/"><span style="position:absolute"><img src="https://blog.zanstra.com/images/doekman.png" alt="Logo" style="height:36px;width:109px;position:relative;left:-125px" /></span>Bloggus Doekmanni</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/about/">about</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <a class="page-link" href="http://zanstra.com/my/">my projects</a>
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Open Tab's on My Devices</h1>
+    <p class="post-meta"><time datetime="2026-01-06T00:00:00+01:00" itemprop="datePublished">January 6, 2026</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Doeke Zanstra</span></span></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>Below are the links on the internet-tab’s I found on my devices. I did a virtual cleanup of my browsers. I’ll keep the links for reference, but I doubt I’ll need them again. The list is obviously slightly redacted.</p>
+
+<p>I used <a href="https://www.idownloadblog.com/2025/10/17/copy-all-open-tab-links-safari/#On-iPhone">these instructions</a> (I’m using Safari on my Apple devices) to save the links. With the use of an editor and macro’s, I converted the list to MarkDown. However, the iPhone-list didn’t come with titles, so I wrote a <a href="https://gist.github.com/doekman/121cc8e71368aaf2396f97b232b58f2a">simple Python script</a> to fetch the titles. I did get around 10 <code class="language-plaintext highlighter-rouge">403 Forbidden</code> responses, they probably thought I was an AI crawler. I fixed the titles by hand. Then I did a visual inspection, and fixed some other problems (no <code class="language-plaintext highlighter-rouge">|</code> allowed in MarkDown link-text? Some WFT-8 problems with my script).</p>
+
+<html>
+<p>
+    To add some actual use to this page, I've added the following button (style by <a href="https://codepen.io/zastrow/pen/eYxvQZW">this CodePen</a>):
+    <br />
+    <button onclick="window.open(getRandomLink());">I'm feeling adventurous and nostalgic</button>
+</p>
+<script>
+    function getRandomLink() {
+        const nr_of_links_above = 3;
+        let container = document.getElementsByClassName('post-content')[0];
+        let links = container.getElementsByTagName('A');
+        let nr = Math.floor(Math.random() * (links.length - nr_of_links_above) + nr_of_links_above);
+        let link = links[nr];
+        console.info("Opening link nr %s.", nr, links);
+        return link.href;
+    }
+</script>
+<style>
+    header {
+        
+    }
+    body {
+    	font-family: "Lucida Grande", system-ui, sans-serif;
+    	min-height: 100vh;
+        /*
+    	display: flex;
+    	justify-content: center;
+    	align-items: center;
+        */
+    	background-image: repeating-linear-gradient(
+    		#fff 0%,
+    		#fff 50%,
+    		#f0f0f0 50%,
+    		#f0f0f0 100%
+    	);
+    	background-size: 0.5ch 0.5ch;
+    	/* Try changing these values to change the color	 */
+    	--light-adjust: 0%;
+    	--chroma-base: 41; /* Default: 41 */
+    	--chroma-range: 13; /* Default: 13 */
+    	--hue-base: 267deg; /* Default: 267deg */
+    }
+
+    button {
+    	appearance: none;
+    	font-family: inherit;
+    	font-size: 1rem;
+    	text-shadow: 0 0.25ch 0.25ch
+    		lch(calc(30% + var(--light-adjust)) var(--chroma-base) var(--hue-base) / 50%);
+    	position: relative;
+    	border: none;
+    	color: lch(0% 0 0deg);
+    }
+
+    button,
+    button::after {
+    	border-radius: 1.5ch;
+    	padding: 0.5ch 1.5ch;
+    	background-color: lch(
+    		calc(98% + var(--light-adjust))
+    			calc(var(--chroma-base) + (var(--chroma-range) * 2)) var(--hue-base) / 50%
+    	);
+    	box-shadow: inset 0 0 0.05ch 0.025ch
+    			lch(
+    				calc(100% + var(--light-adjust))
+    					calc(var(--chroma-base) + var(--chroma-range)) var(--hue-base) / 10%
+    			),
+    		inset 0 0 0.1ch 0.05ch
+    			lch(
+    				calc(100% + var(--light-adjust))
+    					calc(var(--chroma-base) + var(--chroma-range)) var(--hue-base) / 50%
+    			),
+    		inset 0 0.2ch 0.4ch 0.1ch
+    			lch(calc(60% + var(--light-adjust)) var(--chroma-base) var(--hue-base) / 50%),
+    		inset 0 -0.25ch 0.25ch 0 lch(calc(20% + var(--light-adjust)) 41
+    					var(--hue-base) / 10%),
+    		inset -0.25ch 0 0.25ch 0 lch(calc(20% + var(--light-adjust))
+    					calc(var(--chroma-base) + var(--chroma-range)) var(--hue-base) / 40%),
+    		inset 0.25ch 0 0.25ch 0
+    			lch(
+    				calc(20% + var(--light-adjust))
+    					calc(var(--chroma-base) + var(--chroma-range)) var(--hue-base) / 40%
+    			),
+    		inset 0 0.5ch 1ch 0.5ch
+    			lch(
+    				calc(30% + var(--light-adjust))
+    					calc(var(--chroma-base) + var(--chroma-range)) var(--hue-base) / 60%
+    			);
+    	transition: all ease-in-out 250ms;
+    }
+
+    button:hover {
+    	--light-adjust: 10%;
+    }
+
+    button::before,
+    button::after {
+    	content: "";
+    	display: block;
+    	position: absolute;
+    }
+
+    button::before {
+    	inset: 0.25ch 0.75ch auto;
+    	background: linear-gradient(
+    		lch(calc(100% + var(--light-adjust)) 0 var(--hue-base) / 50%),
+    		lch(
+    			calc(100% + var(--light-adjust)) var(--chroma-base) var(--hue-base) / 30%
+    		),
+    		lch(calc(98% + var(--light-adjust)) var(--chroma-base) var(--hue-base) / 5%)
+    	);
+    	height: 0.875ch;
+    	border-radius: 2ch 2ch 0.5ch 0.5ch;
+    	z-index: 1;
+    }
+
+    button::after {
+    	inset: 0;
+    	opacity: 80%;
+    	filter: blur(0.25ch);
+    	translate: 0 0.875ch;
+    	z-index: -1;
+    }
+</style>
+</html>
+
+<h2 id="tabs-on-my-imac">Tab’s on my iMac</h2>
+
+<ul>
+  <li>Window 1
+    <ul>
+      <li><a href="https://hackaday.com/2023/11/12/the-ibm-mda-should-have-been-the-cda/">The IBM MDA Should Have Been The CDA | Hackaday</a></li>
+      <li><a href="https://ports.macports.org/">Ports | MacPorts</a></li>
+      <li><a href="https://docs.brew.sh/Support-Tiers#tier-3">Support Tiers — Homebrew Documentation</a></li>
+      <li><a href="https://en.wikipedia.org/wiki/Dyson_sphere">Dyson sphere - Wikipedia</a></li>
+      <li><a href="https://garagehq.deuxfleurs.fr/documentation/quick-start/">Quick Start | Garage HQ</a></li>
+      <li><a href="https://jyn.dev/the-terminal-of-the-future/">the terminal of the future</a></li>
+      <li><a href="https://asahilinux.org/2025/12/progress-report-6-18/">Progress Report: Linux 6.18 - Asahi Linux</a></li>
+      <li><a href="https://pivot-to-ai.com/">Pivot to AI – It can’t be that stupid, you must be prompting it wrong</a></li>
+      <li><a href="https://course.ysap.sh/">The Complete Bash Scripting Course - ysap.sh</a></li>
+      <li><a href="https://www.martinnobel.com/techresearch/ios-6-screenshots">iOS 6 Revisited — Martin Nobel</a></li>
+      <li><a href="https://www.qwant.com/?client=ext-safari-macos-sb&amp;t=web&amp;q=shortcut+to+export+all+opened+tabs+in+safari">shortcut to export all opened tabs in safari – Qwant</a></li>
+      <li><a href="https://www.idownloadblog.com/2025/10/17/copy-all-open-tab-links-safari/">How to copy website links of all open tabs in Safari</a></li>
+      <li><a href="https://www.howtogeek.com/758131/how-to-copy-urls-of-all-open-tabs-in-safari/">How to Copy URLs of All Open Tabs in Safari</a></li>
+    </ul>
+  </li>
+  <li>Window 2
+    <ul>
+      <li><a href="https://zed.dev/">Zed — Love your editor again</a></li>
+      <li><a href="https://jpmens.net/2024/02/23/totp-codes-in-the-terminal/">Jan-Piet Mens :: Using 2FAS TOTP codes in the terminal</a></li>
+      <li><a href="https://github.com/phuocng/html-dom">phuocng/html-dom: Common tasks of managing HTML DOM with vanilla JavaScript. Give me 1 ⭐if it’s useful.</a></li>
+      <li><a href="https://www.bikebaze.nl/user-account">Mijn account - Beheer Je BIKEBAZE® Fietsregistraties</a></li>
+      <li><a href="https://www.sfgate.com/tech/article/time-to-declare-war-ai-21221535.php">The time has come to declare war on AI</a></li>
+      <li><a href="https://codeberg.org/doekman/PySQL">doekman/PySQL: Use raw SQL directly from python. Inspired by PugSQL, but with more Pythonesque. - Codeberg.org</a></li>
+      <li><a href="https://pugsql.org/">PugSQL :: SQL is Extremely Good, Actually</a></li>
+    </ul>
+  </li>
+  <li>Window 3 (minimized to dock)
+    <ul>
+      <li><a href="https://fastpen.lecaro.me/#H4sIAAAAAAAAE31TQZKbMBC8%2BxUqckmqQjDxHlIy5pCfCGmA2ZUllSRssym%2FIB%2FYWz6SPyVPiAQ2YHsrOlCt6ZY008wUzHrkEgiKXcJb5pNyRcIq2rw8MCUYa4os4DFoCJfMuV2ifQs2KQtnmCr%2F%2Fnp7K7IBFpm5lzqQ9X%2BVtbb7EQ7bqvNeq%2FLP759FdsEzicp0nvjewC7xcPIJMZJxaLUUYHfJd7DI26mGbLy6yC5FBsiZOjA3VjvAkFo2onK1KpzvoyyerrTof0wv6wPYWuojbVEIUFsyMS1g03qar9eHdjtFBbqQWU9rCac5GnepQAvco1aUa9nt1UwziY1K0cPeUQ7Kg5255855rPuU6xBX%2FoGvQzyt2R5lT4ljyqUumFHPgvCYtvTDZrNZJG%2FAOhOzOQAl39Zrc0n2PHwvts0uDEe0wyF7C5LFg9sb%2BjVFJeBE89twxfhLY3WnBD22ocJb9ojCt%2FTr%2FP51GSYEqiZQ90ylbfjlqWUCO0ef3qdpbk7EaYmCVKFPXpbFtflcV2yldHD%2Fwdc9sw0qul4YKYFZyqRc3mZI7GoyXzn8D4evQJ%2FuXP0yDM9SKjXzlEio%2FY0uTs6DzMZuu08vHaL0xqS7fOK6NiUqiQrSSuqrJdflbeicODWhhziT8DHNP5P80yw6LxKMusULoy9VqO7SYOcweZeBCpPFLRofUTbBKJqOvw9mzT%2FmWRMPqgQAAA%3D%3D">Fastpen : a client side only codepen alternative</a></li>
+      <li><a href="https://aaadaaam.com/notes/tools-that-build-you/">Tools that build you | Adam Stoddard</a></li>
+      <li><a href="https://maclabs.jazzace.ca/2025/06/07/blog-or-wiki.html">Anthony’s Mac Labs Blog | Blog Post or Wiki Edit? (📦)</a></li>
+      <li><a href="https://alexwlchan.net/2025/swift-bird-animation/?ref=mastodon">Recreating the bird animation from Swift.org – alexwlchan</a></li>
+    </ul>
+  </li>
+  <li>Window 4 (minimized to dock)
+    <ul>
+      <li><a href="https://www.hotsoup.nl/nl/herkomst/nepalese-thee.html">Nepalese thee | Hotsoup.nl online thee voor fijnproevers</a></li>
+      <li><a href="https://mikrotik.com/">MikroTik · Routers and Wireless</a></li>
+      <li><a href="https://www.ebay.nl/mye/myebay/summary">Overzicht | Mijn eBay | eBay</a></li>
+    </ul>
+  </li>
+  <li>Window 5 (minimized to dock)
+    <ul>
+      <li><a href="https://www.kleine-klussen.nl/#klusplanner">Klusjesman in Groningen, Haren, Meerstad, Eelderwolde</a></li>
+      <li><a href="https://www.monumenten.nl/ontzorgingsprogramma">Ontzorgingsprogramma Verduurzaming Monumenten | Monumenten.nl</a></li>
+      <li><a href="https://www.bitsoffreedom.nl/2025/10/16/weg-van-big-tech-stap-4-navigatie-en-kaarten/">Weg van Big Tech stap 4: navigatie en kaarten – Bits of Freedom</a></li>
+      <li><a href="https://www.bitrecover.com/blog/export-gmail-to-maildir/">Export Gmail/GSuite to Maildir with All Components</a></li>
+      <li><a href="https://soverin.nl/help/migratie-van-google-naar-soverin">Soverin: Migratie van Google naar Soverin</a></li>
+      <li><a href="https://www.lastdodo.nl/nl/my/shop_orders/12093119">LastDodo - ’s Werelds grootste catalogus &amp; community voor verzamelaars</a></li>
+    </ul>
+  </li>
+  <li>Window 6 (minimized to dock)
+    <ul>
+      <li><a href="https://noorderlink.nl/vacature/74268-01422-079603050116-senior-devops-engineer-idp-ministerie-van-economische-zaken-en-klimaat-ezk?utm_medium=email&amp;utm_source=transactional&amp;utm_campaign=vacatures@noorderlink.nl">Senior DevOps Engineer IDP bij Ministerie van Economische Zaken en Klimaat (EZK) | Noorderlink</a></li>
+      <li><a href="https://www.mijnmovum.nl/folders/27/blocks">Mijn Movum</a></li>
+      <li><a href="https://runwaylanderspot.com/?d=durdraw.org&amp;pkAId=2143526812">Parking Page</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="tabs-on-my-macbook-pro">Tab’s on my MacBook Pro</h2>
+
+<ul>
+  <li>Window 1
+    <ul>
+      <li><a href="https://www.joanwestenberg.com/the-case-for-blogging-in-the-ruins/">he Case for Blogging in the Ruins</a></li>
+      <li><a href="https://shantellsans.com/process">Shantell Sans → ArrowType</a></li>
+      <li><a href="https://www.felienne.nl/2026-01/">Special Schrijven | Writing</a></li>
+      <li><a href="https://www.ns.nl/reisplanner/#/?vertrek=Zwolle&amp;vertrektype=treinstation&amp;aankomst=Groningen&amp;aankomsttype=treinstation&amp;type=vertrek&amp;tijd=2026-01-04T19:30&amp;firstMileModality=PUBLIC_TRANSPORT&amp;lastMileModality=PUBLIC_TRANSPORT&amp;context=arnu%7CfromStation%3D8400747%7CrequestedFromStation%3D8400747%7CtoStation%3D8400263%7CrequestedToStation%3D8400263%7CplannedFromTime%3D2026-01-04T19:16:00%2B01:00%7CplannedArrivalTime%3D2026-01-04T20:12:00%2B01:00%7CexcludeHighSpeedTrains%3Dfalse%7CsearchForAccessibleTrip%3Dfalse%7ClocalTrainsOnly%3Dfalse%7CtravelAssistance%3Dfalse%7CtripSummaryHash%3D3604313121&amp;ritnummers=765">Reisplanner | Plan je reis | NS</a></li>
+      <li><a href="https://nos.nl/artikel/2596943-topdrukte-voor-strooiers-dit-is-onze-wintersport">Topdrukte voor strooiers: ‘Dit is onze wintersport’</a></li>
+      <li><a href="https://nos.nl/artikel/2596914-vk-en-frankrijk-bombarderen-is-complex-in-syrie">VK en Frankrijk bombarderen IS-complex in Syrië</a></li>
+      <li><a href="https://www.unilin.com/nl">Home</a></li>
+      <li><a href="https://evabits.com/">This Connection Is Not Private</a></li>
+      <li><a href="https://www.wadcon.nl/">Wadcon | Speciaalmachinebouw | Automatisering | Transfersystemen</a></li>
+    </ul>
+  </li>
+  <li>Window 2
+    <ul>
+      <li><a href="https://voorbereidboek.nl/">Voorbereid – Zo zien de grootste Nederlandse rampscenario’s eruit</a></li>
+      <li><a href="https://lab.alexanderobenauer.com/updates/the-jasper-report">Recreating the Canon Cat document interface - Little Lab</a></li>
+      <li><a href="https://www.w3tutorials.net/python-tutorial/how-to-use-linting-for-python-code-quality/">How to Use Linting for Python Code Quality — w3tutorials.net</a></li>
+      <li><a href="https://realpython.com/ruff-python/">Ruff: A Modern Python Linter for Error-Free and Maintainable Code – Real Python</a></li>
+    </ul>
+  </li>
+  <li>Window 3
+    <ul>
+      <li><a href="https://www.linusakesson.net/programming/tty/">The TTY demystified</a></li>
+      <li><a href="https://typographyforlawyers.com/">Typography for Lawyers</a></li>
+      <li><a href="http://scripting.com/">Scripting News</a></li>
+      <li><a href="https://blog.codinghorror.com/the-trap-you-set-for-yourself/">The Trap You Set For Yourself</a></li>
+      <li><a href="https://aspect.bildhuus.com/#file-system">Bildhuus Aspect</a></li>
+      <li><a href="https://www.bitsoffreedom.nl/2025/09/16/stap-over-op-privacyvriendelijke-e-mail-agenda/">Weg van Big Tech stap 1: e-mail &amp; agenda – Bits of Freedom</a></li>
+      <li><a href="https://tonsky.me/blog/syntax-highlighting/">I am sorry, but everyone is getting syntax highlighting wrong @ tonsky.me</a></li>
+      <li><a href="https://tangiblemediacollection.com/">Tangible Media: A Historical Collection of Information Storage Technology</a></li>
+    </ul>
+  </li>
+  <li>Window 4
+    <ul>
+      <li><a href="https://www.photosync-app.com/home">PhotoSync – Photo Transfer and Backup App | For iOS &amp; Android - PhotoSync</a></li>
+      <li><a href="https://github.com/git/git/blob/master/Documentation/gitdatamodel.adoc">git/Documentation/gitdatamodel.adoc at master · git/git</a></li>
+      <li><a href="https://community.signalusers.org/c/ux/ios-ux-ui/29">(4) Latest UI/UX Feedback/iOS UI/UX topics - Signal Community</a></li>
+      <li><a href="https://bitbucket.org/doekman/workspace/repositories/">doekman / Repositories — Bitbucket</a></li>
+    </ul>
+  </li>
+  <li>Window 5
+    <ul>
+      <li><a href="https://jekyllrb.com/docs/collections/#output">Collections | Jekyll • Simple, blog-aware, static sites</a></li>
+      <li><a href="http://127.0.0.1:4000/like/">Pagina openen mislukt</a></li>
+      <li><a href="https://nora.codes/post/infrastructure-photography-manifesto-and-decker-in-html/">Infrastructure photography manifesto</a></li>
+      <li><a href="https://beyondloom.com/decker/">https://beyondloom.com/decker/</a></li>
+    </ul>
+  </li>
+  <li>Window 6
+    <ul>
+      <li><a href="https://calpaterson.com/bank-python.html">n oral history of Bank Python</a></li>
+      <li><a href="https://togetherlondon.com/insights/active-listening-swiss-army-knife">Active Listening: Swiss Army Knife of Communication (with Examples)</a></li>
+    </ul>
+  </li>
+  <li>Window 7 (hidden in a virtual desktop)
+    <ul>
+      <li><a href="https://buttondown.com/whatever_jamie/archive/the-many-many-many-javascript-runtimes-of-the-last-decade/">The many, many, many JavaScript runtimes of the last decade • Buttondown</a></li>
+      <li><a href="https://github.com/mcfunley/pugsql">mcfunley/pugsql: A HugSQL-inspired database library for Python</a></li>
+      <li><a href="https://www.youtube.com/watch?v=GfH4QL4VqJ0&amp;list=WL&amp;index=11">(35) Python: The Documentary | An origin story - YouTube</a></li>
+      <li><a href="https://www.devalkzalk.nl/nl/molenwinkel">molenwinkel</a></li>
+      <li><a href="https://anno.nl/contact/">Contact museum ANNO Zwolle</a></li>
+      <li><a href="https://hetanderenepal.nl/familiereizen-nepal/">Familiereizen Nepal | Het Andere Nepal</a></li>
+      <li><a href="https://www.anwb.nl/vakantie/nepal/beste-reistijd">Beste reistijd Nepal | Weer en klimaat Nepal » ANWB</a></li>
+      <li><a href="https://www.google.com/travel/flights/search?tfs=CBwQAhonEgoyMDI2LTAzLTAyagsIAhIHL20vMGszcHIMCAMSCC9tLzA0Y3g1GicSCjIwMjYtMDMtMjNqDAgDEggvbS8wNGN4NXILCAISBy9tLzBrM3BAAUgBcAGCAQsI____________AZgBAQ">Amsterdam to Kathmandu | Google Flights</a></li>
+      <li><a href="https://en.wikipedia.org/wiki/Nepal">Nepal - Wikipedia</a></li>
+      <li><a href="https://www.bestereistijd.nl/nepal/#weerervaringen">Nepal temperatuur, klimaat en weer per maand</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="tabs-on-my-iphone-mini">Tab’s on my iPhone mini</h2>
+
+<ul>
+  <li><a href="https://datasette.io/">Datasette: An open source multi-tool for exploring and publishing data</a></li>
+  <li><a href="https://lekkerder.nl/groentekwekerij-noordlaren">Groentekwekerij Noordlaren  - Boerderijwinkel, Kwekerij en Anders in Noordlaren</a></li>
+  <li><a href="https://zuriga.com/de/Produkte/ZURIGA-E2/ZEEU401">https://zuriga.com/de/Produkte/ZURIGA-E2/ZEEU401 (no title)</a></li>
+  <li><a href="https://pine64.com/product/pinecil-smart-mini-portable-soldering-iron/">PINECIL – Smart Mini Portable Soldering Iron (Version 2) - PINE STORE</a></li>
+  <li><a href="https://bluescsi.com/v2#new">BlueSCSI v2 Pico Announcement - BlueSCSI</a></li>
+  <li><a href="https://en.m.wikipedia.org/wiki/The_Ozark_Mountain_Daredevils">The Ozark Mountain Daredevils</a></li>
+  <li><a href="https://www.npr.org/sections/health-shots/2016/04/13/474071268/how-lsd-makes-your-brain-one-with-the-universe">Brain Connections May Cause Blurring Sense Of Self With LSD : Shots - Health News : NPR</a></li>
+  <li><a href="https://duckduckgo.com/?q=cat+lee+king+and+his+cooks&amp;t=iphone&amp;ia=web">cat lee king and his cooks at DuckDuckGo</a></li>
+  <li><a href="https://weblogs.vpro.nl/plots/">https://weblogs.vpro.nl/plots/</a> – 404 Not Found</li>
+  <li><a href="https://www.vpro.nl/programmas/tegenlicht/kijk/afleveringen/2019-2020/houtbouwers.html">Houtbouwers | VPRO Tegenlicht</a></li>
+  <li><a href="https://ralphammer.com/make-me-think/">Make me think! – Ralph Ammer</a></li>
+  <li><a href="https://unsplash.com/">Beautiful Free Images &amp; Pictures | Unsplash</a></li>
+  <li><a href="https://www.o42interieur.nl/">De mooiste interieurstudio en showroom van Groningen - O’42 interieur</a></li>
+  <li><a href="https://www.mantherapy.org/">https://www.mantherapy.org/ (no title)</a></li>
+  <li><a href="https://vimeo.com/showcase/9459437/video/838408969/embed">Vimeo: Vera Weekly</a></li>
+  <li><a href="https://www.templatemaker.nl/en/">✂Templatemaker</a></li>
+  <li><a href="https://soundtracker.com/">Official Website: Gordon Hempton – The Sound Tracker®</a></li>
+  <li><a href="https://decorrespondent.nl/11931/jij-dacht-dat-je-goed-kon-luisteren-luister-dan-eens-naar-deze-man-met-microfoon/3ae02ea8-67fb-0e9a-27cb-2eef1bd1ee06">Jij dacht dat je goed kon luisteren? Luister dan eens naar deze man met microfoon  - De Correspondent</a></li>
+  <li><a href="https://hackaday.com/2023/01/09/all-about-usb-c-power-delivery/">All About USB-C: Power Delivery | Hackaday</a></li>
+  <li><a href="https://www.npr.org/2017/07/12/533862948/lets-get-graphic-100-favorite-comics-and-graphic-novels">100 Best Comics And Graphic Novels : NPR</a></li>
+  <li><a href="https://lithub.com/tag/climate-change-library/">Literary Hub » Climate Change Library</a></li>
+  <li><a href="https://yewtu.be/">Invidious - search</a></li>
+  <li><a href="https://www.npr.org/sections/altlatino/2013/09/30/227834004/cumbia-the-musical-backbone-of-latin-america">Cumbia: The Musical Backbone Of Latin America : Alt.Latino : NPR</a></li>
+  <li><a href="https://www.c-support.nu/">C-support | Wij ondersteunen mensen met langdurige corona klachten</a></li>
+  <li><a href="https://mtlynch.io/aardvarkd/">Aardvark’d: The Fog Creek Documentary, 18 Years Later ·mtlynch.io</a></li>
+  <li><a href="https://www.abortretry.fail/p/an-introduction-to-linux-part-1">https://www.abortretry.fail/p/an-introduction-to-linux-part-1</a> – 404 Not Found</li>
+  <li><a href="https://www.thomann.de/nl/shure_sm57lc_bundle_ii.htm?msclkid=fcfac665a0f915896003a3681845bcf5&amp;utm_source=bing&amp;utm_medium=cpc&amp;utm_campaign=Shopping%20NL&amp;utm_term=4576717170826333&amp;utm_content=MI">Shure SM57LC Bundle II – Thomann Nederland</a></li>
+  <li><a href="https://www.lovemysalad.com/nl/recepten/lasagne-met-pompoen-ricotta-spinazie-en-salie">LASAGNE MET POMPOEN, RICOTTA, SPINAZIE EN SALIE</a></li>
+  <li><a href="https://duckduckgo.com/?q=jon+spencer+blues+explosion&amp;t=iphone&amp;ia=web">jon spencer blues explosion at DuckDuckGo</a></li>
+  <li><a href="https://jennyodell.com/writing.html">jenny odell - writing</a></li>
+  <li><a href="https://chrisfitzgeraldmusic.com/watch/">Watch – Chris Fitzgerald</a></li>
+  <li><a href="https://chrisfitzgeraldmusic.com/download/walking-bass-line-theory-basics/?wpdmdl=1258&amp;refresh=652eb84518c8f1697560645">https://chrisfitzgeraldmusic.com/download/walking-bass-line-theory-basics/?wpdmdl=1258&amp;refresh=652eb84518c8f1697560645 (no title)</a></li>
+  <li><a href="https://neal.fun/internet-artifacts/amazon-order/">First Amazon Order</a></li>
+  <li><a href="https://plantbaseddennis.nl/nl/recepten/diner/de-lekkerste-tempeh-marinades/">De lekkerste tempeh-marinade - Plantbased Dennis</a></li>
+  <li><a href="https://tome.one/slides/amiet-pelissier-security-keys-workshop-ph0wn-2023-slides.pdf">https://tome.one/slides/amiet-pelissier-security-keys-workshop-ph0wn-2023-slides.pdf (no title)</a></li>
+  <li><a href="https://en.m.wikipedia.org/wiki/Primer_(film)">Primer (film)</a></li>
+  <li><a href="https://standardebooks.org/ebooks">Browse Standard Ebooks - Standard Ebooks: Free and liberated ebooks, carefully produced for the true book lover</a></li>
+  <li><a href="https://www.airdancer.nl/airdancer/natuurlijke-luchtverfrisser/luchtverfrisser-buiten/13823">Luchtverfrisser Buiten: Natuurlijke luchtverfrisser: Airdancer.nl</a></li>
+  <li><a href="https://www.hawalili.com/">Shop Hawaiian Shirts-Hawalili | hawalili</a></li>
+  <li><a href="https://www.macintoshrepository.org/48943-shuriken">Shuriken - Macintosh Repository</a></li>
+  <li><a href="https://rvessen.wordpress.com/2023/07/30/korte-cursus-korte-verhalen-schrijven/">korte cursus korte  verhalen schrijven | reddend zwemmen</a></li>
+  <li><a href="https://duckduckgo.com/?q=data+model+web+shop&amp;t=iphone&amp;ia=web">data model web shop at DuckDuckGo</a></li>
+  <li><a href="https://shkspr.mobi/blog/2024/02/activitypub-server-in-a-single-file/">ActivityPub Server in a Single PHP File – Terence Eden’s Blog</a></li>
+  <li><a href="https://www.nytimes.com/interactive/2023/03/03/well/mind/breathing-exercises.html">3 Breathing Exercises to Relieve Stress and Improve Health - The New York Times</a></li>
+  <li><a href="https://www.tammo80.nl/">Tammo80.nl - Tammo Jan Dijkema</a></li>
+  <li><a href="https://kerkour.com/sqlite-for-servers">Optimizing SQLite for servers</a></li>
+  <li><a href="https://goedmaken.org/index.php/2024/04/15/wie-bepaalt-het-narratief-rond-ai/">Wie bepaalt het narratief rond AI? – Goed Maken ❤️</a></li>
+  <li><a href="https://axleos.com/building-a-gps-receiver-part-1-hearing-whispers/">Building a GPS Receiver, Part 1: Hearing Whispers | Phillip Tennen</a></li>
+  <li><a href="https://anderetijden.nl/aflevering/707/Op-vakantie-naar-Afghanistan">Op vakantie naar Afghanistan - Andere Tijden</a></li>
+  <li><a href="https://alinpanaitiu.com/blog/woodworking-escape-from-software-absurdity/#other-small-wood-things">Woodworking as an escape from the absurdity of software</a></li>
+  <li><a href="https://chriscoyier.net/2024/07/22/practical-svg-is-now-free-to-read-online/">Practical SVG is Now Free to Read Online – Chris Coyier</a></li>
+  <li><a href="https://nl.jvc.com/compare/?cat=93&amp;products=4228,1584,591,585">Compare • JVC Nederland</a></li>
+  <li><a href="https://www.bol.com/nl/nl/p/breaker-s-revenge-original-b-boy-and-b-girl-breakdance-classics/9300000178253704/?s2a=#productTitle">Arthur Baker - Arthur Baker presents Breaker’s Revenge And Original B-Boy and B-Girl… | bol</a></li>
+  <li><a href="https://pagedout.institute/download/PagedOut_001_beta1.pdf">https://pagedout.institute/download/PagedOut_001_beta1.pdf (no title)</a></li>
+  <li><a href="https://endler.dev/2024/the-dying-web/">The Dying Web | Matthias Endler</a></li>
+  <li><a href="https://www.cdfinder.de/index.html">NeoFinder – The Digital Asset Manager for macOS and iOS</a></li>
+  <li><a href="https://sourcefiles.app/">Source Files for iPhone, iPad &amp; Mac</a></li>
+  <li><a href="https://freron.com/">MailMate</a></li>
+  <li><a href="https://landsat.gsfc.nasa.gov/apps/YourNameInLandsat-main/index.html">Landsat - NASA Science</a></li>
+  <li><a href="https://sunshowers.io/posts/beyond-ctrl-c-signals/">Beyond Ctrl-C: The dark corners of Unix signal handling · sunshowers</a></li>
+  <li><a href="https://shop.tropicfeel.com/">Tropicfeel | The Ultimate Travel Gear</a></li>
+  <li><a href="https://www.musictheory.net/exercises/fretboard">Fretboard Note Identification</a></li>
+  <li><a href="https://www.amazon.com/Body-Keeps-Score-Healing-Trauma/dp/0143127748">The Body Keeps the Score: Brain, Mind, and Body in the Healing of Trauma</a></li>
+  <li><a href="https://tonsky.me/sign-in/">Sign In @ tonsky.me</a></li>
+  <li><a href="https://www.schiermonnikoog.nl/trouwambtenaren">Trouwambtenaren | Gemeente Schiermonnikoog</a></li>
+  <li><a href="https://duckduckgo.com/?q=velux+dakraam+monteren&amp;t=iphone&amp;ia=web">velux dakraam monteren at DuckDuckGo</a></li>
+  <li><a href="https://foxilicious.nl/harira-marokkaanse-tomatensoep/">Harira: Marokkaanse tomatensoep met linzen en kikkererwten</a></li>
+  <li><a href="https://speakerdeck.com/pycon2016/sumana-harihareswara-http-can-do-that?slide=9">Sumana Harihareswara - HTTP Can Do That?! - Speaker Deck</a></li>
+  <li><a href="https://pipe.pico.sh/">pipe: authenticated pubsub over ssh</a></li>
+  <li><a href="https://hi-lo-art.com/links">Links | Hi-Lo</a></li>
+  <li><a href="https://www.groene.nl/artikel/werk-is-politiek?utm_campaign=website&amp;utm_medium=owned_social&amp;utm_source=mastodon">‘Werk is politiek’ –  De Groene Amsterdammer</a></li>
+  <li><a href="https://moviesjoy.kim/">https://moviesjoy.kim/</a> – (exception when retrieving: HTTPSConnectionPool(host=’moviesjoy.kim’, port=443): Max retries exceeded with url: / (Caused by NameResolutionError(“HTTPSConnection(host=’moviesjoy.kim’, port=443): Failed to resolve ‘moviesjoy.kim’ ([Errno 8] nodename nor servname provided, or not known)”)))</li>
+  <li><a href="https://ztoz.blog/posts/postscript-code/">PostScript® 1.0 - A Code Study | ℤ→ℤ</a></li>
+  <li><a href="https://www.mollywhite.net/micro/entry/202403091817">POSSE</a></li>
+  <li><a href="https://theartofbeingaman.nl/#contact">At Home - TheartofbeingaMAN</a></li>
+  <li><a href="https://european-alternatives.eu/category/search-engines">European search engines | European Alternatives</a></li>
+  <li><a href="https://archive.org/details/TheInternetsOwnBoyTheStoryOfAaronSwartz">The Internet’s Own Boy: The Story of Aaron Swartz : Brian Knappenberger : Free Download, Borrow, and Streaming : Internet Archive</a></li>
+  <li><a href="https://www.mijnpensioenoverzicht.nl/">Mijn pensioenoverzicht</a></li>
+  <li><a href="https://www.nemokennislink.nl/publicaties/waarom-leerstijlen-niet-bestaan/">Waarom leerstijlen niet bestaan - NEMO Kennislink</a></li>
+  <li><a href="https://klevgrand.com/products/speldosa">Klevgrand - Dream Louder</a></li>
+  <li><a href="https://www.odoo.com/nl_NL/app/planning">Odoo Planning - Gratis Software voor Planningbeheer</a></li>
+  <li><a href="https://daylightcomputer.com/">Daylight | A More Caring Computer</a></li>
+  <li><a href="https://github.com/oils-for-unix/oils/wiki/How-Interactive-Shells-Work#1-processing-user-inputs">How Interactive Shells Work · oils-for-unix/oils Wiki · GitHub</a></li>
+  <li><a href="https://bit-101.com/blog/posts/2024-12-28/journal/">BIT-101 | Journal</a></li>
+  <li><a href="https://www.etsy.com/nl/listing/1322634709/handgemaakte-14k-edel-champagnegoud-voor?ga_order=most_relevant&amp;ga_search_type=all&amp;ga_view_type=gallery&amp;ga_search_query=trouwringen&amp;ref=sc_gallery-4-2&amp;frs=1&amp;cns=1&amp;sts=1&amp;search_preloaded_img=1&amp;plkey=7a0ef5e3202ca95ec326a37978c1df8f23023c95%3A1322634709&amp;variation1=2931233890&amp;variation0=2947772965">Handgemaakte 14k edel champagnegoud voor hem en haar Mobius-trouwringset</a></li>
+  <li><a href="https://100r.co/site/small_space.html">100R — small space</a></li>
+  <li><a href="https://muffinman.io/blog/the-tiny-book-of-great-joys/">The Tiny Book of Great Joys · Muffin Man</a></li>
+  <li><a href="https://www.zanglesvoormannen.nl/">Zangles voor Mannen | Zangles voor Mannen in Zwolle</a></li>
+  <li><a href="https://duckduckgo.com/?q=offerte+velux+dakkspel+groningen&amp;t=iphone&amp;ia=web">offerte velux dakkspel groningen at DuckDuckGo</a></li>
+  <li><a href="https://it-notes.dragas.net/2025/02/26/fedimeteo-how-a-tiny-freebsd-vps-became-a-global-weather-service-for-thousands/">FediMeteo: How a Tiny €4 FreeBSD VPS Became a Global Weather Service for Thousands - IT Notes</a></li>
+  <li><a href="https://www.bol.com/nl/nl/p/woodoro-led-leeslampje-bevordert-slaap-3-lichtstanden-oplaadbaar/9300000001817264/">Led Leeslampje voor boek – 3 Standen oogvriendelijk licht – Dimbare oplaadbare… | bol</a></li>
+  <li><a href="https://localghost.dev/blog/this-page-is-under-construction/">This page is under construction - localghost</a></li>
+  <li><a href="https://nl.m.wikipedia.org/wiki/Tjeerd_Bottema">Tjeerd Bottema</a></li>
+  <li><a href="http://www.ecohovenier.nl/wp/artikelen/onkruid-bestrijden-op-verhardingen-2/">Ecologisch onkruid bestrijden op verhardingen – ecohovenier.nl</a></li>
+  <li><a href="https://www.hornbach.nl/p/altrex-huishoudtrap-double-decker-5-treden/4100185/">ALTREX Huishoudtrap Double Decker, 5 treden kopen! | HORNBACH</a></li>
+  <li><a href="https://retool.com/visual-basic">Something Pretty Right: A History of Visual Basic | Retool</a></li>
+  <li><a href="https://alexwlchan.net/2025/bookmarks-static-site/?utm_source=mastodon">Creating a static website for all my bookmarks – alexwlchan</a></li>
+  <li><a href="https://veltkampenstam.nl/woning/zalk-van-dijksweg-31/">Zalk – van Dijksweg 31 | Veltkamp &amp; Stam Admono Makelaars</a></li>
+  <li><a href="https://speld.nl/2025/05/13/knmi-meet-langste-periode-ooit-dat-nederlanders-niet-zeiken-over-het-weer/">KNMI meet langste periode ooit dat Nederlanders niet zeiken over het weer</a></li>
+  <li><a href="https://www.kleinanzeigen.de/s-anzeige/dell-6k-32-monitor-u3224kba/3084829569-225-3490">PC &amp; Zubehör &amp; Software gebraucht kaufen in Prenzlauer Berg - Pankow | kleinanzeigen.de</a></li>
+  <li><a href="https://decorrespondent.nl/16100/de-zwakke-plek-van-de-verenigde-staten-vind-je-op-zee/ebd85e6c-351c-00c5-10c2-b4db9c79ee42">De zwakke plek van de Verenigde Staten vind je op zee</a></li>
+  <li><a href="https://youmightnotneedjquery.com/">You Might Not Need jQuery</a></li>
+  <li><a href="https://www.hoelangmoetkoken.nl/knolselderij/">Knolselderij koken, bakken of grillen</a></li>
+  <li><a href="https://www.joanwestenberg.com/how-convenience-kills-curiosity/">How Convenience Kills Curiosity</a></li>
+  <li><a href="https://direnv.net/">direnv – unclutter your .profile | direnv</a></li>
+  <li><a href="https://efkobeton.nl/positieve-ervaringen-met-open-hiring-solliciteren-zonder-sollicitatieprocedure/">Positieve ervaringen met open hiring: solliciteren zonder sollicitatieprocedure - EFKO Beton</a></li>
+  <li><a href="https://justfuckingusehtml.com/">Just fucking use HTML</a></li>
+  <li><a href="https://guide.elm-lang.org/core_language.html">Core Language · An Introduction to Elm</a></li>
+  <li><a href="https://straun.nl/">Straun – Natuureducatie Schiermonnikoog</a></li>
+  <li><a href="https://www.netmeister.org/blog/http-123.html">Bootstrapping HTTP/1.1, HTTP/2, and HTTP/3</a></li>
+  <li><a href="https://appdocumentary.com/2015/01/08/neven-mrgan-on-why-skeuomorphism-is-like-a-classic-car/">Neven Mrgan on Why Skeuomorphism Is Like a Classic Car | App: The Human Story - Available Now</a></li>
+  <li><a href="https://m.soundcloud.com/thepowersharingseries/ps165-clip-sculley-atkinson-hypercard">Stream episode PS165 - Clip - Sculley - Atkinson - Hypercard by The Powersharing Series podcast | Listen online for free on SoundCloud</a></li>
+  <li><a href="https://berthub.eu/articles/posts/dutch-postcode-and-building-database/">Welcome to the BAG: The Dutch Building and Addresses database - Bert Hubert’s writings</a></li>
+  <li><a href="https://transeurotrail.org/netherlands/#5.84/52.131/5.659">TET Netherlands - Trans Euro Trail - Europe’s Dirt Road Adventure</a></li>
+  <li><a href="https://crackedmirrorinshalott.wordpress.com/2013/04/12/autistic-allistic-neurodiverse-and-neurotypical-say-what/">Autistic, Allistic, Neurodiverse, and Neurotypical: Say what? | Cracked Mirror in Shalott</a></li>
+  <li><a href="https://cablespaghetti.dev/hosting-a-fediverse-instance-on-an-original-raspberry-pi.html">Hosting a Fediverse instance on an original Raspberry Pi</a> – (exception when retrieving: HTTPSConnectionPool(host=’cablespaghetti.dev’, port=443): Max retries exceeded with url: /hosting-a-fediverse-instance-on-an-original-raspberry-pi.html (Caused by NewConnectionError(“HTTPSConnection(host=’cablespaghetti.dev’, port=443): Failed to establish a new connection: [Errno 51] Network is unreachable”)))</li>
+  <li><a href="https://crescentro.se/posts/writing-drivers/">Writing a basic Linux device driver when you know nothing about Linux drivers or USB // crescentro.se</a></li>
+  <li><a href="https://hetdorpzalk.nl/?s=Zalkerbos&amp;doing_wp_cron=1751886056.3051149845123291015625">Je zocht naar Zalkerbos - Het dorp Zalk</a></li>
+  <li><a href="https://www.crowdsupply.com/excamera/termdriver-2">TermDriver 2 | Crowd Supply</a></li>
+  <li><a href="https://www.feynmanlectures.caltech.edu/">Feynman Lecures on Physics</a></li>
+  <li><a href="https://www.homecomputermuseum.nl/en/collectie/aster/">HomeComputerMuseum - Aster Computers</a></li>
+  <li><a href="https://borretti.me/article/notes-on-managing-adhd#strategies">Notes on Managing ADHD</a></li>
+  <li><a href="https://isolatie.nijbegun.nl/over-de-isolatieaanpak/wat-is-een-isolatieplan/">Nij Begun</a></li>
+  <li><a href="https://copy.sh/v86/">v86</a></li>
+  <li><a href="https://descargasalsa.nl/handig/">Handige bronnen – Dansschool Descarga Salsa</a></li>
+  <li><a href="https://aaadaaam.com/notes/useful-defaults/">There’s no such thing as a CSS reset | Adam Stoddard</a></li>
+  <li><a href="https://web-platform-dx.github.io/web-features-explorer/">Web platform features explorer - Home</a></li>
+  <li><a href="https://web-platform-dx.github.io/web-features-explorer/widely-available/">Web platform features explorer - Widely available</a></li>
+  <li><a href="https://www.bostonmagazine.com/news/lost-at-sea/">Shipwrecked: A Shocking Tale of Love, Loss, and Survival in the Deep Blue Sea</a></li>
+  <li><a href="https://nl.ifixit.com/Guide/How+to+Clean+your+iPhone's+Lightning+Port/164631">How to Clean your iPhone’s Lightning Port - iFixit reparatiehandleiding</a></li>
+  <li><a href="https://www.klompen.frl/webshop/">Online houten scherjon klompen kopen</a></li>
+  <li><a href="https://usetrmnl.com/">TRMNL | E-ink dashboard to stay focused</a></li>
+  <li><a href="https://github.com/schlagmichdoch/pairdrop/blob/master/docs/faq.md">PairDrop/docs/faq.md at master · schlagmichdoch/PairDrop · GitHub</a></li>
+  <li><a href="https://www.ursulakleguin.com/blog">Ursula K. Le Guin — Blog (2010–2017)</a></li>
+  <li><a href="https://www.newmasculinity.org/">Ibiza Retreat for Men | New Masculinity | Ibiza Men’s Group</a></li>
+  <li><a href="https://simoneskitchen.nl/socca-glutenvrije-kikkererwten-pannenkoek/">Socca: glutenvrije kikkererwten pannenkoek - Simone’s Kitchen</a></li>
+  <li><a href="https://jpmens.net/2019/04/04/i-clone-all-repositories-i-ve-starred/">Jan-Piet Mens :: I clone all GitHub repositories I’ve starred</a></li>
+  <li><a href="https://jacobian.org/2025/aug/8/two-scenario-threat-modeling/">Two Scenario Threat Modeling - Jacob Kaplan-Moss</a></li>
+  <li><a href="https://www.emclient.com/">eM Client | The Best Email Client for Windows and Mac</a></li>
+  <li><a href="https://overtype.dev/">OverType - The Markdown Editor That’s a Textarea</a></li>
+  <li><a href="https://kiwix.org/en/">Explore Offline Wikipedia and Educational Content with Kiwix- Kiwix</a></li>
+  <li><a href="https://djot.net/">djot</a></li>
+  <li><a href="https://cpldcpu.com/2025/08/13/candle-flame-oscillations-as-a-clock/">Candle Flame Oscillations as a Clock – Tim’s Blog</a></li>
+  <li><a href="https://www.noorderzon.nl/programma/hanggai">Hanggai › Noorderzon</a></li>
+  <li><a href="https://www.linusakesson.net/programming/tty/">The TTY demystified</a></li>
+  <li><a href="https://aeon.co/essays/why-might-the-big-bang-theory-be-in-crisis-very-soon?ref=readtangle.com">Why might the Big Bang theory be in crisis very soon? | Aeon Essays</a></li>
+  <li><a href="https://m.soundcloud.com/sudhir-ibiza/mindful-magic-mushrum?in=sudhir-ibiza%2Fsets%2Fmedittions">Listen to Mindful Magic Mushrum Mircordosing Meditation for Men 2.wav by Sudhir, Zorah &amp; friends in Meditations playlist online for free on SoundCloud</a></li>
+  <li><a href="https://www.macstories.net/stories/ios-and-ipados-26-the-macstories-review/">iOS and iPadOS 26: The MacStories Review</a></li>
+  <li><a href="https://www.flickr.com/photos/mwichary/albums/72177720329068272/">Houweling Telecomm Museum, Rotterdam | Flickr</a></li>
+  <li><a href="https://iamvishnu.com/posts/utf8-is-brilliant-design">UTF-8 is a Brilliant Design — Vishnu’s Pages</a></li>
+  <li><a href="https://www.reflectionframe.com/">Reflection Frame</a></li>
+  <li><a href="https://www.filfre.net/sitemap/">» Table of Contents The Digital Antiquarian</a></li>
+  <li><a href="https://harpers.org/archive/1941/08/who-goes-nazi/">Who Goes Nazi?, by Dorothy Thompson</a></li>
+  <li><a href="https://sunpig.com/martin/2025/09/28/roman-mars-on-the-curse-of-efficiency/">Roman Mars on the curse of efficiency – Legends of the Sun Pig</a></li>
+  <li><a href="https://the-web-we-want.com/">The web you want</a></li>
+  <li><a href="https://mysamasati.com/?mid=223">mySamasati - Today’s Meditation</a></li>
+  <li><a href="https://pyfound.blogspot.com/2025/10/NSF-funding-statement.html?m=1">Python Software Foundation News: The PSF has withdrawn a $1.5 million proposal to US government grant program</a></li>
+  <li><a href="https://github.com/non-ai-licenses/non-ai-licenses/blob/main/README.md">non-ai-licenses/README.md at main · non-ai-licenses/non-ai-licenses · GitHub</a></li>
+  <li><a href="https://www.avrotros.nl/program/ondertussen-aan-de-hofvijver~75/">Ondertussen aan de Hofvijver | AVROTROS</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Malicious_compliance">Malicious compliance</a></li>
+  <li><a href="https://visualrambling.space/dithering-part-1/">Dithering - Part 1</a></li>
+  <li><a href="https://aaadaaam.com/notes/pumped-up/">Pumped up | Adam Stoddard</a></li>
+  <li><a href="https://createadaptablelife.com/2025/10/how-can-we-see-and-steer-through-our-life-crises-to-find-a-new-path.html">How Can We See and Steer Through Our Life “Crises” to Find a New Path? - Create an Adaptable Life</a></li>
+  <li><a href="https://smallthingsconsidered.blog/">Small Things Considered</a></li>
+  <li><a href="https://www.tbray.org/ongoing/When/202x/2025/11/01/Blog-Search-Pagefind">ongoing by Tim Bray · Bye, Google Search</a></li>
+  <li><a href="https://www.asnbank.nl/betalen/nieuw-in-de-asn-app-en-asn-online-bankieren.html">Nieuw in de ASN-app en ASN Online Bankieren - ASN Bank</a></li>
+  <li><a href="https://the-web-you-want.org/?css=vasilis2">The web you want</a></li>
+  <li><a href="https://scripting.com/2022/07/19/152235.html?title=devNotesForMarkdownInRss">https://scripting.com/2022/07/19/152235.html?title=devNotesForMarkdownInRss</a> – (exception when retrieving: (‘Connection aborted.’, ConnectionResetError(54, ‘Connection reset by peer’)))</li>
+  <li><a href="https://www.stayokay.com/nl/tips/overnachten-in-een-wikkelhouse">Op vakantie midden in de natuur, overnacht in een Wikkelhouse bij Stayokay | Stayokay</a></li>
+  <li><a href="https://tickets.spotgroningen.nl/mtTicket/performance?id=108512&amp;lang=nl#seats">Kies je stoelen | Kaartverkoop SPOT Groningen</a></li>
+  <li><a href="https://www.ah.nl/allerhande/recept/R-R1189426/pannenkoeken-basisrecept?as_templateId=23793&amp;msclkid=8bcf0be5da3519893b6462f062e3fbcd&amp;utm_source=bing&amp;utm_medium=cpc&amp;utm_campaign=NL%2FNL%20-%20AO%20-%20Search%20-%20API%20-%20NB%20-%20Gerechten%20-%20Top%20100&amp;utm_term=pannenkoeken&amp;utm_content=Gerecht%20-%C2%A0Pannenkoeken%20-%C2%A0HV">Pannenkoeken basisrecept</a></li>
+  <li><a href="https://byte.tsundoku.io/#198610b-266">Byte - a visual archive</a></li>
+  <li><a href="https://jimmyhmiller.com/overly-humble-programmer">The Overly Humble Programmer</a></li>
+  <li><a href="https://www.webdesignmuseum.org/">Web Design Museum - Discover old websites, apps and software</a></li>
+  <li><a href="https://stemvan.groningen.nl/toekomst-haddingestraatgarage/?utm_campaign=Nieuwsbrief+Centrum+&amp;utm_medium=email&amp;utm_source=Mailer#reageren">Informatie - Toekomst Haddingestraatgarage</a></li>
+  <li><a href="https://www.nevel.org/">Nevel Wild Ales bier</a></li>
+  <li><a href="https://nl.wikipedia.org/wiki/Zonnesteen_(kompas)">Zonnesteen (kompas)</a></li>
+  <li><a href="https://eemstuin.nl/">Biologisch-dynamische groente met smaak - Eemstuin</a></li>
+  <li><a href="https://eikemaheert.nl/">Eikemaheert | Biologisch landbouwbedrijf in Loppersum dat natuur en cultuur verbindt</a></li>
+  <li><a href="https://filiph.github.io/unsure/">Unsure Calculator</a></li>
+  <li><a href="https://hpsv-vissen.nl/Lusknopen.htm">Lusknopen</a></li>
+  <li><a href="https://www.laptoprevive.nl/">Laptop Revive – Sociaal, duurzaam en open</a></li>
+  <li><a href="https://simsalabimwebshop.com/alternatieve-herenkleding/">Alternatieve herenkleding kopen? Simsalabim</a></li>
+  <li><a href="https://nkbv.nl/kenniscentrum/inbinden-bij-sportklimmen.html">Inbinden bij sportklimmen | NKBV</a></li>
+  <li><a href="https://www.provinciegroningen.nl/actueel/nieuws/nieuwsartikel/herinrichtingsplannen-pol-gebied-zes-weken-ter-inzage/">Herinrichtingsplannen POL-gebied zes weken ter inzage - Provincie Groningen</a></li>
+  <li><a href="https://app.tasteventura.nl/nl/quiz/intro/oNMd">Taste Ventura</a></li>
+  <li><a href="https://www.theatlantic.com/technology/2025/12/people-outsourcing-their-thinking-ai/685093/?gift=iWa_iB9lkw4UuiWbIbrWGTqj_UFH3shy9qJgLM4CAq4&amp;utm_source=copy-link&amp;utm_medium=social&amp;utm_campaign=share">The People Outsourcing Their Thinking to AI - The Atlantic</a></li>
+  <li><a href="https://www.danmcquillan.org/resisting_genai_highered_cjuu.html">Resisting GenAI &amp; Big Tech in Higher Education</a></li>
+  <li><a href="https://floorp.app/">Floorp Browser</a></li>
+  <li><a href="https://librewolf.net/">LibreWolf</a></li>
+  <li><a href="https://gwij.nl/">Deen Design Zandbak is under construction</a> – The Woodsmen</li>
+  <li><a href="https://marikebol.com/2023/04/26/glutenvrije-soezen/">Glutenvrije soezen, basisrecept</a></li>
+  <li><a href="https://www.ninakalinina.com/">Nina Kalinina’s home page</a></li>
+  <li><a href="https://nl.wikipedia.org/wiki/Escapisme">Escapisme</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Ambient_1:_Music_for_Airports">Ambient 1: Music for Airports</a></li>
+  <li><a href="https://berthub.eu/articles/posts/on-being-useful/">On Being Useful - Bert Hubert’s writings</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/HDMI#ARC">HDMI</a></li>
+</ul>
+
+
+    
+  </div>
+
+</article>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Bloggus Doekmanni</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            <span class="icon icon--mastodon"><?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg fill="#999999" width="800px" height="800px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xml:space="preserve"><path d="M21.327 8.566c0-4.339-2.843-5.61-2.843-5.61-1.433-.658-3.894-.935-6.451-.956h-.063c-2.557.021-5.016.298-6.45.956 0 0-2.843 1.272-2.843 5.61 0 .993-.019 2.181.012 3.441.103 4.243.778 8.425 4.701 9.463 1.809.479 3.362.579 4.612.51 2.268-.126 3.541-.809 3.541-.809l-.075-1.646s-1.621.511-3.441.449c-1.804-.062-3.707-.194-3.999-2.409a4.523 4.523 0 0 1-.04-.621s1.77.433 4.014.536c1.372.063 2.658-.08 3.965-.236 2.506-.299 4.688-1.843 4.962-3.254.434-2.223.398-5.424.398-5.424zm-3.353 5.59h-2.081V9.057c0-1.075-.452-1.62-1.357-1.62-1 0-1.501.647-1.501 1.927v2.791h-2.069V9.364c0-1.28-.501-1.927-1.502-1.927-.905 0-1.357.546-1.357 1.62v5.099H6.026V8.903c0-1.074.273-1.927.823-2.558.566-.631 1.307-.955 2.228-.955 1.065 0 1.872.409 2.405 1.228l.518.869.519-.869c.533-.819 1.34-1.228 2.405-1.228.92 0 1.662.324 2.228.955.549.631.822 1.484.822 2.558v5.253z"/></svg></span>
+            <a rel="me" href="https://mastodon.nl/@doekman">@doekman</a>
+          </li>
+          
+          
+          <li>
+            <span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><a href="https://github.com/doekman" title="GitHub"><span class="username">doekman</span></a>
+
+          </li>
+          
+          
+          <li>
+            <span class="icon icon--keybase"><?xml version="1.0" encoding="utf-8"?><svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 71 76.3" style="enable-background:new 0 0 71 76.3;" xml:space="preserve"><style type="text/css">.st0{fill:#999999;}</style><g transform="translate(-241.11756,-377.8123)"><path class="st0" d="M247.8,451.8c-0.6-1.3-1.4-3.1-1.8-4l-0.6-1.7l-2,2.2l-2,2.2 l-0.2-4.2c-0.3-6,0.2-12.2,1.2-16.6c2.3-9.8,9.5-18.7,18.8-23.4l2.1-1l-0.5-1.5c-0.3-0.8-0.6-2.5-0.7-3.6l-0.2-2.1l-2.1-0.2 c-3.2-0.3-4.9-1.2-6-3.5c-0.6-1.2-0.6-1.4-0.4-4.6c0.2-4.2,0.5-5.1,1.8-6.5c1.6-1.8,2.7-2.1,6.7-1.9c2.9,0.2,3.5,0.3,4.8,0.9 c0.8,0.4,1.5,0.8,1.6,0.8c0.1,0,1-1.1,2.1-2.6l1.9-2.7l1.2,0.7c0.7,0.4,1.5,0.9,1.9,1.1l0.7,0.4l-0.6,1.5c-0.3,0.8-0.7,2.2-0.8,2.9 l-0.2,1.4l1.7,0.2c6.1,0.6,10.7,4.3,12.4,9.9c0.5,1.8,0.5,5.3,0,7c-0.5,1.6-0.5,1.7-0.1,1.7c0.7,0,5.4,2.3,7.3,3.5 c3.7,2.4,8,6.6,10.4,10.2c4.5,6.7,6.4,14,5.6,22c-0.4,4.8-1.3,8.6-2.9,12.3l-0.6,1.4l-2.5,0l-2.5,0l1.2-2.4 c1.3-2.6,2.3-6.2,2.8-9.4c0.3-2.2,0.4-8.2,0.1-9.3l-0.2-0.7l-1.3,1.4c-3.2,3.5-7.9,4.5-14.2,2.8c-5.4-1.4-7.6-1.7-12.7-1.7 c-3.9,0-5.2,0.1-7.3,0.6c-5.8,1.3-9.9,3.2-15.6,7.3c-2.1,1.5-3.8,2.7-3.9,2.7c-0.1,0,0.2-1,0.6-2.3c0.4-1.3,1.1-3.4,1.5-4.8 l0.8-2.5l-0.9,0.9c-0.5,0.5-1.9,1.9-3.1,3.2l-2.1,2.3l0.5,1.9c0.6,2.5,2,5.6,3.5,7.9c0.6,1,1.1,1.8,1.1,1.9s-1.2,0.1-2.6,0.1h-2.6 L247.8,451.8L247.8,451.8z M256.6,427.6c4.8-5.1,8.7-9.2,8.8-9.2c0.1,0.1-0.4,1.6-0.9,3.3c-3.3,10.4-4,12.4-3.9,12.5 c0,0,1.2-0.4,2.5-0.9c8.5-3.7,18.4-4.2,28.9-1.4c4.7,1.2,6.5,1.2,8.8,0c1.3-0.7,1.8-1.1,2.4-2.1c1.1-1.7,1.2-4.1,0.5-6.3 c-1.7-4.8-8.3-11-14.5-13.7c-3.2-1.4-3.4-1.4-4.1-0.7l-0.6,0.6l2.6,3.2c1.4,1.7,2.9,3.6,3.1,4.1c0.6,1.2,0.7,3.1,0.1,4.3 c-0.8,1.7-3.2,2.9-5.1,2.5c-0.8-0.2-1.1-0.1-1.9,0.5c-2.2,1.6-4.6,1.2-6.6-1.2c-1.6-1.8-2-2.7-2.1-4.5c0-0.9-0.3-2-0.5-2.4 c-0.3-0.6-0.4-1.3-0.4-2.2l0.1-1.4l-1.3-0.3c-1.8-0.5-3.9-1.5-5.1-2.4c-0.6-0.4-1.1-0.8-1.3-0.8s-1.5,0.6-2.9,1.3 c-9.7,5-16,14.3-17,24.8c-0.1,1-0.2,2.3-0.3,2.8l-0.1,0.9l1.1-1.1C247.4,437.3,251.8,432.7,256.6,427.6L256.6,427.6z M282.5,420.2 c0.9-0.7,1.7-1.3,1.9-1.3c0.1,0,0.4,0.3,0.7,0.7c0.5,0.8,1.4,0.8,1.8,0.1c0.3-0.5,0.3-0.6-5.6-7.8c-3.5-4.3-4.2-5-4.7-5 c-1.2,0.1-0.9,1,1,3.3l1.8,2.2l-1,0.8c-1.1,1-1.2,1.2-0.5,1.8c0.5,0.5,0.6,0.4,1.6-0.3l1.1-0.7l0.7,0.6c0.4,0.3,0.6,0.8,0.6,0.9 c0,0.2-0.8,0.9-1.7,1.7c-0.9,0.7-1.6,1.5-1.6,1.7c0,0.3,0.5,1.1,1.4,2.2C280.3,421.7,280.8,421.5,282.5,420.2L282.5,420.2z  M272.2,406c0.6-1.8,2.6-3.2,4.6-3.2c1.1,0,2.7,0.9,3.8,2.1l1,1.2l0.9-1.1c2.5-2.8,2.8-6.7,0.8-10.1c-1.5-2.5-4.3-4-8.2-4.4 c-2.1-0.2-2.6-0.4-3.7-1.5l-0.8-0.8l-0.4,0.6c-0.8,1.2-2.5,5.1-3,6.6c-0.7,2.3-0.4,5.9,0.5,7.7c0.9,1.7,3.3,4,4,3.7 C271.8,406.9,272,406.5,272.2,406L272.2,406z M263.3,392.4c0.2-0.5,0.7-1.8,1.2-2.8c0.5-1,0.9-2,0.9-2.3c0-0.9-1-1.3-3.7-1.5 c-2.4-0.2-2.6-0.1-3.1,0.4c-0.4,0.4-0.6,0.9-0.6,1.6c0,0.6-0.1,1.7-0.2,2.6c-0.2,2.1,0.1,2.5,2.2,2.8 C263.1,393.4,263,393.4,263.3,392.4z M260.2,390c0-1.7,0.2-1.9,1.6-1.9h1.3v1.4v1.4h-1.4h-1.4V390z M266.5,448.3 c-0.6-0.6-0.8-1-0.8-2c0-1.9,1.1-3,2.9-3c1.7,0,2.9,1.2,2.9,2.9c0,1.8-1.1,2.8-3,2.9C267.5,449.1,267.1,448.9,266.5,448.3 L266.5,448.3z M285.8,448.6c-2.3-1.8-1.1-5.3,1.8-5.3c1.8,0,2.8,1.1,2.9,3c0,1.1-0.1,1.4-0.8,2s-1,0.8-2,0.8 C286.8,449.1,286.2,448.9,285.8,448.6L285.8,448.6z"/></g></svg>
+</span><a href="https://keybase.io/doekman" title="Keybase"><span class="username">doekman</span></a>
+
+          </li>
+          
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>This is Bloggus Doekmanni, or Doekman's blog if you like. A bit of drivel about computer programming; some dead serious, some not so much...
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+<link rel="stylesheet" href="/css/no_cookies.css">
+<script src="/js/no_cookies.js"></script>
+
+
+  </body>
+
+</html>
