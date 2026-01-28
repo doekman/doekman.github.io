@@ -244,6 +244,49 @@ Tab's on my MacBook Pro
     * [Nepal - Wikipedia](https://en.wikipedia.org/wiki/Nepal)
     * [Nepal temperatuur, klimaat en weer per maand](https://www.bestereistijd.nl/nepal/#weerervaringen)
 
+Update: to add insult to injury, I found a document with a list of links I saved because I had to re-install my MacBook Pro:
+
+- Mac:
+    * [Infinite Mac Construction Set](https://blog.persistent.info/2025/07/infinite-mac-embedding.html)
+    * [Mavericks Forever](https://mavericksforever.com)
+- Programmeren:
+    * [Web Browser Engineering](https://browser.engineering)
+    * [Who's Afraid of a Hard Page Load](https://unplannedobsolescence.com/blog/hard-page-load/)
+    * [Tablib: Pythonic Tabular Datasets](https://tablib.readthedocs.io/en/latest/)
+    * [The Hitchhiker's Guide to Python; DB's](https://docs.python-guide.org/scenarios/db/)
+- Ontwerp/CSS/HTML:
+    * [There’s no such thing as a CSS reset](https://aaadaaam.com/notes/useful-defaults/)
+    * [A new, approachable way to create Web applications](https://mavo.io)
+    * [What I learnt about making websites by reading two thousand web pages](https://alexwlchan.net/2025/learning-how-to-make-websites/#thoughtful_html)
+    * [CSS Inheritance, The Cascade And Global Scope: Your New Old Worst Best Friends](https://www.smashingmagazine.com/2016/11/css-inheritance-cascade-global-scope-new-old-worst-best-friends/)
+    * [Dingen over HTML enzo (hier over `<col>`)](https://heydonworks.com/article/the-col-element/)
+    * [Use of JavaScript in Fossil](https://fossil-scm.org/home/doc/trunk/www/javascript.md)
+    * [Manifesto for Ubiquitous Linking](https://linkingmanifesto.org)
+- Tech Ops:
+    * [Podman vs Docker: What Are the Key Differences Explained in Detail](https://www.geeksforgeeks.org/devops/podman-vs-docker/)
+    * [CS615 -- System Administration](https://stevens.netmeister.org/615/)
+    * [Geef uw computer een tweede leven](https://hogelandlinux.nl/#diensten)
+- Lezen:
+    * [De maan is een springplank, een proeftuin en (nu nog) een helder venster op het heelal](https://www.nrc.nl/nieuws/2025/07/02/de-maan-is-een-springplank-een-proeftuin-en-nu-nog-een-helder-venster-op-het-heelal-a4899037)
+    * [BEYOND MEN AND MASCULINITY (film)](https://thefutureishumane.com/beyond-men-and-masculinity-the-film/)
+    * [Notes on Managing ADHD](https://borretti.me/article/notes-on-managing-adhd)
+- Opinion:
+    * [Every Reason Why I Hate AI and You Should Too](https://malwaretech.com/2025/08/every-reason-why-i-hate-ai.html?a=1)
+- Cmptr (retro):
+    * [Apple’s Darwin OS and XNU Kernel Deep Dive](https://tansanrao.com/blog/2025/04/xnu-kernel-and-darwin-evolution-and-architecture/#user-content-fnref-2)
+    * [General Magic's Adorable Magic Cap Operating System](https://blog.decryption.net.au/posts/magic-cap.html)
+- Tooling:
+    * <https://sqlitebrowser.org>
+    * <https://cooked.wiki/landing>
+    * [Fossil Versus Git](https://fossil-scm.org/home/doc/trunk/www/fossil-v-git.wiki)
+    * [JSON Editor](https://vdt-labs.com/json-editor/)
+    * Editors
+        + <https://zed.dev/blog/debugger>
+        + <https://helix-editor.com>
+    * [F-Droid is an installable catalogue of FOSS (Free and Open Source Software) applications for the Android platform](https://f-droid.org)
+- Verstrooing:
+    * [The Big Lebowski Quotes](https://www.thebiglebow.ski/random/favorite)
+
 
 
 Tab's on my iPhone mini
