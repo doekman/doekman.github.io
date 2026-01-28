@@ -6,8 +6,8 @@
 </description>
     <link>https://blog.zanstra.com/</link>
     <atom:link href="https://blog.zanstra.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 07 Jan 2026 17:19:54 +0100</pubDate>
-    <lastBuildDate>Wed, 07 Jan 2026 17:19:54 +0100</lastBuildDate>
+    <pubDate>Wed, 28 Jan 2026 10:21:08 +0100</pubDate>
+    <lastBuildDate>Wed, 28 Jan 2026 10:21:08 +0100</lastBuildDate>
     <generator>Jekyll v4.4.1</generator>
       <item>
         <title>Open Tab&apos;s on My Devices</title>
@@ -281,6 +281,81 @@
   &lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;p&gt;Update: to add insult to injury, I found a document with a list of links I saved because I had to re-install my MacBook Pro:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Mac:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://blog.persistent.info/2025/07/infinite-mac-embedding.html&quot;&gt;Infinite Mac Construction Set&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://mavericksforever.com&quot;&gt;Mavericks Forever&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Programmeren:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://browser.engineering&quot;&gt;Web Browser Engineering&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://unplannedobsolescence.com/blog/hard-page-load/&quot;&gt;Who’s Afraid of a Hard Page Load&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://tablib.readthedocs.io/en/latest/&quot;&gt;Tablib: Pythonic Tabular Datasets&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://docs.python-guide.org/scenarios/db/&quot;&gt;The Hitchhiker’s Guide to Python; DB’s&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Ontwerp/CSS/HTML:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://aaadaaam.com/notes/useful-defaults/&quot;&gt;There’s no such thing as a CSS reset&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://mavo.io&quot;&gt;A new, approachable way to create Web applications&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://alexwlchan.net/2025/learning-how-to-make-websites/#thoughtful_html&quot;&gt;What I learnt about making websites by reading two thousand web pages&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.smashingmagazine.com/2016/11/css-inheritance-cascade-global-scope-new-old-worst-best-friends/&quot;&gt;CSS Inheritance, The Cascade And Global Scope: Your New Old Worst Best Friends&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://heydonworks.com/article/the-col-element/&quot;&gt;Dingen over HTML enzo (hier over &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;col&amp;gt;&lt;/code&gt;)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://fossil-scm.org/home/doc/trunk/www/javascript.md&quot;&gt;Use of JavaScript in Fossil&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://linkingmanifesto.org&quot;&gt;Manifesto for Ubiquitous Linking&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Tech Ops:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.geeksforgeeks.org/devops/podman-vs-docker/&quot;&gt;Podman vs Docker: What Are the Key Differences Explained in Detail&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://stevens.netmeister.org/615/&quot;&gt;CS615 – System Administration&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://hogelandlinux.nl/#diensten&quot;&gt;Geef uw computer een tweede leven&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Lezen:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.nrc.nl/nieuws/2025/07/02/de-maan-is-een-springplank-een-proeftuin-en-nu-nog-een-helder-venster-op-het-heelal-a4899037&quot;&gt;De maan is een springplank, een proeftuin en (nu nog) een helder venster op het heelal&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://thefutureishumane.com/beyond-men-and-masculinity-the-film/&quot;&gt;BEYOND MEN AND MASCULINITY (film)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://borretti.me/article/notes-on-managing-adhd&quot;&gt;Notes on Managing ADHD&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Opinion:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://malwaretech.com/2025/08/every-reason-why-i-hate-ai.html?a=1&quot;&gt;Every Reason Why I Hate AI and You Should Too&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Cmptr (retro):
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://tansanrao.com/blog/2025/04/xnu-kernel-and-darwin-evolution-and-architecture/#user-content-fnref-2&quot;&gt;Apple’s Darwin OS and XNU Kernel Deep Dive&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://blog.decryption.net.au/posts/magic-cap.html&quot;&gt;General Magic’s Adorable Magic Cap Operating System&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Tooling:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://sqlitebrowser.org&quot;&gt;https://sqlitebrowser.org&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://cooked.wiki/landing&quot;&gt;https://cooked.wiki/landing&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://fossil-scm.org/home/doc/trunk/www/fossil-v-git.wiki&quot;&gt;Fossil Versus Git&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://vdt-labs.com/json-editor/&quot;&gt;JSON Editor&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;Editors
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;https://zed.dev/blog/debugger&quot;&gt;https://zed.dev/blog/debugger&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://helix-editor.com&quot;&gt;https://helix-editor.com&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://f-droid.org&quot;&gt;F-Droid is an installable catalogue of FOSS (Free and Open Source Software) applications for the Android platform&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Verstrooing:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.thebiglebow.ski/random/favorite&quot;&gt;The Big Lebowski Quotes&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;h2 id=&quot;tabs-on-my-iphone-mini&quot;&gt;Tab’s on my iPhone mini&lt;/h2&gt;
 
 &lt;ul&gt;
@@ -399,7 +474,7 @@
   &lt;li&gt;&lt;a href=&quot;https://berthub.eu/articles/posts/dutch-postcode-and-building-database/&quot;&gt;Welcome to the BAG: The Dutch Building and Addresses database - Bert Hubert’s writings&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://transeurotrail.org/netherlands/#5.84/52.131/5.659&quot;&gt;TET Netherlands - Trans Euro Trail - Europe’s Dirt Road Adventure&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://crackedmirrorinshalott.wordpress.com/2013/04/12/autistic-allistic-neurodiverse-and-neurotypical-say-what/&quot;&gt;Autistic, Allistic, Neurodiverse, and Neurotypical: Say what? | Cracked Mirror in Shalott&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://cablespaghetti.dev/hosting-a-fediverse-instance-on-an-original-raspberry-pi.html&quot;&gt;Hosting a Fediverse instance on an original Raspberry Pi&lt;/a&gt; – (exception when retrieving: HTTPSConnectionPool(host=’cablespaghetti.dev’, port=443): Max retries exceeded with url: /hosting-a-fediverse-instance-on-an-original-raspberry-pi.html (Caused by NewConnectionError(“HTTPSConnection(host=’cablespaghetti.dev’, port=443): Failed to establish a new connection: [Errno 51] Network is unreachable”)))&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cablespaghetti.dev/hosting-a-fediverse-instance-on-an-original-raspberry-pi.html&quot;&gt;Hosting a Fediverse instance on an original Raspberry Pi&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://crescentro.se/posts/writing-drivers/&quot;&gt;Writing a basic Linux device driver when you know nothing about Linux drivers or USB // crescentro.se&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://hetdorpzalk.nl/?s=Zalkerbos&amp;amp;doing_wp_cron=1751886056.3051149845123291015625&quot;&gt;Je zocht naar Zalkerbos - Het dorp Zalk&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.crowdsupply.com/excamera/termdriver-2&quot;&gt;TermDriver 2 | Crowd Supply&lt;/a&gt;&lt;/li&gt;
