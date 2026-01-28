@@ -287,6 +287,20 @@ Update: to add insult to injury, I found a document with a list of links I saved
 - Verstrooing:
     * [The Big Lebowski Quotes](https://www.thebiglebow.ski/random/favorite)
 
+And a list of links from email messages, also around the same date:
+
+* <https://retool.com/visual-basic/>
+* <https://smallstep.com/blog/ssh-agent-explained/>
+* [http debug](https://hachyderm.io/@leftpaddotpy/110764798227834050)
+* [twitter archive](https://social.jvns.ca/@b0rk/110775162006555035)
+* [7 Rules for Creating Gorgeous UI – Part 2](https://learnui.design/blog/7-rules-for-creating-gorgeous-ui-part-2.html)
+* [Let’s learn how modern JavaScript frameworks work by building one](https://nolanlawson.com/2023/12/02/lets-learn-how-modern-javascript-frameworks-work-by-building-one/)
+* [10 Things Software Developers Should Learn about Learning](https://cacm.acm.org/magazines/2024/1/278891-10-things-software-developers-should-learn-about-learning/fulltext)
+* [How to remove Caps Lock key delay: MacOS](https://www.reddit.com/r/MacOS/comments/1dkklgs/how_to_remove_caps_lock_key_delay/)
+* [Articles: Production-ready Docker packaging for Python developers](https://pythonspeed.com/docker/)
+* [AppexIndexer 1.0](https://mjtsai.com/blog/2025/04/11/appexindexer-1-0/)
+* [Sync bookmarks](https://mastodon.social/@jpmens/114352679361368952)
+* [Css Function](https://front-end.social/@mia/114635882877016925)
 
 
 Tab's on my iPhone mini
