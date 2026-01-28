@@ -407,7 +407,7 @@ Tab's on my iPhone mini
 - [Welcome to the BAG: The Dutch Building and Addresses database - Bert Hubert's writings](https://berthub.eu/articles/posts/dutch-postcode-and-building-database/)
 - [TET Netherlands - Trans Euro Trail - Europe's Dirt Road Adventure](https://transeurotrail.org/netherlands/#5.84/52.131/5.659)
 - [Autistic, Allistic, Neurodiverse, and Neurotypical: Say what? \| Cracked Mirror in Shalott](https://crackedmirrorinshalott.wordpress.com/2013/04/12/autistic-allistic-neurodiverse-and-neurotypical-say-what/)
-- [Hosting a Fediverse instance on an original Raspberry Pi](https://cablespaghetti.dev/hosting-a-fediverse-instance-on-an-original-raspberry-pi.html) -- (exception when retrieving: HTTPSConnectionPool(host='cablespaghetti.dev', port=443): Max retries exceeded with url: /hosting-a-fediverse-instance-on-an-original-raspberry-pi.html (Caused by NewConnectionError("HTTPSConnection(host='cablespaghetti.dev', port=443): Failed to establish a new connection: [Errno 51] Network is unreachable")))
+- [Hosting a Fediverse instance on an original Raspberry Pi](https://cablespaghetti.dev/hosting-a-fediverse-instance-on-an-original-raspberry-pi.html)
 - [Writing a basic Linux device driver when you know nothing about Linux drivers or USB // crescentro.se](https://crescentro.se/posts/writing-drivers/)
 - [Je zocht naar Zalkerbos - Het dorp Zalk](https://hetdorpzalk.nl/?s=Zalkerbos&doing_wp_cron=1751886056.3051149845123291015625)
 - [TermDriver 2 \| Crowd Supply](https://www.crowdsupply.com/excamera/termdriver-2)
