@@ -6,9 +6,58 @@
 </description>
     <link>https://blog.zanstra.com/</link>
     <atom:link href="https://blog.zanstra.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 28 Jan 2026 10:21:08 +0100</pubDate>
-    <lastBuildDate>Wed, 28 Jan 2026 10:21:08 +0100</lastBuildDate>
+    <pubDate>Wed, 20 May 2026 12:01:32 +0200</pubDate>
+    <lastBuildDate>Wed, 20 May 2026 12:01:32 +0200</lastBuildDate>
     <generator>Jekyll v4.4.1</generator>
+      <item>
+        <title>I Spoke on PyGrunn</title>
+        <description>
+          &lt;p&gt;I spoke on &lt;a href=&quot;https://pygrunn.org&quot; title=&quot;pyGrunn is the “Python and friends” developer conference with a local footprint and global mindset.&quot;&gt;PyGrunn&lt;/a&gt; this year (May 8&lt;sup&gt;th&lt;/sup&gt; 2026). See the details of this talk below for future reference.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Title&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;List-Man: Pragmatic System Integration&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Timeslot&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;15:00 - 15:30&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Location&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;Camera 4 (84 people)&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;summary&quot;&gt;Summary&lt;/h3&gt;
+
+&lt;p&gt;Time is always limited, but when you have big plans, it’s time to get smart and pragmatic. At the time, the company was rapidly growing and processes were getting more mature every day. It was a dynamic environment with a heterogenous landscape of different information systems. That mix also puts a demand on the data-quality of all those systems; an error quickly goes unnoticed.&lt;/p&gt;
+
+&lt;p&gt;Big companies often deploy some kind of enterprise service bus for these kinds of problems, but that was clearly overkill. So I made a plan how to tackle this problem, and presented the vision within ArchiLab, our companies internal vehicle for innovation.&lt;/p&gt;
+
+&lt;p&gt;In this presentation I will present a number of examples of what I built, which address actual use-cases within the company. Examples include publishing data on the intranet, visually comparing lists for inconsistencies and recording data on ever changing lists. With these examples I will address things like bootstrapping your project, having an information architecture, software reusability and just building cool stuff. My tooling of choice were Debian Linux (development on Mac OS X), Python, Flask and Postgresql.&lt;/p&gt;
+
+&lt;h3 id=&quot;about-doeke-zanstra&quot;&gt;About Doeke Zanstra&lt;/h3&gt;
+
+&lt;p&gt;Doeke is a versatile software developer living in the city of Groningen.
+Today he’s programming in Python, but in the past decades he also wrote other languages like Java, C# and Objective-C for Atos, KPN and AkzoNobel amongst others.&lt;br /&gt;
+He gets energy from roles where structure and creativity come together.&lt;/p&gt;
+
+&lt;h3 id=&quot;video&quot;&gt;Video&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;This post will be updated, when the video comes available&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+
+        </description>
+        <pubDate>Wed, 20 May 2026 00:00:00 +0200</pubDate>
+        <link>https://blog.zanstra.com/ict/2026/05/20/i-spoke-on-pygrunn.html</link>
+        <guid isPermaLink="true">https://blog.zanstra.com/ict/2026/05/20/i-spoke-on-pygrunn.html</guid>
+        <category>ICT</category>
+      </item>
       <item>
         <title>Open Tab&apos;s on My Devices</title>
         <description>
@@ -354,6 +403,23 @@
       &lt;li&gt;&lt;a href=&quot;https://www.thebiglebow.ski/random/favorite&quot;&gt;The Big Lebowski Quotes&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And a list of links from email messages, also around the same date:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://retool.com/visual-basic/&quot;&gt;https://retool.com/visual-basic/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://smallstep.com/blog/ssh-agent-explained/&quot;&gt;https://smallstep.com/blog/ssh-agent-explained/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://hachyderm.io/@leftpaddotpy/110764798227834050&quot;&gt;http debug&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://social.jvns.ca/@b0rk/110775162006555035&quot;&gt;twitter archive&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://learnui.design/blog/7-rules-for-creating-gorgeous-ui-part-2.html&quot;&gt;7 Rules for Creating Gorgeous UI – Part 2&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://nolanlawson.com/2023/12/02/lets-learn-how-modern-javascript-frameworks-work-by-building-one/&quot;&gt;Let’s learn how modern JavaScript frameworks work by building one&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cacm.acm.org/magazines/2024/1/278891-10-things-software-developers-should-learn-about-learning/fulltext&quot;&gt;10 Things Software Developers Should Learn about Learning&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.reddit.com/r/MacOS/comments/1dkklgs/how_to_remove_caps_lock_key_delay/&quot;&gt;How to remove Caps Lock key delay: MacOS&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://pythonspeed.com/docker/&quot;&gt;Articles: Production-ready Docker packaging for Python developers&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://mjtsai.com/blog/2025/04/11/appexindexer-1-0/&quot;&gt;AppexIndexer 1.0&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://mastodon.social/@jpmens/114352679361368952&quot;&gt;Sync bookmarks&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://front-end.social/@mia/114635882877016925&quot;&gt;Css Function&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;tabs-on-my-iphone-mini&quot;&gt;Tab’s on my iPhone mini&lt;/h2&gt;
