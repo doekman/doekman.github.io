@@ -33,7 +33,8 @@ He gets energy from roles where structure and creativity come together.
 
 ### Video
 
-**_This post will be updated, when the video comes available_**
+[https://youtu.be/gMO9ozFaFjk](https://youtu.be/gMO9ozFaFjk)
+
 
 
 [pygrunn]: https://pygrunn.org "pyGrunn is the “Python and friends” developer conference with a local footprint and global mindset."
