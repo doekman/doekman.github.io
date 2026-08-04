@@ -5,7 +5,20 @@ date: 2026-08-04
 author: Doeke Zanstra
 category: ICT
 lang: nl
+no_title: True
 ---
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
+  </header>
+
+  <figure class="post-hero">
+    <img src="{{ "/images/2026-08-04/header.jpeg" | prepend: site.baseurl }}" 
+    srcset="{{ "/images/2026-08-04/header@2x.jpeg" | prepend: site.baseurl }} 2x" 
+    fetchpriority="high"
+        alt="Gracht met boten en historische huizen in IJlst & logo's uit het stuk">
+  </figure>
+
+  <p class="post-meta"><time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%B %-d, %Y" }}</time>{% if page.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>{% endif %}</p>
 
 Bij het maken van fietstochten gebruikte ik in het verleden meestal de [Basiskaart netwerk LF-routes Nederland](https://www.nederlandfietsland.nl/fietsgidsen/fietsgids-basiskaart-lf-routes/). Het is een losbladig systeem van kaarten, nog steeds te koop. Echter, ik heb drie bladen meegenomen maar er op geen enkel moment naar gekeken. Door de komst van de smartphone en veranderende vereisten (fietsen met partner), ben ik naar andere hulpmiddelen gaan kijken. Hier een overzicht van wat ik heb gebruikt.
 
@@ -31,7 +44,7 @@ Fijne fietsvakanties toegewenst.
 
 ---
 
-<small style="color:gray">Disclaimer: de opmaak van de website van de Fietsbond is met AI naar deze blog pagina gekopieerd. Verder is er geen AI gebruikt bij deze post.</small>
+<small>Disclaimer: de opmaak van de website van de Fietsbond is met AI naar deze blog pagina gekopieerd. Verder is er geen AI gebruikt bij deze post.</small>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,21 +54,38 @@ Fijne fietsvakanties toegewenst.
 .site-footer {
     font-family: "Inter", Arial, sans-serif;
 }
+.page-content {
+    padding: 0;
+}
 .post-content {
     font-size: 18px;
     line-height: 1.6;
 }
 
 .post-header {
+    --hero-overlap: clamp(180px, 25vw, 260px);
     background: #ffd503;
     box-shadow: 0 0 0 100vmax #ffd503;
     clip-path: inset(0 -100vmax);
-    margin-bottom: 30px;
-    padding: 24px 0;
+    margin-bottom: 0;
+    padding: 24px 0 var(--hero-overlap);
+}
+
+.post-hero {
+    margin: clamp(-260px, -25vw, -180px) 0 30px;
+    position: relative;
+    z-index: 1;
+}
+
+.post-hero img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
 }
 
 .post-title {
-    margin-bottom: 12px;
+    margin-bottom: 3rem;
     color: #111;
     font-size: 58px;
     font-weight: 700;
@@ -64,7 +94,8 @@ Fijne fietsvakanties toegewenst.
 }
 
 .post-meta {
-    font-size: 14px;
+    font-size: 16px;
+    color: black;
 }
 
 .site-footer {
@@ -86,13 +117,23 @@ Fijne fietsvakanties toegewenst.
     font-weight: 700;
 }
 
+small {
+  color:gray;
+  font-size: 75%;
+}
+
 @media screen and (max-width: 800px) {
     .post-content {
     font-size: 17px;
     }
 
     .post-header {
-    padding: 20px 0;
+    --hero-overlap: 140px;
+    padding: 20px 0 var(--hero-overlap);
+    }
+
+    .post-hero {
+    margin-top: -140px;
     }
 
     .post-title {
