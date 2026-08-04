@@ -28,3 +28,75 @@ De [HogeNood-app](https://apps.apple.com/us/app/hogenood-find-toilets/id52350220
 Om de familie op de hoogte te houden, hebben we [Polarsteps]() gebruikt. Elke dag een verhaaltje typen, en foto's uploaden. Omdat we de GPS niet aan hadden staan, kun je op het kaartje niet zien waar we langs zijn geweest, maar in het verhaaltje hebben we dit wel genoemd. En in de laatste step hebben we een schermafbeelding van Topo GPS toegevoegd met de route. Of we deze app in de toekomst weer gaan gebruiken zal de toekomst uit moeten gaan wijzen.
 
 Fijne fietsvakanties toegewenst.
+
+---
+
+<small style="color:gray">Disclaimer: de opmaak van de website van de Fietsbond is met AI naar deze blog pagina gekopieerd. Verder is er geen AI gebruikt bij deze post.</small>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+.page-content,
+.site-footer {
+    font-family: "Inter", Arial, sans-serif;
+}
+.post-content {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.post-header {
+    background: #ffd503;
+    box-shadow: 0 0 0 100vmax #ffd503;
+    clip-path: inset(0 -100vmax);
+    margin-bottom: 30px;
+    padding: 24px 0;
+}
+
+.post-title {
+    margin-bottom: 12px;
+    color: #111;
+    font-size: 58px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 4.5rem;
+}
+
+.post-meta {
+    font-size: 14px;
+}
+
+.site-footer {
+    border-top: 0;
+    padding: 42px 0;
+    background: #ffd503;
+    color: #111;
+}
+
+.site-footer .footer-heading,
+.site-footer .footer-col-wrapper,
+.site-footer a,
+.site-footer a:visited {
+    color: #111;
+}
+
+.site-footer .footer-heading {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+@media screen and (max-width: 800px) {
+    .post-content {
+    font-size: 17px;
+    }
+
+    .post-header {
+    padding: 20px 0;
+    }
+
+    .post-title {
+    font-size: 36px;
+    }
+}
+</style>
