@@ -12,6 +12,7 @@
     <link rel="alternate" type="application/json"    title="Bloggus Doekmanni" href="https://blog.zanstra.com/feed.json" />
     <link rel="alternate" type="application/rss+xml" title="Bloggus Doekmanni" href="https://blog.zanstra.com/feed.xml">
     <link rel="me" href="https://micro.blog/doekman"/>
+    
   </head>
 
 
@@ -63,10 +64,12 @@
       <div class="wrapper">
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
+  
   <header class="post-header">
     <h1 class="post-title" itemprop="name headline">git-url</h1>
     <p class="post-meta"><time datetime="2019-03-08T00:00:00+01:00" itemprop="datePublished">March 8, 2019</time></p>
   </header>
+  
 
   <div class="post-content" itemprop="articleBody">
     <p>A while ago, <a href="https://gist.github.com/doekman/45acdb0ceedd9dc9dc6105d0b058b06a">I created a shell script</a> called <code class="language-plaintext highlighter-rouge">git-url</code>. It prints the remote origin URL of your current git-repository (or exit 1 if no git-repo is found). If the URL is in <code class="language-plaintext highlighter-rouge">git:</code> format, it is converted to <code class="language-plaintext highlighter-rouge">http:</code> format.</p>
