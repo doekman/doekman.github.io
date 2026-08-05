@@ -1,6 +1,8 @@
 ---
 layout: post
 title: "Handige apps voor fietsvakantie in Nederland"
+description: "Een beschrijving van alle apps die ik (niet) voor m'n meerdaagse fiets-elfstedentocht in Nederland heb gebruikt."
+image: "/images/2026-08-04/header.jpeg"
 date: 2026-08-04
 author: Doeke Zanstra
 category: ICT
@@ -12,8 +14,8 @@ no_title: True
   </header>
 
   <figure class="post-hero">
-    <img src="{{ "/images/2026-08-04/header.jpeg" | prepend: site.baseurl }}" 
-    srcset="{{ "/images/2026-08-04/header@2x.jpeg" | prepend: site.baseurl }} 2x" 
+      <img src="{{ page.image | prepend: site.baseurl }}" 
+    srcset="{{ page.image | replace: ".jp", "@2x.jp" | prepend: site.baseurl }} 2x" 
     fetchpriority="high"
         alt="Gracht met boten en historische huizen in IJlst & logo's uit het stuk">
   </figure>
@@ -42,9 +44,7 @@ Om de familie op de hoogte te houden, hebben we [Polarsteps]() gebruikt. Elke da
 
 Fijne fietsvakanties toegewenst.
 
----
-
-<small>Disclaimer: de opmaak van de website van de Fietsbond is met AI naar deze blog pagina gekopieerd. Verder is er geen AI gebruikt bij deze post.</small>
+<small>Disclaimer: de opmaak van de website van [de Fietsbond](https://www.fietsersbond.nl/nieuws/rare-frats-piepende-banden-in-rothenbach/) is met AI naar deze blog pagina gekopieerd. Verder is er geen AI gebruikt bij het maken van deze post.</small>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -90,9 +90,20 @@ Fijne fietsvakanties toegewenst.
     font-size: 58px;
     font-weight: 700;
     letter-spacing: -0.04em;
-    line-height: 4.5rem;
+    line-height: 1.875rem;
 }
-
+@media (min-width:768px) {
+  .post-title {
+      margin-bottom: 3rem;
+      line-height: 3.5rem;
+  }
+}
+@media (min-width:1024px) {
+  .post-title {
+      margin-bottom: 3rem;
+      line-height: 4.5rem;
+  }
+}
 .post-meta {
     font-size: 16px;
     color: black;
@@ -117,9 +128,17 @@ Fijne fietsvakanties toegewenst.
     font-weight: 700;
 }
 
-small {
+p:has(small) {
   color:gray;
+  border-top: 1px solid gray;
+  margin-top:3em;
+}
+p small {
   font-size: 75%;
+}
+
+small :any-link {
+  color:gray;
 }
 
 @media screen and (max-width: 800px) {
