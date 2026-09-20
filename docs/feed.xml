@@ -6,9 +6,72 @@
 </description>
     <link>https://blog.zanstra.com/</link>
     <atom:link href="https://blog.zanstra.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 05 Aug 2026 12:14:15 +0200</pubDate>
-    <lastBuildDate>Wed, 05 Aug 2026 12:14:15 +0200</lastBuildDate>
+    <pubDate>Sun, 20 Sep 2026 17:02:22 +0200</pubDate>
+    <lastBuildDate>Sun, 20 Sep 2026 17:02:22 +0200</lastBuildDate>
     <generator>Jekyll v4.4.1</generator>
+      <item>
+        <title>Introducing the PySQLe-Library</title>
+        <description>
+          &lt;p&gt;I’ve been using the excellent &lt;a href=&quot;https://pugsql.org&quot;&gt;PugSQL library&lt;/a&gt; for some years now. It’s very easy to use: just annotate your SQL queries in a text-file with a name, result-type and parameters; then load the sql file with a PugSQL module and you can run queries by calling a method with the name of the query. The calling in Python is handled by the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;__call__&lt;/code&gt;-method of the module. While this is elegant by itself, you don’t get to have all the standard goodness you get by using Python’s native function definitions.&lt;/p&gt;
+
+&lt;p&gt;What if you could link a Python function to a SQL query in some way? That’s exactly why I made &lt;strong&gt;PySQLe&lt;/strong&gt;. Let me demonstrate how this works:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pysqle&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PysqleModule&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;one&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyQueries&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PysqleModule&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@one&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;find_user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;sh&quot;&gt;&quot;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;select * from users where user_id = :user_id&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&quot;&quot;&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;queries&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyQueries&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;sqlite:///foo.db&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;queries&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;find_user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user_id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;666&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;First you create a class (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MyQueries&lt;/code&gt;) and subclassing it from the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PysqleModule&lt;/code&gt;-class. Then you define a query by writing a method (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;find_user&lt;/code&gt;). This method can have arguments, which will be passed to the database when executing the queries. The query-method itself should returns the SQL query as a string. Finally, you decorate the class with one of the supplied query-decorators. That is where the magic happens: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@one&lt;/code&gt; will take care of executing the SQL when the method is called, and will return the expected results.&lt;/p&gt;
+
+&lt;p&gt;By instantiating the class with a SQLAlchemy connection string, you create an object to call queries with. By calling &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;queries.find_user&lt;/code&gt;, the SQL is executed with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;foo.db&lt;/code&gt;-database, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;user&lt;/code&gt; will contain a named tuple of the found user, just as SQLAlchemy would.&lt;/p&gt;
+
+&lt;p&gt;You can use other decorators, like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;many&lt;/code&gt; which returns a recordset, or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;scalar&lt;/code&gt; which returns one single value. Because it’s standard Python, query parameters can have default values, type-annotations and be used as positional or keyword arguments. Example:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;c1&quot;&gt;# ...
+&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;# Omited class definition, assuming extending the class MyQueries from above
+&lt;/span&gt;    &lt;span class=&quot;nd&quot;&gt;@many&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;get_users&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;category_filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Optional&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;sh&quot;&gt;&quot;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;select * from users 
+                   where :category_filter is null 
+                      or :category_filter = category&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&quot;&quot;&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@scalar&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;get_username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;sh&quot;&gt;&quot;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;select username from users 
+                  where user_id = :user_id&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&quot;&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# ...
+&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;all_users&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;queries&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;get_users&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;admin_users&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;queries&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;get_users&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;category_filter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;admin&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;queries&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;get_username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user_id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;666&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://codeberg.org/doekman/PySQLe/&quot;&gt;repository can be found at Codeberg&lt;/a&gt;. The library itself has been &lt;a href=&quot;https://pypi.org/project/pysqle/&quot;&gt;published to PyPI.org&lt;/a&gt;, and can be installed via &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pip install pysqle&lt;/code&gt; or equivalent. The repo contains some documentation: an [overview with some more examples][], and there is &lt;a href=&quot;https://codeberg.org/doekman/PySQLe/src/branch/main/doc/guide.md&quot;&gt;the complete guide&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;whats-next&quot;&gt;What’s Next&lt;/h2&gt;
+
+&lt;p&gt;Writing this library is a learning experience for me. I never had an idea for a reusable Python library until now. This is clearly a first version; I have some more ideas to make this library more usable. One thing is to make get the type annotations work everywhere (for example: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;reveal_type&lt;/code&gt; is not reporting the correct return type on annotated query-methods). Another idea is to add support for loading PugSQL annotated files. If you have any ideas or comments, I would like to hear them.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;small&gt;Disclaimer: The design of &lt;a href=&quot;https://maggieappleton.com/keyboard-fetishism/&quot;&gt;Maggie Appleton’s website&lt;/a&gt; was copied to this blog page using AI. No AI was otherwise used in creating this post.&lt;/small&gt;&lt;/p&gt;
+
+&lt;link rel=&quot;stylesheet&quot; href=&quot;/images/2026-09-20/the.css&quot; /&gt;
+
+
+        </description>
+        <pubDate>Sun, 20 Sep 2026 00:00:00 +0200</pubDate>
+        <link>https://blog.zanstra.com/ict/2026/09/20/introducing-the-pysqle-library.html</link>
+        <guid isPermaLink="true">https://blog.zanstra.com/ict/2026/09/20/introducing-the-pysqle-library.html</guid>
+        <category>ICT</category>
+      </item>
       <item>
         <title>Handige apps voor fietsvakantie in Nederland</title>
         <description>
@@ -2291,84 +2354,6 @@ when the extention will be released to the Visual Studio Gallery, please
         <link>https://blog.zanstra.com/2016/09/08/Only-my-warnings.html</link>
         <guid isPermaLink="true">https://blog.zanstra.com/2016/09/08/Only-my-warnings.html</guid>
         <category>tools</category>
-      </item>
-      <item>
-        <title>A console.log() adventure; pimped</title>
-        <description>
-          &lt;p&gt;Over a year ago, my interwebfriend &lt;a href=&quot;https://twitter.com/secretGeek&quot;&gt;secretGeek&lt;/a&gt; created a thing. I created a fork, and pimped it &lt;a href=&quot;https://rawgit.com/doekman/console-adventure/master/console.html&quot;&gt;into this&lt;/a&gt; (&lt;em&gt;and copied some of his blog lines too&lt;/em&gt;). I urge you to go and try it out before you read on. Unfortunately you’ll need to be on a desktop computer, not a mobile phone.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://rawgit.com/doekman/console-adventure/master/console.html&quot;&gt;&lt;img src=&quot;/images/console_best.png&quot; style=&quot;border:8px solid #333;box-shadow:3px 3px 7px #888&quot; title=&quot;a console.log() adventure.&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://rawgit.com/doekman/console-adventure/master/console.html&quot;&gt;Go there now&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;In case you don’t have a desktop computer anymore (woah, futuristic!), or have already tried it out, I’ll give some spoilers and discussion now.&lt;/p&gt;
-
-&lt;h1 id=&quot;spoilers&quot;&gt;Spoilers&lt;/h1&gt;
-
-&lt;p&gt;Actually, I’ll give some space before the spoilers. Scroll now for spoilers.&lt;/p&gt;
-
-&lt;p&gt;↓ spoilers ahead ↓&lt;/p&gt;
-
-&lt;p&gt;↓ spoilers ahead ↓&lt;/p&gt;
-
-&lt;p&gt;↓ spoilers ahead ↓&lt;/p&gt;
-
-&lt;p&gt;↓ spoilers ahead ↓&lt;/p&gt;
-
-&lt;p&gt;↓ spoilers ahead ↓&lt;/p&gt;
-
-&lt;p&gt;↓ spoilers ahead ↓&lt;/p&gt;
-
-&lt;p&gt;↓ spoilers ahead ↓&lt;/p&gt;
-
-&lt;p&gt;↓ spoilers ahead ↓&lt;/p&gt;
-
-&lt;p&gt;↓ spoilers ahead ↓&lt;/p&gt;
-
-&lt;p&gt;↓ spoilers ahead ↓&lt;/p&gt;
-
-&lt;p&gt;↓ spoilers ahead ↓&lt;/p&gt;
-
-&lt;p&gt;↓ spoilers ahead ↓&lt;/p&gt;
-
-&lt;p&gt;↓ spoilers ahead ↓&lt;/p&gt;
-
-&lt;p&gt;↓ spoilers ahead ↓&lt;/p&gt;
-
-&lt;p&gt;↓ spoilers ahead ↓&lt;/p&gt;
-
-&lt;p&gt;↓ spoilers ahead ↓&lt;/p&gt;
-
-&lt;p&gt;Here is &lt;a href=&quot;http://www.secretgeek.net/console_log&quot;&gt;secretGeek’s blog-entry&lt;/a&gt;. When playing the game I had loads of fun. 
-Keeping a map on graph paper, just to make sure the map is deterministic and doesn’t use some random numbers. 
-After some more playing, I started looking at the code and wanted to tinker with it. So I forked it. I had some wild and interesting ideas.&lt;/p&gt;
-
-&lt;p&gt;But somehow, nothing happened.&lt;/p&gt;
-
-&lt;p&gt;I guess I was overthinking it. A year later, I remembered one time at work while being bored, I created the so called &lt;a href=&quot;https://zanstra.com/arc/xs4all/dds.arc/miniwebventure/index.htm&quot; title=&quot;Originally hosted at http://www.worldaccess.nl/~mobitdz around 1997 I think&quot;&gt;mini-webventure&lt;/a&gt;. I didn’t think too much back then, so why do it now?&lt;/p&gt;
-
-&lt;p&gt;So I just started. After running around in the forest (in the game, that is), I got tired of entering parenthesis. And with 
-&lt;a href=&quot;http://ejohn.org/blog/ecmascript-5-objects-and-properties/&quot;&gt;properties&lt;/a&gt; around in all browsers nowadays, there’s no need for it. So instead of typing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;n()&lt;/code&gt;, you now can enter &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;n&lt;/code&gt; to go north.&lt;/p&gt;
-
-&lt;p&gt;An other thing: in a JavaScript game, I don’t consider inspecting and modifying variables cheating.
-So I prevented that with an &lt;a href=&quot;http://benalman.com/news/2010/11/immediately-invoked-function-expression/&quot;&gt;iife&lt;/a&gt; and some help of &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode&quot;&gt;strict mode&lt;/a&gt; (to eliminate global variables).&lt;/p&gt;
-
-&lt;p&gt;Multiple lines are now returned after entering a command, so they are displayed in the same font and color. And deaths 
-are a bit more dramatic now. You should really try it, if you haven’t already…&lt;/p&gt;
-
-&lt;p&gt;After dying too often, implementing load/save was next. First I just saved the game state, but then I realized
-this was another way to cheat, so now only the entered commands are stored. Then I realized, a demo-mode
-is very easy to implement. Couldn’t resist it, but it’s hidden somewhere in the game.&lt;/p&gt;
-
-&lt;p&gt;I didn’t want to change the map or story. Just wanted to share the fun I had, both playing and pimping the game.&lt;/p&gt;
-
-
-        </description>
-        <pubDate>Sun, 06 Mar 2016 13:45:00 +0100</pubDate>
-        <link>https://blog.zanstra.com/2016/03/06/Console-log-adventure.html</link>
-        <guid isPermaLink="true">https://blog.zanstra.com/2016/03/06/Console-log-adventure.html</guid>
-        <category>refactor</category>
-        <category>game</category>
       </item>
   </channel>
 </rss>

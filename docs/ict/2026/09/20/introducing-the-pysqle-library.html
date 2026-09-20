@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
 
     <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bloggus Doekmanni</title>
-    <meta name="description" content="This is Bloggus Doekmanni, or Doekman's blog if you like. A bit of drivel about computer programming; some dead serious, some not so much...">
+    <title>Introducing the PySQLe-Library</title>
+    <meta name="description" content="I’ve been using the excellent PugSQL library for some years now. It’s very easy to use: just annotate your SQL queries in a text-file with a name, result-typ...">
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="canonical" href="https://blog.zanstra.com/">
+    <link rel="canonical" href="https://blog.zanstra.com/ict/2026/09/20/introducing-the-pysqle-library.html">
     <link rel="alternate" type="application/json"    title="Bloggus Doekmanni" href="https://blog.zanstra.com/feed.json" />
     <link rel="alternate" type="application/rss+xml" title="Bloggus Doekmanni" href="https://blog.zanstra.com/feed.xml">
     <link rel="me" href="https://micro.blog/doekman"/>
@@ -62,289 +62,74 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <div class="home">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <h1 class="page-heading">Posts</h1>
+  
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Introducing the PySQLe-Library</h1>
+    <p class="post-meta"><time datetime="2026-09-20T00:00:00+02:00" itemprop="datePublished">September 20, 2026</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Doeke Zanstra</span></span></p>
+  </header>
+  
 
-  <ul class="post-list">
+  <div class="post-content" itemprop="articleBody">
+    <p>I’ve been using the excellent <a href="https://pugsql.org">PugSQL library</a> for some years now. It’s very easy to use: just annotate your SQL queries in a text-file with a name, result-type and parameters; then load the sql file with a PugSQL module and you can run queries by calling a method with the name of the query. The calling in Python is handled by the <code class="language-plaintext highlighter-rouge">__call__</code>-method of the module. While this is elegant by itself, you don’t get to have all the standard goodness you get by using Python’s native function definitions.</p>
+
+<p>What if you could link a Python function to a SQL query in some way? That’s exactly why I made <strong>PySQLe</strong>. Let me demonstrate how this works:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">pysqle</span> <span class="kn">import</span> <span class="n">PysqleModule</span><span class="p">,</span> <span class="n">one</span>
+
+<span class="k">class</span> <span class="nc">MyQueries</span><span class="p">(</span><span class="n">PysqleModule</span><span class="p">):</span>
+    <span class="nd">@one</span>
+    <span class="k">def</span> <span class="nf">find_user</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sh">"""</span><span class="s">select * from users where user_id = :user_id</span><span class="sh">"""</span>
+
+<span class="n">queries</span> <span class="o">=</span> <span class="nc">MyQueries</span><span class="p">(</span><span class="sh">"</span><span class="s">sqlite:///foo.db</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">queries</span><span class="p">.</span><span class="nf">find_user</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="mi">666</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>First you create a class (<code class="language-plaintext highlighter-rouge">MyQueries</code>) and subclassing it from the <code class="language-plaintext highlighter-rouge">PysqleModule</code>-class. Then you define a query by writing a method (<code class="language-plaintext highlighter-rouge">find_user</code>). This method can have arguments, which will be passed to the database when executing the queries. The query-method itself should returns the SQL query as a string. Finally, you decorate the class with one of the supplied query-decorators. That is where the magic happens: <code class="language-plaintext highlighter-rouge">@one</code> will take care of executing the SQL when the method is called, and will return the expected results.</p>
+
+<p>By instantiating the class with a SQLAlchemy connection string, you create an object to call queries with. By calling <code class="language-plaintext highlighter-rouge">queries.find_user</code>, the SQL is executed with the <code class="language-plaintext highlighter-rouge">foo.db</code>-database, and <code class="language-plaintext highlighter-rouge">user</code> will contain a named tuple of the found user, just as SQLAlchemy would.</p>
+
+<p>You can use other decorators, like <code class="language-plaintext highlighter-rouge">many</code> which returns a recordset, or <code class="language-plaintext highlighter-rouge">scalar</code> which returns one single value. Because it’s standard Python, query parameters can have default values, type-annotations and be used as positional or keyword arguments. Example:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1"># ...
+</span>    <span class="c1"># Omited class definition, assuming extending the class MyQueries from above
+</span>    <span class="nd">@many</span>
+    <span class="k">def</span> <span class="nf">get_users</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">category_filter</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sh">"""</span><span class="s">select * from users 
+                   where :category_filter is null 
+                      or :category_filter = category</span><span class="sh">"""</span>
+
+    <span class="nd">@scalar</span>
+    <span class="k">def</span> <span class="nf">get_username</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sh">"""</span><span class="s">select username from users 
+                  where user_id = :user_id</span><span class="sh">"""</span>
+
+<span class="c1"># ...
+</span>
+<span class="n">all_users</span> <span class="o">=</span> <span class="n">queries</span><span class="p">.</span><span class="nf">get_users</span><span class="p">()</span>
+<span class="n">admin_users</span> <span class="o">=</span> <span class="n">queries</span><span class="p">.</span><span class="nf">get_users</span><span class="p">(</span><span class="n">category_filter</span><span class="o">=</span><span class="sh">'</span><span class="s">admin</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">name</span> <span class="o">=</span> <span class="n">queries</span><span class="p">.</span><span class="nf">get_username</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="mi">666</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The <a href="https://codeberg.org/doekman/PySQLe/">repository can be found at Codeberg</a>. The library itself has been <a href="https://pypi.org/project/pysqle/">published to PyPI.org</a>, and can be installed via <code class="language-plaintext highlighter-rouge">pip install pysqle</code> or equivalent. The repo contains some documentation: an [overview with some more examples][], and there is <a href="https://codeberg.org/doekman/PySQLe/src/branch/main/doc/guide.md">the complete guide</a>.</p>
+
+<h2 id="whats-next">What’s Next</h2>
+
+<p>Writing this library is a learning experience for me. I never had an idea for a reusable Python library until now. This is clearly a first version; I have some more ideas to make this library more usable. One thing is to make get the type annotations work everywhere (for example: <code class="language-plaintext highlighter-rouge">reveal_type</code> is not reporting the correct return type on annotated query-methods). Another idea is to add support for loading PugSQL annotated files. If you have any ideas or comments, I would like to hear them.</p>
+
+<hr />
+
+<p><small>Disclaimer: The design of <a href="https://maggieappleton.com/keyboard-fetishism/">Maggie Appleton’s website</a> was copied to this blog page using AI. No AI was otherwise used in creating this post.</small></p>
+
+<link rel="stylesheet" href="/images/2026-09-20/the.css" />
+
+
     
-      <li>
-        <span class="post-meta">September 20, 2026</span>
+  </div>
 
-        <h2>
-          <a class="post-link" href="/ict/2026/09/20/introducing-the-pysqle-library.html">Introducing the PySQLe-Library</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">August 4, 2026</span>
-
-        <h2>
-          <a class="post-link" href="/ict/2026/08/04/handige-apps-voor-fietsvakantie-in-nederland.html">Handige apps voor fietsvakantie in Nederland</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 20, 2026</span>
-
-        <h2>
-          <a class="post-link" href="/ict/2026/05/20/i-spoke-on-pygrunn.html">I Spoke on PyGrunn</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">January 6, 2026</span>
-
-        <h2>
-          <a class="post-link" href="/ict/2026/01/06/open-tab-s-on-my-devices.html">Open Tab's on My Devices</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">January 4, 2026</span>
-
-        <h2>
-          <a class="post-link" href="/ict/2026/01/04/installing-bash-via-brew-on-macos.html">Installing Bash via Brew on MacOS</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 26, 2025</span>
-
-        <h2>
-          <a class="post-link" href="/ict/2025/05/26/hosting-my-pocket-archive.html">Hosting My Pocket Archive</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">August 1, 2024</span>
-
-        <h2>
-          <a class="post-link" href="/ict/2024/08/01/transfer-git-changes-with-a-pasteboard-workflow.html">Transfer git Changes With a Pasteboard-Workflow</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 14, 2024</span>
-
-        <h2>
-          <a class="post-link" href="/ict/2024/05/14/google-oauth-invalid-grant-nightmare-and-how-i-fixed-it.html">Google OAuth "Invalid-Grant" Nightmare — and How I Fixed It</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">April 18, 2024</span>
-
-        <h2>
-          <a class="post-link" href="/ict/2024/04/18/stylize-text-files-on-the-terminal-with-awkcss.html">Stylize Text Files on the Terminal With awkcss</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 3, 2023</span>
-
-        <h2>
-          <a class="post-link" href="/ict/2023/05/03/integer-exposed-rewrite.html">Integer Exposed Rewrite</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">September 8, 2021</span>
-
-        <h2>
-          <a class="post-link" href="/ict/2021/09/08/wat-heeft-archipunt-te-maken-met-de-ingenuity-mars-helicopter.html">Wat heeft Archipunt te maken met de Ingenuity Mars Helicopter?</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">April 12, 2021</span>
-
-        <h2>
-          <a class="post-link" href="/ict/2021/04/12/a-closure-explanation.html">One Closure Explanation</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">January 31, 2021</span>
-
-        <h2>
-          <a class="post-link" href="/2021/01/31/Building-Another-Blog-Engine.html">Building Another Blog Engine</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">January 11, 2021</span>
-
-        <h2>
-          <a class="post-link" href="/2021/01/11/go-jamf-pro.html">Moving away from Server.app to Jamf Pro</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">October 5, 2020</span>
-
-        <h2>
-          <a class="post-link" href="/2020/10/05/Pretty-printing-JSON-with-a-twist.html">Pretty Print JSON with a Twist</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">April 3, 2020</span>
-
-        <h2>
-          <a class="post-link" href="/2020/04/03/query-trello-json-with-postgres.html">Query Trello data with Postgres (JSON)</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">February 17, 2020</span>
-
-        <h2>
-          <a class="post-link" href="/2020/02/17/ok-bash-and-python.html">ok-bash and Python on macOS</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">October 2, 2019</span>
-
-        <h2>
-          <a class="post-link" href="/2019/10/02/To-the-point.html">To the Point</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">August 26, 2019</span>
-
-        <h2>
-          <a class="post-link" href="/2019/08/26/NetNewsWire.html">NetNewsWire 5.0 released</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">August 17, 2019</span>
-
-        <h2>
-          <a class="post-link" href="/2019/08/17/Office-for-OS-X-icons.html">Office for OS X icons</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">June 12, 2019</span>
-
-        <h2>
-          <a class="post-link" href="/2019/06/12/Rename-github-repo.html">On renaming a GitHub repository</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 6, 2019</span>
-
-        <h2>
-          <a class="post-link" href="/2019/05/06/Introducing-osagitfilter.html">A third way of putting AppleScript into git</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">March 8, 2019</span>
-
-        <h2>
-          <a class="post-link" href="/2019/03/08/Git-Url.html">git-url</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">December 31, 2018</span>
-
-        <h2>
-          <a class="post-link" href="/2018/12/31/iOS_ethernet.html">Networking with iOS via Ethernet</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">September 13, 2018</span>
-
-        <h2>
-          <a class="post-link" href="/2018/09/13/Jump-around.html">Jump around</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">August 28, 2018</span>
-
-        <h2>
-          <a class="post-link" href="/2018/08/28/Missing-emoji.html">Emoji's missing from emojis.wiki</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">July 8, 2018</span>
-
-        <h2>
-          <a class="post-link" href="/2018/07/08/Vowel-case.html">To vowel case</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">June 29, 2018</span>
-
-        <h2>
-          <a class="post-link" href="/2018/06/29/Refactoring.html">To refactor, or not to refactor</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 19, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/2017/05/19/JSON-feed.html">Jekyll template for JSON Feed</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">May 14, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/2017/05/14/JSON-the-game-nr2.html">JSON, the game #2: The parsings</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">April 30, 2017</span>
-
-        <h2>
-          <a class="post-link" href="/2017/04/30/JSON-the-game-nr1.html">JSON, the game #1: Bootstrapping it</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">September 8, 2016</span>
-
-        <h2>
-          <a class="post-link" href="/2016/09/08/Only-my-warnings.html">Only my warnings</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">March 6, 2016</span>
-
-        <h2>
-          <a class="post-link" href="/2016/03/06/Console-log-adventure.html">A console.log() adventure; pimped</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">January 9, 2016</span>
-
-        <h2>
-          <a class="post-link" href="/2016/01/09/First-post.html">First post!</a>
-        </h2>
-      </li>
-    
-  </ul>
-
-  <p class="rss-subscribe">subscribe via <a href="/feed.json">JSON</a> or <a href="/feed.xml">RSS</a></p>
-
-</div>
+</article>
 
       </div>
     </div>
