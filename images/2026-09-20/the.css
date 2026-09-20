@@ -1,0 +1,282 @@
+/* =========================================================
+   Article typography — Maggie Appleton inspired
+   Everything above the article/title remains untouched.
+   ========================================================= */
+
+/* Fonts
+   Put your licensed Canela webfonts in /fonts/
+*/
+
+@font-face {
+  font-family: "Canela Text";
+  src: url("/images/2026-09-20/fonts/CanelaText-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Canela Text";
+  src: url("/images/2026-09-20/fonts/CanelaText-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Canela Deck";
+  src: url("/images/2026-09-20/fonts/CanelaDeck-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* =========================================================
+   HEADER
+   Keep the existing layout, but use a clean sans-serif.
+   ========================================================= */
+
+header {
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: #333333;
+}
+
+article a:link,
+article a:visited {
+  color: #960462;
+  text-decoration: none;
+}
+
+article a:hover {
+  color: red;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+
+/* =========================================================
+   ARTICLE
+   ========================================================= */
+
+article {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 6rem;
+
+  color: #242424;
+  font-family: "Canela Text", Georgia, serif;
+  font-size: 18px;
+  line-height: 1.62;
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+article h1 {
+  max-width: 900px;
+
+  margin: 0 0 1.25rem;
+
+  font-family: "Canela Deck", Georgia, serif;
+  font-size: clamp(2.75rem, 7vw, 4.75rem);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+
+  color: #202020;
+}
+
+
+/* =========================================================
+   DATE / AUTHOR
+   ========================================================= */
+
+article h1 + p {
+  margin-bottom: 3.5rem;
+
+  color: #777;
+  font-family: "Canela Text", Georgia, serif;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   BODY COPY
+   ========================================================= */
+
+article p {
+  margin: 0 0 1.55rem;
+
+  font-family: "Canela Text", Georgia, serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.62;
+}
+
+article p + p {
+  margin-top: 0.15rem;
+}
+
+
+/* =========================================================
+   ARTICLE HEADINGS
+   ========================================================= */
+
+article h2 {
+  margin: 3.5rem 0 1.25rem;
+
+  font-family: "Canela Deck", Georgia, serif;
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+
+  color: #202020;
+}
+
+article h3 {
+  margin: 2.75rem 0 1rem;
+
+  font-family: "Canela Deck", Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.2;
+
+  color: #202020;
+}
+
+
+/* =========================================================
+   ARTICLE LINKS
+   ========================================================= */
+
+article a {
+  color: #536b68;
+
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+
+  transition:
+    color 120ms ease,
+    text-decoration-color 120ms ease;
+}
+
+article a:hover {
+  color: #00758f;
+  text-decoration-color: #263f3c;
+}
+
+
+/* =========================================================
+   CODE
+   ========================================================= */
+
+article code {
+  font-size: 0.88em;
+}
+
+article pre {
+  margin: 2rem 0;
+  padding: 1.25rem 1.4rem;
+
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.highlight .s {
+  color: #04a5bb;
+}
+.highlight .mi {
+  color: #04a5bb;
+}
+.highlight .nc,
+.highlight .nf {
+  color: #960462;
+}
+.highlight .mi {
+  color: #04a5bb;
+}
+.highlight .c1 {
+  color: #fd8370;
+}
+/* =========================================================
+   LISTS
+   ========================================================= */
+
+article ul,
+article ol {
+  margin: 0 0 1.75rem;
+  padding-left: 1.5rem;
+}
+
+article li {
+  margin-bottom: 0.45rem;
+}
+
+
+/* =========================================================
+   HORIZONTAL RULE
+   ========================================================= */
+
+article hr {
+  margin: 4.5rem 35% 3.5rem;
+
+  border: 0;
+  border-top: 3px solid #fd8370;
+  
+}
+
+
+/* =========================================================
+   TEXT SELECTION
+   ========================================================= */
+
+article ::selection {
+  background: #e8e1d5;
+  color: #202020;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  article {
+    padding: 2.75rem 1.25rem 4rem;
+    font-size: 17px;
+  }
+
+  article h1 {
+    font-size: clamp(2.5rem, 12vw, 3.5rem);
+    line-height: 1.04;
+  }
+
+  article h1 + p {
+    margin-bottom: 2.75rem;
+  }
+
+  article p {
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  article h2 {
+    font-size: 1.8rem;
+    margin-top: 3rem;
+  }
+}
