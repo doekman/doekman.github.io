@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Introducing the PySQLe-Library"
+description: "With PySQLe you can easily write parameterized SQL queries in Python, and run it against any SQLAlchemy-supported database."
 date: 2026-09-20
 author: Doeke Zanstra
 category: ICT
