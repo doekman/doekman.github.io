@@ -50,7 +50,7 @@ admin_users = queries.get_users(category_filter='admin')
 name = queries.get_username(user_id=666)
 ```
 
-The [repository can be found at Codeberg][pysqle]. The library itself has been [published to PyPI.org][pypi], and can be installed via `pip install pysqle` or equivalent. The repo contains some documentation: an [overview with some more examples][], and there is [the complete guide][guide].
+The [repository can be found at Codeberg][pysqle]. The library itself has been [published to PyPI.org][pypi], and can be installed via `pip install pysqle` or equivalent. The repo contains some documentation: an [overview with some more examples][overview], and there is [the complete guide][guide].
 
 
 What's Next
@@ -62,8 +62,8 @@ Writing this library is a learning experience for me. I never had an idea for a 
 [pysqle]: https://codeberg.org/doekman/PySQLe/
 [pypi]: https://pypi.org/project/pysqle/
 [pugsql]: https://pugsql.org
-[Overview]: https://codeberg.org/doekman/PySQLe/src/branch/main/doc/overview.md
-[Guide]: https://codeberg.org/doekman/PySQLe/src/branch/main/doc/guide.md
+[overview]: https://codeberg.org/doekman/PySQLe/src/branch/main/doc/overview.md
+[guide]: https://codeberg.org/doekman/PySQLe/src/branch/main/doc/guide.md
 
 <hr>
 
