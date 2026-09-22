@@ -76,15 +76,15 @@
 
 <p>What if you could link a Python function to a SQL query in some way? That’s exactly why I made <strong>PySQLe</strong>. Let me demonstrate how this works:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pysqle</span> <span class="kn">import</span> <span class="n">PysqleModule</span><span class="p">,</span> <span class="n">one</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">pysqle</span> <span class="kn">import</span> <span class="n">PysqleModule</span><span class="p">,</span> <span class="n">one</span>
 
 <span class="k">class</span> <span class="nc">MyQueries</span><span class="p">(</span><span class="n">PysqleModule</span><span class="p">):</span>
-    <span class="o">@</span><span class="n">one</span>
-    <span class="k">def</span> <span class="nf">find_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">"""select * from users where user_id = :user_id"""</span>
+    <span class="nd">@one</span>
+    <span class="k">def</span> <span class="nf">find_user</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sh">"""</span><span class="s">select * from users where user_id = :user_id</span><span class="sh">"""</span>
 
-<span class="n">queries</span> <span class="o">=</span> <span class="n">MyQueries</span><span class="p">(</span><span class="s">"sqlite:///foo.db"</span><span class="p">)</span>
-<span class="n">user</span> <span class="o">=</span> <span class="n">queries</span><span class="p">.</span><span class="n">find_user</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="mi">666</span><span class="p">)</span>
+<span class="n">queries</span> <span class="o">=</span> <span class="nc">MyQueries</span><span class="p">(</span><span class="sh">"</span><span class="s">sqlite:///foo.db</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">queries</span><span class="p">.</span><span class="nf">find_user</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="mi">666</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>First you create a class (<code class="language-plaintext highlighter-rouge">MyQueries</code>) and subclassing it from the <code class="language-plaintext highlighter-rouge">PysqleModule</code>-class. Then you define a query by writing a method (<code class="language-plaintext highlighter-rouge">find_user</code>). This method can have arguments, which will be passed to the database when executing the queries. The query-method itself should returns the SQL query as a string. Finally, you decorate the class with one of the supplied query-decorators. That is where the magic happens: <code class="language-plaintext highlighter-rouge">@one</code> will take care of executing the SQL when the method is called, and will return the expected results.</p>
@@ -95,22 +95,22 @@
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1"># ...
 </span>    <span class="c1"># Omited class definition, assuming extending the class MyQueries from above
-</span>    <span class="o">@</span><span class="n">many</span>
-    <span class="k">def</span> <span class="nf">get_users</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">category_filter</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">"""select * from users 
+</span>    <span class="nd">@many</span>
+    <span class="k">def</span> <span class="nf">get_users</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">category_filter</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sh">"""</span><span class="s">select * from users 
                    where :category_filter is null 
-                      or :category_filter = category"""</span>
+                      or :category_filter = category</span><span class="sh">"""</span>
 
-    <span class="o">@</span><span class="n">scalar</span>
-    <span class="k">def</span> <span class="nf">get_username</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">"""select username from users 
-                  where user_id = :user_id"""</span>
+    <span class="nd">@scalar</span>
+    <span class="k">def</span> <span class="nf">get_username</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sh">"""</span><span class="s">select username from users 
+                  where user_id = :user_id</span><span class="sh">"""</span>
 
 <span class="c1"># ...
 </span>
-<span class="n">all_users</span> <span class="o">=</span> <span class="n">queries</span><span class="p">.</span><span class="n">get_users</span><span class="p">()</span>
-<span class="n">admin_users</span> <span class="o">=</span> <span class="n">queries</span><span class="p">.</span><span class="n">get_users</span><span class="p">(</span><span class="n">category_filter</span><span class="o">=</span><span class="s">'admin'</span><span class="p">)</span>
-<span class="n">name</span> <span class="o">=</span> <span class="n">queries</span><span class="p">.</span><span class="n">get_username</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="mi">666</span><span class="p">)</span>
+<span class="n">all_users</span> <span class="o">=</span> <span class="n">queries</span><span class="p">.</span><span class="nf">get_users</span><span class="p">()</span>
+<span class="n">admin_users</span> <span class="o">=</span> <span class="n">queries</span><span class="p">.</span><span class="nf">get_users</span><span class="p">(</span><span class="n">category_filter</span><span class="o">=</span><span class="sh">'</span><span class="s">admin</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">name</span> <span class="o">=</span> <span class="n">queries</span><span class="p">.</span><span class="nf">get_username</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="mi">666</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>The <a href="https://codeberg.org/doekman/PySQLe/">repository can be found at Codeberg</a>. The library itself has been <a href="https://pypi.org/project/pysqle/">published to PyPI.org</a>, and can be installed via <code class="language-plaintext highlighter-rouge">pip install pysqle</code> or equivalent. The repo contains some documentation: an <a href="https://codeberg.org/doekman/PySQLe/src/branch/main/doc/overview.md">overview with some more examples</a>, and there is <a href="https://codeberg.org/doekman/PySQLe/src/branch/main/doc/guide.md">the complete guide</a>.</p>
@@ -118,6 +118,13 @@
 <h2 id="whats-next">What’s Next</h2>
 
 <p>Writing this library is a learning experience for me. I never had an idea for a reusable Python library until now. This is clearly a first version; I have some more ideas to make this library more usable. One thing is to make get the type annotations work everywhere (for example: <code class="language-plaintext highlighter-rouge">reveal_type</code> is not reporting the correct return type on annotated query-methods). Another idea is to add support for loading PugSQL annotated files. If you have any ideas or comments, I would like to hear them.</p>
+
+<!-- 
+
+* Announced on [Mastodon](https://mastodon.nl/@doekman/117304029760781716)
+* Cross posted to [dev.to](https://dev.to/doekman/a-new-take-on-raw-sql-in-python-13ne)
+
+-->
 
 <hr />
 
