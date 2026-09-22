@@ -65,6 +65,14 @@ Writing this library is a learning experience for me. I never had an idea for a 
 [overview]: https://codeberg.org/doekman/PySQLe/src/branch/main/doc/overview.md
 [guide]: https://codeberg.org/doekman/PySQLe/src/branch/main/doc/guide.md
 
+
+<!-- 
+
+* Announced on [Mastodon](https://mastodon.nl/@doekman/117304029760781716)
+* Cross posted to [dev.to](https://dev.to/doekman/a-new-take-on-raw-sql-in-python-13ne)
+
+-->
+
 <hr>
 
 <small>Disclaimer: The design of [Maggie Appleton's website](https://maggieappleton.com/keyboard-fetishism/) was copied to this blog page using AI. No AI was otherwise used in creating this post.</small>
